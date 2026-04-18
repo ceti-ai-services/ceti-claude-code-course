@@ -51,14 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import matter from 'gray-matter'
 import { marked } from 'marked'
-
-// Buffer polyfill so gray-matter works in Vite/Nitro builds without extra config
-if (typeof globalThis.Buffer === 'undefined') {
-  // @ts-ignore
-  globalThis.Buffer = { isBuffer: () => false }
-}
 
 interface Lesson {
   slug: string
@@ -68,13 +61,35 @@ interface Lesson {
   html: string
 }
 
+// Minimal frontmatter parser — zero deps, no Buffer, works in SSR and hydration.
+function parseFrontmatter(raw: string): { data: Record<string, string>; content: string } {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/)
+  if (!match) return { data: {}, content: raw }
+  const data: Record<string, string> = {}
+  for (const line of match[1].split(/\r?\n/)) {
+    const colon = line.indexOf(':')
+    if (colon < 1) continue
+    const key = line.slice(0, colon).trim()
+    let val = line.slice(colon + 1).trim()
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1)
+    }
+    data[key] = val
+  }
+  return { data, content: match[2] }
+}
+
 // Glob-import every Bronze lesson markdown file at build time
-const raw = import.meta.glob('../../../content/start/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+const raw = import.meta.glob('../../../content/start/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>
 
 const lessons: Lesson[] = Object.entries(raw)
   .map(([path, content]) => {
     const slug = path.split('/').pop()!.replace(/\.md$/, '')
-    const { data, content: body } = matter(content)
+    const { data, content: body } = parseFrontmatter(content)
     return {
       slug,
       module: String(data.module ?? slug.slice(0, 2)),
