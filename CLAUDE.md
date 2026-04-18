@@ -37,6 +37,26 @@ The entire course assumes a reader who has **never opened a terminal**. Target a
 - **No hype**. If a thing is genuinely useful, say what it does. Show don't tell.
 - **Short sentences**. Short paragraphs. Aggressive verbs. Cut every sentence that could be cut.
 
+## Core team
+
+| Name | Email | Role |
+|------|-------|------|
+| Manu Mulaveesala | hello@ceti.ai / manutej@gmail.com | Founder, lead instructor, enterprise consulting |
+| Ormus | hermeticormus@gmail.com | Cohort zero · product review · co-instructor candidate for Silver |
+
+Ormus is also Bronze friend code **`BRONZE-FRIEND-01`**. His feedback gates the Bronze launch.
+
+### Draft workflow — "draft to X"
+
+When Manu says *"draft to ormus"* (or any core-team name), queue a Gmail draft rather than sending. Drafts pile up in the Drafts folder and Manu reviews + sends in a single pass, usually daily. Rationale: preserves tone control, avoids half-baked messages going out, and batches async communication so the core team isn't pinged in real time.
+
+Convention for every drafted email:
+- Tone matches the course tone: warm, confident, a little dry.
+- Subject line names the deliverable, not the feeling ("Claude Code course — Bronze review ready," not "Quick question!").
+- Body opens with context in one sentence, then the ask in another.
+- Ends with a specific request or "no action needed" — never vague sign-offs.
+- Never send directly. Always `create_draft`, never a send API.
+
 ## Course structure (Bronze — 7 modules, ~90 min total)
 
 1. **Mental model** — what Claude Code is (and isn't)
