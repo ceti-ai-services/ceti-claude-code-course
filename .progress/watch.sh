@@ -40,6 +40,12 @@ while true; do
       meta=$(git log -1 --pretty=format:'%h|%cI|%an|%s' "$sha" 2>/dev/null)
       # Find which refs contain it
       refs=$(git for-each-ref --contains "$sha" --format='%(refname:short)' refs/heads refs/remotes | tr '\n' ',' | sed 's/,$//')
+      # Skip commits that only touch the monitor branch (our own activity)
+      monitor_only=$(echo "$refs" | tr ',' '\n' | grep -vE '(^|/)claude/monitor-git-progress-5nk7H$' | head -1)
+      if [ -z "$monitor_only" ]; then
+        echo "$sha" >> "$SEEN_FILE"
+        continue
+      fi
       echo "NEW_COMMIT $meta refs=${refs:-unknown}"
       echo "$sha" >> "$SEEN_FILE"
       saw_new=1
@@ -48,11 +54,15 @@ while true; do
 
   # Detect ref movement (e.g. branch reset / new branch with no new SHA)
   if ! diff -q <(echo "$new_state") "$STATE_FILE" >/dev/null 2>&1; then
-    diff <(sort "$STATE_FILE") <(echo "$new_state" | sort) | grep -E '^[<>]' | while read -r line; do
-      echo "REF_CHANGE $line"
-    done
+    # Filter out monitor-branch ref movement (our own pushes)
+    diff <(sort "$STATE_FILE") <(echo "$new_state" | sort) \
+      | grep -E '^[<>]' \
+      | grep -vE 'claude/monitor-git-progress-5nk7H' \
+      | while read -r line; do
+        echo "REF_CHANGE $line"
+        saw_new=1
+      done
     echo "$new_state" > "$STATE_FILE"
-    saw_new=1
   fi
 
   if [ "$saw_new" -eq 1 ]; then
