@@ -1,5 +1,8 @@
 # learn.cetiai.co
 
+**Live (dev preview)**: https://dev-learn.cetiai.co
+**Repo**: https://github.com/ceti-ai-services/ceti-claude-code-course
+
 CETI.AI's Claude Code course — landing site + enrollment funnel.
 
 Three tiers: **🥉 Bronze** (free, invite-only, 7-module self-serve), **🥈 Silver** ($499, 4-week cohort), **🥇 Gold** ($2,500, 1:1 integration).
