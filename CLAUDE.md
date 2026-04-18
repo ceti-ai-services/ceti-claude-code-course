@@ -12,7 +12,7 @@ This repo is the landing site and enrollment funnel for CETI.AI's Claude Code co
 |------|-------|--------|-----|---------|
 | 🥉 Bronze — *Claude Code: Day One* | Free (invite) | 7 self-serve modules, ~90 min | — | Top of funnel. Captures the list. |
 | 🥈 Silver — *Claude Code for Your Work* | $499 | 4-week async cohort + weekly live Q&A | 20 | Recurring revenue engine. |
-| 🥇 Gold — *Claude Code in Your Business* | $2,500 | 4× 1:1 hours + 30-day Slack support | 5/quarter | Bridge to existing enterprise consulting. |
+| 🥇 Gold — *Claude Code in Your Business* | $2,500 | 4× 1:1 hours + 30-day Slack support · **optional $1,000/mo retainer after** | 5/quarter | Bridge to existing enterprise consulting. |
 
 **Funnel math**: Free Bronze → 5–10% → Silver → 10–20% → Gold → retainer / enterprise.
 

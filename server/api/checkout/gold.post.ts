@@ -1,21 +1,26 @@
-import { defineEventHandler, createError } from 'h3'
+import { defineEventHandler, readBody } from 'h3'
 
 /**
- * Gold checkout — $2,500 one-time.
- * PLACEHOLDER: see server/api/checkout/silver.post.ts for the real pattern.
+ * Gold checkout — $2,500.
+ * Same pattern as silver.post.ts — see that file for full docs.
  */
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  const body = await readBody<{ adminKey?: string }>(event).catch(() => ({}))
   const config = useRuntimeConfig()
-  const priceId = process.env.STRIPE_PRICE_GOLD
 
-  if (!config.stripeSecretKey || !priceId) {
-    throw createError({
-      statusCode: 503,
-      statusMessage: 'Stripe not configured — email hello@ceti.ai to book',
-    })
+  const provided = String(body?.adminKey || '').trim().toUpperCase()
+  const adminKey = String(config.adminKey || '').trim().toUpperCase()
+  if (adminKey && provided === adminKey) {
+    return { url: '/thanks?tier=gold&admin=1' }
+  }
+
+  const paymentLink = String(config.stripePaymentLinkGold || '').trim()
+  if (paymentLink) {
+    return { url: paymentLink }
   }
 
   return {
-    url: `https://checkout.stripe.com/pay/placeholder?price=${priceId}&tier=gold`,
+    error:
+      'Stripe payment link not configured yet. Email hello@ceti.ai to book, or pass the admin key if you are testing.',
   }
 })

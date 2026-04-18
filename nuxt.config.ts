@@ -3,9 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-01',
   devtools: { enabled: true },
   ssr: true,
-  nitro: {
-    preset: 'static',
-  },
+  // No preset override — Vercel auto-detects `vercel` preset, so API routes
+  // run as serverless functions in production. Locally, `nuxt dev` runs them
+  // in the Nitro dev server.
   css: ['~/assets/css/main.css'],
   app: {
     head: {
@@ -27,8 +27,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // server-only
-    stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
-    bronzeTicketCodes: process.env.BRONZE_TICKET_CODES || 'BRONZE-FRIEND-01,BRONZE-FRIEND-02,CETI-BRONZE-2026',
+    adminKey: process.env.ADMIN_KEY || '',
+    bronzeTicketCodes:
+      process.env.BRONZE_TICKET_CODES || 'BRONZE-FRIEND-01,BRONZE-FRIEND-02,CETI-BRONZE-2026',
+    stripePaymentLinkSilver: process.env.STRIPE_PAYMENT_LINK_SILVER || '',
+    stripePaymentLinkGold: process.env.STRIPE_PAYMENT_LINK_GOLD || '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://cetiai.co',
     },

@@ -12,8 +12,12 @@
   },
   "devDependencies": {
     "nuxt": "^4.0.0",
+    "typescript": "^5.6.0",
     "vue": "^3.5.0",
-    "vue-router": "^4.4.0",
-    "typescript": "^5.6.0"
+    "vue-router": "^4.4.0"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.2"
   }
 }

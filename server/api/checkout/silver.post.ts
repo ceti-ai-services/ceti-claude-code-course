@@ -1,34 +1,33 @@
-import { defineEventHandler, createError } from 'h3'
+import { defineEventHandler, readBody } from 'h3'
 
 /**
- * Silver checkout — $499 one-time.
- * PLACEHOLDER: returns the Stripe Checkout URL when STRIPE_SECRET_KEY +
- * STRIPE_PRICE_SILVER are set. Otherwise returns a friendly error so the
- * UI doesn't crash during pre-launch.
+ * Silver checkout — $499.
  *
- * Real implementation:
- *   const stripe = new Stripe(config.stripeSecretKey)
- *   const session = await stripe.checkout.sessions.create({
- *     mode: 'payment',
- *     line_items: [{ price: config.stripePriceSilver, quantity: 1 }],
- *     success_url: `${siteUrl}/thanks?tier=silver`,
- *     cancel_url:  `${siteUrl}/silver`,
- *   })
- *   return { url: session.url }
+ * Minimal-setup path: reads STRIPE_PAYMENT_LINK_SILVER and returns it.
+ * To enable: create a Payment Link at https://dashboard.stripe.com/payment-links
+ * and paste its URL into .env (or Vercel env vars).
+ *
+ * Admin bypass: if `adminKey` in body matches ADMIN_KEY env, skip Stripe and
+ * redirect straight to /thanks?tier=silver&admin=1 so the full flow can be
+ * walked end-to-end without a real payment.
  */
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  const body = await readBody<{ adminKey?: string }>(event).catch(() => ({}))
   const config = useRuntimeConfig()
-  const priceId = process.env.STRIPE_PRICE_SILVER
 
-  if (!config.stripeSecretKey || !priceId) {
-    throw createError({
-      statusCode: 503,
-      statusMessage: 'Stripe not configured — email hello@ceti.ai to enroll',
-    })
+  const provided = String(body?.adminKey || '').trim().toUpperCase()
+  const adminKey = String(config.adminKey || '').trim().toUpperCase()
+  if (adminKey && provided === adminKey) {
+    return { url: '/thanks?tier=silver&admin=1' }
   }
 
-  // Replace this block with a real Stripe SDK call once keys are set.
+  const paymentLink = String(config.stripePaymentLinkSilver || '').trim()
+  if (paymentLink) {
+    return { url: paymentLink }
+  }
+
   return {
-    url: `https://checkout.stripe.com/pay/placeholder?price=${priceId}&tier=silver`,
+    error:
+      'Stripe payment link not configured yet. Email hello@ceti.ai to enroll, or pass the admin key if you are testing.',
   }
 })

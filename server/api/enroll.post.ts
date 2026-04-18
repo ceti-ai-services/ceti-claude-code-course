@@ -4,9 +4,11 @@ import { defineEventHandler, readBody, createError } from 'h3'
  * Bronze enrollment gate.
  * POST { email, code } → { ok, redirect } | { ok: false, error }
  *
- * Codes are stored in runtime config as a comma-separated string.
- * In production, swap the in-memory enrollments log for a real store
- * (Airtable, Notion, Postgres, ConvertKit — whatever captures the list).
+ * Valid codes:
+ *   - Entries in BRONZE_TICKET_CODES (comma-separated env var)
+ *   - ADMIN_KEY (MERCURIOP0656) — master admin bypass for dev/test
+ *
+ * On success: returns `/start/01-mental-model` for redirect.
  */
 export default defineEventHandler(async (event) => {
   const body = await readBody<{ email?: string; code?: string }>(event)
@@ -27,16 +29,19 @@ export default defineEventHandler(async (event) => {
     .map((c) => c.trim().toUpperCase())
     .filter(Boolean)
 
-  if (!validCodes.includes(code)) {
+  const adminKey = String(config.adminKey || '').trim().toUpperCase()
+  const isAdmin = adminKey && code === adminKey
+
+  if (!isAdmin && !validCodes.includes(code)) {
     return { ok: false, error: 'That ticket code is not recognized.' }
   }
 
   // TODO: persist enrollment (Airtable / Notion / Postgres).
-  // For now, log server-side so we have a trail during the friends launch.
-  console.log('[enroll]', { email, code, at: new Date().toISOString() })
+  console.log('[enroll]', { email, code: isAdmin ? 'ADMIN' : code, at: new Date().toISOString() })
 
   return {
     ok: true,
     redirect: '/start/01-mental-model',
+    admin: isAdmin,
   }
 })

@@ -59,7 +59,7 @@
             <li>Built-for-you CLAUDE.md, skills, MCP</li>
             <li>Workflow audit — what Claude Code replaces</li>
             <li>30-day post-engagement Slack support</li>
-            <li>Optional $500/mo retainer</li>
+            <li>Optional $1,000/mo retainer</li>
           </ul>
           <NuxtLink to="/gold" class="btn btn-secondary">Book Gold</NuxtLink>
         </article>
