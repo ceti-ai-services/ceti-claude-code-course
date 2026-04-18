@@ -1,0 +1,19 @@
+{
+  "name": "ceti-claude-code-course",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CETI.AI — Claude Code course landing + enrollment (Nuxt 4 static).",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "^4.0.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.4.0",
+    "typescript": "^5.6.0"
+  }
+}

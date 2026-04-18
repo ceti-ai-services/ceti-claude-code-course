@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Claude Code — Bronze Cheat Sheet</title>
+<style>
+  @page {
+    size: A4;
+    margin: 14mm 12mm 12mm 12mm;
+  }
+  html, body {
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.35;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    padding: 18mm 16mm 14mm 16mm;
+    max-width: 210mm;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 18pt;
+    margin: 0 0 2pt 0;
+    letter-spacing: -0.01em;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 4pt;
+  }
+  .subtitle {
+    font-size: 9pt;
+    color: #666;
+    margin: 0 0 10pt 0;
+    font-style: italic;
+  }
+  h2 {
+    font-size: 10.5pt;
+    margin: 8pt 0 3pt 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #000;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 2pt;
+  }
+  .columns {
+    column-count: 2;
+    column-gap: 8mm;
+    column-rule: 0.5pt solid #ddd;
+  }
+  .section { break-inside: avoid; }
+  p { margin: 2pt 0 4pt 0; }
+  ul, ol { margin: 2pt 0 4pt 16pt; padding: 0; }
+  li { margin: 1pt 0; }
+  code, pre {
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 8.5pt;
+  }
+  code {
+    background: #f2f2f2;
+    padding: 0 3pt;
+    border-radius: 2pt;
+  }
+  pre {
+    background: #f6f6f6;
+    border-left: 2pt solid #888;
+    padding: 4pt 6pt;
+    margin: 3pt 0 4pt 0;
+    white-space: pre-wrap;
+    border-radius: 0;
+  }
+  pre code { background: transparent; padding: 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 8.5pt;
+    margin: 3pt 0 4pt 0;
+  }
+  th, td {
+    border-bottom: 0.5pt solid #ccc;
+    padding: 2pt 3pt;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f2f2f2;
+    font-weight: 600;
+  }
+  .footer {
+    margin-top: 8pt;
+    padding-top: 4pt;
+    border-top: 1px solid #bbb;
+    font-size: 8pt;
+    color: #666;
+    text-align: center;
+  }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<h1>Claude Code — Bronze Cheat Sheet</h1>
+<p class="subtitle">One page. Keep it near your keyboard.</p>
+
+<div class="columns">
+
+<div class="section">
+<h2>Install (one-liner)</h2>
+<pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+<p>Needs Node 18+. Check with <code>node -v</code>. If <code>npm</code> complains about permissions, see the FAQ — don't reach for <code>sudo</code>.</p>
+</div>
+
+<div class="section">
+<h2>Launch</h2>
+<pre><code>cd ~/path/to/your/folder
+claude</code></pre>
+<p>The folder you launch from is the folder Claude sees. If your <code>CLAUDE.md</code> lives in <code>~/work/alex/</code>, launch from <code>~/work/alex/</code>.</p>
+</div>
+
+<div class="section">
+<h2>Essential keys</h2>
+<table>
+<thead><tr><th>Key</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>Enter</code></td><td>Send your message</td></tr>
+<tr><td><code>y</code> + <code>Enter</code></td><td>Approve an action</td></tr>
+<tr><td><code>n</code> + <code>Enter</code></td><td>Deny an action</td></tr>
+<tr><td><code>Esc</code></td><td>Cancel current response</td></tr>
+<tr><td><code>Ctrl+C</code></td><td>Exit Claude</td></tr>
+<tr><td><code>/exit</code></td><td>Also exits, politely</td></tr>
+<tr><td><code>Shift+Enter</code></td><td>New line, no send</td></tr>
+<tr><td><code>/</code></td><td>Show slash commands</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2>Three useful first prompts</h2>
+<ol>
+<li><strong>"Read CLAUDE.md and tell me what you understood about me."</strong> Catches anything you got wrong in setup.</li>
+<li><strong>"Summarize the five most recently modified files in this folder. Three sentences each."</strong> Proves Claude can see your files.</li>
+<li><strong>"Help me draft a short email to [person] about [topic]. Warm tone, under 120 words."</strong> The everyday workhorse.</li>
+</ol>
+</div>
+
+<div class="section">
+<h2>CLAUDE.md anatomy</h2>
+<p>The file Claude reads automatically. Six sections worth having:</p>
+<ol>
+<li><strong>Who I Am</strong> — name, role, one sentence of context</li>
+<li><strong>What This Folder Is</strong> — structure and rough layout</li>
+<li><strong>How I Work</strong> — your conventions</li>
+<li><strong>Default Output Style</strong> — tone, length, sign-off</li>
+<li><strong>People I Mention A Lot</strong> — five to ten names</li>
+<li><strong>Do / Don't List</strong> — explicit guardrails</li>
+</ol>
+<p>Short, specific, and maintained beats long and forgotten.</p>
+</div>
+
+<div class="section">
+<h2>Safety rules</h2>
+<ul>
+<li><strong>Read before you run.</strong> Read the prompt before pressing <code>y</code>.</li>
+<li><strong>Never paste API keys into chat.</strong> Use <code>.env</code> or environment variables.</li>
+<li><strong>Claude can't undo deletions.</strong> Prefer moving to <code>_archive/</code>.</li>
+<li><strong>Client data stays local.</strong> Don't paste anything you wouldn't email.</li>
+<li><strong>Approval is a feature.</strong> If you're rubber-stamping, update <code>.claude/settings.json</code> instead of building muscle memory.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Where to get help</h2>
+<ul>
+<li>Official docs: <strong>docs.anthropic.com/claude-code</strong></li>
+<li>This kit's <code>FAQ.md</code></li>
+<li>CETI.AI course cohort: bring the exact error text — screenshot or copy-paste.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="footer">CETI.AI — Bronze Kit for Claude Code · cetiai.co</div>
+
+</body>
+</html>
