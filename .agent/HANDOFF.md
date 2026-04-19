@@ -65,24 +65,27 @@ Maps loosely onto pricing tiers (Bronze ≈ Novice, Silver ≈ Experienced, Gold
 
 **Milestone M1 — Insight synthesis + taxonomy definition** (in progress)
 
-Steps:
-1. Write HANDOFF.md (this file) + DASHBOARD.md baseline ← **done now**
-2. Dispatch 3 parallel subagents:
-   - **MERCURIO**: extract core wisdom from LUXOR MERCURIO skill/agent/project
-   - **MARS**: extract core wisdom from LUXOR MARS skill/agent/project
-   - **LUXOR-MAP**: inventory LUXOR skills/projects relevant to non-dev academy + deep-dive the `codebase-to-course` skill
-3. While subagents work, finalize the Novice/Experienced/Expert tier rubric (what skills fall where)
-4. Synthesize subagent outputs into `docs/insights/*.md`
-5. Update HANDOFF.md + DASHBOARD.md
-6. Advance to M2.
+Status:
+- ✅ HANDOFF.md + DASHBOARD.md written + committed (`07d6be7`)
+- ✅ LUXOR-MAP subagent returned → `docs/insights/luxor-map.md` written
+- ⏳ MERCURIO subagent → pending
+- ⏳ MARS subagent → pending
+- ⏳ Novice/Experienced/Expert tier rubric → pending
+
+**Key architectural decision from LUXOR-MAP**:
+`codebase-to-course` produces standalone HTML with its own *light* design system — it does **not** integrate with our dark-gold Tailwind+shadcn stack. Chosen path: **use codebase-to-course as a content source**, transform its HTML into a JSON intermediate, re-render through our shadcn-vue components. Preserves pedagogy + LUXOR discipline without visual mismatch.
+
+Also from LUXOR-MAP — five LUXOR skills to port in spirit: `course-validator` (our pre-commit gate), `course-orchestrator` (8-phase academy build pipeline), `progressive-game-lab` (XP + gating adapted into `ProgressDots`), `curriculum-module-writer` (content generator), `codebase-to-course` (content source).
 
 **Milestone M2 — Academy spine** (next)
 
-Use `codebase-to-course` to generate the first 3 academy pages (one per tier). Each page is a fully-rendered, interactive HTML preview built on the shadcn-vue component baseline.
+- Draft Novice / Experienced / Expert tier rubric → `docs/academy-taxonomy.md`
+- Build the codebase-to-course → shadcn-vue transform layer (small; ~100 LOC script)
+- Generate the first proof-of-pipeline academy page: `/academy/experienced/debugging-ai-loops` from `agentic-ai-course/labs/day3/lab-09-debugging-ai-loops.html`
 
 **Milestone M3 — Academy expansion**
 
-Expand each tier with 5–7 skill-focused modules driven by the synthesized insights.
+Expand each tier with 5–7 skill-focused pages driven by the synthesized insights and MERCURIO/MARS patterns.
 
 ---
 

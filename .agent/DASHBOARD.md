@@ -4,6 +4,25 @@ Append-only log of every milestone, decision, and build. Newest at top.
 
 ---
 
+## 2026-04-19 · LUXOR-MAP subagent returned
+
+**Finding** (big): `codebase-to-course` is standalone light-theme HTML with a hard-coded design system (warm cream #FAF7F2, Bricolage Grotesque). **Does not integrate** with Tailwind v4 + shadcn-vue.
+
+**Decision** (C — adopted): Use `codebase-to-course` as a *content source*, not as the final renderer. Transform its HTML → JSON intermediate → shadcn-vue components. Keeps the LUXOR pedagogy engine + accuracy discipline, keeps our dark-gold brand.
+
+**Five LUXOR skills to port** (in spirit where not directly reusable):
+- `course-validator` → our pre-commit gate (merge overlapping rules)
+- `course-orchestrator` → our academy build protocol (8-phase)
+- `progressive-game-lab` → inform our `ProgressDots` (XP + gating)
+- `curriculum-module-writer` → content generator for `content/academy/`
+- `codebase-to-course` → content source for modules seeded from existing code
+
+**Three courseware projects** to mine: `agentic-ai-course`, `ANTHROPIC-AGENT-SDK-COURSE`, `MCP-COURSE`.
+
+**Artifact**: `docs/insights/luxor-map.md` (written + committed at `<hash-pending>`).
+
+---
+
 ## 2026-04-19 · Pivot + M1 start
 
 **Event**: User returned and redirected the effort away from Vercel Sandbox autonomy toward in-session academy building with LUXOR/MERCURIO/MARS integration.
