@@ -115,9 +115,27 @@ Status:
 - [x] Step 3: Academy landing rewrite (commit `e33a4d9`) — HeroCustomizer is the primary entry, tier grid and placement quiz removed; homepage CTA now "Start the Academy" → /academy
 - [x] Step 4: Archive corporate pages (commit `9eff07f` + routeRules in `5c4c411`) — perspective-matrix.vue + six-dimensions.vue moved to `app/pages/academy/_corporate/`; nuxt.config routeRules redirect `/academy/_corporate/**` → `/academy` (307)
 - [x] Step 5: Lesson loader i18n + persona (commit `1e5cb74`) — tokenizer splits markdown into block sequence (html / callout / try / recap / quiz / personaExample), persona-comment pre-filter keeps only matching `<!-- persona:X -->` regions, language routing picks `<slug>.<lang>.md` else `.md`. Live-verified on dev-learn.cetiai.co for creator + service.
-- [ ] Step 6: Content rewrite EN (modules 01, 03, 05, 06, 07 + light 04) ← **in progress** (01, 03, 05, 06, 07 already committed in prior session — sanity-pass + module 02/04 remaining)
-- [ ] Step 7: ES authoring (all 7)
+- [x] Step 6: Content rewrite EN — all 7 modules in v2 voice (M01 `c32638d`, M03 `549f54e`, M05 `3a8ac9c`, M06 `5c4c411`, M07 `e1ba4b4`, M02+M04 light `76d74c1`)
+- [x] **Validation gate M6**: MERCURIO `6571f73` green-light + MARS `1636237` yellow→green. Both reports at `docs/insights/validation-{mercurio,mars}-m6.md`. Three MERCURIO fixes applied (`41f575a`): M05 salon neutral EN, M06 broker last-mile, M07 soft-pedal claims. Three MARS fixes applied (`49aca60`): M03 backup forward-lift, M06 four persona "Before you open Claude" preambles (biggest abandonment-risk fix — Service + Real Estate were assuming CSV/WhatsApp exports), M07 zero-code week-loop TryThis (SMS/calendar reminders).
+- [ ] Step 7: ES authoring (all 7) ← **in progress** — subagent dispatched, committing per module
 - [ ] Step 8: Smoke + cohort link
+
+**Commit count in Plan v2 window**: ~20 pushes to main (changelog-shaped for mobile view).
+
+**Live state snapshot** (post-49aca60):
+- `/academy` · `/start` · `/start/<01..07>?persona=<any>` all HTTP 200
+- Persona-rotated content rendering correctly ("You know the move" + "caption" on creator, "WhatsApp" on service)
+- Banned words: zero hits across `content/start/*.md` + academy pages
+- Build: green
+- MERCURIO verdict: GREEN-LIGHT · MARS verdict: GREEN after fixes
+
+**Resume protocol if session drops** (updated):
+1. Read `docs/DECISIONS.md` — voice + invariants
+2. Read this HANDOFF.md — current progress
+3. `git log --oneline -15` — recent commits
+4. Check if ES subagent committed all 7 `.es.md` files at `content/start/*.es.md`
+5. If ES incomplete: dispatch a fresh translator with the prompt style from Plan v2
+6. If ES complete: run Step 8 smoke matrix (4 personas × 2 langs × top modules = 24 URLs) + send cohort-zero link
 
 ---
 
