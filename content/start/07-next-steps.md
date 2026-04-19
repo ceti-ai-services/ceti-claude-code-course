@@ -72,6 +72,22 @@ For now: you have a working install, a CLAUDE.md that knows who you are, a finis
 
 That's the whole thing. Go use it.
 
+<TryThis time="2 min">
+
+Close the week loop with your own phone — no extra tool, no account.
+
+Open your SMS or Messages app. Send yourself this:
+
+> **MON** — open Claude Code, run my Module 06 task again.
+> **WED** — notice if I reached for the browser chatbot. If yes, stop and try Claude Code first.
+> **FRI** — open my CLAUDE.md and add anything I kept re-explaining this week.
+
+Or: open Google Calendar, create three reminders — Monday 9am, Wednesday 9am, Friday 9am — same three lines. Pick whichever you actually check.
+
+The habits only stick if something outside your head keeps score.
+
+</TryThis>
+
 <Recap>
 
 You finished the Bronze arc. You have the mental model, the tool, the approval discipline, the project memory, and one real task shipped end-to-end. Three habits this week — reuse CLAUDE.md in a new folder, refine the one you have, catch yourself before the browser-chatbot reflex — is what turns an hour of training into a tool you actually keep. Silver and Gold exist for when the task you want is bigger than Bronze can hold. They're not the point right now. Practice is.

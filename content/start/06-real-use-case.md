@@ -42,6 +42,8 @@ The task you wrote down in Module 01 probably matches one of four shapes. Read t
 
   You have a folder with ten raw clips from the week — maybe they're in `~/Content/2026-wk-16/`. You usually write captions one by one, late at night, after you've already watched the clip four times. It takes two hours. The captions end up sounding samey because you're tired.
 
+  **Before you open Claude.** Make sure the folder contains the clips plus one file called `last-twenty-captions.md` — paste your last twenty captions there, one per line. That gives Claude your voice to match. Three minutes of copy-paste now saves an hour of tone correction later.
+
   **Read-only.** `cd` into the folder, launch Claude. First prompt:
 
   ```
@@ -69,6 +71,8 @@ The task you wrote down in Module 01 probably matches one of four shapes. Read t
   **Your task: draft three client follow-up emails with full context.**
 
   You've been putting off three emails all week: one unpaid-invoice nudge, one scope clarification, one project status update. Each one requires you to re-read the thread, remember the tone you use with this client, and draft something that doesn't sound like a form letter. You usually do these Friday afternoon and they take ninety minutes.
+
+  **Before you open Claude.** The folder should already hold the files you normally use for this client — the proposal, the statement of work, meeting notes, past email threads you've saved. If past emails aren't saved anywhere, pull the last ten from Gmail: open the thread, three-dot menu → *Download message*, drop the `.eml` files into the folder. Claude reads `.eml` fine.
 
   **Read-only.** Open Claude in the client folder — `cd ~/Clients/Meridian/` or wherever the correspondence and notes actually live. First prompt:
 
@@ -101,7 +105,9 @@ The task you wrote down in Module 01 probably matches one of four shapes. Read t
 
   You have a bookings export (CSV or PDF — whatever your system spits out), your calendar, and the WhatsApp thread where half your clients actually confirm. Once a week you sit down and try to match them up: who actually came, who no-showed, who paid, who owes you. It takes an hour and you always miss one.
 
-  **Read-only.** Put this week's bookings file, a calendar export, and any relevant WhatsApp screenshots into one folder. Launch Claude there. First prompt:
+  **Before you open Claude.** You need three things in one folder. *Bookings export*: in most booking apps (Square, Booksy, Vagaro, Setmore), go to Reports → Appointments → Export CSV. *Calendar*: Google Calendar → settings gear → Import & Export → Export, which gives you an `.ics` file for all calendars — drop it in. *WhatsApp confirmations*: open the chat → three-dot menu → More → *Export chat* → Without Media. You get a `.txt` file per conversation. Put the CSV, the `.ics`, and the chat exports in the same folder. That's ten minutes of setup, and after this week you have the pattern.
+
+  **Read-only.** Launch Claude in the folder. First prompt:
 
   ```
   read every file here. tell me what's a booking, what's a confirmation,
@@ -128,7 +134,9 @@ The task you wrote down in Module 01 probably matches one of four shapes. Read t
 
   You have a new listing you're showing Saturday and a buyer who asked for comps on Wednesday. You usually pull the MLS export, open it in a spreadsheet, eyeball the comparables, and then write a two-paragraph summary in email. It's an hour of work and your eyeballing is the part that could be wrong.
 
-  **Read-only.** Put the listing sheet, the MLS comps CSV, and any inspection or disclosure docs into one folder. Launch Claude. First prompt:
+  **Before you open Claude.** One folder per transaction. In this one, put: the subject listing's detail sheet (MLS → Print → Save as PDF), your comps CSV (MLS → search comparable actives/solds → Export → CSV), any inspection or disclosure PDFs you've already received, and the email thread with the buyer if it exists (save as `.eml` from Gmail or `.msg` from Outlook). Five minutes of file-dragging. You only do the setup once per listing, and it becomes your working folder for the whole transaction.
+
+  **Read-only.** Launch Claude in the folder. First prompt:
 
   ```
   read the listing sheet and the comps CSV. tell me the subject

@@ -40,6 +40,8 @@ You're now inside Claude Code, scoped to that folder. Every file in there is rea
 
 <Callout variant="warning">
 Do not start Claude Code in your home folder (`~` or `/Users/you`) or on your Desktop. That's where years of everything lives — financial PDFs, old screenshots, exports you forgot about. Start scoped.
+
+If the folder you picked holds work you cannot afford to lose, duplicate it first — right-click → Duplicate on Mac, Copy + Paste in Explorer on Windows. Work Claude against the copy until you trust the session. You'll learn the full undo discipline in Module 04, but the "make a copy first" habit is worth starting now.
 </Callout>
 
 ## What to ask first
