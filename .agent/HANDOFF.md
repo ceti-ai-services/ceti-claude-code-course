@@ -72,6 +72,57 @@ Status:
 - ✅ MARS subagent returned → `docs/insights/mars-patterns.md`
 - ✅ Novice/Experienced/Expert tier rubric → `docs/academy-taxonomy.md`
 
+---
+
+## Plan v2 — Bronze reset (2026-04-19, approved + executing)
+
+**Plan file**: `/Users/manu/.claude/plans/kind-herding-matsumoto.md`
+**Decisions ledger**: `docs/DECISIONS.md`
+**UX research**: `docs/insights/best-in-class-ux.md` (in flight)
+
+**Core directives** (see DECISIONS.md for full rationale):
+- Scrap v1 academy content — too corporate, AI-slop tone. Start fresh.
+- Voice: impactful, honest, direct, intimate. Manu's authority + empathy.
+- 4 personas: Creator · Consultant · Service · Real Estate. 5th "Corporate" hidden.
+- EN authoring + agent-translated Neutral LatAm Spanish (sidecar `.es.md`).
+- Hero customizer (2-tap picker) as primary entry point.
+- Interactive: callouts, coding animations, forced choice, game-feel, choose-your-adventure. Inspiration: bootcamp.dev.
+- shadcn-vue composition only; no new deps without documented payoff.
+- codebase-to-course skill may be modified/forked if needed.
+- Future-hooks only (AI-assistant plug-in stubs, no assistant built yet).
+
+**Validation gates** (MERCURIO + MARS subagents at each milestone):
+- End of Step 2 (component library)
+- End of Step 3 (academy landing)
+- End of Step 6a (first rewritten module)
+- End of Step 6 (full EN rewrite)
+- End of Step 7 (ES authoring)
+- Before Step 8 (cohort-zero link)
+
+**Commit cadence**: one push per step (10 steps → ~10 deploys) so mobile GitHub view reads like a changelog.
+
+**Resume protocol** (if session drops):
+1. `docs/DECISIONS.md` (invariants + voice)
+2. `/Users/manu/.claude/plans/kind-herding-matsumoto.md` (approved plan)
+3. This HANDOFF.md (current state + unchecked Steps)
+4. `git log --oneline -10`
+5. Continue at first unchecked Step.
+
+**Progress on Plan v2**:
+- [x] Step 0: DECISIONS.md baseline (commit `6fb3888`)
+- [ ] Step 1: useCustomizer + types ← **in progress**
+- [ ] Step 2: HeroCustomizer + PersonaCard + PersonaExample + LanguageToggle
+- [ ] Step 3: Academy landing rewrite
+- [ ] Step 4: Archive corporate pages
+- [ ] Step 5: Lesson loader (i18n + persona)
+- [ ] Step 6: Content rewrite EN (modules 01, 03, 05, 06, 07 + light 04)
+- [ ] Step 7: ES authoring (all 7)
+- [ ] Step 8: Smoke + cohort link
+
+---
+
+## Historical — Plan v1 work (superseded, artifacts preserved)
+
 **Milestone M2 — Build proof-of-pipeline academy page** (proof page built 2026-04-19)
 
 Landed:
