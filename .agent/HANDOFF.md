@@ -1,7 +1,7 @@
 # HANDOFF — CETI Claude Code Academy
 
 **Purpose**: resume from any point. Updated at every milestone and before 70% context usage.
-**Last updated**: 2026-04-19 (M3 close)
+**Last updated**: 2026-04-19 (Steps 3–5 closed; Step 6 in progress)
 **Primary objective**: build the highest-quality Claude Code academy — tiered as Novice / Experienced / Expert — using the `codebase-to-course` skill, porting LUXOR + MERCURIO + MARS insights, and logging everything to DASHBOARD.md.
 
 ---
@@ -112,10 +112,10 @@ Status:
 - [x] Step 0: DECISIONS.md baseline (commit `6fb3888`)
 - [x] Step 1: useCustomizer + types
 - [x] Step 2: HeroCustomizer + PersonaCard + PersonaExample + LanguageToggle + XpOrb + ForkChoice + BossCheckpoint + useXp
-- [ ] Step 3: Academy landing rewrite ← **in progress**
-- [ ] Step 4: Archive corporate pages
-- [ ] Step 5: Lesson loader (i18n + persona)
-- [ ] Step 6: Content rewrite EN (modules 01, 03, 05, 06, 07 + light 04)
+- [x] Step 3: Academy landing rewrite (commit `e33a4d9`) — HeroCustomizer is the primary entry, tier grid and placement quiz removed; homepage CTA now "Start the Academy" → /academy
+- [x] Step 4: Archive corporate pages (commit `9eff07f` + routeRules in `5c4c411`) — perspective-matrix.vue + six-dimensions.vue moved to `app/pages/academy/_corporate/`; nuxt.config routeRules redirect `/academy/_corporate/**` → `/academy` (307)
+- [x] Step 5: Lesson loader i18n + persona (commit `1e5cb74`) — tokenizer splits markdown into block sequence (html / callout / try / recap / quiz / personaExample), persona-comment pre-filter keeps only matching `<!-- persona:X -->` regions, language routing picks `<slug>.<lang>.md` else `.md`. Live-verified on dev-learn.cetiai.co for creator + service.
+- [ ] Step 6: Content rewrite EN (modules 01, 03, 05, 06, 07 + light 04) ← **in progress** (01, 03, 05, 06, 07 already committed in prior session — sanity-pass + module 02/04 remaining)
 - [ ] Step 7: ES authoring (all 7)
 - [ ] Step 8: Smoke + cohort link
 
