@@ -63,14 +63,29 @@ Maps loosely onto pricing tiers (Bronze ≈ Novice, Silver ≈ Experienced, Gold
 
 ## What I'm working on right now
 
-**Milestone M1 — Insight synthesis + taxonomy definition** (in progress)
+**Milestone M1 — Insight synthesis + taxonomy definition** (closed 2026-04-19)
 
 Status:
 - ✅ HANDOFF.md + DASHBOARD.md written + committed (`07d6be7`)
-- ✅ LUXOR-MAP subagent returned → `docs/insights/luxor-map.md` written
-- ⏳ MERCURIO subagent → pending
-- ⏳ MARS subagent → pending
-- ⏳ Novice/Experienced/Expert tier rubric → pending
+- ✅ LUXOR-MAP subagent returned → `docs/insights/luxor-map.md` committed (`083edd3`)
+- ✅ MERCURIO subagent returned → `docs/insights/mercurio-patterns.md`
+- ✅ MARS subagent returned → `docs/insights/mars-patterns.md`
+- ✅ Novice/Experienced/Expert tier rubric → `docs/academy-taxonomy.md`
+
+**Milestone M2 — Build proof-of-pipeline academy page** (in progress)
+
+First page to build: **Experienced / Debugging AI Loops**. Pipeline:
+1. Feed `agentic-ai-course/labs/day3/lab-09-debugging-ai-loops.html` into `codebase-to-course` via `skill-page` mode.
+2. Write a small transform script that parses the output HTML into a JSON intermediate (sections, quizzes, code-english pairs, glossary, callouts).
+3. Render the JSON through a new `AcademyPage.vue` that composes existing shadcn-vue primitives.
+4. Route: `/academy/experienced/debugging-ai-loops`.
+5. Commit + deploy + live-verify.
+
+After proof lands, fan out:
+- Novice / Perspective Matrix (MERCURIO-port)
+- Novice / Six Dimensions (MARS-port)
+- All Novice threads (reusing existing Bronze markdown, rendered through the new pipeline)
+- Experienced + Expert thread-by-thread.
 
 **Key architectural decision from LUXOR-MAP**:
 `codebase-to-course` produces standalone HTML with its own *light* design system — it does **not** integrate with our dark-gold Tailwind+shadcn stack. Chosen path: **use codebase-to-course as a content source**, transform its HTML into a JSON intermediate, re-render through our shadcn-vue components. Preserves pedagogy + LUXOR discipline without visual mismatch.

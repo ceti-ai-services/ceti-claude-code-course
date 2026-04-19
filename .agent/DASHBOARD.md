@@ -4,6 +4,22 @@ Append-only log of every milestone, decision, and build. Newest at top.
 
 ---
 
+## 2026-04-19 · MERCURIO + MARS subagents returned; taxonomy drafted
+
+Both subagents finished within minutes of each other. Ten teachable patterns extracted (3 MERCURIO, 5 MARS + 2 drop-outs). Written to `docs/insights/mercurio-patterns.md` and `docs/insights/mars-patterns.md`.
+
+Academy taxonomy finalized → `docs/academy-taxonomy.md`. Five cross-tier threads (mental model · daily practice · tool integration · decision-making · scaling + safety), each with Novice/Experienced/Expert depth. Three-question self-placement on the landing for visitors.
+
+**Build order**:
+1. Experienced / Debugging AI Loops (proof-of-pipeline)
+2. Novice / Perspective Matrix (MERCURIO-port)
+3. Novice / Six Dimensions (MARS-port)
+4. Fan out to all threads
+
+M1 closed. M2 beginning: build the codebase-to-course → shadcn-vue transform + the first academy page.
+
+---
+
 ## 2026-04-19 · LUXOR-MAP subagent returned
 
 **Finding** (big): `codebase-to-course` is standalone light-theme HTML with a hard-coded design system (warm cream #FAF7F2, Bricolage Grotesque). **Does not integrate** with Tailwind v4 + shadcn-vue.
