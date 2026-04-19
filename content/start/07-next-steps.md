@@ -1,63 +1,81 @@
 ---
-title: Next Steps
-module: 07
+title: You did it. Now what changes.
+module: "07"
 time: "10 min"
+tags: [next-steps, practice, silver, gold, bronze]
+skills_gained: [habit-forming, self-assessment, next-path]
+persona_aware: true
 ---
 
-# Next Steps
+# You did it. Now what changes.
 
-You came in never having opened a terminal. You leave with a tool that reads your files, talks to you in plain English, proposes changes under your control, and remembers your context across sessions. That is the whole Bronze Ticket. This final lesson is a short inventory of what you can now do, an honest preview of what the next tiers add, and one pointed exercise to identify where automation would actually save you time.
+An hour ago you were the person who had watched a course. Now you're the person who used Claude on your actual work and has a finished file to prove it.
 
-## What you can now do
+That's not a small shift. That's the shift.
 
-You can install and launch Claude Code on a Mac, Windows, or Linux machine. You can start a scoped session by `cd`-ing into a folder before you run `claude`. You can ask the opening question that diagnoses a folder — what is in here and what is it for — and reshape Claude's answers through normal conversation. You can approve or deny file edits with full visibility into what is about to change, and you know to duplicate files before edits when git is not in the picture. You can write a `CLAUDE.md` that encodes the context you previously had to retype every session, and you know the difference between project memory and a prompt.
+You still have the same clients, the same inbox, the same calendar, the same Monday. What changed is the ceiling on how fast you can get through the parts of all of that which are text, files, and repeatable drafts. Before today, that ceiling was however fast your hands move and however clear your head is on a given morning. After today, it's different. The tool is in the room now.
 
-Most importantly, you can do one real task end to end. Not a toy example. A task from your actual week, done with the three-stage pattern — read, plan, execute with approvals — and producing a tangible output in a real file.
+This module is what to do with that.
 
-That is genuinely enough. For many readers, Bronze is the whole tool. A few specific habits, applied to a few specific tasks, is where most of the value lives. If you close this course and never open the next tier, you will still get meaningful hours back every week.
+## Three things to practice this week
 
-## Where Silver picks up
+Not someday. This week. The gap between "installed and used once" and "part of my weekly rhythm" is about three sessions. If you use Claude three times in the next seven days, it sticks. If you don't, the install ages out and becomes another thing on a list of tools you sort of know.
 
-If the end of Module 06 felt like the beginning of something instead of the end — if you came out of the exercise thinking "okay, what if this ran on Gmail too, what if I could actually automate this weekly instead of doing it once" — Silver is the tier written for you.
+**Reuse your CLAUDE.md by pointing Claude at a different folder.** Tomorrow morning, find another folder where your work lives — a different client, a different project, a different batch. Write a new CLAUDE.md there, modeled on the one from Module 05. The second one will take you ten minutes instead of thirty. The third one will take you five. That's how fast you learn what actually belongs in these files versus what doesn't.
 
-The **Silver Ticket** is a four-week cohort at $499. It moves Claude Code from "tool you open for one task" to "tool wired into your actual job." Three things change:
+**Refine the CLAUDE.md you already have as you notice what you keep re-explaining.** Every time you find yourself typing "remember that I prefer…" or "also just to be clear, my clients…" — that's a line that belongs in the file, not in the chat. Add it, save, next session is sharper. Your CLAUDE.md gets better every week by about two lines.
 
-**MCP integrations.** MCP — Model Context Protocol — is the way Claude Code connects to other services. In Silver you wire Claude into Gmail, Google Calendar, Notion, and a few common tools, so that the same approval-based workflow you just learned can now read your inbox, create calendar events, update pages in your Notion workspace, and pull data from the systems where your work actually lives. You are no longer limited to files on disk.
+**Catch yourself before pasting into the browser chatbot.** This is the real test. You'll hit a moment next week where you almost reflexively open ChatGPT in a tab, paste a document, and ask for a summary. Stop for one second and ask: *could I just point Claude at the folder this lives in?* Nine times out of ten the answer is yes, and nine times out of ten the answer is faster, more accurate, and doesn't require copy-paste gymnastics afterward.
 
-**Hooks and automation.** Hooks are rules that run automatically when something happens — a file changes, a session starts, a task completes. The Bronze workflow is "open Claude, do the thing." The Silver workflow is "set up the task once, and it runs itself on a schedule or trigger." This is where weekly reports become Monday-morning emails without you opening anything.
+## What this looks like by next Friday
 
-**A capstone project.** Over the four weeks you pick one task from your real work and automate it end to end, with weekly reviews. By the end you walk away with a working piece of automation — not a demo — that you use in your actual job.
+<PersonaExample>
+  <template #creator>
 
-If you have already identified the task you would want to automate (the exercise below asks you to), Silver is the path that builds it.
+  By next Friday, your weekly caption batch takes forty minutes instead of two hours — and the captions sound more like you, not less, because Claude's been reading the last twenty you wrote.
 
-## Where Gold fits
+  </template>
+  <template #consultant>
 
-**Gold** is different in kind, not degree. It is a $2,500 engagement, one-on-one, for teams or individuals who need Claude Code wired into their specific stack — a unique combination of tools, confidential data, compliance constraints, or custom workflows that a cohort format cannot cover. If your organization has the kind of situation where "just buy the course" does not quite fit, Gold is the tier that sits down with you and designs the integration.
+  By next Friday, your Friday-afternoon follow-up pile is done by Thursday, with three client emails drafted and ready in about twenty minutes instead of ninety.
 
-For most readers of this course, Gold is not the next step. Silver is. Gold is named here only so you know it exists when you need it.
+  </template>
+  <template #service>
 
-## The starter kit
+  By next Friday, your weekly bookings reconciliation is a fifteen-minute sit-down instead of an hour, and you know exactly who to message on Monday because the gaps list is already written.
 
-There is a small bundle of resources that goes with Bronze — a cheat sheet of the commands from Modules 02 through 04, the `CLAUDE.md` template from Module 05 in a downloadable form, and a list of ten example tasks to try if your Module 01 task turned out to be a poor fit. Bookmark it. You will come back to the `CLAUDE.md` template the next time you open Claude Code in a new folder and realize you want project memory there too.
+  </template>
+  <template #realestate>
 
-The mailing list is a slower cadence — not more than one email a month — with short updates on new Claude Code features and real case studies from Silver cohorts. Subscribe if you want the signal without the volume.
+  By next Friday, the MLS-comps-to-buyer-summary loop is a twenty-minute task instead of an hour, and the numbers are more defensible because they came from the CSV, not your eyeballs.
 
-## Before you close this tab
+  </template>
+</PersonaExample>
 
-The temptation at the end of any course is to put the tool aside and come back "when you have time." That is the wrong move with Claude Code. The gap between "installed and tried once" and "part of my weekly rhythm" is about three sessions. If you use it three times in the next seven days, it sticks. If you do not, the install ages out of your memory and the tool you just learned becomes another thing on a list of tools you sort of know.
+Those aren't guesses. They're what happens when people put the tool on one task and stick with it for a week. The second week the same tasks get faster again. By the fourth, the way you used to do them is the one that feels weird.
 
-Put something on your calendar. Tomorrow morning, or the next time you face the task you did in Module 06. Open the terminal, `cd` into the folder, and do it again. Second time is always faster. Third time is where the habit forms.
+## If you want more — Silver and Gold
 
-## What you just did
+Silver and Gold are real. They're also earned, not sold to you. If what you just did in Module 06 felt like the beginning of something rather than the end — if you came out of that hour thinking *okay, what if this was on a schedule, what if this touched my email, what if this pulled from my calendar* — there are paths for that.
 
-You finished the Bronze Ticket. You now have a working install of Claude Code, a concrete mental model for how to use it, one real task done end to end, and a clear sense of where Silver and Gold would pick up if you want more. The tool is scoped to the folders you point it at, every change goes through approval, and the context in your `CLAUDE.md` follows you between sessions. The rest is reps.
+**Silver — *Claude Code for Your Work*.** Four weeks, async cohort, $499, capped at twenty people. Silver is the tier if you want Claude wired into the tools your actual job lives in — Gmail, Google Calendar, Notion, Airtable, the ones where your work actually happens. You leave Silver with one of your real weekly tasks automated end-to-end, not just done faster but *actually running itself on a schedule*. If you already know the task you'd automate, Silver is the path that builds it.
 
-## Try this
+**Gold — *Claude Code in Your Business*.** Four 1:1 hours, thirty days of direct Slack support, $2,500. Gold is for when you or your team has a specific setup — your stack, your data, your constraints — and you want me or my team to sit down and build the integration *for* you rather than teach you to build it. Optional $1,000/month retainer after, if it turns into ongoing work. Most readers of this course don't need Gold. A few do. You'll know which.
 
-Open a blank document. List the top three to five recurring tasks in your week that involve any kind of digital artifact — files, emails, calendar invites, spreadsheets, documents. Next to each, estimate two numbers: **hours per week** you currently spend on that task, and your **gut feeling** on whether Claude Code could meaningfully reduce that number (low, medium, or high confidence).
+There's no hurry on either one. Bronze is genuinely enough for a lot of people. If you spend the next month just doing the three habits above — reusing CLAUDE.md, refining it, catching yourself before the copy-paste reflex — and that's the ceiling that works for you, that's a completely valid place to stop. Come back when the task you want to automate is bigger than Bronze can hold.
 
-Look at the list. There is almost certainly one task with a *medium or high* confidence score and a *multi-hour* weekly cost. Circle it.
+## One last thing
 
-That task is your Silver capstone target. Even if you never take Silver, writing that task down commits it to the "things I intend to automate" list instead of the "things I complain about" list. If you do take Silver, you already have the project picked.
+A quieter note to end on. The course you just took is version one. What lives on this page now is text. What will eventually live here is an assistant — one that remembers what you said in your reflections, notices where you got stuck, and adjusts the next module for you specifically. That's not here yet. When it is, the path you just walked will still be the path — but it'll bend toward the specific version of you who walked it.
 
-If no task on your list meets that bar, the honest answer is that you do not need Silver yet — Bronze is the right ceiling for you right now, and you should come back to this exercise in a few months after Claude Code has been in your workflow for a while. Most people find the circled task the first week. Some do not find it for a month. Both are fine.
+For now: you have a working install, a CLAUDE.md that knows who you are, a finished file from Module 06 that you built alongside Claude, and three habits to put on this week's calendar.
+
+That's the whole thing. Go use it.
+
+<Recap>
+
+You finished the Bronze arc. You have the mental model, the tool, the approval discipline, the project memory, and one real task shipped end-to-end. Three habits this week — reuse CLAUDE.md in a new folder, refine the one you have, catch yourself before the browser-chatbot reflex — is what turns an hour of training into a tool you actually keep. Silver and Gold exist for when the task you want is bigger than Bronze can hold. They're not the point right now. Practice is.
+
+</Recap>
+
+<!-- REFLECTION_INPUT_PLACEHOLDER — future AI assistant will ask the reader which of the three habits they'll commit to this week and when. Not rendered yet. -->
