@@ -1,7 +1,7 @@
 # HANDOFF — CETI Claude Code Academy
 
 **Purpose**: resume from any point. Updated at every milestone and before 70% context usage.
-**Last updated**: 2026-04-19 (Steps 3–5 closed; Step 6 in progress)
+**Last updated**: 2026-04-19 — **PLAN V2 COMPLETE.** Bronze ships ready for cohort zero.
 **Primary objective**: build the highest-quality Claude Code academy — tiered as Novice / Experienced / Expert — using the `codebase-to-course` skill, porting LUXOR + MERCURIO + MARS insights, and logging everything to DASHBOARD.md.
 
 ---
