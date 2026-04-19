@@ -4,6 +4,20 @@ Append-only log of every milestone, decision, and build. Newest at top.
 
 ---
 
+## 2026-04-19 · M2 proof page built — tier components + academy landing + debugging-ai-loops
+
+Six course components shipped under `app/components/course/`: `ModuleHero`, `Callout` (7 variants via CVA), `Quiz` (per-question reveal, no cross-question state), `IxCollapse` (rotating chevron), `TryThis`, `Recap`. Each composes existing shadcn-vue primitives — no new deps, no new tokens. Tailwind utilities throughout; no inline `style=`.
+
+Academy landing at `/academy`: three-question stepper (uses `ref()`, advances step-by-step, emits recommended tier), three tier cards with Experienced featured (`border-gold`), and the 5×3 cross-tier thread table with mobile overflow. No gate — public entry for the skill-level axis.
+
+First Experienced page at `/academy/experienced/debugging-ai-loops`. Content adapted from LUXOR `agentic-ai-course/labs/day1/lab-03-agent-thinking.html` + `day3/lab-08-production.html` (the originally-cited `lab-09-debugging-ai-loops.html` does not exist — used the nearest substance sources). PRAO loop framing softened for non-developers into Perceive / Reason / Act / Observe. Three quizzes, each naming a symptom and asking for the root cause. Invariants held: no `--thinking`, no `--context`, no `/memory`.
+
+Nav updated to include "Academy" between Bronze and Silver. `npm run build` green. Banned-words + inline-style scan clean.
+
+**Next milestone (M3)**: fan out — Novice / Perspective Matrix and Novice / Six Dimensions as the next two pages, then fill the Experienced thread.
+
+---
+
 ## 2026-04-19 · MERCURIO + MARS subagents returned; taxonomy drafted
 
 Both subagents finished within minutes of each other. Ten teachable patterns extracted (3 MERCURIO, 5 MARS + 2 drop-outs). Written to `docs/insights/mercurio-patterns.md` and `docs/insights/mars-patterns.md`.

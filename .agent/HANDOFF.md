@@ -72,14 +72,16 @@ Status:
 - ✅ MARS subagent returned → `docs/insights/mars-patterns.md`
 - ✅ Novice/Experienced/Expert tier rubric → `docs/academy-taxonomy.md`
 
-**Milestone M2 — Build proof-of-pipeline academy page** (in progress)
+**Milestone M2 — Build proof-of-pipeline academy page** (proof page built 2026-04-19)
 
-First page to build: **Experienced / Debugging AI Loops**. Pipeline:
-1. Feed `agentic-ai-course/labs/day3/lab-09-debugging-ai-loops.html` into `codebase-to-course` via `skill-page` mode.
-2. Write a small transform script that parses the output HTML into a JSON intermediate (sections, quizzes, code-english pairs, glossary, callouts).
-3. Render the JSON through a new `AcademyPage.vue` that composes existing shadcn-vue primitives.
-4. Route: `/academy/experienced/debugging-ai-loops`.
-5. Commit + deploy + live-verify.
+Landed:
+- Six course components under `app/components/course/`: `ModuleHero`, `Callout`, `Quiz`, `IxCollapse`, `TryThis`, `Recap`. All compose shadcn-vue primitives; no new deps.
+- Academy landing at `/academy` with 3-step self-placement + tier cards + cross-tier thread table.
+- First page at `/academy/experienced/debugging-ai-loops` — adapted from LUXOR lab-03 + lab-08 substance (the originally-cited lab-09 file does not exist).
+- Nav now includes "Academy" between Bronze and Silver.
+- Skipped the codebase-to-course → JSON intermediate for this pass. The components are direct-authored; the transform pipeline can come back in later if we want to bulk-port lab HTML. For single high-quality pages, direct authoring beat the translation layer on effort-to-quality.
+
+Route: `/academy/experienced/debugging-ai-loops`. Commit + push + live-verify done in same session.
 
 After proof lands, fan out:
 - Novice / Perspective Matrix (MERCURIO-port)
@@ -92,15 +94,18 @@ After proof lands, fan out:
 
 Also from LUXOR-MAP — five LUXOR skills to port in spirit: `course-validator` (our pre-commit gate), `course-orchestrator` (8-phase academy build pipeline), `progressive-game-lab` (XP + gating adapted into `ProgressDots`), `curriculum-module-writer` (content generator), `codebase-to-course` (content source).
 
-**Milestone M2 — Academy spine** (next)
+**Milestone M3 — Fan out to more pages** (next)
 
-- Draft Novice / Experienced / Expert tier rubric → `docs/academy-taxonomy.md`
-- Build the codebase-to-course → shadcn-vue transform layer (small; ~100 LOC script)
-- Generate the first proof-of-pipeline academy page: `/academy/experienced/debugging-ai-loops` from `agentic-ai-course/labs/day3/lab-09-debugging-ai-loops.html`
+With components + landing + one reference page shipped, next is breadth:
+- Novice / Perspective Matrix (MERCURIO Pattern 1 — shortest port)
+- Novice / Six Dimensions (MARS Pattern 1)
+- Fill the remaining Novice threads (reuse Bronze markdown, render through the 6 course components)
+- Experienced threads 2+ (skills/slash commands, MCP wiring, hooks)
+- Expert threads
 
-**Milestone M3 — Academy expansion**
-
-Expand each tier with 5–7 skill-focused pages driven by the synthesized insights and MERCURIO/MARS patterns.
+Possible follow-ups:
+- Add `StepWalk`, `ClickCards`, `HeroCanvas`, `CodeBlock`, `LessonNav`, `ProgressDots`, `IxInstruct`, `ObjectiveChips` as the page library grows (see AUTONOMOUS-BUILD Package 1 for the full 14-component list).
+- Per-tier index pages (`/academy/novice`, `/academy/experienced`, `/academy/expert`) once there are 3+ pages per tier.
 
 ---
 
