@@ -1,75 +1,129 @@
 ---
-title: The Mental Model
-module: 01
+title: You already have AI. You're just using it wrong.
+module: "01"
 time: "12 min"
+tags: [mental-model, fundamentals, bronze]
+skills_gained: [framing, correct-expectations, first-shift]
+persona_aware: true
 ---
 
-# The Mental Model
+# You already have AI. You're just using it wrong.
 
-You have probably used ChatGPT or Claude in a browser. You paste something in, it writes something back, you copy the response into the document or spreadsheet that actually needs it. The answer is often good. The workflow is terrible. Every useful output is trapped behind a copy-paste wall, and the AI never sees the actual files you work with.
+You've been here before. Late night. Tab open, ChatGPT or Claude in the browser. You type. You get a good answer. You copy it. You paste it somewhere else — the doc, the DM, the spreadsheet, the email — and then you spend another twenty minutes making it fit.
 
-Claude Code is a different kind of tool for the same underlying model. Before you install anything, it helps to understand what it is, and — more importantly — what it is not.
+You did the work twice. The AI answered once. The second round — the part where you actually shipped — you did alone.
 
-## What Claude Code actually is
+That's the problem. Not the AI. The shape of how you're using it.
 
-Claude Code is a **terminal-native assistant**. The *terminal* is the text-based window your operating system has had since the 1970s — on a Mac it is called Terminal, on Windows it is PowerShell or Windows Terminal, on Linux it is whatever shell you use. You type a command, it does something, you see the result. Claude Code runs in that window.
+<!-- persona:creator -->
+<Callout variant="core-idea">
+You know the move: open the chatbot, write "rewrite this caption to be more engaging." Get a reply. Paste it in. Fix three things manually. Post it anyway, not quite your voice.
+</Callout>
+<!-- /persona:creator -->
 
-Once it is running, Claude can do three things you cannot do in a browser chatbot:
+<!-- persona:consultant -->
+<Callout variant="core-idea">
+You know the move: ask the chatbot to help draft a client follow-up. Get a response. Copy it into Gmail. Rework half of it so it sounds like you. Send.
+</Callout>
+<!-- /persona:consultant -->
 
-1. **Read files on your computer.** Not just files you upload — any file in the folder where you started it. Ten-year-old Word documents, a CSV full of customers, a folder of meeting transcripts. It reads them directly.
-2. **Run commands.** It can open a program, rename files, convert a document, search across a hundred PDFs. With your permission, every time.
-3. **Edit files.** It can change the text in a document, reorganize a spreadsheet, rewrite a draft. Again — with your permission, every time.
+<!-- persona:service -->
+<Callout variant="core-idea">
+You know the move: paste a customer's text message into the chatbot. Ask for a polite reply. Copy the answer back into WhatsApp. Adjust the tone because it sounds too formal for your clients. Send.
+</Callout>
+<!-- /persona:service -->
 
-That last phrase matters. Claude Code is built on an approval model. Before anything on your computer changes, it asks. You see the proposed change. You say yes or no.
+<!-- persona:realestate -->
+<Callout variant="core-idea">
+You know the move: paste a lead's inquiry into the chatbot. Ask for a warm reply with market context. Copy the answer into your SMS or email. Rework the comps because you know your market better. Send.
+</Callout>
+<!-- /persona:realestate -->
 
-## What Claude Code is not
+## The shape you haven't used yet
 
-It is not a browser chatbot with a new skin. It is not a plugin inside VS Code, Cursor, or any other editor. It is not a SaaS product you log into at some URL.
+Claude Code is the same Claude you've been using in the browser. Different shape. It doesn't live on a website. It lives on your computer, inside the folder where your actual work sits.
 
-It lives in the folder where your work lives. When you start it inside your `Contracts` folder, it sees your contracts. When you start it inside `Downloads`, it sees your downloads. It has no memory of other folders. It has no access to your whole computer — only the one it was started in, and its subfolders.
+That's the whole idea. Let me say what that means, because most people don't realize the size of it.
 
-That scoping is the feature, not a limitation. You decide what it can see by deciding where you launch it.
+Right now, your work is in folders. A client's brief is a Google Doc in `~/Documents/Clients/`. Your calendar is in an app. Your receipts are a screenshot pile in `~/Downloads`. Your email drafts are in Gmail. Your caption backlog is a Notes file.
 
-## The careful junior colleague
+Every time you want to *do* something with that work — summarize it, reorganize it, draft from it, clean it up — you have to either (a) copy-paste into a chatbot or (b) do it yourself. Both are slow.
 
-Here is the analogy that makes the rest of this course easier to follow.
+Claude Code removes step (a). You open a terminal window, point it at the folder, and now the AI can read the files directly. Not uploaded. Not summarized. The real files. And it can edit them, with your permission, one step at a time.
 
-Think of Claude Code as a **careful junior colleague** who has just joined your team. They are fast, fluent, and they read quickly. But they are new. They do not know which files matter. They have not met the client. They have never used the shared drive before.
+<TryThis time="2 min">
 
-A careful junior colleague does three things you want from any new hire:
+Think about the last time you asked ChatGPT or Claude (the browser one) for help with something real. Not curiosity — actual work.
 
-- **They ask before they touch anything.** "Should I move these files into a subfolder, or leave them as they are?" is a much better sentence than the sound of files being moved.
-- **They read before they act.** If you ask them to summarize a folder, they open the folder first. They do not guess.
-- **They explain their plan.** When the work is non-trivial, they describe what they are about to do in plain English, and wait for you to nod.
+- What did you ask?
+- What did you do with the answer afterward?
+- How long did the *afterward* take?
 
-Claude Code behaves this way by default. The discipline is built in. Your job is not to supervise it constantly — it is to give it enough context to be useful, then review its proposals before approving them.
+That "afterward" is where Claude Code earns its keep.
 
-## Vending machine versus colleague
+</TryThis>
 
-Most people's first instinct with AI is to treat it like a vending machine. You put in a prompt, a response falls out, you walk away. The loop never closes. You copy the output into a Google Doc and massage it into the real deliverable. Nothing the AI produced actually made contact with the real work.
+## The mental model that fixes this
 
-Claude Code is the colleague model. You work in the same folder. The AI opens the same files you would open. When it drafts something, the draft lands in the actual document — not in a separate chat window that you then have to ferry back. When you tell it something about how your team operates, it remembers for that project. The loop closes.
+There's one framing that makes all of this click. I've taught this to thousands of people, and it's the one that sticks.
 
-This is the biggest single shift in the rest of this course. You are not going to learn better prompts. You are going to learn to work alongside something that can open the files and do the thing.
+Claude Code is not a vending machine. It's a colleague.
 
-## A concrete example
+A vending machine takes your input, gives you an output. Transaction done. You walk away. That's ChatGPT in a browser. You prompt, it replies, you do the rest.
 
-You have forty meeting notes from Q1. Your boss wants a summary of the recurring themes by Thursday.
+A colleague is different. A colleague sits in the same room with you. Sees the same files. Asks you to clarify when you're vague. Shows you what they're about to change before they change it. Does the boring parts so you can do the parts that need you.
 
-The vending-machine version: open each note, copy the text, paste into a chatbot, ask for themes, copy the answer, paste into a doc, repeat — or do it all at once and blow past the context window.
+<Callout variant="tip">
+A good colleague doesn't need you to transcribe the situation for them. They can see it. That's what moving from "chatbot" to "Claude Code" actually gets you.
+</Callout>
 
-The colleague version: open Claude Code inside the folder that contains the forty notes. Ask, "Read everything in this folder and tell me the three most common themes, with quotes." It reads them. It answers. You ask follow-ups. When you like the result, you ask it to write the summary as a Word document in the same folder. It does. Your Thursday deliverable is a real file, not a chat log.
+## What this means for your week
 
-The difference is not the quality of the answer. It is the number of moments where you had to manually shuttle text between windows. That number goes to zero.
+Not abstractly. Specifically.
 
-## What you just did
+<PersonaExample>
+  <template #creator>
 
-You read a definition and an analogy. The definition: Claude Code is a terminal-native AI that reads files, runs commands, and edits code or documents with your approval, scoped to the folder you launch it in. The analogy: a careful junior colleague who reads first, asks before acting, and closes the loop by working in the same files you do. Everything in the next six lessons builds on these two ideas. If one sticks, make it the colleague.
+  This week, you probably spent two hours on content ops: renaming exports, moving files between drafts and scheduled, writing captions that match old ones, replying to DMs that all ask roughly the same thing. The vending-machine version of AI helps you write *one* caption. The colleague version reads your last 20 captions, understands your voice, drafts 5 new ones, and files them in the right folder. Same amount of your time, ten times the output.
 
-## Try this
+  </template>
+  <template #consultant>
 
-Open a plain text file — Notes, TextEdit, Word, whatever you have. Write down one task you do every week that involves **five or more files**. The task should be something tedious that you do not enjoy: compiling a weekly report from multiple sources, cleaning up a shared folder, drafting follow-ups from meeting transcripts, reconciling a spreadsheet against another one, summarizing a batch of contracts. One sentence is enough.
+  This week, you probably drafted the same type of email three or four times: follow-up on an unpaid invoice, clarification on scope, status update to a client. The vending-machine version helps you write *one* email. The colleague version reads last month's correspondence with that client, understands your relationship and tone, drafts the right version in your voice, and ships it. You approve. That's it.
 
-Save the file somewhere you will find it again. You are going to use this task as your real use case in Module 06, and it is going to become the thing you automate.
+  </template>
+  <template #service>
 
-Do not overthink it. The best candidate is the task you mildly dread on Monday mornings.
+  This week, you probably got the same customer question ten times through different channels: "what are your hours," "do you have availability Saturday," "how much is X." The vending-machine version helps you write *one* answer. The colleague version looks at your schedule, reads the customer's history, drafts a reply that fits them, and marks the message answered. You approve. Done.
+
+  </template>
+  <template #realestate>
+
+  This week, you probably pulled comps, wrote a follow-up to a buyer, and replied to disclosure questions on two listings. The vending-machine version helps you with one of those. The colleague version reads the listing folder, pulls the comps from the CSV you already downloaded, drafts the follow-up in the voice you use with this buyer, and flags the disclosure questions you need to escalate to your broker. You approve.
+
+  </template>
+</PersonaExample>
+
+## What's coming
+
+Over the next six modules, you'll install Claude Code, run your first real session, and build up from there. By the end, you'll have one real thing working on your computer — something you actually do every week, now done with a colleague.
+
+One note before we move on. The version of this course you're reading is the first one. Later, there will be an assistant right here on this page that remembers what you said in your reflections, notices where you got stuck, and adjusts the next module for you specifically. It's not here yet. When it is, you'll know.
+
+<Recap>
+
+You've been using AI in a shape that makes it do the easy half of your work and leaves you the hard half. Claude Code is the same AI in a different shape — one where it can see your files and do the work with you. Colleague, not vending machine. That's the only idea you need from this module. The rest is mechanics.
+
+</Recap>
+
+<TryThis time="5 min">
+
+Before you start Module 02, write down one task you do every week that involves opening more than five files or messages. A weekly report. A batch of DMs. A pile of receipts. A content calendar. A client update.
+
+One sentence. Save it somewhere you'll find it. You're going to use this task as your real example in Module 06 — and if it lands right, by the end of next week, you won't be doing it the old way anymore.
+
+The more painful the task, the better the fit.
+
+</TryThis>
+
+<!-- REFLECTION_INPUT_PLACEHOLDER — future AI assistant will prompt the reader here. Not rendered yet. -->
