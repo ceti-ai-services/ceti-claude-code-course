@@ -73,12 +73,27 @@ The invocation assumes:
 - Install is `npm install -g @anthropic-ai/claude-code`. Launch is `claude`.
 - Permission modes: `default`, `acceptEdits`, `plan`.
 
-### Design system (extended from reference)
-- **Palette**: `--bg: #0a0a0b` · `--surface: #121214` · `--raised: #1a1a1d` · `--text: #f5f5f4` · `--muted: #a1a1a8` · `--dim: #6b6b72` · `--gold: #d4a84b` (single accent). Do not introduce additional accent colors.
-- **Typography**: Inter 400/500/600/700/800 (body) · JetBrains Mono 400/500 (code/prices) · Oswald 600/700 uppercase for display eyebrows and module numbers (letter-spacing `0.04em`).
-- **Motion curve**: `cubic-bezier(0.22, 1, 0.36, 1)` for every transition. Default duration `0.2s` for UI, `0.6s` for orchestrated reveals.
-- **Radius**: `--radius: 10px` · `--radius-lg: 14px` · `--radius-xl: 20px` for hero-scale cards.
-- **Reduced motion**: every animation respects `prefers-reduced-motion: reduce`. Canvas animation falls back to a static render. No exceptions.
+### Tech stack (fixed — do not change)
+- **Nuxt 4** with default Vercel preset (server routes → serverless functions).
+- **Tailwind CSS v4** via `@tailwindcss/vite`. CSS-first config via `@theme` in `app/assets/css/main.css` — no `tailwind.config.js`.
+- **shadcn-vue** via the `shadcn-nuxt` module. Baseline already installed with 10 primitives in `app/components/ui/`: `button`, `card`, `alert`, `badge`, `collapsible`, `tabs`, `accordion`, `dialog`, `progress`, `separator`.
+- **reka-ui** (Radix-for-Vue port) — underlying primitive layer shadcn-vue depends on. Accessible by default.
+- **Lucide** via `lucide-vue-next` — icon library. No emojis in body copy; only Lucide icons.
+- **clsx + tailwind-merge** via the `cn()` helper in `app/lib/utils.ts` — use on every conditional classList.
+
+To add more shadcn-vue primitives:
+```bash
+npx --cache /tmp/ceti-npm-cache shadcn-vue@latest add <name> --yes
+```
+Components you'll likely need beyond the baseline: `checkbox`, `radio-group`, `select`, `switch`, `tooltip`, `hover-card`, `sheet`, `toast`/`sonner`, `scroll-area`, `skeleton`, `table`.
+
+### Design system
+- **Palette** (single gold accent, defined as Tailwind theme tokens in `app/assets/css/main.css`):
+  `--color-bg: #0a0a0b` · `--color-surface: #121214` · `--color-raised: #1a1a1d` · `--color-text: #f5f5f4` · `--color-muted: #a1a1a8` · `--color-dim: #6b6b72` · `--color-gold: #d4a84b` (single accent). shadcn tokens (`--color-primary`, `--color-card`, etc.) are mapped onto these. Do not introduce additional accent colors.
+- **Typography**: Inter 400/500/600/700/800 (body) · JetBrains Mono 400/500 (code/prices) · Oswald 600/700 uppercase for display eyebrows and module numbers (letter-spacing `0.04em`). All three registered as Tailwind fonts (`font-sans`, `font-mono`, `font-display`).
+- **Motion curve**: `cubic-bezier(0.22, 1, 0.36, 1)` — available as `ease-out-spring` or `var(--ease-out-spring)`. Default duration `0.2s` for UI, `0.6s` for orchestrated reveals.
+- **Radius**: `rounded-[10px]` (`--radius`), `rounded-[14px]` (`--radius-lg`), `rounded-[20px]` (`--radius-xl` for hero-scale cards).
+- **Reduced motion**: every animation respects `prefers-reduced-motion: reduce` (already wired globally in `main.css`). Canvas animation falls back to a static render. No exceptions.
 
 ### Commit + deploy discipline
 - One commit per verified package. Conventional commit subjects (`feat(bronze):`, `feat(ui):`, `fix(accuracy):`, etc.).
@@ -180,47 +195,61 @@ Commit: `chore(agent): state report <timestamp>`. Push. Then advance.
 
 ---
 
-### Package 1 — Component library *(~90 min)*
+### Package 1 — Course component library *(~75 min)*
 
-**Goal**: Build the Vue component set that every later lesson will compose. No lesson content in this package — just reusable pieces.
+**Goal**: Build course-specific Vue components by composing shadcn-vue primitives + Tailwind utilities. Components live under `app/components/course/` so they're cleanly separated from the `app/components/ui/` shadcn primitives.
 
-**Files to create under `app/components/`**:
+**The baseline is already installed** — shadcn-vue + Tailwind v4 + Lucide + `cn()` helper are wired. You are composing, not scaffolding from scratch.
 
-| Component | Purpose | Must support |
-|-----------|---------|--------------|
-| `HeroCanvas.vue` | Animated network canvas for the landing hero. Nodes = verbs ("read", "edit", "run"). Edges drift sage-gold packets along them. Respects `prefers-reduced-motion`. | Props: `density`, `accent`. Fallback: static SVG. |
-| `ModuleHero.vue` | Per-lesson hero with module number (Oswald uppercase), title, 3–5 objective chips, subtle floating particles. | Props: `moduleNum`, `title`, `time`, `objectives` (array of strings). |
-| `ObjectiveChips.vue` | Horizontal chip row. Each chip has a Lucide icon + short label. | Props: `items` (array of `{icon, label}`). |
-| `Callout.vue` | Colored-border info block with 7 variants. | Props: `variant` ∈ `{core-idea, tip, warning, key-concept, approval, definition, stakes}`, `title?`. Slot: body. |
-| `Quiz.vue` | Multiple-choice quiz. Click-to-reveal per option. Shows check/x icon + explanation on select. No scores across questions — pure comprehension check. | Props: `prompt`, `options` (array of `{label, correct, explain}`). |
-| `StepWalk.vue` | Step-by-step walkthrough. Manual advance (left/right arrow keys + on-screen buttons). Progress pills at top. | Props: `steps` (array of `{title, body (slot), image?}`). |
-| `ClickCards.vue` | Grid of cards; clicking flips to show hidden detail. Useful for "three misconceptions" or "five archetypes". | Props: `cards` (array of `{front, back}`). |
-| `CodeBlock.vue` | Syntax-highlighted block with copy button, optional filename badge, optional line-number gutter. | Props: `lang`, `filename?`, `showLineNumbers?`. Slot: code. |
-| `IxInstruct.vue` | Italic, muted instruction line with a right-pointing triangle prefix. Goes immediately before every interactive element. | Slot: the instruction sentence. |
-| `IxCollapse.vue` | Styled `<details>` wrapper. Gold disclosure triangle. Smooth open (max-height + opacity). | Props: `summary`. Slot: body. |
-| `TryThis.vue` | End-of-lesson exercise block. Card with gold left border, clock icon, estimated time. | Props: `time`. Slot: exercise body. |
-| `Recap.vue` | "What you just did" block at end of lesson. | Slot: recap copy. |
-| `LessonNav.vue` | Prev / next buttons at the bottom with module numbers and titles. | Props: `prev?`, `next?` (each `{slug, moduleNum, title}`). |
-| `ProgressDots.vue` | Dot row for the 7 Bronze modules. States: locked / active / done, driven by `useProgress`. | Props: `current` (slug). |
+**Files to create under `app/components/course/`**:
+
+| Component | Composition strategy | Key props |
+|-----------|---------------------|-----------|
+| `HeroCanvas.vue` | Custom — canvas element + JS animation (no lib). Nodes = verbs ("read", "edit", "run"). Drifting gold packets along edges. `<ClientOnly>` wrapper. `prefers-reduced-motion` → static SVG. | `density?`, `accent?` |
+| `ModuleHero.vue` | `Card` wrapper + Oswald uppercase module number + Tailwind `font-display` + `Badge` row from `ui/badge` for objectives + optional subtle particle canvas. | `moduleNum`, `title`, `time`, `objectives: string[]` |
+| `ObjectiveChips.vue` | Flex row of `Badge` from `ui/badge` with Lucide icon prefix. | `items: {icon: string, label: string}[]` |
+| `Callout.vue` | Wrap `Alert` / `AlertTitle` / `AlertDescription` from `ui/alert` with 7 variants via CVA (`class-variance-authority`): `core-idea`, `tip`, `warning`, `key-concept`, `approval`, `definition`, `stakes`. Each variant maps to a Lucide icon + a gold/muted/danger border-left accent. | `variant`, `title?` |
+| `Quiz.vue` | Composed from `Card` + a `Button` per option. On click: show `Alert` with correct/incorrect icon + explanation. Radix `RadioGroup` primitive if single-answer (add with `shadcn-vue add radio-group`). No cross-question scoring — pure comprehension. | `prompt`, `options: {label, correct, explain}[]` |
+| `StepWalk.vue` | `Tabs` from `ui/tabs` for step switching OR custom state with `Button` prev/next. `Progress` from `ui/progress` at top. Arrow-key nav via composable `useMagicKeys` (or hand-rolled `onKeyStroke`). | `steps: {title, body-slot, image?}[]` |
+| `ClickCards.vue` | Grid of `Card` components; click flips via Tailwind `transition-transform rotate-y-180` + `[transform-style:preserve-3d]`. Back side uses same `Card` primitive. | `cards: {front, back}[]` |
+| `CodeBlock.vue` | Custom — uses `shiki` (install on demand) for SSR syntax highlighting + a copy `Button` from `ui/button`. Optional filename `Badge`. | `lang`, `filename?`, `showLineNumbers?` |
+| `IxInstruct.vue` | Flex row: `<Triangle class="w-3 h-3 text-gold" />` + italic muted text. Goes before every interactive. | (slot only) |
+| `IxCollapse.vue` | Wraps `Collapsible` + `CollapsibleTrigger` + `CollapsibleContent` from `ui/collapsible`. Styles trigger with gold disclosure icon (`ChevronRight` that rotates 90° when open). | `summary` |
+| `TryThis.vue` | `Card` with `border-l-4 border-gold`. Header row: `Clock` Lucide icon + `time` prop + "Try this" label. | `time: string` |
+| `Recap.vue` | `Card` with muted background + "What you just did" heading. | (slot only) |
+| `LessonNav.vue` | Two `Button` (variant=secondary / primary) with Lucide `ArrowLeft` / `ArrowRight`. Shows module number + title from props. | `prev?`, `next?` |
+| `ProgressDots.vue` | Row of 7 styled anchors. Driven by `useProgress` composable. States via Tailwind: `bg-muted-bg` (locked), `bg-gold text-primary-foreground` (current), `border-gold text-gold` (done). | `current: string` |
 
 **Also create**:
-- `app/composables/useProgress.ts` — `localStorage`-backed state: `markComplete(slug)`, `isComplete(slug)`, `completedCount` reactive.
-- `app/assets/css/tokens.css` — spin out tokens from `main.css` so components can `@import` them without circularity. Keep `main.css` for global resets + typography.
-- `app/plugins/lucide.client.ts` — register Lucide icons used by the components (at minimum: `Sparkles`, `ChevronRight`, `Check`, `X`, `Copy`, `Clock`, `ArrowRight`, `CircleCheck`, `CircleAlert`, `Info`).
+- `app/composables/useProgress.ts` — `localStorage`-backed state, reactive. Namespace by track (`bronze`, `silver`). Methods: `markComplete(ns, slug)`, `isComplete(ns, slug)`, `count(ns)`.
+- Extend `app/assets/css/main.css` — no new tokens needed (already defined). Add any component-specific keyframes under a `@layer utilities` block.
 
-**Styling convention** for every component:
-- Scoped `<style>` with `:deep()` only where truly needed.
-- All colors via CSS custom properties (no hex literals inline).
-- All transitions use `cubic-bezier(0.22, 1, 0.36, 1)`.
-- Every interactive element has a visible focus state (gold outline, 2px offset).
+**Styling convention**:
+- **Tailwind utilities first**. Reach for scoped `<style>` only when utilities can't express the rule (rare: complex keyframes, 3D transforms, canvas layering).
+- **Never** use `style="color: ..."` inline — use `text-gold`, `text-muted-foreground`, etc.
+- Use the `cn()` helper from `@/lib/utils` whenever a component accepts a `class` prop or conditionally composes classes.
+- Every interactive element gets `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2` (already the shadcn default — keep it).
+- Transitions: `transition duration-200 ease-[var(--ease-out-spring)]`.
+
+**Lucide icon usage**:
+```vue
+<script setup>
+import { Sparkles, ChevronRight, Check, X, Clock, ArrowRight, ArrowLeft,
+         CircleCheck, CircleAlert, Info, Triangle, Copy, Play } from 'lucide-vue-next'
+</script>
+<template>
+  <Sparkles class="w-4 h-4 text-gold" />
+</template>
+```
 
 **Acceptance**:
 - `npm run build` compiles all 14 components with no warnings.
-- Create `app/pages/_components-demo.vue` (gate behind `?preview=1` query so it's not indexed) that renders one instance of every component so you can visually QA them on the live URL.
-- Hit `https://dev-learn.cetiai.co/_components-demo?preview=1` — all components render and are interactive.
-- Check `prefers-reduced-motion` manually via devtools — canvas goes static, animations are disabled.
+- Create `app/pages/_components-demo.vue` (gate behind `?preview=1` query so it's not crawler-indexed) that renders one instance of every course component. This is your live QA board.
+- Hit `https://dev-learn.cetiai.co/_components-demo?preview=1` — every component renders and is interactive.
+- Toggle devtools "reduce motion" — canvas goes static, animations suppress.
+- Dark mode only — site is dark-native; do not add light-mode variants in this pass.
 
-**Commit**: `feat(ui): component library — hero canvas, module hero, quiz, callout, 14 total`
+**Commit**: `feat(ui): course component library on shadcn-vue — 14 components`
 
 ---
 
@@ -537,23 +566,28 @@ Silence is the only real failure mode. Always leave an artifact.
 ```
 app/
 ├── app.vue                         # shell + nav + footer
-├── assets/css/main.css             # globals + typography
-├── assets/css/tokens.css           # design tokens (Package 1)
-├── components/                     # Package 1 lives here
-│   ├── HeroCanvas.vue
-│   ├── ModuleHero.vue
-│   ├── Callout.vue
-│   ├── Quiz.vue
-│   ├── StepWalk.vue
-│   ├── ClickCards.vue
-│   ├── CodeBlock.vue
-│   ├── IxInstruct.vue
-│   ├── IxCollapse.vue
-│   ├── TryThis.vue
-│   ├── Recap.vue
-│   ├── LessonNav.vue
-│   ├── ProgressDots.vue
-│   └── ObjectiveChips.vue
+├── assets/css/main.css             # Tailwind @theme tokens + legacy classes (migrating)
+├── lib/utils.ts                    # cn() helper for Tailwind class merging
+├── components/
+│   ├── ui/                         # shadcn-vue primitives (installed — do not hand-edit)
+│   │   ├── button/ card/ alert/ badge/ collapsible/ tabs/ accordion/
+│   │   ├── dialog/ progress/ separator/
+│   │   └── ... (add more via `npx shadcn-vue@latest add <name>`)
+│   └── course/                     # Package 1 — composed from ui/ primitives
+│       ├── HeroCanvas.vue
+│       ├── ModuleHero.vue
+│       ├── Callout.vue
+│       ├── Quiz.vue
+│       ├── StepWalk.vue
+│       ├── ClickCards.vue
+│       ├── CodeBlock.vue
+│       ├── IxInstruct.vue
+│       ├── IxCollapse.vue
+│       ├── TryThis.vue
+│       ├── Recap.vue
+│       ├── LessonNav.vue
+│       ├── ProgressDots.vue
+│       └── ObjectiveChips.vue
 ├── composables/
 │   └── useProgress.ts
 ├── plugins/

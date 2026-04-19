@@ -1,3 +1,5 @@
+import tailwindcss from '@tailwindcss/vite'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-01',
@@ -6,6 +8,14 @@ export default defineNuxtConfig({
   // No preset override — Vercel auto-detects `vercel` preset, so API routes
   // run as serverless functions in production. Locally, `nuxt dev` runs them
   // in the Nitro dev server.
+  modules: ['shadcn-nuxt'],
+  shadcn: {
+    prefix: '',
+    componentDir: './app/components/ui',
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
   css: ['~/assets/css/main.css'],
   app: {
     head: {
