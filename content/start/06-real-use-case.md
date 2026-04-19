@@ -1,130 +1,194 @@
 ---
-title: One Real Use Case, End to End
-module: 06
-time: "14 min"
+title: This is the one. Pick the task you mildly dread.
+module: "06"
+time: "45 min"
+tags: [real-work, first-task, end-to-end, bronze]
+skills_gained: [read-plan-execute, permission-discipline, first-shipped-task]
+persona_aware: true
 ---
 
-# One Real Use Case, End to End
+# This is the one. Pick the task you mildly dread.
 
-Everything so far has been preparation. You know the mental model, you have the tool installed, you can start sessions safely, you understand the approval loop, and you have written context into `CLAUDE.md`. Now you are going to do actual work with Claude Code — the task you wrote down at the end of Module 01. By the end of this lesson you should have one tangible deliverable produced in roughly the time it took you to read this course so far.
+You wrote something down in Module 01. The task you mildly dread on Monday mornings. The weekly thing with too many files, too many tabs, too many copy-pastes. The thing you'd pay $50 to not have to do.
+
+Now you're going to do it with Claude — for the first time. Not a tutorial task. Not a toy example. The real one.
+
+Everything the last five modules gave you — scoped folder, installed tool, approval instincts, a CLAUDE.md that knows who you are — was setup for this hour. This is where the whole course earns itself back.
+
+<Callout variant="stakes">
+If nothing else from this course stuck, this module is the one that pays you back. One real task, done alongside Claude, ships the proof to yourself that this is actually different. Skip this and Bronze becomes a thing you watched. Do this and it becomes a thing you use.
+</Callout>
 
 ## The shape of every real task
 
-Almost every useful Claude Code session follows three stages:
+Every useful session follows three moves. Memorize the order — it's the whole method.
 
-**Read-only.** You start by asking Claude to tell you what is there. No edits, no file changes, no shell commands — just understanding. This is where you catch misunderstandings cheaply, before any work gets done on the wrong foundation.
+**Read-only first.** You ask Claude to tell you what's there. No edits. No files written. Just understanding. This is the cheapest way to catch a misunderstanding, before any work lands on the wrong foundation.
 
-**Plan.** Once Claude has read, you ask what it *would* do. You are asking for the blueprint, not the building. This stage is where you correct scope, narrow the goal, and make sure you and Claude want the same thing.
+**Plan second.** You ask what Claude *would* do. You're asking for the blueprint, not the building. This is where you correct scope, narrow the goal, and make sure you and Claude want the same thing.
 
-**Execute with approvals.** Only now does Claude start producing the deliverable — writing files, moving documents, drafting the email. You approve each step. If something goes wrong, you caught it early, because you planned first.
+**Execute with approvals third.** Now Claude starts producing — writing files, moving documents, drafting the email — and you approve each step. If something goes wrong, you caught it at step two, not step three.
 
-The rest of this lesson walks through three archetypes of task so you can recognize yours. Whichever one matches, the three-stage pattern is the same.
+Read → plan → execute. Three moves. Every task.
 
-## Archetype 1: Report from many inputs
+## Your task, your version
 
-You have a folder full of raw inputs — meeting notes, call transcripts, status updates, research documents — and you need to produce a single synthesized document. A monthly summary. A board update. A competitor analysis. A themes report from ten customer interviews.
+The task you wrote down in Module 01 probably matches one of four shapes. Read the one closest to yours. The specifics change. The rhythm doesn't.
 
-**Read-only stage.** `cd` into the folder. Launch Claude. First question:
+<PersonaExample>
+  <template #creator>
 
-```
-read everything in this folder and give me a one-paragraph summary of what's here
-```
+  **Your task: batch ten Instagram captions from a week of content.**
 
-Claude reads. You verify the summary matches your memory of the folder. If it mentions files you do not recognize, or misses ones you know are there, you clarify. This takes thirty seconds and saves an hour later.
+  You have a folder with ten raw clips from the week — maybe they're in `~/Content/2026-wk-16/`. You usually write captions one by one, late at night, after you've already watched the clip four times. It takes two hours. The captions end up sounding samey because you're tired.
 
-**Plan stage.** Now you describe the deliverable:
+  **Read-only.** `cd` into the folder, launch Claude. First prompt:
 
-```
-I need to produce a monthly summary of recurring themes from these meeting notes, 
-for a one-page executive update. What's your plan for that?
-```
+  ```
+  read every file in this folder and tell me what each clip is about
+  in one sentence. no captions yet — just the summaries.
+  ```
 
-Claude will describe its approach: which files it would read more deeply, what structure it would use for the final document, what it would flag as uncertain. Read the plan. Adjust. "Group by customer instead of by theme." "The executive cares about blockers most — lead with those."
+  Claude tells you what it sees. You skim. If a summary is off ("that clip is about ADHD organization, not productivity"), you correct it in the chat. That correction costs 20 seconds now and saves 20 minutes later.
 
-**Execute stage.** Approve the plan and let Claude produce the output — usually in a new file it creates in the same folder:
+  **Plan.** Now you shape the batch:
 
-```
-write the monthly summary to a new file called 2025-march-summary.md
-```
+  ```
+  draft ten captions — one per clip. my voice is deadpan, no emojis,
+  short sentences, hook in the first line, never peppy. show me the first
+  three so i can check the tone before you do the rest.
+  ```
 
-Claude writes the file. You approve the creation. You open the file and read. You edit yourself, or ask Claude to revise specific sections.
+  Read the three. Too peppy? "Drop the exclamation points and cut every caption by a third." Too formal? "Looser. Like I'm talking to my friend who also has ADHD." Once three feel right, let it finish the other seven.
 
-## Archetype 2: Organize a messy folder
+  **Execute.** `write these ten captions into a file called captions-wk-16.md.` Approve the write. Open the file. Adjust anything that's still off by hand. Ship.
 
-Your Downloads folder, or a shared drive corner, or an old project directory — hundreds of files with no structure. You want it organized. Archived. Renamed consistently. Duplicates removed.
+  </template>
+  <template #consultant>
 
-**Read-only stage.**
+  **Your task: draft three client follow-up emails with full context.**
 
-```
-read the filenames in this folder and tell me what kinds of things are here. 
-group them into categories you would use if you were organizing this
-```
+  You've been putting off three emails all week: one unpaid-invoice nudge, one scope clarification, one project status update. Each one requires you to re-read the thread, remember the tone you use with this client, and draft something that doesn't sound like a form letter. You usually do these Friday afternoon and they take ninety minutes.
 
-Claude will propose categories — invoices, contracts, photos, random downloads, duplicates, ambiguous items it cannot classify. Look at the proposed categories. Do they match how you think about this folder? If not, say so. "Group the invoices by year, not by client." "Treat the Zoom recordings as their own category, they should be deleted."
+  **Read-only.** Open Claude in the client folder — `cd ~/Clients/Meridian/` or wherever the correspondence and notes actually live. First prompt:
 
-**Plan stage.**
+  ```
+  read my correspondence and meeting notes with this client from the
+  last 60 days. tell me what's open, what's waiting on me, and what
+  tone i tend to use with them.
+  ```
 
-```
-propose a folder structure and explain what you'd move where. 
-don't move anything yet — just describe it
-```
+  Claude summarizes. You verify. If Claude thinks something's resolved that isn't, correct it now.
 
-Claude writes the plan in plain English. It might say "I would create four subfolders — Contracts, Invoices, Media, Archive — and move 47 files into them. 3 files I cannot classify confidently; I would leave those in place and flag them." You read the plan. You probably want to change something. "Don't create an 'Archive' folder, just delete the duplicates." "Contracts should be organized by client name, not by year."
+  **Plan.** Name what you want drafted:
 
-**Execute stage.** Approve the cleanup in stages. Create the folders first — approve. Move the first category — approve. Inspect the folder. If it looks right, continue with the next category. If something is off, pause and course-correct. This is exactly the case where the default approval mode earns its keep: you are doing an irreversible thing on files that matter, and every approval is a chance to catch a mistake before it cascades.
+  ```
+  i need three emails: (1) a soft nudge on invoice #441, 30 days past
+  due; (2) a clarification on whether the brand guidelines work is in
+  scope for phase two or a change order; (3) a status update on the
+  current deliverables. match the tone you just described. show me the
+  first one before you draft the others.
+  ```
 
-## Archetype 3: Draft from a source
+  Read the nudge. Adjust — "too apologetic" or "cut the intro, they know me." Once the tone is right, ask for the other two.
 
-You have a transcript, a contract, a specification, or a thread — and you need to produce a shorter, targeted document from it. A follow-up email summarizing a sales call. A plain-English summary of a ten-page legal document. A proposal draft based on a client's RFP.
+  **Execute.** `save these three as follow-up-1.md, follow-up-2.md, follow-up-3.md in this folder.` Approve each write. Open, paste into Gmail, send.
 
-**Read-only stage.**
+  </template>
+  <template #service>
 
-```
-read transcript.txt and tell me the key moments — who said what, 
-what the main outcomes were, what's unresolved
-```
+  **Your task: reconcile a week of bookings against your schedule.**
 
-Claude reads and summarizes. You verify — you were in the call, you know the real shape of the conversation. If Claude missed the commitment someone made in the last five minutes, you catch it now.
+  You have a bookings export (CSV or PDF — whatever your system spits out), your calendar, and the WhatsApp thread where half your clients actually confirm. Once a week you sit down and try to match them up: who actually came, who no-showed, who paid, who owes you. It takes an hour and you always miss one.
 
-**Plan stage.**
+  **Read-only.** Put this week's bookings file, a calendar export, and any relevant WhatsApp screenshots into one folder. Launch Claude there. First prompt:
 
-```
-I need to send a follow-up email to the client. it should confirm what we agreed, 
-restate the open questions, and propose next steps. what's your draft approach?
-```
+  ```
+  read every file here. tell me what's a booking, what's a confirmation,
+  what's a payment. give me a list of every appointment this week with
+  who, when, what service, and whether it shows as paid.
+  ```
 
-Claude describes the email it would write: tone, structure, what to include and leave out. You adjust. "The client is fairly formal — match that." "Don't include the pricing discussion; we haven't finalized that internally yet."
+  Claude produces the list. You scan it. Names you recognize — good. Names you don't, or times that don't match your memory — flag those in the chat: "Sofia on Wednesday is wrong, she moved to Thursday."
 
-**Execute stage.**
+  **Plan.**
 
-```
-write the email as a new file called follow-up-draft.md
-```
+  ```
+  now make two lists: (1) appointments that happened and are fully paid,
+  (2) appointments that have any gap — no-show, unpaid, or needing
+  confirmation. explain what's missing for each one in list 2.
+  ```
 
-Claude writes the draft. You read it. You either approve it as-is and copy it into your email client, or you ask for specific revisions. "Second paragraph is too long — cut it in half." "Change 'we will' to 'I will' throughout." Revision cycles are fast — this is where Claude Code starts feeling genuinely collaborative.
+  **Execute.** `save the full reconciliation as wk-16-bookings.md in this folder.` Approve. Use list 2 to send your Monday morning WhatsApp follow-ups.
 
-## The small habits that multiply
+  </template>
+  <template #realestate>
 
-A few patterns that will pay off across every archetype.
+  **Your task: pull comps and draft a buyer summary for one listing.**
 
-**Ask for structure on output.** "As a table." "As a bulleted list with three levels." "As a two-paragraph summary followed by action items." Structure is cheap for Claude, valuable for you. Default prose is rarely the most useful shape.
+  You have a new listing you're showing Saturday and a buyer who asked for comps on Wednesday. You usually pull the MLS export, open it in a spreadsheet, eyeball the comparables, and then write a two-paragraph summary in email. It's an hour of work and your eyeballing is the part that could be wrong.
 
-**Push back when something is off.** "That's not what I asked for." "You missed the point of the third bullet." Claude responds well to plain correction. It does not need to be polished — it needs to be specific.
+  **Read-only.** Put the listing sheet, the MLS comps CSV, and any inspection or disclosure docs into one folder. Launch Claude. First prompt:
 
-**Ask for uncertainty.** "What are you unsure about in this document?" "Which of these files did you skim versus read fully?" "Where did you have to guess?" These questions surface the edges of Claude's confidence, and those edges are where you want human judgment most.
+  ```
+  read the listing sheet and the comps CSV. tell me the subject
+  property's specs and how the comps compare — price per square foot,
+  days on market, condition notes. highlight any outliers.
+  ```
 
-**Close the loop.** At the end, ask Claude what it changed and what is left undone. "Summarize what we did this session and what you would recommend for a follow-up." That exit question is the single cheapest habit for catching things you missed.
+  Claude pulls the numbers. You verify against your own knowledge of the street. If a comp shouldn't be in the set (different school district, teardown priced as a renovation), say so — Claude excludes it.
 
-## What you just did
+  **Plan.**
 
-You worked through a real task end to end — the one you wrote down in Module 01 — using the three-stage pattern: read-only first, plan second, execute with approvals third. Whichever archetype your task matched — a report from many inputs, an organizational cleanup, or a targeted draft from a source — the shape was the same. You read before you acted, you planned before you built, and every file change was approved. You should have one finished deliverable sitting in your folder right now.
+  ```
+  draft a buyer summary email: two short paragraphs. paragraph one is
+  the listing in plain English, not MLS-speak. paragraph two is the
+  comp analysis — what range i think it should sell at and why.
+  ```
 
-## Try this
+  **Execute.** `save as buyer-summary-145-main.md in this folder.` Approve. Read. Tighten. Paste into email. Send to your buyer.
 
-Pull out the task you wrote down at the end of Module 01 — the weekly task involving five or more files that you mildly dread. Before you open Claude, note two things on paper: roughly how long this task usually takes you (in minutes), and the single quality criterion that matters most for the output ("accuracy on names and dates," "readable on mobile," "short enough to send without editing," whatever applies).
+  </template>
+</PersonaExample>
 
-Now do the task with Claude Code. Follow the three-stage pattern — read-only, plan, execute. Use the archetype that matches: report, organize, or draft. Approve each step. Revise aggressively when something is off.
+## The discipline that makes this work
 
-When you finish, note two new things: how long it actually took, and how close the result is to your quality bar on the first pass. Keep those four numbers. The gap between your usual time and today's time is the ROI you will quote when you tell a colleague about this. The gap on quality is your honest assessment of where you still need to do the work yourself versus where Claude handled it well enough.
+The temptation, as Claude starts producing, is to stop reading the approval prompts. Approve-approve-approve, skim the result, ship. Don't.
 
-If the result was worse than doing it by hand, the task was probably the wrong archetype — or the folder needed a better `CLAUDE.md`. Revisit Module 05 and try again with more context. Most first-task disappointments disappear the second time around.
+<Callout variant="approval">
+Every approval is a checkpoint. Especially the first time you run a task end-to-end, read what's about to happen before you say yes. The two seconds per approval you'd "save" by hitting accept-all is the same two seconds that would have caught the file being written to the wrong folder, the tone drifting into something you'd never send, or the summary confidently citing a document that isn't actually there. Read the diff. Read the command. Then approve.
+</Callout>
+
+As the task gets familiar — the second, third, fourth time you do your weekly caption batch or follow-up draft — you'll scan faster. That's earned. Not default.
+
+## A few habits that multiply
+
+**Ask for structure.** "As a table." "As a bulleted list." "Two short paragraphs, no more." The default prose shape is rarely the most useful one. Specify.
+
+**Correct fast and direct.** "That's not what I asked for." "You missed the point of the second one." "Shorter." Claude responds well to plain correction. It doesn't need to be polite. It needs to be specific.
+
+**Ask what it's unsure about.** Before you ship, ask: "What did you skim versus read fully? Where did you have to guess?" Those edges of confidence are exactly where you want your human judgment to land.
+
+**Close the loop.** At the end: "Summarize what we did and what's left." You'll catch the one file it forgot, or the decision you meant to make and didn't.
+
+<TryThis time="45 min">
+
+Block forty-five minutes. Close Slack, close DMs, close the other tabs. This is the session that matters.
+
+Pull up the task you wrote down in Module 01 — the weekly thing you mildly dread. Before you open Claude, write two numbers on paper: roughly how long this task usually takes you, and the quality bar that matters most ("names correct," "tone matches," "shippable without my editing," whatever it is).
+
+Now do the task with Claude. Follow the three moves — read, plan, execute. Approve every step. Correct aggressively when something's off. Don't try to be fast the first time. Try to be *correct*.
+
+When you finish, write down two more numbers: how long it actually took, and how close the result is to your quality bar. Those four numbers are the ROI conversation you'll have with the next person you tell about this.
+
+If the result is worse than doing it by hand, the task was probably the wrong fit — or the folder needed a better CLAUDE.md. Go back to Module 05, sharpen the context, try again. Almost every first-task disappointment disappears on the second run.
+
+</TryThis>
+
+<Recap>
+
+You didn't just learn Claude Code. You *did something* with it — the one weekly task you'd been avoiding, shipped end-to-end using the three-move pattern. Read first, plan second, execute with approvals third. The task is different for everyone. The rhythm is the same for everyone. One finished deliverable now sits in your folder that wasn't there an hour ago — and you know exactly how it got there.
+
+</Recap>
+
+<!-- REFLECTION_INPUT_PLACEHOLDER — future AI assistant will ask the reader what task they picked, how long it took, and where Claude got it wrong the first time. Not rendered yet. -->

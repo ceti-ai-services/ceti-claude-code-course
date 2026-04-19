@@ -46,4 +46,10 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://cetiai.co',
     },
   },
+  // Hide archived corporate pages from routing. The files live under
+  // pages/academy/_corporate/* so Nuxt's underscore-prefix convention
+  // should skip them, but Nuxt 4 still emits the routes — redirect defensively.
+  routeRules: {
+    '/academy/_corporate/**': { redirect: '/academy' },
+  },
 })
