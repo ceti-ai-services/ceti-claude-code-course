@@ -110,7 +110,7 @@ const tierCards: Array<{
 ]
 
 const firstRouteFor: Record<Tier, string> = {
-  novice: "/start/01-mental-model",
+  novice: "/academy/novice/perspective-matrix",
   experienced: "/academy/experienced/debugging-ai-loops",
   expert: "/academy/experienced/debugging-ai-loops",
 }

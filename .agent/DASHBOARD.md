@@ -4,6 +4,20 @@ Append-only log of every milestone, decision, and build. Newest at top.
 
 ---
 
+## 2026-04-19 · M3 novice tier opened — Perspective Matrix + Six Dimensions
+
+Two Novice pages shipped: `/academy/novice/perspective-matrix` (MERCURIO Pattern 1) and `/academy/novice/six-dimensions` (MARS Pattern 1). Both ported for non-developers — no MoE syntax, no Hekat DSL, no agent-mode framing. The habit comes first, the Claude Code workflow comes second inside a collapsed deep-dive.
+
+Structure matches the M2 reference page exactly: `ModuleHero` → lead sentence → `core-idea` Callout → quizzes with one correct option (and plausible misdirections) → `tip`/`warning`/`key-concept` Callouts → `IxCollapse` deep-dive → `TryThis` exercise → `Recap` → bottom nav. Six Dimensions uses a styled `<dl>` for the dimension list — no new component needed, definitions ≤ 8 words each.
+
+Academy landing updated: Novice tier now routes to `/academy/novice/perspective-matrix` (was `/start/01-mental-model`). The self-placement stepper and tier cards both send novices to the new page.
+
+`npm run build` green. Banned-words + inline-style scan clean. No new deps, no new components.
+
+**Next milestone (M4)**: fan out Experienced tier — candidates `/academy/experienced/mcp-wiring`, `/hooks-basics`, `/skills-library`, `/multi-project-setup`.
+
+---
+
 ## 2026-04-19 · M2 proof page built — tier components + academy landing + debugging-ai-loops
 
 Six course components shipped under `app/components/course/`: `ModuleHero`, `Callout` (7 variants via CVA), `Quiz` (per-question reveal, no cross-question state), `IxCollapse` (rotating chevron), `TryThis`, `Recap`. Each composes existing shadcn-vue primitives — no new deps, no new tokens. Tailwind utilities throughout; no inline `style=`.

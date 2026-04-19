@@ -1,7 +1,7 @@
 # HANDOFF — CETI Claude Code Academy
 
 **Purpose**: resume from any point. Updated at every milestone and before 70% context usage.
-**Last updated**: 2026-04-19
+**Last updated**: 2026-04-19 (M3 close)
 **Primary objective**: build the highest-quality Claude Code academy — tiered as Novice / Experienced / Expert — using the `codebase-to-course` skill, porting LUXOR + MERCURIO + MARS insights, and logging everything to DASHBOARD.md.
 
 ---
@@ -94,14 +94,27 @@ After proof lands, fan out:
 
 Also from LUXOR-MAP — five LUXOR skills to port in spirit: `course-validator` (our pre-commit gate), `course-orchestrator` (8-phase academy build pipeline), `progressive-game-lab` (XP + gating adapted into `ProgressDots`), `curriculum-module-writer` (content generator), `codebase-to-course` (content source).
 
-**Milestone M3 — Fan out to more pages** (next)
+**Milestone M3 — Novice tier opened** (closed 2026-04-19)
 
-With components + landing + one reference page shipped, next is breadth:
-- Novice / Perspective Matrix (MERCURIO Pattern 1 — shortest port)
-- Novice / Six Dimensions (MARS Pattern 1)
-- Fill the remaining Novice threads (reuse Bronze markdown, render through the 6 course components)
-- Experienced threads 2+ (skills/slash commands, MCP wiring, hooks)
-- Expert threads
+Landed:
+- `app/pages/academy/novice/perspective-matrix.vue` — MERCURIO Pattern 1 ported for non-developers. 3 quizzes, core-idea + tip + warning Callouts, IxCollapse deep-dive into a `CLAUDE.md` one-liner workflow, TryThis on a real decision, Recap. Links forward to Six Dimensions, back to Academy.
+- `app/pages/academy/novice/six-dimensions.vue` — MARS Pattern 1 ported. Six-item styled `<dl>` (no new component) for the dimension list, 3 quizzes each surfacing the under-examined dimension, IxCollapse for a `/six-dimensions` slash command idea, TryThis on a stalled project, Recap.
+- `app/pages/academy/index.vue` — Novice tier card now links to `/academy/novice/perspective-matrix`.
+- `.agent/DASHBOARD.md` + this file updated.
+
+Build green, banned-words clean, no new deps.
+
+**Milestone M4 — Fan out Experienced tier** (next)
+
+The six existing components (`ModuleHero`, `Callout`, `Quiz`, `IxCollapse`, `TryThis`, `Recap`) can carry 8–12 more pages if paired with good source content. Candidate pages:
+- `/academy/experienced/mcp-wiring` — how to connect one of their actual tools (Gmail, Calendar, Notion)
+- `/academy/experienced/hooks-basics` — pre-tool-use hooks, pre-commit gates
+- `/academy/experienced/skills-library` — building a reusable skill, the `.claude/skills/` pattern
+- `/academy/experienced/multi-project-setup` — project-level `CLAUDE.md`, per-project slash commands
+
+Source material can be adapted from the existing `content/silver/*` markdown once it exists, or drafted fresh from the CLAUDE.md product vision. Keep density discipline: ≤ 600–700 visible prose words per page.
+
+Fill the remaining Novice threads after M4, then Expert.
 
 Possible follow-ups:
 - Add `StepWalk`, `ClickCards`, `HeroCanvas`, `CodeBlock`, `LessonNav`, `ProgressDots`, `IxInstruct`, `ObjectiveChips` as the page library grows (see AUTONOMOUS-BUILD Package 1 for the full 14-component list).
