@@ -1,6 +1,7 @@
 # MARS validation — Bronze EN corpus (M6 ship)
 
 **Date**: 2026-04-18 · **Scope**: `content/start/01..07` EN + `app/pages/academy/index.vue` · **Contract**: `docs/DECISIONS.md` 2026-04-19 entry.
+**Verdict**: Yellow — fix M03 backup line first.
 
 ## Domain decomposition
 
