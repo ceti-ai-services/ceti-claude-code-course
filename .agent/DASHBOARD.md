@@ -4,6 +4,38 @@ Append-only log of every milestone, decision, and build. Newest at top.
 
 ---
 
+## 2026-04-19 · Bronze reset Step 2 — customizer UI + game-feel primitives
+
+Seven components + one composable shipped under `app/components/course/` and `app/composables/`. All compose existing shadcn-vue primitives (card, button, badge, dialog, progress, alert); no new deps, no new shadcn installs. Tailwind utilities throughout; zero inline `style="…"` in any new file. Banned-word grep clean. `prefers-reduced-motion` honored in all custom keyframes (xp-roll, fork-in).
+
+**Customizer trio**:
+- `PersonaCard.vue` (67 LOC) — big-tap icon card, 4-up grid cell. `Camera`/`Briefcase`/`Wrench`/`Home` Lucide icons, gold ring on hover, solid gold border + gold-dim bg when selected.
+- `LanguageToggle.vue` (53 LOC) — segmented EN | ES pill, native buttons inside a `Card`, wires `useCustomizer().setCustomizer({ lang })`.
+- `HeroCustomizer.vue` (131 LOC) — 3-step state machine (`persona` → `lang` → `done`) with 250ms transitions; ends with `router.push('/start/01-mental-model?lang=…&persona=…')` after a 600ms hand-off.
+- `PersonaExample.vue` (78 LOC) — named slots `#creator`/`#consultant`/`#service`/`#realestate`, dev-mode warning when the active persona's slot is missing, neutral fallback in prod. Gold left-border + bilingual eyebrow.
+
+**Game-feel trio**:
+- `XpOrb.vue` (107 LOC) — compact gold badge with rolling-digit CSS keyframe + brief `scale-110` pulse on change. Reduced-motion clamps the animation.
+- `ForkChoice.vue` (114 LOC) — mid-module forced-choice with scoped slots keyed off each option's `slot` string. Picking disables the other options (40% opacity), reveals the chosen slot with a 400ms fork-in animation, emits `pick` with `{ label, xp }` for parent-side XP awarding.
+- `BossCheckpoint.vue` (276 LOC) — end-of-module `Dialog` with three phases: ask → feedback → complete. Optional (opt-in via `:show-timer`) 30s focus-rhythm `Progress` bar (no fail on timeout, purely visual). One retry allowed on wrong answer; half-XP on retry success. Persists completion to `localStorage['ceti.completed.v1']`; awards XP via `useXp().addXp`.
+
+**Helper**:
+- `useXp.ts` (93 LOC) — SSR-safe composable. `xp: Readonly<Ref<number>>` hydrates from `ceti.xp.v1` in `onMounted`. `addXp(amount, reason)` increments, appends to `ceti.xp.log.v1` (tail-50). `reset()` for dev.
+
+**Nav wiring**: `LanguageToggle` placed between `Academy` and `Silver` in `app/app.vue` nav — small (`min-w-[100px]`), unobtrusive. `HeroCustomizer` deliberately left unmounted; Step 3 wires it into the academy landing.
+
+`npm run build` green. Bundle: unchanged page chunks, new component chunks merged into dynamic imports.
+
+**Mid-build decisions**:
+- Rolling-digit animation simplified from a full odometer to a single-column slide-up (two stacked spans, translate-Y -1em). Reads clean at small sizes and respects reduced-motion cleanly.
+- Confetti explicitly omitted (per the report's anti-pattern list). `BossCheckpoint` "complete" state stays understated — gold eyebrow + "Module cleared." headline.
+- `BossCheckpoint` timer is opt-in (`:show-timer="false"` by default) so the default is the non-dev-friendly "no clock" path. Keeping the prop surface in place means the timer can light up per-module where it helps.
+- `HeroCustomizer`'s "done" flash uses Tailwind's `animate-pulse` rather than a bespoke keyframe — lighter, already reduced-motion-safe.
+
+**Next (Step 3)**: rewrite `app/pages/academy/index.vue` to lead with `HeroCustomizer` and the new tone.
+
+---
+
 ## 2026-04-19 · M3 novice tier opened — Perspective Matrix + Six Dimensions
 
 Two Novice pages shipped: `/academy/novice/perspective-matrix` (MERCURIO Pattern 1) and `/academy/novice/six-dimensions` (MARS Pattern 1). Both ported for non-developers — no MoE syntax, no Hekat DSL, no agent-mode framing. The habit comes first, the Claude Code workflow comes second inside a collapsed deep-dive.

@@ -110,9 +110,9 @@ Status:
 
 **Progress on Plan v2**:
 - [x] Step 0: DECISIONS.md baseline (commit `6fb3888`)
-- [ ] Step 1: useCustomizer + types ← **in progress**
-- [ ] Step 2: HeroCustomizer + PersonaCard + PersonaExample + LanguageToggle
-- [ ] Step 3: Academy landing rewrite
+- [x] Step 1: useCustomizer + types
+- [x] Step 2: HeroCustomizer + PersonaCard + PersonaExample + LanguageToggle + XpOrb + ForkChoice + BossCheckpoint + useXp
+- [ ] Step 3: Academy landing rewrite ← **in progress**
 - [ ] Step 4: Archive corporate pages
 - [ ] Step 5: Lesson loader (i18n + persona)
 - [ ] Step 6: Content rewrite EN (modules 01, 03, 05, 06, 07 + light 04)
