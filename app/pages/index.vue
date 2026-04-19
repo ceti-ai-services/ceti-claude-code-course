@@ -9,7 +9,7 @@
         without opening a second tab.
       </p>
       <div class="cta-row">
-        <NuxtLink to="/start" class="btn btn-primary">Start with Bronze</NuxtLink>
+        <NuxtLink to="/academy" class="btn btn-primary">Start the Academy</NuxtLink>
         <NuxtLink to="/silver" class="btn btn-secondary">See the cohort →</NuxtLink>
       </div>
     </section>
