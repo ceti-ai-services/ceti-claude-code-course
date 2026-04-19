@@ -1,12 +1,15 @@
 ---
 title: Install Claude Code
-module: 02
+module: "02"
 time: "14 min"
+tags: [install, setup, bronze]
+skills_gained: [install, first-launch, authentication]
+persona_aware: false
 ---
 
 # Install Claude Code
 
-You have never opened a terminal, and the internet is not especially helpful for first-timers — most install guides assume you already know what `npm` is, or that "just run this command" will land somewhere useful. This lesson walks through the install from a cold start on Mac, Windows, and Linux, in that order. By the end you will have a blinking `>` prompt waiting for your first question.
+You've never opened a terminal. The internet is useless for first-timers — most install guides assume you already know what `npm` is, or that "just run this command" lands somewhere useful. This one doesn't. It walks the install from a cold start on Mac, Windows, and Linux, in that order. By the end you'll have a blinking `>` prompt waiting for your first question.
 
 ## Prerequisites
 
@@ -125,13 +128,15 @@ After authentication, the terminal settles into something that looks roughly lik
 > 
 ```
 
-That single `>` with a blinking cursor is the Claude Code prompt. It is waiting for a question.
+That single `>` with a blinking cursor is the Claude Code prompt. It's waiting for a question.
 
-## What you just did
+<Recap>
 
-You installed a terminal-native AI assistant. Node.js is the engine, `npm install -g @anthropic-ai/claude-code` is the install command, and `claude` is how you launch it. You authenticated with either a Claude.ai subscription or an API key, and you are now sitting at a `>` prompt in the folder you launched from. That folder is Claude's entire world right now — which is exactly the scoping the previous lesson described.
+You installed a terminal-native AI assistant. Node.js is the engine, `npm install -g @anthropic-ai/claude-code` is the install command, and `claude` is how you launch it. You authenticated with either a Claude.ai subscription or an API key, and you're now sitting at a `>` prompt in the folder you launched from. That folder is Claude's entire world right now — exactly the scoping the last lesson described.
 
-## Try this
+</Recap>
+
+<TryThis time="3 min">
 
 With the `>` prompt waiting, type this and press Return:
 
@@ -139,6 +144,10 @@ With the `>` prompt waiting, type this and press Return:
 hello, can you see my desktop?
 ```
 
-Read the answer carefully. Claude will tell you what directory it is currently in — probably your home folder, something like `/Users/yourname` on Mac or `C:\Users\yourname` on Windows. It will explain that it can see files in that folder and nothing outside it. If you are on your home folder, it may list a few things it can see — Desktop, Documents, Downloads.
+Read the answer. Claude will tell you what directory it's currently in — probably your home folder, something like `/Users/yourname` on Mac or `C:\Users\yourname` on Windows. It'll explain that it can see files in that folder and nothing outside it. If you're in your home folder, it may list a few things it can see — Desktop, Documents, Downloads.
 
-That short exchange is all you need to confirm the install worked. Type `exit` and press Return to close Claude Code when you are done, or leave it open and continue to the next lesson.
+That short exchange is all you need to confirm the install worked. Type `exit` and press Return to close Claude Code, or leave it open and continue to the next lesson.
+
+</TryThis>
+
+<!-- REFLECTION_INPUT_PLACEHOLDER — future AI assistant will ask the reader which OS they installed on and whether they hit any errors. Not rendered yet. -->

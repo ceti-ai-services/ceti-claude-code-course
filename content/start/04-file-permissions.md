@@ -1,12 +1,15 @@
 ---
 title: Files, Permissions, and Undo
-module: 04
+module: "04"
 time: "12 min"
+tags: [permissions, approval, safety, bronze]
+skills_gained: [approval-flow, permission-modes, backup-habit]
+persona_aware: false
 ---
 
 # Files, Permissions, and Undo
 
-So far you have only asked Claude to read. The next step — and the one most people are nervous about — is letting it change things. This lesson covers the permission system that keeps you in control, the modes that adjust how often Claude asks, and a simple pre-flight habit that makes "undo" almost always possible.
+So far you've only asked Claude to read. The next step — and the one most people are nervous about — is letting it change things. This lesson covers the permission system that keeps you in control, the modes that adjust how often Claude asks, and a small pre-flight habit that makes "undo" almost always possible.
 
 ## The approval loop
 
@@ -18,11 +21,13 @@ Every action that changes a file on your computer goes through the same pattern:
 4. You approve or deny.
 5. Only after approval does the file actually change.
 
-There is no way around step 3 by default. Claude cannot silently rewrite a document. It cannot delete a file without telling you. It will not run a shell command without surfacing it first. When it wants to do something, a prompt appears in the terminal — usually with the file name, a summary of the change, and options like "Yes," "No," or "Yes, and do similar things automatically for the rest of this task."
+There's no way around step 3 by default. Claude can't silently rewrite a document. It can't delete a file without telling you. It won't run a shell command without surfacing it first. When it wants to do something, a prompt appears in the terminal — usually with the file name, a summary of the change, and options like "Yes," "No," or "Yes, and do similar things automatically for the rest of this task."
 
-Read every prompt. Especially at the start. A few seconds of friction per approval is the price of knowing exactly what happened to your files. As you build trust with the tool, you will start scanning approvals instead of reading every line, and that is fine — but in the first week, read them.
+<Callout variant="approval">
+Read every prompt. Especially at the start. Two seconds of friction per approval is the price of knowing exactly what happened to your files. As you build trust, you'll start scanning approvals instead of reading every line — that's fine, that's earned. In the first week, read them.
+</Callout>
 
-When you deny, Claude does not get mad. It adjusts. It might ask a clarifying question, or propose a smaller change, or tell you it cannot proceed without the thing you just refused. That back-and-forth is the safety feature working.
+When you deny, Claude doesn't get mad. It adjusts. It might ask a clarifying question, propose a smaller change, or tell you it can't proceed without the thing you just refused. That back-and-forth is the safety feature working.
 
 ## What the approval prompt shows you
 
@@ -79,11 +84,13 @@ Deny when:
 
 Denying is not failure. It is part of the conversation. "Don't do that — let's narrow the scope. Only change the first paragraph" is a completely valid next turn, and Claude will adjust.
 
-## What you just did
+<Recap>
 
-You learned that every file-changing action in Claude Code flows through an approval prompt, which shows you a diff for text edits and the exact command for everything else. You learned there are three permission modes — default (ask every time), acceptEdits (file edits silent, commands still approved), and plan (nothing changes, Claude just describes) — and that default is where you want to be until the tool feels natural. And you learned the single most useful undo habit for beginners: duplicate the file before you let Claude touch it.
+Every file-changing action in Claude Code flows through an approval prompt — a diff for text edits, the exact command for everything else. Three permission modes: default (ask every time), acceptEdits (file edits silent, commands still approved), plan (nothing changes, Claude just describes). Default is where you live until the tool feels natural. The single most useful undo habit: duplicate the file before you let Claude touch it.
 
-## Try this
+</Recap>
+
+<TryThis time="8 min">
 
 Find a short text file on your computer — meeting notes, a draft email, a paragraph you wrote in a `.txt` or `.md` file. Something under a page. Duplicate it first.
 
@@ -93,6 +100,10 @@ Now open Claude Code in the same folder (`cd` into it, then `claude`) and ask:
 read meeting-notes.md and fix its formatting — consistent bullets, proper headings, no trailing whitespace
 ```
 
-Use your actual file name. Claude will read the file and propose an edit. Look at the diff. Approve it if it looks right. Deny it if it does not, and ask for a narrower change.
+Use your actual file name. Claude will read the file and propose an edit. Look at the diff. Approve it if it looks right. Deny it if it doesn't, and ask for a narrower change.
 
-When the edit is done, open the file and read the result. If you like it, delete the backup. If you do not, delete the edited version and rename the backup — that is your undo. Either way, you just went through the full loop of a real edit, under approval, with a safety net. Every future edit is a variation on this exact pattern.
+When the edit is done, open the file and read the result. If you like it, delete the backup. If you don't, delete the edited version and rename the backup — that's your undo. Either way, you just went through the full loop of a real edit, under approval, with a safety net. Every future edit is a variation on this exact pattern.
+
+</TryThis>
+
+<!-- REFLECTION_INPUT_PLACEHOLDER — future AI assistant will ask the reader whether they approved or denied, and what the diff caught that they might have missed. Not rendered yet. -->
