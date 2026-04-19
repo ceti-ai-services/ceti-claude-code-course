@@ -1,102 +1,212 @@
 ---
-title: CLAUDE.md — Giving Context Once
-module: 05
+title: Teach it once. Let it remember forever.
+module: "05"
 time: "13 min"
+tags: [claude-md, project-memory, context, bronze]
+skills_gained: [writing-claude-md, project-memory, persistent-context]
+persona_aware: true
 ---
 
-# CLAUDE.md — Giving Context Once
+# Teach it once. Let it remember forever.
 
-By your third session you will notice a pattern: you type the same thing into Claude every time you start. "I'm a marketing lead at a mid-sized software company." "Our clients are in healthcare, not tech." "Always use British English." "This folder is for client proposals — every document here is confidential." You are typing these sentences because Claude has no memory between sessions, and every new conversation starts blank.
+Three sessions in, you'll notice it. The same two sentences at the top of every prompt.
 
-There is a file that fixes this. It is called `CLAUDE.md`, it sits in your folder, and Claude reads it automatically at the start of every session in that folder. You write it once. You never have to re-introduce yourself again.
+*"Just a reminder — I'm a [whatever you are], my clients are [whoever they are], keep the tone [however you want it]."*
 
-## What CLAUDE.md is
+You type it. Claude responds well. You close the session. Tomorrow you open a new one and type it again. Maybe with a typo. Maybe missing the third thing you keep meaning to mention. The reintroduction tax is real, and it's paid in the worst currency — the first three minutes of every session, every day.
 
-`CLAUDE.md` is a plain text file in Markdown format — the same format these lessons are written in. The `.md` extension tells your computer it is Markdown. Claude Code looks for this file by exact name when it starts, and if it finds one in the folder you launched from, it reads it before answering your first question.
+There is a file that ends this. It's called `CLAUDE.md`. It sits in your folder. Claude reads it automatically at the start of every session in that folder. You write it once. The reintroduction stops.
 
-The content is simply *context you would otherwise type every session*. Who you are. What this folder is for. What conventions matter. What the intended audience is for anything Claude produces here. You write it in normal sentences, as if you were onboarding a new colleague.
+## What CLAUDE.md actually is
 
-It is not a prompt. You do not paste it into the conversation. You do not run a slash command to "activate" it. You save the file in the folder, and it just works from the next session onward.
+It's a plain text file. Markdown — the same format these lessons are written in. You can make it in any text editor, in Finder, in the terminal, anywhere.
 
-It is also not magic. Claude will not follow instructions in `CLAUDE.md` that contradict what you say in the session. If your file says "always respond in British English" and you then ask, "actually, use American for this one," Claude uses American. The file is the default context, not a handcuff.
+When you start Claude in a folder that contains a `CLAUDE.md`, Claude opens it before it says hello. Whatever is in that file becomes the ambient context for the session. Who you are, what this folder is for, what your standards are — all available to Claude without you having to say any of it out loud.
 
-## What to put in it
+<Callout variant="core-idea">
+CLAUDE.md is not a prompt. It's not a slash command. It's a file that sits in the folder. Claude reads it at session start. That's the entire mechanism.
+</Callout>
 
-A good `CLAUDE.md` answers four questions. You do not need headers for each — write it as prose if you want — but these are the four axes of useful context.
+It's also not magic. If your file says "always use British English" and you ask Claude to "write this one in American," Claude uses American. The file is the default, not a handcuff. You're not losing control by writing it — you're setting the floor.
 
-**Who am I?** One sentence. Your role, your organization, what you do. "I run operations at a 30-person logistics company." "I'm a partner at a small law firm focused on commercial leases." The more specific, the better the defaults Claude picks for tone and vocabulary.
+## The four things worth writing down
 
-**What is this folder for?** One or two sentences. The purpose of the folder and the kind of work that happens in it. "This folder contains active client contracts and the associated correspondence. Each client has a subfolder." Claude will stop guessing, because it does not have to.
+A useful CLAUDE.md answers four questions. You don't need headers for each. You can write it as a short paragraph. But these four axes are where the value is.
 
-**What conventions matter?** Anything that keeps coming up. Naming patterns ("all invoices are named YYYY-MM-client.pdf"). Language preferences ("use British English, and never use the word 'leverage'"). Structural norms ("when summarizing, start with a three-sentence executive summary, then bullets"). Confidentiality notes ("never paste any content from this folder into an external tool or email draft").
+**Who am I?** One sentence. Your role, what you do, who you do it for. The more specific, the better Claude's defaults get.
 
-**Who is the audience for outputs?** If most things produced here are meant for a specific reader, say so. "Drafts in this folder are read by our CFO, who wants numbers first and prose second." "Summaries in this folder are for internal engineers who already know the domain, so skip background explanations."
+**What is this folder for?** One or two sentences. The purpose of this specific folder and what kind of work lives in it.
 
-Keep it short. One screen, ideally. A two-page `CLAUDE.md` is worse than a six-line one — Claude will read it either way, but your future self has to maintain it.
+**What conventions do I care about?** Anything you keep re-explaining. Naming patterns. Tone. Words you don't use. Output shapes you prefer.
 
-## A template to start from
+**Who reads what comes out of here?** If most things produced in this folder go to a specific audience — clients, your spouse, a specific Instagram demographic, an inspector — name them.
 
-Copy this into a file called `CLAUDE.md` in the folder you want to set context for. Replace the bracketed parts.
+Keep it short. One screen is ideal. A two-page CLAUDE.md is worse than a six-line one, because your future self has to maintain it.
 
-```markdown
-# Context for Claude
+## Four versions. Pick the one closest to yours.
 
-## Who I am
-[One sentence: role, organization, area of focus.]
+Here's what this looks like filled out for four very different people. Read the one closest to your work. Steal what's useful. Modify the rest.
 
-## What this folder is
-[One or two sentences: purpose of the folder, how it is organized.]
+<PersonaExample>
+  <template #creator>
 
-## Conventions I care about
-- [Naming convention for files, if any.]
-- [Language/style preferences — formal/casual, regional, vocabulary to avoid.]
-- [Structural preferences — how summaries should be formatted, etc.]
+  ```markdown
+  # Context for Claude
 
-## Audience for outputs
-[Who reads the things produced in this folder, and what they care about.]
+  ## Who I am
+  I run a newsletter + YouTube channel about home organization for people
+  with ADHD. ~18k subs across both. Solo operator.
 
-## Things to never do
-- [Actions that are off-limits — e.g., "never delete anything without explicit confirmation."]
-```
+  ## What this folder is
+  Content batches — scripts, caption drafts, newsletter bodies, research
+  notes. Organized by week, sometimes by theme.
 
-That template is not sacred. Delete sections that do not apply. Add a section for anything specific to your work. The only rule is that the file lives at the root of the folder and is named exactly `CLAUDE.md`.
+  ## How I write
+  - Short sentences. Deadpan. Never peppy.
+  - Never use the words "hack," "life-changing," or "productivity."
+  - Examples from my own mess, not other people's.
 
-## The hierarchy
+  ## Audience
+  Women 28–45 who already tried the trendy systems and bounced off them.
+  They're tired of being sold to. Assume they're smart and burned out.
 
-Claude Code actually reads three kinds of `CLAUDE.md` files, in order. Most non-developers only ever need one of them, but it is worth knowing the full picture so nothing surprises you later.
+  ## Never do
+  - Suggest I buy apps or courses in the script.
+  - Rewrite my voice — tighten it, don't replace it.
+  ```
 
-**Global**, at `~/.claude/CLAUDE.md` on your computer. This is context that applies *everywhere* you run Claude Code — your name, your general profession, any universal preferences. Most people skip this and add it later, after they have a feel for what belongs there.
+  </template>
+  <template #consultant>
 
-**Project**, at `CLAUDE.md` in the folder you launched from. This is the one you will actually use. The four-question template above goes here. Ninety percent of your useful context is folder-specific, and folder-specific context belongs in the folder.
+  ```markdown
+  # Context for Claude
 
-**Local**, at `./.claude/CLAUDE.md`. This is a hidden subfolder (the leading dot makes it hidden on Mac and Linux) that holds context specific to *your* copy of a shared folder. If the folder is synced with a team, everyone sees the main `CLAUDE.md` but your own notes and quirks live in the local one. Skip this until you genuinely have a shared-folder situation.
+  ## Who I am
+  Independent brand strategist. Ten years in. Three retainer clients,
+  one project client at a time. I bill hourly and hate scope creep.
 
-Most non-developers only need the project one. If you are not sure whether you need the others, you do not.
+  ## What this folder is
+  Active client work for Meridian Foods — their rebrand project.
+  Briefs, decks, client emails, meeting notes, my own research.
 
-## It is memory, not a command
+  ## How I work
+  - Direct, no fluff. Client is senior — don't over-explain.
+  - When I ask for a draft, default to short. I'll ask if I want more.
+  - Flag anything that reads like I'm trying too hard.
 
-This bears repeating because the distinction trips people up. `CLAUDE.md` is **project memory**. It is not a prompt template — you are not writing instructions like "Please always respond in the style of..." as if you were crafting a clever opening message. You are writing the context that any reasonable colleague would need on day one.
+  ## Audience for outputs
+  Meridian's CMO (reads fast, hates adjectives) and their board
+  (wants numbers and one-page summaries, not strategy essays).
 
-It is also not a slash command. You do not type `/claude-md` or `/memory` to invoke it. There is no command. The file exists, Claude reads it at session start, the context is in the room.
+  ## Never do
+  - Propose scope beyond what's in the current SOW.
+  - Use the word "leverage" as a verb. Ever.
+  ```
 
-The practical consequence is that `CLAUDE.md` should read like a briefing document, not like a prompt. "I run ops at a logistics company" is good. "You are a helpful assistant specializing in logistics operations" is worse — that is writing a prompt, which Claude already has. You are giving it *your* specifics, not describing its job.
+  </template>
+  <template #service>
 
-## What you just did
+  ```markdown
+  # Context for Claude
 
-You learned that `CLAUDE.md` is a plain Markdown file Claude reads automatically at the start of every session in that folder, and that it is the right place for the context you would otherwise retype every time: who you are, what the folder is for, what conventions you care about, and who reads the outputs. You learned the four-section template, and you learned that while there is a three-level hierarchy of global, project, and local files, the project-level file in the folder root is the only one most people need. It is project memory, not a command.
+  ## Who I am
+  I own a two-chair salon in Medellín. We do cuts, color, and weddings.
+  Me + one stylist. Bookings through WhatsApp mostly.
 
-## Try this
+  ## What this folder is
+  My business admin — bookings exports, client notes, price list,
+  supplier invoices, the WhatsApp history I occasionally export.
 
-Go back to the folder you used in Module 03 — the one where you asked Claude to explain itself. Create a new file in that folder called exactly `CLAUDE.md`. On Mac you can do this from Finder (right-click → New Document, rename to `CLAUDE.md`), from a text editor (File → New, save with that exact name), or from the terminal (`touch CLAUDE.md` in Mac/Linux, or `New-Item CLAUDE.md` in PowerShell).
+  ## How I talk to clients
+  - Warm but professional. Usted for new clients, vos for regulars.
+  - Never use emojis in price conversations.
+  - Confirm appointments with time + service + stylist, nothing else.
 
-Paste the template from earlier in this lesson into the file. Fill out three sections — who you are, what the folder is for, and one convention that matters. Leave the rest if you are not sure. Save.
+  ## Audience for outputs
+  Clients via WhatsApp (short, casual) and my accountant (just the
+  numbers, in a table).
 
-Now start a fresh Claude session in that folder (`exit` out of any existing one, then `claude` again). Ask the same opening question you asked before:
+  ## Never do
+  - Invent prices. If you don't see it in price-list.md, ask me.
+  - Share or reference other clients' info when drafting a reply.
+  ```
+
+  </template>
+  <template #realestate>
+
+  ```markdown
+  # Context for Claude
+
+  ## Who I am
+  Residential broker in Austin. 12 years in. Mostly working with
+  buyers $500k–$1.2M, a few listings a quarter.
+
+  ## What this folder is
+  One transaction: 145 Main St listing. MLS exports, comps CSVs,
+  disclosures, inspection PDFs, my buyer correspondence.
+
+  ## How I write to clients
+  - Plain English, not MLS-speak. Buyers are first-timers.
+  - Numbers first, narrative second. Never bury the ask.
+  - Disclosure language stays exact. Don't paraphrase what the
+    inspection report said — quote it.
+
+  ## Audience for outputs
+  Buyers (warm, specific), my broker (flag anything requiring a
+  second read), the other agent (professional, brief).
+
+  ## Never do
+  - Give legal advice. Flag anything that needs the attorney.
+  - Invent comps. Only use numbers from the CSVs in /comps.
+  ```
+
+  </template>
+</PersonaExample>
+
+Notice what's in all four: specific audience, specific voice, specific "never do." Notice what's not: no job description for Claude, no "you are a helpful assistant." You're not prompting Claude — you're briefing it on *you*.
+
+## Project beats global. That's the whole priority rule.
+
+You'll eventually read that Claude Code checks multiple CLAUDE.md files — a global one, a project one, sometimes a local one. Ignore the others for now.
+
+<Callout variant="tip">
+The one that matters is the CLAUDE.md sitting in the folder you launched from. That's your project file. It wins over anything global. Ninety percent of your useful context is folder-specific anyway — the client, the tone, the audience, the stakes. Write one good project-level CLAUDE.md and you're done.
+</Callout>
+
+If you later find yourself re-typing the same *universal* thing ("I'm in Austin, my work day is 9–6, I prefer American English") into multiple CLAUDE.mds, that's when a global one starts earning its keep. Not before.
+
+## The thing people get wrong
+
+The mistake is writing CLAUDE.md like a prompt.
+
+"You are a helpful assistant specializing in real estate, with a warm but professional tone, who always considers the needs of first-time buyers…"
+
+Delete that. Claude already has a job description. What Claude doesn't have is *you*. Write the thing only you can write — the specific shape of your work, your clients, your standards, your non-negotiables.
+
+Read it out loud when you're done. If it sounds like a briefing document for a new assistant who just got hired on Monday, it's right. If it sounds like a prompt you'd paste into a chatbot, rewrite it.
+
+<TryThis time="10 min">
+
+Open the folder you used in Module 03 — the one where you asked Claude to describe what was in it.
+
+Create a file in that folder named exactly `CLAUDE.md`. On Mac: in Finder, right-click → New Document, then rename it. In the terminal: `touch CLAUDE.md`. On Windows: in File Explorer, right-click → New Text Document, rename to `CLAUDE.md` (make sure it's not `CLAUDE.md.txt`).
+
+Paste the template from the persona closest to you. Change three things so it describes your actual work, your actual voice, your actual audience. Save.
+
+Now start a fresh session: exit any existing Claude session, run `claude` again in that folder, and ask the same opening question you asked in Module 03:
 
 ```
 what's in this folder and what is it for?
 ```
 
-The answer should feel different — more specific, more confident, less generic. Claude is not guessing at context anymore. It has read your file.
+The answer should land differently. More specific. Less generic. If it still feels generic, your CLAUDE.md is too vague — add one more sharp sentence, save, open a fresh session, ask again. That loop is how you learn what kind of context actually moves Claude.
 
-If the answer still feels generic, your `CLAUDE.md` is too vague. Open it, add one more specific sentence, save, start a fresh session, ask again. This iteration loop is how people learn what kind of context actually moves the needle.
+</TryThis>
+
+<Recap>
+
+CLAUDE.md is the file that ends the daily reintroduction. It lives in your folder, Claude reads it every session, and it holds the four things Claude can't know without you telling it: who you are, what this folder is for, what conventions you care about, and who reads the outputs. It's not a prompt and not a command — it's a briefing document for a colleague who just started. Project-level file, in the folder root. That's the one that matters.
+
+</Recap>
+
+<!-- REFLECTION_INPUT_PLACEHOLDER — future AI assistant will ask the reader what's in their CLAUDE.md and where it's still vague. Not rendered yet. -->
