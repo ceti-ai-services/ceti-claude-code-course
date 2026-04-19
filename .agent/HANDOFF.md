@@ -117,8 +117,8 @@ Status:
 - [x] Step 5: Lesson loader i18n + persona (commit `1e5cb74`) — tokenizer splits markdown into block sequence (html / callout / try / recap / quiz / personaExample), persona-comment pre-filter keeps only matching `<!-- persona:X -->` regions, language routing picks `<slug>.<lang>.md` else `.md`. Live-verified on dev-learn.cetiai.co for creator + service.
 - [x] Step 6: Content rewrite EN — all 7 modules in v2 voice (M01 `c32638d`, M03 `549f54e`, M05 `3a8ac9c`, M06 `5c4c411`, M07 `e1ba4b4`, M02+M04 light `76d74c1`)
 - [x] **Validation gate M6**: MERCURIO `6571f73` green-light + MARS `1636237` yellow→green. Both reports at `docs/insights/validation-{mercurio,mars}-m6.md`. Three MERCURIO fixes applied (`41f575a`): M05 salon neutral EN, M06 broker last-mile, M07 soft-pedal claims. Three MARS fixes applied (`49aca60`): M03 backup forward-lift, M06 four persona "Before you open Claude" preambles (biggest abandonment-risk fix — Service + Real Estate were assuming CSV/WhatsApp exports), M07 zero-code week-loop TryThis (SMS/calendar reminders).
-- [ ] Step 7: ES authoring (all 7) ← **in progress** — subagent dispatched, committing per module
-- [ ] Step 8: Smoke + cohort link
+- [x] Step 7: ES authoring (all 7) — sidecar `.es.md` per module, neutral LatAm voice, persona slots authored (salon picks Medellín, broker picks CDMX), Spotlight→Foco localization acknowledged, banned-words clean. Commits: M01 `e2ff8d1`, M02 `24d8fdf`, M03 `5710956`, M04 `a1fa6c7`, M05 `17006e6`, M06 `0ec6e7b`, M07 `cf24d55`.
+- [ ] Step 8: Smoke + cohort link ← **next**
 
 **Commit count in Plan v2 window**: ~20 pushes to main (changelog-shaped for mobile view).
 
