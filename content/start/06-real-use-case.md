@@ -146,7 +146,7 @@ The task you wrote down in Module 01 probably matches one of four shapes. Read t
   comp analysis — what range i think it should sell at and why.
   ```
 
-  **Execute.** `save as buyer-summary-145-main.md in this folder.` Approve. Read. Tighten. Paste into email. Send to your buyer.
+  **Execute.** `save as buyer-summary-145-main.md in this folder.` Approve. Open the file — it's plain text you can read like a doc. Copy the two paragraphs, paste into Gmail, send to your buyer. If they prefer SMS, you already have it written — just trim to one paragraph and text it.
 
   </template>
 </PersonaExample>

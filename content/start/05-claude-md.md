@@ -110,8 +110,8 @@ Here's what this looks like filled out for four very different people. Read the 
   # Context for Claude
 
   ## Who I am
-  I own a two-chair salon in Medellín. We do cuts, color, and weddings.
-  Me + one stylist. Bookings through WhatsApp mostly.
+  I own a small salon — two chairs, me plus one stylist. We do cuts,
+  color, and weddings. Bookings come in through text mostly.
 
   ## What this folder is
   My business admin — bookings exports, client notes, price list,

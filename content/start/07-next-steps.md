@@ -32,27 +32,27 @@ Not someday. This week. The gap between "installed and used once" and "part of m
 <PersonaExample>
   <template #creator>
 
-  By next Friday, your weekly caption batch takes forty minutes instead of two hours — and the captions sound more like you, not less, because Claude's been reading the last twenty you wrote.
+  By next Friday, your weekly caption batch runs noticeably faster — and more importantly, the captions sound more like you, not less, because Claude's been reading the last twenty you wrote.
 
   </template>
   <template #consultant>
 
-  By next Friday, your Friday-afternoon follow-up pile is done by Thursday, with three client emails drafted and ready in about twenty minutes instead of ninety.
+  By next Friday, the follow-up pile you usually do Friday afternoon is mostly done by Thursday — three client emails drafted in a fraction of the time, in your voice.
 
   </template>
   <template #service>
 
-  By next Friday, your weekly bookings reconciliation is a fifteen-minute sit-down instead of an hour, and you know exactly who to message on Monday because the gaps list is already written.
+  By next Friday, the weekly bookings reconciliation fits into one sit-down instead of stretching across the week, and you know exactly who to message on Monday because the gaps list writes itself.
 
   </template>
   <template #realestate>
 
-  By next Friday, the MLS-comps-to-buyer-summary loop is a twenty-minute task instead of an hour, and the numbers are more defensible because they came from the CSV, not your eyeballs.
+  By next Friday, the MLS-comps-to-buyer-summary loop is a routine task, not a chunk of your afternoon, and the numbers are more defensible because they came from the CSV, not your memory.
 
   </template>
 </PersonaExample>
 
-Those aren't guesses. They're what happens when people put the tool on one task and stick with it for a week. The second week the same tasks get faster again. By the fourth, the way you used to do them is the one that feels weird.
+I'm being careful with the word "faster" here because the actual number depends on your inputs — but in the cohorts I've run, people consistently cut the *boring parts* of a recurring weekly task by half or more within the first two weeks. The second week the same tasks get faster again. By the fourth, the way you used to do them is the one that feels weird.
 
 ## If you want more — Silver and Gold
 
