@@ -1,71 +1,72 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import MissionBrief from "@/components/course/MissionBrief.vue"
-import TerminalDemo from "@/components/course/TerminalDemo.vue"
+import ApprovalSim from "@/components/course/ApprovalSim.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 
 const { lang } = useCustomizer()
 
-interface LineDef {
-  kind: "prompt" | "out" | "ok" | "warn" | "meta"
+interface DiffLine {
+  kind: "remove" | "add" | "context" | "meta"
   text: string
-  delay?: number
 }
 
-const enLines: LineDef[] = [
-  { kind: "prompt", text: "fix the formatting in meeting-notes.md" },
-  { kind: "out", text: "Proposing edit to meeting-notes.md:" },
-  { kind: "warn", text: "- bullet  list   with weird spacing" },
-  { kind: "ok", text: "+ - Bullet list with consistent spacing" },
-  { kind: "warn", text: "- wrong trailing space" },
-  { kind: "ok", text: "+ - consistent trailing (none)" },
-  { kind: "out", text: "Approve this change? (y/n)" },
-  { kind: "prompt", text: "y" },
-  { kind: "ok", text: "Applied to meeting-notes.md" },
-  { kind: "meta", text: "(no other files touched — scope held)" },
+const enDiff: DiffLine[] = [
+  { kind: "context", text: "## Meeting notes · Meridian" },
+  { kind: "remove", text: "- action items    with extra spaces" },
+  { kind: "add",    text: "- Action items with consistent spacing" },
+  { kind: "remove", text: "- follow up next week  (trailing space)" },
+  { kind: "add",    text: "- Follow up next week" },
+  { kind: "context", text: "" },
+  { kind: "meta",   text: "(2 lines changed · 1 file)" },
 ]
 
-const esLines: LineDef[] = [
-  { kind: "prompt", text: "arregla el formato de meeting-notes.md" },
-  { kind: "out", text: "Propongo editar meeting-notes.md:" },
-  { kind: "warn", text: "- viñetas   con espacios raros" },
-  { kind: "ok", text: "+ - Viñetas con espaciado consistente" },
-  { kind: "warn", text: "- espacio final incorrecto" },
-  { kind: "ok", text: "+ - sin espacio final" },
-  { kind: "out", text: "¿Aprobar este cambio? (y/n)" },
-  { kind: "prompt", text: "y" },
-  { kind: "ok", text: "Aplicado a meeting-notes.md" },
-  { kind: "meta", text: "(ningún otro archivo tocado — alcance respetado)" },
+const esDiff: DiffLine[] = [
+  { kind: "context", text: "## Notas de reunión · Meridian" },
+  { kind: "remove", text: "- elementos de acción    con espacios extra" },
+  { kind: "add",    text: "- Elementos de acción con espaciado consistente" },
+  { kind: "remove", text: "- seguimiento próxima semana  " },
+  { kind: "add",    text: "- Seguimiento próxima semana" },
+  { kind: "context", text: "" },
+  { kind: "meta",   text: "(2 líneas cambiadas · 1 archivo)" },
 ]
 
 const en = {
   codename: "M04 · PERMISSIONS",
   title: "Files, Permissions, and Undo",
-  analogy: "Three prompts stand between a question and a changed file.",
+  analogy: "Every change goes through you. That friction is the feature.",
   chips: [
     { label: "Diff before change" },
     { label: "Approve or deny" },
-    { label: "Undo with a copy" },
+    { label: "Nothing lands without your yes" },
   ],
   time: "12 min",
-  demoTitle: "claude · approval loop",
+  simTitle: "claude · approval loop",
+  simPrompt: "fix the formatting in meeting-notes.md",
+  simFilename: "meeting-notes.md",
+  approveOutcome: "Applied to meeting-notes.md. No other files touched.",
+  denyOutcome: "No changes made. You stayed in control.",
 }
 
 const es = {
   codename: "M04 · PERMISOS",
   title: "Archivos, permisos, y deshacer",
-  analogy: "Tres prompts se interponen entre una pregunta y un archivo cambiado.",
+  analogy: "Todo cambio pasa por ti. Esa fricción es la ventaja.",
   chips: [
     { label: "Diff antes del cambio" },
     { label: "Aprobar o denegar" },
-    { label: "Deshacer con una copia" },
+    { label: "Nada aterriza sin tu sí" },
   ],
   time: "12 min",
-  demoTitle: "claude · loop de aprobación",
+  simTitle: "claude · loop de aprobación",
+  simPrompt: "arregla el formato de meeting-notes.md",
+  simFilename: "meeting-notes.md",
+  approveOutcome: "Aplicado a meeting-notes.md. Ningún otro archivo tocado.",
+  denyOutcome: "Sin cambios. Te mantuviste en control.",
 }
 
 const t = computed(() => (lang.value === "es" ? es : en))
-const lines = computed(() => (lang.value === "es" ? esLines : enLines))
+const diff = computed(() => (lang.value === "es" ? esDiff : enDiff))
 </script>
 
 <template>
@@ -76,11 +77,12 @@ const lines = computed(() => (lang.value === "es" ? esLines : enLines))
     :objectives="t.chips"
     :time="t.time"
   />
-  <TerminalDemo
-    :title="t.demoTitle"
-    dir="~/client-notes/"
-    :lines="lines"
-    :autoplay="true"
-    :replayable="true"
+  <ApprovalSim
+    :title="t.simTitle"
+    :prompt="t.simPrompt"
+    :filename="t.simFilename"
+    :diff="diff"
+    :approveOutcome="t.approveOutcome"
+    :denyOutcome="t.denyOutcome"
   />
 </template>

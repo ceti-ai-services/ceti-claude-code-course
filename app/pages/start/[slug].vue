@@ -25,8 +25,13 @@
       </div>
     </template>
 
-    <article v-if="lesson" class="lesson-body">
-      <template v-for="(block, i) in lesson.blocks" :key="i">
+    <article v-if="lesson" ref="lessonBody" class="lesson-body">
+      <div
+        v-for="(block, i) in lesson.blocks"
+        :key="i"
+        class="appear"
+        :style="`--appear-delay: ${Math.min(i * 55, 280)}ms`"
+      >
         <!-- plain markdown HTML -->
         <div
           v-if="block.kind === 'html'"
@@ -80,7 +85,7 @@
             />
           </template>
         </PersonaExample>
-      </template>
+      </div>
     </article>
 
     <div v-else class="card" style="margin-top: 40px">
@@ -116,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick } from "vue"
 import { marked } from "marked"
 import Callout from "@/components/course/Callout.vue"
 import TryThis from "@/components/course/TryThis.vue"
@@ -480,6 +485,45 @@ function lessonLink(s: string): string {
   return `/start/${s}${params.length ? "?" + params.join("&") : ""}`
 }
 
+// --- Scroll-triggered appear animations -----------------------------------
+// Progressive enhancement: JS adds 'js-ready' to the article so the CSS
+// opacity-0 rule only activates when the observer can immediately reveal
+// visible blocks. Without JS (SSR/prerender), blocks show immediately.
+const lessonBody = ref<HTMLElement | null>(null)
+let appearObserver: IntersectionObserver | null = null
+
+function setupAppear(el: HTMLElement) {
+  appearObserver?.disconnect()
+  el.classList.add("js-ready")
+  appearObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible")
+          appearObserver?.unobserve(e.target)
+        }
+      })
+    },
+    { threshold: 0.06, rootMargin: "0px 0px -20px 0px" },
+  )
+  el.querySelectorAll(".appear").forEach((el) => appearObserver!.observe(el))
+}
+
+onMounted(async () => {
+  await nextTick()
+  if (lessonBody.value) setupAppear(lessonBody.value)
+})
+
+watch(lesson, async () => {
+  await nextTick()
+  if (lessonBody.value) {
+    lessonBody.value.classList.remove("js-ready")
+    setupAppear(lessonBody.value)
+  }
+})
+
+onBeforeUnmount(() => appearObserver?.disconnect())
+
 definePageMeta({
   // prerender every lesson at build time
 })
@@ -537,14 +581,39 @@ useHead(() => ({
   margin-bottom: 24px;
 }
 .lesson-body :deep(h2) {
-  margin: 40px 0 16px;
+  position: relative;
+  margin: 52px 0 18px;
+  padding-top: 22px;
   font-size: 22px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  border-top: 1px solid var(--border);
+}
+/* Gold accent mark on section headings */
+.lesson-body :deep(h2)::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 36px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
 }
 .lesson-body :deep(h3) {
-  margin: 28px 0 12px;
+  margin: 32px 0 12px;
   font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+.lesson-body :deep(h3)::before {
+  content: "//";
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-gold-dim);
+  margin-right: 6px;
+  font-weight: 400;
 }
 .lesson-body :deep(p) {
   margin-bottom: 16px;
@@ -599,5 +668,27 @@ useHead(() => ({
   border: none;
   border-top: 1px solid var(--border);
   margin: 32px 0;
+}
+
+/* ---- Scroll-triggered appear animations --------------------------------- */
+/* Only active after JS adds .js-ready. Without JS all blocks display normally. */
+.lesson-body.js-ready .appear {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 520ms var(--ease-out-spring) var(--appear-delay, 0ms),
+    transform 520ms var(--ease-out-spring) var(--appear-delay, 0ms);
+}
+.lesson-body.js-ready .appear.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-body.js-ready .appear {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 </style>
