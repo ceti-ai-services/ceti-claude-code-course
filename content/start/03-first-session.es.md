@@ -9,9 +9,9 @@ persona_aware: true
 
 # Tu primera sesión real. No un hola. Una respuesta útil.
 
-Ya lo instalaste. Corriste `claude` por primera vez. Te dijo algo amable. Ahora estás viendo el cursor, y la verdad es esta: no sabes qué escribir primero.
+Ya lo instalaste. Corriste `claude` por primera vez. Si hiciste el TryThis del Módulo 02 completo, ya lo apuntaste a una carpeta acotada y le hiciste tu primera pregunta real — así que la idea de este módulo ya es físicamente cierta para ti. Este módulo la nombra, te muestra adónde van las próximas dos sesiones, y te deja con un hábito que vale la pena guardar.
 
-No escribas "hola." No escribas "qué puedes hacer." No escribas nada hasta que hayas hecho una cosa: elegir la carpeta donde está tu trabajo real.
+Si te saltaste adelante y ahora mismo estás viendo el cursor en una terminal nueva, no escribas "hola." No escribas "qué puedes hacer." No escribas nada hasta que hayas hecho una cosa: elegir la carpeta donde está tu trabajo real.
 
 Este módulo es 80% sobre esa elección. La parte de escribir toma 30 segundos.
 

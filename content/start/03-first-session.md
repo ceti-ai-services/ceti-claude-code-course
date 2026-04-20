@@ -9,9 +9,9 @@ persona_aware: true
 
 # Your first real session. Not a hello. A useful answer.
 
-You've installed it. You ran `claude` for the first time. It said something nice to you. Now you're staring at a cursor, and the truth is: you don't know what to type first.
+You've installed it. You ran `claude` for the first time. If you did the Module 02 TryThis end-to-end, you already pointed it at a scoped folder and asked your first real question — so the idea of this module is already physically true for you. This module names it, shows you where the next two sessions should go, and gets you a habit worth keeping.
 
-Don't type "hi." Don't type "what can you do." Don't type anything until you've done one thing: chosen the folder where your real work lives.
+If you skipped ahead and you're staring at a cursor in a fresh terminal right now, don't type "hi." Don't type "what can you do." Don't type anything until you've done one thing: chosen the folder where your real work lives.
 
 This module is 80% about that choice. The typing part takes 30 seconds.
 

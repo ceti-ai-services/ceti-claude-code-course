@@ -136,17 +136,27 @@ Instalaste un asistente de IA que vive en la terminal. Node.js es el motor, `npm
 
 </Recap>
 
-<TryThis time="3 min">
+<TryThis time="4 min">
 
-Con el prompt `>` esperando, escribe esto y presiona Return:
+Antes de preguntarle algo a Claude, dale una carpeta donde trabajar. Elige una pequeña — menos de 20 archivos — que tenga trabajo que quieras revisar. Evita tu Escritorio y tu carpeta personal; ambas son demasiado grandes para una primera sesión.
+
+Si ahora mismo estás en el prompt de Claude de la instalación de arriba, escribe `exit` y presiona Return para cerrarlo. Luego apunta una terminal nueva a la carpeta que elegiste:
+
+- **Mac**: en Finder, clic derecho sobre la carpeta → **Nueva Terminal en la carpeta**.
+- **Windows**: en el Explorador de archivos, Shift + clic derecho sobre la carpeta → **Abrir en Terminal** (o **Abrir ventana de PowerShell aquí**).
+- **Linux** (o alternativa para cualquier sistema): en la terminal, escribe `cd ` (con un espacio al final), arrastra la carpeta desde tu gestor de archivos a la ventana de la terminal — aparece la ruta — y presiona Return.
+
+Ahora escribe `claude` y presiona Return. Esta vez la sesión está acotada a la carpeta que elegiste.
+
+Pregunta:
 
 ```
-hola, ¿puedes ver mi escritorio?
+¿qué hay en esta carpeta y para qué es?
 ```
 
-Lee la respuesta. Claude te va a decir en qué directorio está — probablemente tu carpeta home, algo como `/Users/tunombre` en Mac o `C:\Users\tunombre` en Windows. Te va a explicar que puede ver archivos en esa carpeta y nada fuera de ella. Si estás en tu carpeta home, puede que liste unas cuantas cosas que ve — Desktop, Documents, Downloads.
+Claude abre los archivos, los revisa, y te devuelve un resumen de un párrafo de tu propio trabajo. Eso es la instalación confirmada *y* la idea del siguiente módulo — el alcance — ya físicamente cierta para ti.
 
-Ese intercambio corto es todo lo que necesitas para confirmar que la instalación funcionó. Escribe `exit` y presiona Return para cerrar Claude Code, o déjalo abierto y sigue a la próxima lección.
+Escribe `/exit` para cerrar, o déjala corriendo y continúa.
 
 </TryThis>
 

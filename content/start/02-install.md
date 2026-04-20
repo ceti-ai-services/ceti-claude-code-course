@@ -136,17 +136,27 @@ You installed a terminal-native AI assistant. Node.js is the engine, `npm instal
 
 </Recap>
 
-<TryThis time="3 min">
+<TryThis time="4 min">
 
-With the `>` prompt waiting, type this and press Return:
+Before you ask Claude anything, give it a folder to work in. Pick a small one — under 20 files — that holds work you'd like to look at. Avoid your Desktop and your home folder; both are too big for a first session.
+
+If you're at the Claude prompt right now from the install above, type `exit` and press Return to close it. Then point a fresh terminal at your chosen folder:
+
+- **Mac**: in Finder, right-click the folder → **New Terminal at Folder**.
+- **Windows**: in File Explorer, Shift+right-click the folder → **Open in Terminal** (or **Open PowerShell window here**).
+- **Linux** (or fallback for any OS): in the terminal, type `cd ` (with a trailing space), drag the folder from your file manager onto the terminal window — the path appears — and press Return.
+
+Now type `claude` and press Return. This time the session is scoped to the folder you picked.
+
+Ask:
 
 ```
-hello, can you see my desktop?
+what's in this folder and what is it for?
 ```
 
-Read the answer. Claude will tell you what directory it's currently in — probably your home folder, something like `/Users/yourname` on Mac or `C:\Users\yourname` on Windows. It'll explain that it can see files in that folder and nothing outside it. If you're in your home folder, it may list a few things it can see — Desktop, Documents, Downloads.
+Claude opens the files, skims them, and gives you a one-paragraph summary of your own work back. That's the install confirmed *and* the next module's idea — scope — already physically true for you.
 
-That short exchange is all you need to confirm the install worked. Type `exit` and press Return to close Claude Code, or leave it open and continue to the next lesson.
+Type `/exit` to close, or leave it running and continue.
 
 </TryThis>
 
