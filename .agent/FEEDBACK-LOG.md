@@ -4,6 +4,46 @@ Running record of user-provided direction on the academy. Most recent entry at t
 
 ---
 
+## 2026-04-20 — Pass 2 interactive revision (post first interactive pass)
+
+**Context.** Following the first interactive revision pass (5 new primitives, 7 hero components), Manu returned and the direction continued: still not interactive enough, needs mission vibe more deeply throughout the lesson *body* (not just the hero). The hero primitives were good — the body was still reading as static prose.
+
+### What was built in this pass
+
+**Component redesigns (lesson body)**:
+- `TryThis.vue` — "Field assignment" card. Animated gold sweep (scaleX 0→1 on mount, 800ms spring). Pulsing timer dot. Target icon. Dashed separator. Reinforces operator/mission frame over tutorial frame.
+- `Recap.vue` — "Mission debrief" card. Circular check badge with gold ring. Gradient separator line. Pulsing scan-line at bottom. Language shift from descriptive ("what you just did") to operative ("debrief").
+- `PersonaExample.vue` — Scenario card. Pulsing gold indicator, icon-badge header, slide-in animation on every persona switch (contentKey + CSS `@keyframes scenario-body-in`). Content area has full prose styling system (lists, code, headings).
+
+**Lesson page animations (`[slug].vue`)**:
+- IntersectionObserver scroll-triggered reveal for every content block (55ms stagger, capped at 280ms, progressive enhancement via `js-ready` CSS class toggled on mount).
+- h2 headings: gold 36px bar (`::before`) + top border with 22px padding.
+- h3 headings: `//` mono prefix in `--color-gold-dim`.
+
+**M04 hero upgrade**:
+- Swapped TerminalDemo for ApprovalSim (interactive approve/deny state machine).
+- ApprovalSim: typing animation on prompt, colored diff lines, Approve/Deny buttons with distinct outcome states, reset to idle.
+- Full EN+ES i18n. New analogy: "Every change goes through you. That friction is the feature."
+
+**Gate redesign (`/start/index.vue`)**:
+- Replaced emoji + static list with: pulsing radio dot eyebrow, display title, module manifest with staggered slide-in per item (`manifest-item-in` 480ms spring), form card with gold top-sweep gradient, no emojis.
+
+### What held from Manu's direction
+
+- "Way more visuals, more animation" → scroll-triggered reveal answers this for the lesson body.
+- "Vibe should feel like embarking on a mission" → "Field assignment" + "Mission debrief" language + operator icons.
+- "Interactive experiences" → ApprovalSim is the first click-to-act interactive that isn't just cosmetic; student makes a real decision.
+- "More process highlighting" → h2 gold bars create visual chapter markers.
+
+### Still pending
+
+- Live browser review (computer-use was blocked by another session this pass).
+- Tone audit of M02/M03/M04 body content — these got the lightest tone treatment in the content rewrite.
+- More body interactivity in M06 (the "shape of every real task" section is still prose).
+- Cohort-zero link — held until Manu's live review.
+
+---
+
 ## 2026-04-19 — Post Plan v2 Step 7 review (pre Step 8)
 
 **Context.** Manu reviewed the live site after the 34-commit Step 7 close (Bronze reset, full EN rewrite + ES sidecars). Site is stable, content loads. He wants another revision pass before cohort zero.

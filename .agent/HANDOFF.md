@@ -1,7 +1,7 @@
 # HANDOFF — CETI Claude Code Academy
 
 **Purpose**: resume from any point. Updated at every milestone and before 70% context usage.
-**Last updated**: 2026-04-19 (pm) — **Plan v2 Step 8 smoke passed + interactive revision landed.** Awaiting live browser review before cohort-zero link dispatch.
+**Last updated**: 2026-04-20 (am) — **Second interactive revision pass complete.** Two new commits: body animations + component redesigns (`a05c44f`) + /start gate redesign (`6df3842`). Awaiting Manu's live review before cohort-zero link.
 **Primary objective**: build the highest-quality Claude Code academy — tiered as Novice / Experienced / Expert — using the `codebase-to-course` skill, porting LUXOR + MERCURIO + MARS insights, and logging everything to DASHBOARD.md.
 
 ---
@@ -119,7 +119,15 @@ Status:
 - [x] **Validation gate M6**: MERCURIO `6571f73` green-light + MARS `1636237` yellow→green. Both reports at `docs/insights/validation-{mercurio,mars}-m6.md`. Three MERCURIO fixes applied (`41f575a`): M05 salon neutral EN, M06 broker last-mile, M07 soft-pedal claims. Three MARS fixes applied (`49aca60`): M03 backup forward-lift, M06 four persona "Before you open Claude" preambles (biggest abandonment-risk fix — Service + Real Estate were assuming CSV/WhatsApp exports), M07 zero-code week-loop TryThis (SMS/calendar reminders).
 - [x] Step 7: ES authoring (all 7) — sidecar `.es.md` per module, neutral LatAm voice, persona slots authored (salon picks Medellín, broker picks CDMX), Spotlight→Foco localization acknowledged, banned-words clean. Commits: M01 `e2ff8d1`, M02 `24d8fdf`, M03 `5710956`, M04 `a1fa6c7`, M05 `17006e6`, M06 `0ec6e7b`, M07 `cf24d55`.
 - [x] Step 8 (smoke): source-level smoke matrix passed 21/21 (`.agent/SMOKE-STEP-8.md`). Live visual pass deferred to next session when Chrome extension / grant-access is available.
-- [x] Step 8 (interactive revision, prior to cohort link): per `.agent/FEEDBACK-LOG.md` — tone trims applied to M01/M06/M07 EN+ES; 5 new interactive primitives built (`MissionBrief`, `ProcessFlow`, `BeforeAfter`, `TerminalDemo`, `StackedReveal`); 2 variants proposed per module in `.agent/VARIANTS-M-ALL.md`; sibling-agent evaluation picked winners; 7 lesson-hero components wired into `app/pages/start/[slug].vue`.
+- [x] Step 8 (interactive revision — pass 1): per `.agent/FEEDBACK-LOG.md` — tone trims applied to M01/M06/M07 EN+ES; 5 new interactive primitives built (`MissionBrief`, `ProcessFlow`, `BeforeAfter`, `TerminalDemo`, `StackedReveal`); 2 variants proposed per module in `.agent/VARIANTS-M-ALL.md`; sibling-agent evaluation picked winners; 7 lesson-hero components wired into `app/pages/start/[slug].vue`.
+- [x] Step 8 (interactive revision — pass 2, commit `a05c44f` + `6df3842`): Second round per Manu feedback ("not interactive enough, needs mission vibe, way more animation"). Changes:
+  - `TryThis.vue` → full redesign as "Field assignment" with animated gold sweep (scaleX 0→1 on mount), pulsing timer dot, Target icon
+  - `Recap.vue` → full redesign as "Mission debrief" with circular check badge, gradient line, pulsing scan-line at bottom
+  - `PersonaExample.vue` → full redesign as animated scenario card; slide-in animation fires on every persona switch (contentKey pattern)
+  - `[slug].vue` → IntersectionObserver scroll-triggered reveal (55ms stagger, progressive enhancement via `js-ready` class); h2 gets gold 36px bar + top border; h3 gets `//` mono prefix
+  - `M04Hero.vue` → swapped TerminalDemo for ApprovalSim (interactive approve/deny with state machine + diff display + outcome)
+  - `ApprovalSim.vue` → committed from untracked; full i18n EN+ES
+  - `/start/index.vue` → full gate redesign: pulsing radio eyebrow, display title, module manifest with staggered slide-in, form with gold top-sweep, no emojis
 - [x] Step 8 (MERCURIO+MARS validation gate): **YELLOW go**. Voice holds, no banned-word regressions, M06 visibly more teachable. Two findings: (1) **M02→M03 scope-habit mismatch fixed** — M02 TryThis now requires `cd` into a scoped folder so M03's "scope is everything" lands on a reader who is already physically scoped (EN+ES); M03 intro acknowledges the prior step. (2) **Recommendation for next pass** (not blocker): boss-encounter checkpoint at end of M02/M04/M06 — three-state declaration (`green/yellow/red`) that writes to `StudentProfile.completedModules` + `reflections`. Adds the missing decision-interactivity affordance from `DECISIONS.md` §interactive-experience and feeds the future-AI-assistant scaffolding with real data from day one.
 - [ ] Step 8 (cohort link): **NOT SENT** — awaiting Manu's live review + explicit go-ahead. MERCURIO+MARS minimum-unblock: push commits, walk M01→M07 once on iPhone, dispatch.
 
