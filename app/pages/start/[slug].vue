@@ -1,13 +1,5 @@
 <template>
   <main class="lesson">
-    <div v-if="lesson" class="eyebrow">
-      Module {{ lesson.module }} · Bronze
-    </div>
-    <h1 v-if="lesson">{{ lesson.title }}</h1>
-    <div v-if="lesson" class="lesson-meta">
-      ~{{ lesson.time }} · {{ lessonIndex + 1 }} of {{ lessons.length }}
-    </div>
-
     <div class="progress-dots">
       <NuxtLink
         v-for="(l, i) in lessons"
@@ -20,6 +12,18 @@
         {{ l.module }}
       </NuxtLink>
     </div>
+
+    <!-- Mission-brief interactive hero for each module.
+         Replaces the static eyebrow+h1+meta intro with a per-module briefing
+         that composes MissionBrief + a module-specific interactive block. -->
+    <component v-if="heroComponent" :is="heroComponent" />
+    <template v-else-if="lesson">
+      <div class="eyebrow">Module {{ lesson.module }} · Bronze</div>
+      <h1>{{ lesson.title }}</h1>
+      <div class="lesson-meta">
+        ~{{ lesson.time }} · {{ lessonIndex + 1 }} of {{ lessons.length }}
+      </div>
+    </template>
 
     <article v-if="lesson" class="lesson-body">
       <template v-for="(block, i) in lesson.blocks" :key="i">
@@ -119,9 +123,32 @@ import TryThis from "@/components/course/TryThis.vue"
 import Recap from "@/components/course/Recap.vue"
 import Quiz from "@/components/course/Quiz.vue"
 import PersonaExample from "@/components/course/PersonaExample.vue"
+
+// Per-module interactive hero blocks. Each composes `MissionBrief` + a
+// module-specific interactive primitive (BeforeAfter / ProcessFlow /
+// TerminalDemo / StackedReveal). Chosen by sibling-agent evaluation from
+// .agent/VARIANTS-M-ALL.md. Static imports so the block renders in SSR.
+import M01Hero from "@/components/course/lesson/M01Hero.vue"
+import M02Hero from "@/components/course/lesson/M02Hero.vue"
+import M03Hero from "@/components/course/lesson/M03Hero.vue"
+import M04Hero from "@/components/course/lesson/M04Hero.vue"
+import M05Hero from "@/components/course/lesson/M05Hero.vue"
+import M06Hero from "@/components/course/lesson/M06Hero.vue"
+import M07Hero from "@/components/course/lesson/M07Hero.vue"
+
 import { useCustomizer } from "@/composables/useCustomizer"
 import type { Persona } from "@/types/customizer"
 import { PERSONAS } from "@/types/customizer"
+
+const heroMap: Record<string, unknown> = {
+  "01-mental-model": M01Hero,
+  "02-install": M02Hero,
+  "03-first-session": M03Hero,
+  "04-file-permissions": M04Hero,
+  "05-claude-md": M05Hero,
+  "06-real-use-case": M06Hero,
+  "07-next-steps": M07Hero,
+}
 
 type QuizOption = { label: string; correct: boolean; explain: string }
 
@@ -418,6 +445,8 @@ const lessons = computed(() =>
 const lessonIndex = computed(() =>
   lessons.value.findIndex((l) => l.slug === slug.value),
 )
+
+const heroComponent = computed(() => heroMap[slug.value] ?? null)
 
 const lesson = computed<Lesson | undefined>(() => {
   const file = pickFile(slug.value, lang.value)
