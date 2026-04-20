@@ -1,7 +1,7 @@
 # HANDOFF — CETI Claude Code Academy
 
 **Purpose**: resume from any point. Updated at every milestone and before 70% context usage.
-**Last updated**: 2026-04-19 — **PLAN V2 COMPLETE.** Bronze ships ready for cohort zero.
+**Last updated**: 2026-04-19 (pm) — **Plan v2 Step 8 smoke passed + interactive revision landed.** Awaiting live browser review before cohort-zero link dispatch.
 **Primary objective**: build the highest-quality Claude Code academy — tiered as Novice / Experienced / Expert — using the `codebase-to-course` skill, porting LUXOR + MERCURIO + MARS insights, and logging everything to DASHBOARD.md.
 
 ---
@@ -118,7 +118,9 @@ Status:
 - [x] Step 6: Content rewrite EN — all 7 modules in v2 voice (M01 `c32638d`, M03 `549f54e`, M05 `3a8ac9c`, M06 `5c4c411`, M07 `e1ba4b4`, M02+M04 light `76d74c1`)
 - [x] **Validation gate M6**: MERCURIO `6571f73` green-light + MARS `1636237` yellow→green. Both reports at `docs/insights/validation-{mercurio,mars}-m6.md`. Three MERCURIO fixes applied (`41f575a`): M05 salon neutral EN, M06 broker last-mile, M07 soft-pedal claims. Three MARS fixes applied (`49aca60`): M03 backup forward-lift, M06 four persona "Before you open Claude" preambles (biggest abandonment-risk fix — Service + Real Estate were assuming CSV/WhatsApp exports), M07 zero-code week-loop TryThis (SMS/calendar reminders).
 - [x] Step 7: ES authoring (all 7) — sidecar `.es.md` per module, neutral LatAm voice, persona slots authored (salon picks Medellín, broker picks CDMX), Spotlight→Foco localization acknowledged, banned-words clean. Commits: M01 `e2ff8d1`, M02 `24d8fdf`, M03 `5710956`, M04 `a1fa6c7`, M05 `17006e6`, M06 `0ec6e7b`, M07 `cf24d55`.
-- [ ] Step 8: Smoke + cohort link ← **next**
+- [x] Step 8 (smoke): source-level smoke matrix passed 21/21 (`.agent/SMOKE-STEP-8.md`). Live visual pass deferred to next session when Chrome extension / grant-access is available.
+- [x] Step 8 (interactive revision, prior to cohort link): per `.agent/FEEDBACK-LOG.md` — tone trims applied to M01/M06/M07 EN+ES; 5 new interactive primitives built (`MissionBrief`, `ProcessFlow`, `BeforeAfter`, `TerminalDemo`, `StackedReveal`); 2 variants proposed per module in `.agent/VARIANTS-M-ALL.md`; sibling-agent evaluation picked winners; 7 lesson-hero components wired into `app/pages/start/[slug].vue`.
+- [ ] Step 8 (cohort link): **NOT SENT** — awaiting Manu's live review of the revision + explicit go-ahead.
 
 **Commit count in Plan v2 window**: ~20 pushes to main (changelog-shaped for mobile view).
 
