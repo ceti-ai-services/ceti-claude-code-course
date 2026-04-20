@@ -16,7 +16,7 @@ Ahora la vas a hacer con Claude — por primera vez. No una tarea de tutorial. N
 Todo lo que los últimos cinco módulos te dieron — carpeta con alcance, herramienta instalada, instintos de aprobación, un CLAUDE.md que ya sabe quién eres — fue setup para esta hora. Aquí es donde el curso entero se paga a sí mismo.
 
 <Callout variant="stakes">
-Si ninguna otra cosa de este curso se te queda, este módulo es el que te devuelve lo invertido. Una tarea real, hecha al lado de Claude, te manda la prueba a ti mismo de que esto sí es distinto. Sáltatela y el Bronze se vuelve una cosa que viste. Hazla y se vuelve una cosa que usas.
+Una tarea real, hecha al lado de Claude, es la diferencia entre haber visto un curso y haber usado la herramienta. Todo hasta ahora fue práctica. Aquí es donde lo pruebas con trabajo que sí importa para tu semana.
 </Callout>
 
 ## La forma de cada tarea real

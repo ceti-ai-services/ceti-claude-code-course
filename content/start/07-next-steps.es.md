@@ -9,13 +9,11 @@ persona_aware: true
 
 # Lo lograste. Ahora qué cambia.
 
-Hace una hora eras la persona que había visto un curso. Ahora eres la persona que usó Claude en su trabajo real y tiene un archivo terminado que lo prueba.
+Hace una hora eras la persona que había visto un curso. Ahora usaste Claude en tu trabajo real, y hay un archivo terminado sentado en tu carpeta que no estaba esta mañana.
 
-Eso no es un cambio chico. Ese es el cambio.
+Eso es lo que vale la pena notar.
 
-Sigues teniendo los mismos clientes, la misma bandeja, el mismo calendario, el mismo lunes. Lo que cambió es el techo de qué tan rápido puedes pasar por las partes de todo eso que son texto, archivos, y borradores repetibles. Antes de hoy, ese techo era lo rápido que se mueven tus manos y lo clara que tienes la cabeza esa mañana. Después de hoy, es otra cosa. La herramienta ya está en el cuarto.
-
-Este módulo es qué hacer con eso.
+Sigues teniendo los mismos clientes, la misma bandeja, el mismo calendario, el mismo lunes. Lo que cambió son las partes de esa semana que son texto, archivos, y borradores repetibles — esas ahora tienen un segundo par de manos disponible, dentro de la carpeta donde el trabajo ya vive. El resto de este módulo es qué hacer con eso, empezando esta semana.
 
 ## Tres cosas para practicar esta semana
 
@@ -52,7 +50,7 @@ No un día. Esta semana. El salto entre "instalé y lo usé una vez" y "es parte
   </template>
 </PersonaExample>
 
-Voy con cuidado con la palabra "más rápido" aquí porque el número real depende de tus inputs — pero en las cohortes que he corrido, la gente consistentemente recorta las *partes aburridas* de una tarea semanal recurrente a la mitad o más en las primeras dos semanas. La segunda semana las mismas tareas se aceleran otra vez. Para la cuarta, la forma en que las hacías antes es la que se siente rara.
+"Más rápido" depende de tus inputs y tu setup — no te voy a dar un número. Lo que sí te digo es que en las cohortes que he corrido, la gente tiende a notar el cambio en la segunda o tercera semana, no en la primera. Para la cuarta, la forma vieja de hacer la misma tarea suele ser la que se siente lenta.
 
 ## Si quieres más — Silver y Gold
 

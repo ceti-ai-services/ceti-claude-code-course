@@ -84,7 +84,7 @@ Not abstractly. Specifically.
 <PersonaExample>
   <template #creator>
 
-  This week, you probably spent two hours on content ops: renaming exports, moving files between drafts and scheduled, writing captions that match old ones, replying to DMs that all ask roughly the same thing. The vending-machine version of AI helps you write *one* caption. The colleague version reads your last 20 captions, understands your voice, drafts 5 new ones, and files them in the right folder. Same amount of your time, ten times the output.
+  This week, you probably spent two hours on content ops: renaming exports, moving files between drafts and scheduled, writing captions that match old ones, replying to DMs that all ask roughly the same thing. The vending-machine version of AI helps you write *one* caption. The colleague version reads your last 20 captions, understands your voice, drafts 5 new ones, and files them in the right folder. The same work you were already doing — with most of the mechanical parts peeled off.
 
   </template>
   <template #consultant>

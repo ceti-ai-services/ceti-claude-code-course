@@ -84,7 +84,7 @@ No en abstracto. En concreto.
 <PersonaExample>
   <template #creator>
 
-  Esta semana, seguro gastaste dos horas en operaciones de contenido: renombrando exports, moviendo archivos entre borradores y programados, escribiendo captions que combinen con los anteriores, respondiendo DMs que preguntan más o menos lo mismo. La versión máquina expendedora de la IA te ayuda a escribir *un* caption. La versión colega lee tus últimos 20 captions, entiende tu voz, redacta 5 nuevos y los archiva en la carpeta correcta. El mismo tiempo tuyo, diez veces el output.
+  Esta semana, seguro gastaste dos horas en operaciones de contenido: renombrando exports, moviendo archivos entre borradores y programados, escribiendo captions que combinen con los anteriores, respondiendo DMs que preguntan más o menos lo mismo. La versión máquina expendedora de la IA te ayuda a escribir *un* caption. La versión colega lee tus últimos 20 captions, entiende tu voz, redacta 5 nuevos y los archiva en la carpeta correcta. El mismo trabajo que ya estabas haciendo — con la mayor parte de lo mecánico quitado.
 
   </template>
   <template #consultant>

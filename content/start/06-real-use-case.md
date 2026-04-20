@@ -16,7 +16,7 @@ Now you're going to do it with Claude — for the first time. Not a tutorial tas
 Everything the last five modules gave you — scoped folder, installed tool, approval instincts, a CLAUDE.md that knows who you are — was setup for this hour. This is where the whole course earns itself back.
 
 <Callout variant="stakes">
-If nothing else from this course stuck, this module is the one that pays you back. One real task, done alongside Claude, ships the proof to yourself that this is actually different. Skip this and Bronze becomes a thing you watched. Do this and it becomes a thing you use.
+One real task, done alongside Claude, is the difference between having watched a course and having used the tool. Everything up to now has been practice. This is where you try it on work that actually matters to your week.
 </Callout>
 
 ## The shape of every real task

@@ -9,11 +9,11 @@ persona_aware: true
 
 # You did it. Now what changes.
 
-An hour ago you were the person who had watched a course. Now you're the person who used Claude on your actual work and has a finished file to prove it.
+An hour ago you were the person who had watched a course. Now you've used Claude on your actual work, and there's a finished file sitting in your folder that wasn't there this morning.
 
-That's not a small shift. That's the shift.
+That's the thing worth noticing.
 
-You still have the same clients, the same inbox, the same calendar, the same Monday. What changed is the ceiling on how fast you can get through the parts of all of that which are text, files, and repeatable drafts. Before today, that ceiling was however fast your hands move and however clear your head is on a given morning. After today, it's different. The tool is in the room now.
+You still have the same clients, the same inbox, the same calendar, the same Monday. What's different is the parts of that week that are text, files, and repeatable drafts — those now have a second pair of hands available, inside the folder where the work already lives. The rest of this module is about what to do with that, starting this week.
 
 This module is what to do with that.
 
@@ -52,7 +52,7 @@ Not someday. This week. The gap between "installed and used once" and "part of m
   </template>
 </PersonaExample>
 
-I'm being careful with the word "faster" here because the actual number depends on your inputs — but in the cohorts I've run, people consistently cut the *boring parts* of a recurring weekly task by half or more within the first two weeks. The second week the same tasks get faster again. By the fourth, the way you used to do them is the one that feels weird.
+"Faster" depends on your inputs and your setup — I'm not going to give you a number. What I'll say is that in cohorts I've run, people tend to notice the shift in the second or third week, not the first. By the fourth week, the old way of doing the same task is often the one that feels slow.
 
 ## If you want more — Silver and Gold
 
