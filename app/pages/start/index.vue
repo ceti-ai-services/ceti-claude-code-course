@@ -1,81 +1,72 @@
 <template>
-  <main class="container" style="padding: 60px 24px 40px;">
-    <div class="eyebrow">🥉 Bronze Ticket</div>
-    <h1>Claude Code: Day One</h1>
-    <p class="lead" style="margin-top:16px; max-width:600px;">
-      Zero to productive in about 90 minutes. Seven modules, a starter kit, and a
-      CLAUDE.md template you'll actually use. Enter your ticket code to begin.
-    </p>
+  <main class="gate">
+    <!-- Header: mission brief style -->
+    <header class="gate-header">
+      <div class="gate-eyebrow">
+        <span class="gate-radio" aria-hidden="true" />
+        <span>CETI · Claude Code Academy · Bronze</span>
+      </div>
+      <h1 class="gate-title">Claude Code: Day One</h1>
+      <p class="gate-lead">
+        Zero to productive in 90 minutes. Seven modules, a starter kit, and a
+        CLAUDE.md template built for your work — not the generic tutorial.
+      </p>
+    </header>
 
-    <form class="form" @submit.prevent="submit" style="margin-top:40px;">
-      <div class="field">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          v-model="email"
-          type="email"
-          autocomplete="email"
-          placeholder="you@company.com"
-          required
+    <!-- Module manifest -->
+    <section class="manifest" aria-label="Course modules">
+      <div class="manifest-label">Mission briefing · 7 modules</div>
+      <ol class="manifest-list">
+        <li
+          v-for="(m, i) in modules"
+          :key="m.num"
+          class="manifest-item"
+          :style="`--item-delay: ${i * 60}ms`"
         >
-      </div>
-      <div class="field">
-        <label for="code">Ticket code</label>
-        <input
-          id="code"
-          v-model="code"
-          type="text"
-          autocomplete="off"
-          placeholder="BRONZE-FRIEND-01"
-          required
-        >
-        <div class="field-hint">Case-insensitive. If you don't have one, reply to the email you received.</div>
-      </div>
-      <p v-if="error" class="form-error">{{ error }}</p>
-      <button type="submit" class="btn btn-primary" :disabled="loading">
-        {{ loading ? 'Checking…' : 'Start the course →' }}
-      </button>
-    </form>
+          <span class="manifest-num">{{ m.num }}</span>
+          <span class="manifest-title">{{ m.title }}</span>
+          <span class="manifest-time">{{ m.time }}</span>
+        </li>
+      </ol>
+    </section>
 
-    <section style="margin-top:64px;">
-      <div class="eyebrow" style="color:var(--dim);">What's inside</div>
-      <div class="modules">
-        <div class="module">
-          <div class="module-num">01</div>
-          <div class="module-title">What Claude Code is (and isn't) — mental model</div>
-          <div class="module-time">12 min</div>
-        </div>
-        <div class="module">
-          <div class="module-num">02</div>
-          <div class="module-title">Install on Mac, Windows, or Linux</div>
-          <div class="module-time">15 min</div>
-        </div>
-        <div class="module">
-          <div class="module-num">03</div>
-          <div class="module-title">First session — ask it something useful</div>
-          <div class="module-time">12 min</div>
-        </div>
-        <div class="module">
-          <div class="module-num">04</div>
-          <div class="module-title">File permissions — edit a real file, revert</div>
-          <div class="module-time">14 min</div>
-        </div>
-        <div class="module">
-          <div class="module-num">05</div>
-          <div class="module-title">CLAUDE.md — fill-in-the-blanks template</div>
-          <div class="module-time">13 min</div>
-        </div>
-        <div class="module">
-          <div class="module-num">06</div>
-          <div class="module-title">One real use case (report, organize, email)</div>
-          <div class="module-time">15 min</div>
-        </div>
-        <div class="module">
-          <div class="module-num">07</div>
-          <div class="module-title">Next steps → Silver / Gold</div>
-          <div class="module-time">10 min</div>
-        </div>
+    <!-- Access form -->
+    <section class="gate-form-wrap">
+      <div class="gate-form-eyebrow">
+        <span class="gate-form-dot" aria-hidden="true" />
+        Enter your ticket to begin
       </div>
+      <form class="gate-form" @submit.prevent="submit">
+        <div class="gate-field">
+          <label for="email" class="gate-label">Email</label>
+          <input
+            id="email"
+            v-model="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@company.com"
+            class="gate-input"
+            required
+          >
+        </div>
+        <div class="gate-field">
+          <label for="code" class="gate-label">Ticket code</label>
+          <input
+            id="code"
+            v-model="code"
+            type="text"
+            autocomplete="off"
+            placeholder="BRONZE-FRIEND-01"
+            class="gate-input"
+            required
+          >
+          <div class="gate-hint">Case-insensitive. No code? Reply to the email you received.</div>
+        </div>
+        <p v-if="error" class="gate-error" role="alert">{{ error }}</p>
+        <button type="submit" class="btn btn-primary" :disabled="loading">
+          {{ loading ? 'Checking…' : 'Start the course →' }}
+        </button>
+      </form>
     </section>
   </main>
 </template>
@@ -85,6 +76,16 @@ const email = ref('')
 const code = ref('')
 const error = ref('')
 const loading = ref(false)
+
+const modules = [
+  { num: '01', title: 'What Claude Code is — and how it differs from the browser chatbot', time: '12 min' },
+  { num: '02', title: 'Install on Mac, Windows, or Linux', time: '14 min' },
+  { num: '03', title: 'Your first real session — scoped to a folder', time: '14 min' },
+  { num: '04', title: 'File permissions — read the diff, approve the change', time: '12 min' },
+  { num: '05', title: 'CLAUDE.md — write it once, stop explaining yourself', time: '13 min' },
+  { num: '06', title: 'One real task, end-to-end', time: '45 min' },
+  { num: '07', title: 'What you do next — three habits that compound', time: '10 min' },
+]
 
 async function submit() {
   error.value = ''
@@ -106,3 +107,231 @@ async function submit() {
   }
 }
 </script>
+
+<style scoped>
+.gate {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+}
+
+/* ---- Header ---- */
+.gate-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gate-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.gate-radio {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  animation: radio-pulse 2s ease-in-out infinite;
+}
+
+@keyframes radio-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.gate-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.gate-lead {
+  max-width: 560px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+/* ---- Module manifest ---- */
+.manifest {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.manifest-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+
+.manifest-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.manifest-item {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  transition: border-color 220ms var(--ease-out-spring), background 220ms var(--ease-out-spring);
+  animation: manifest-item-in 480ms var(--ease-out-spring) var(--item-delay, 0ms) both;
+}
+
+.manifest-item:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-raised);
+}
+
+@keyframes manifest-item-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.manifest-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.06em;
+}
+
+.manifest-title {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.manifest-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-dim);
+  white-space: nowrap;
+}
+
+/* ---- Form ---- */
+.gate-form-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 14px;
+  background: var(--color-surface);
+  position: relative;
+}
+
+.gate-form-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0.5;
+}
+
+.gate-form-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.gate-form-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  animation: radio-pulse 2.4s ease-in-out infinite;
+}
+
+.gate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gate-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gate-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.gate-input {
+  background: var(--color-raised);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+}
+.gate-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px var(--color-gold-dim);
+}
+.gate-input::placeholder { color: var(--color-dim); }
+
+.gate-hint {
+  font-size: 12px;
+  color: var(--color-dim);
+  line-height: 1.5;
+}
+
+.gate-error {
+  font-size: 13px;
+  color: var(--color-danger);
+  font-family: var(--font-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gate-radio,
+  .gate-form-dot {
+    animation: none;
+    opacity: 0.8;
+  }
+  .manifest-item { animation: none; }
+}
+</style>
