@@ -27,19 +27,15 @@ Cuando arrancas Claude en una carpeta que tiene un `CLAUDE.md`, Claude lo abre a
 CLAUDE.md no es un prompt. No es un slash command. Es un archivo que vive en la carpeta. Claude lo lee al inicio de la sesión. Ese es el mecanismo entero.
 </Callout>
 
-Tampoco es magia. Si tu archivo dice "siempre usa inglés británico" y tú le pides a Claude que "escribe este en americano," Claude usa americano. El archivo es el default, no una esposa. No pierdes control al escribirlo — estás fijando el piso.
+<CourseDiagram id="m05-d1" />
+
+Tampoco es magia. Si tu archivo dice "siempre usa inglés británico" y tú le pides a Claude que "escribe este en americano," Claude usa americano. El archivo es el default, no una esposa.
 
 ## Las cuatro cosas que vale la pena escribir
 
-Un CLAUDE.md útil responde cuatro preguntas. No necesitas encabezados para cada una. Lo puedes escribir como un párrafo corto. Pero estos cuatro ejes son donde está el valor.
+Un CLAUDE.md útil responde cuatro preguntas. No necesitas encabezados para cada una — un párrafo corto alcanza. Pero estos cuatro ejes son donde está el valor.
 
-**¿Quién soy?** Una oración. Tu rol, qué haces, para quién. Mientras más específico, mejor quedan los defaults de Claude.
-
-**¿Para qué es esta carpeta?** Una o dos oraciones. El propósito de esta carpeta en específico y qué tipo de trabajo vive en ella.
-
-**¿Qué convenciones me importan?** Cualquier cosa que te encuentres re-explicando. Patrones de nombres. Tono. Palabras que no usas. Formas de output que prefieres.
-
-**¿Quién lee lo que sale de aquí?** Si la mayoría de lo que se produce en esta carpeta va a una audiencia específica — clientes, tu pareja, una demografía específica de Instagram, un inspector — ponles nombre.
+<CourseDiagram id="m05-d2" />
 
 Mantenlo corto. Una pantalla es ideal. Un CLAUDE.md de dos páginas es peor que uno de seis líneas, porque tu yo futuro tiene que mantenerlo.
 
@@ -189,13 +185,15 @@ Si más adelante te encuentras re-escribiendo lo mismo *universal* ("estoy en M�
 
 ## Lo que la gente entiende mal
 
-El error es escribir CLAUDE.md como si fuera un prompt.
+El error es escribir CLAUDE.md como si fuera un prompt. Claude ya tiene descripción de puesto — lo que Claude no tiene es a *ti*.
 
-"Eres un asistente útil especializado en bienes raíces, con un tono cálido pero profesional, que siempre considera las necesidades de los compradores primerizos…"
+<CourseDiagram id="m05-d3" />
 
-Bórralo. Claude ya tiene descripción de puesto. Lo que Claude no tiene es a *ti*. Escribe la cosa que solo tú puedes escribir — la forma específica de tu trabajo, tus clientes, tus estándares, tus no-negociables.
+Escribe la cosa que solo tú puedes escribir: la forma específica de tu trabajo, tus clientes, tus estándares, tus no-negociables.
 
-Léelo en voz alta cuando termines. Si suena a un documento de briefing para un asistente nuevo que entró el lunes, está bien. Si suena a un prompt que pegarías en un chatbot, reescríbelo.
+<CourseDiagram id="m05-d4" />
+
+Léelo en voz alta cuando termines. Si suena a un briefing para un asistente nuevo que entró el lunes, está bien. Si suena a un prompt, reescríbelo.
 
 <TryThis time="10 min">
 

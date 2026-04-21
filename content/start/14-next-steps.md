@@ -19,13 +19,15 @@ This module is what to do with that.
 
 ## Three things to practice this week
 
-Not someday. This week. The gap between "installed and used once" and "part of my weekly rhythm" is about three sessions. If you use Claude three times in the next seven days, it sticks. If you don't, the install ages out and becomes another thing on a list of tools you sort of know.
+Not someday. This week. If you use Claude three times in the next seven days, it sticks. If you don't, the install ages out.
 
-**Reuse your CLAUDE.md by pointing Claude at a different folder.** Tomorrow morning, find another folder where your work lives — a different client, a different project, a different batch. Write a new CLAUDE.md there, modeled on the one from Module 05. The second one will take you ten minutes instead of thirty. The third one will take you five. That's how fast you learn what actually belongs in these files versus what doesn't.
+<CourseDiagram id="m14-d1" />
 
-**Refine the CLAUDE.md you already have as you notice what you keep re-explaining.** Every time you find yourself typing "remember that I prefer…" or "also just to be clear, my clients…" — that's a line that belongs in the file, not in the chat. Add it, save, next session is sharper. Your CLAUDE.md gets better every week by about two lines.
+**Reuse your CLAUDE.md by pointing Claude at a different folder.** The second one takes ten minutes instead of thirty. The third takes five. That's how fast you learn what belongs in these files versus what doesn't.
 
-**Catch yourself before pasting into the browser chatbot.** This is the real test. You'll hit a moment next week where you almost reflexively open ChatGPT in a tab, paste a document, and ask for a summary. Stop for one second and ask: *could I just point Claude at the folder this lives in?* Nine times out of ten the answer is yes, and nine times out of ten the answer is faster, more accurate, and doesn't require copy-paste gymnastics afterward.
+**Refine the CLAUDE.md you already have as you notice what you keep re-explaining.** Every time you find yourself typing *"remember that I prefer…"* — that's a line for the file, not the chat. Yours gets better every week by about two lines.
+
+**Catch yourself before pasting into the browser chatbot.** The real test. Next week you'll reflexively open ChatGPT, paste a document, ask for a summary. Stop for one second: *could I just point Claude at the folder this lives in?* Nine times out of ten, yes.
 
 ## What this looks like by next Friday
 
@@ -56,13 +58,15 @@ Not someday. This week. The gap between "installed and used once" and "part of m
 
 ## If you want more — Silver and Gold
 
-Silver and Gold are real. They're also earned, not sold to you. If what you just did in Module 06 felt like the beginning of something rather than the end — if you came out of that hour thinking *okay, what if this was on a schedule, what if this touched my email, what if this pulled from my calendar* — there are paths for that.
+Silver and Gold are real. They're also earned, not sold to you. If what you just did in Module 06 felt like the beginning of something — *what if this was on a schedule, what if this touched my email* — there are paths for that.
 
-**Silver — *Claude Code for Your Work*.** Four weeks, async cohort, $499, capped at twenty people. Silver is the tier if you want Claude wired into the tools your actual job lives in — Gmail, Google Calendar, Notion, Airtable, the ones where your work actually happens. You leave Silver with one of your real weekly tasks automated end-to-end, not just done faster but *actually running itself on a schedule*. If you already know the task you'd automate, Silver is the path that builds it.
+<CourseDiagram id="m14-d2" />
 
-**Gold — *Claude Code in Your Business*.** Four 1:1 hours, thirty days of direct Slack support, $2,500. Gold is for when you or your team has a specific setup — your stack, your data, your constraints — and you want me or my team to sit down and build the integration *for* you rather than teach you to build it. Optional $1,000/month retainer after, if it turns into ongoing work. Most readers of this course don't need Gold. A few do. You'll know which.
+There's no hurry. Bronze is genuinely enough for a lot of people. Come back when the task you want to automate is bigger than Bronze can hold.
 
-There's no hurry on either one. Bronze is genuinely enough for a lot of people. If you spend the next month just doing the three habits above — reusing CLAUDE.md, refining it, catching yourself before the copy-paste reflex — and that's the ceiling that works for you, that's a completely valid place to stop. Come back when the task you want to automate is bigger than Bronze can hold.
+<CourseDiagram id="m14-d4" />
+
+<CourseDiagram id="m14-d3" />
 
 ## One last thing
 

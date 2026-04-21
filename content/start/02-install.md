@@ -19,10 +19,10 @@ Two things must be true before Claude Code will run.
 
 **Second, you need a way to sign in.** There are two valid paths:
 
-- **A Claude.ai subscription** (Pro or Max). If you already pay for Claude in the browser, that same login works for Claude Code. This is the simplest path for most non-developers. There is nothing else to set up.
-- **An Anthropic API key.** This is a long string of characters you generate at console.anthropic.com. It charges your account per request. You only need this if you do not have a Claude.ai subscription, or if you need more control over billing and usage.
+- **A Claude.ai subscription** (Pro or Max). If you already pay for Claude in the browser, that same login works for Claude Code. This is the simplest path for most non-developers.
+- **An Anthropic API key.** A long string of characters you generate at console.anthropic.com. It charges your account per request.
 
-Pick whichever you already have. If you have neither, a Claude.ai Pro subscription is the path of least resistance.
+<CourseDiagram id="m02-d1" />
 
 ## The install command
 
@@ -32,103 +32,28 @@ Regardless of operating system, the command that actually installs Claude Code i
 npm install -g @anthropic-ai/claude-code
 ```
 
-`npm` is the package manager that comes with Node.js. `install -g` means "install globally, so I can run it from anywhere." `@anthropic-ai/claude-code` is the name of the package. After this command finishes, you can type `claude` in any terminal window and it will launch.
+`npm` is the package manager that comes with Node.js. `install -g` means "install globally." `@anthropic-ai/claude-code` is the package. After it finishes, typing `claude` in any terminal launches the app.
 
-The rest of this lesson is about getting to the point where that command works.
+<CourseDiagram id="m02-d3" />
 
-## Mac
+## Open a terminal and run it
 
-Open Spotlight — that is Command+Space — and type `Terminal`. Press Return. A plain window appears with a cursor blinking after some text that ends in `$` or `%`. That is the terminal. The `$` or `%` is called the **prompt**. It is waiting for you to type.
+The shape is the same on every OS: open the right terminal, check for Node, install Claude Code, launch. The shell differs, and each platform has one escape hatch worth knowing.
 
-Type this and press Return:
+<CourseDiagram id="m02-d2" />
 
-```bash
-node --version
-```
+Two notes the panel above doesn't fit:
 
-If you see something like `v20.11.1` or any number 18 or higher, Node is already installed. Skip to the install step.
-
-If you see `command not found: node`, you need to install Node. Go to nodejs.org, click the download button marked **LTS** (long-term support — the stable version), run the installer like any other Mac app, and accept the defaults. Close the Terminal window and open a fresh one — installers do not affect terminals that were already open.
-
-With Node installed, run:
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-It will print a few lines and return you to the prompt. You may see a warning about permissions — if the install fails with an `EACCES` error, run the same command again with `sudo` at the front:
-
-```bash
-sudo npm install -g @anthropic-ai/claude-code
-```
-
-It will ask for your Mac password. Type it (the cursor will not move — this is normal), press Return, and the install will proceed.
-
-When it finishes, type `claude` and press Return. You have arrived at the first-launch screen.
-
-## Windows
-
-Windows has two terminals: the old one (Command Prompt, mostly avoid) and the modern one (Windows Terminal or PowerShell). You want PowerShell, which is built in to every Windows 10 and 11 machine. Click the Start button, type `PowerShell`, and open the app that appears.
-
-Check for Node:
-
-```powershell
-node --version
-```
-
-If Node is missing, go to nodejs.org and download the **LTS** Windows installer. Run it, accept defaults, and open a fresh PowerShell window when it finishes.
-
-Install Claude Code:
-
-```powershell
-npm install -g @anthropic-ai/claude-code
-```
-
-Then run `claude`.
-
-If `claude` is not found after the install finishes cleanly, or if you hit strange errors that mention permissions or paths, there is a more reliable path on Windows: **WSL**, the Windows Subsystem for Linux. WSL gives you a real Linux terminal inside Windows, and Claude Code tends to run more smoothly there. To install it, open PowerShell **as administrator** (right-click, "Run as administrator") and run:
-
-```powershell
-wsl --install
-```
-
-Restart your computer when it tells you to. After restarting, a new app called **Ubuntu** will be in your Start menu. Open it. You are now in a Linux terminal. Follow the Linux section below from here.
-
-WSL is not required. Many people run Claude Code on plain PowerShell without trouble. But if the plain-PowerShell path is giving you a week's worth of weird errors, WSL is the escape hatch.
-
-## Linux
-
-You probably already have a terminal open. Check Node:
-
-```bash
-node --version
-```
-
-If missing, install Node from your distribution's package manager (`apt`, `dnf`, `pacman` — whichever you use), or from nodejs.org if you want the latest LTS build.
-
-Then:
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-If you see `EACCES` errors, prefix with `sudo`. Run `claude` to launch.
+- On **Mac or Linux**, if the install fails with an `EACCES` error, re-run the same command with `sudo` in front. Mac will ask for your password — the cursor won't move as you type it. That's normal.
+- On **Windows**, `wsl --install` has to be run from a PowerShell opened **as administrator**. After you restart, you'll have a new app called **Ubuntu** in your Start menu — that's a real Linux terminal inside Windows.
 
 ## The first launch
 
-The first time you type `claude` and press Return, you will see a short welcome screen followed by an authentication prompt. It offers you two paths — the same two from the Prerequisites section above.
+The first time you type `claude` and press Return, you see a short welcome screen followed by an authentication prompt. Sign in with the path you picked earlier. If it's the API key path, note this: the key starts with `sk-ant-`, and it's a password. Don't email it to yourself, don't paste it into a chat window, don't commit it anywhere public.
 
-**Path 1: Claude.ai subscription.** Choose this option. Claude Code opens a browser tab where you sign in to your Claude account. Once you approve access, the tab confirms and you return to the terminal. You are logged in. This is the recommended path for most readers.
+After authentication, the terminal settles into a single `>` with a blinking cursor. That's Claude Code, waiting for a question.
 
-**Path 2: API key.** Go to console.anthropic.com, sign in (or create an account), and find the **API Keys** page in the settings. Click **Create Key**, copy the long string it shows you — it starts with `sk-ant-` — and paste it back into the terminal when Claude Code asks. That key is a password. Do not email it to yourself, do not paste it into a chat window, do not commit it to a public folder. Keep it to yourself.
-
-After authentication, the terminal settles into something that looks roughly like this:
-
-```
-> 
-```
-
-That single `>` with a blinking cursor is the Claude Code prompt. It's waiting for a question.
+<CourseDiagram id="m02-d4" />
 
 <Recap>
 

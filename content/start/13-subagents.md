@@ -13,9 +13,11 @@ Claude in your terminal is one worker with one context window. Most of the time,
 
 ## What a subagent is
 
-A subagent is a fresh Claude instance that your main Claude session spawns to handle a scoped piece of work. The main session describes the job, hands it off, and the subagent runs in its own context. When it finishes, the subagent reports back — usually with a summary, a result, or a list of findings. The main session keeps its own context clean and decides what to do with the report.
+A subagent is a fresh Claude instance your main session spawns to handle a scoped piece of work. The main session describes the job, hands it off, the subagent runs in its own context, and when it finishes it reports back — usually with a summary. The main session keeps its context clean and decides what to do with the report.
 
-Claude delegates through a built-in mechanism — you don't have to configure it. Your main Claude decides a piece of work is worth delegating, spawns a subagent with a prompt, and either waits for the result or continues while the subagent runs.
+<CourseDiagram id="m13-d1" />
+
+You don't configure this. Claude decides a piece of work is worth delegating, spawns, and either waits or continues while the subagent runs.
 
 <Callout variant="core-idea">
 A subagent is a worker Claude delegates to — you describe the job once, a fresh context finishes it.
@@ -23,19 +25,17 @@ A subagent is a worker Claude delegates to — you describe the job once, a fres
 
 ## When to use one
 
-Three patterns pay off reliably.
+<CourseDiagram id="m13-d2" />
 
-**Independent research.** You need summaries of five different files, or answers from five different sources, and none of them depend on each other. One subagent per file, all running in parallel, each reporting back a short summary. The main session synthesizes.
+Three patterns pay off reliably: independent research across files that don't depend on each other, wide searches where you don't know where the thing lives, and long bounded tasks that produce a compact answer. The shape is the same each time — high independence, heavy reading, small return.
 
-**Wide searches.** You're looking for something in a large codebase or document pile and you don't know where it lives. Spawn a subagent to do the search — it burns through the reading in its own context without polluting yours with every file it looked at.
-
-**Long, bounded tasks.** A task that requires a lot of reading or tool use but produces a compact answer. Running it as a subagent keeps the main session's context focused on the decisions, not the details.
+<CourseDiagram id="m13-d3" />
 
 ## When not to use one
 
-Subagents cost more than a direct call. They spin up a whole new context, they can't see what your main session has seen, and coordinating them adds overhead. If the task fits in one answer from the main session, use the main session.
+<CourseDiagram id="m13-d4" />
 
-Don't spawn a subagent for a single-file edit. Don't spawn one to answer a question Claude can answer from the folder it's already in. Don't spawn three subagents when one would do.
+Subagents cost more than a direct call — fresh context, blind to what your main session has seen, coordination overhead. If the task fits in one answer from the main session, use the main session.
 
 The rule of thumb: if you're about to paste a huge block of text into the prompt *"so Claude has the context,"* or if you're about to ask Claude to do five unrelated things in one message, that's when a subagent (or several in parallel) is the move.
 

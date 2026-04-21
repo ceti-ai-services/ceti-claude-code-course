@@ -15,6 +15,8 @@ You did the work twice. The AI answered once. The second round — the part wher
 
 That's the problem. Not the AI. The shape of how you're using it.
 
+<CourseDiagram id="m01-d1" />
+
 <!-- persona:creator -->
 <Callout variant="core-idea">
 You know the move: open the chatbot, write "rewrite this caption to be more engaging." Get a reply. Paste it in. Fix three things manually. Post it anyway, not quite your voice.
@@ -43,9 +45,9 @@ You know the move: paste a lead's inquiry into the chatbot. Ask for a warm reply
 
 Claude Code is the same Claude you've been using in the browser. Different shape. It doesn't live on a website. It lives on your computer, inside the folder where your actual work sits.
 
-That's the whole idea. Let me say what that means, because most people don't realize the size of it.
+That's the whole idea. Most people don't realize the size of it until they see it laid out.
 
-Right now, your work is in folders. A client's brief is a Google Doc in `~/Documents/Clients/`. Your calendar is in an app. Your receipts are a screenshot pile in `~/Downloads`. Your email drafts are in Gmail. Your caption backlog is a Notes file.
+<CourseDiagram id="m01-d3" />
 
 Every time you want to *do* something with that work — summarize it, reorganize it, draft from it, clean it up — you have to either (a) copy-paste into a chatbot or (b) do it yourself. Both are slow.
 
@@ -69,9 +71,7 @@ There's one framing that makes all of this click. I've taught this to thousands 
 
 Claude Code is not a vending machine. It's a colleague.
 
-A vending machine takes your input, gives you an output. Transaction done. You walk away. That's ChatGPT in a browser. You prompt, it replies, you do the rest.
-
-A colleague is different. A colleague sits in the same room with you. Sees the same files. Asks you to clarify when you're vague. Shows you what they're about to change before they change it. Does the boring parts so you can do the parts that need you.
+<CourseDiagram id="m01-d2" />
 
 <Callout variant="tip">
 A good colleague doesn't need you to transcribe the situation for them. They can see it. That's what moving from "chatbot" to "Claude Code" actually gets you.
@@ -116,11 +116,13 @@ You've been using AI in a shape that makes it do the easy half of your work and 
 
 </Recap>
 
+<CourseDiagram id="m01-d4" />
+
 <TryThis time="5 min">
 
-Before you start Module 02, write down one task you do every week that involves opening more than five files or messages. A weekly report. A batch of DMs. A pile of receipts. A content calendar. A client update.
+Before you start Module 02, write down one task you do every week that involves opening more than five files or messages. One sentence. Save it somewhere you'll find it.
 
-One sentence. Save it somewhere you'll find it. You're going to use this task as your real example in Module 06 — and if it lands right, by the end of next week, you won't be doing it the old way anymore.
+You're going to use this task as your real example in Module 06 — and if it lands right, by the end of next week, you won't be doing it the old way anymore.
 
 The more painful the task, the better the fit.
 

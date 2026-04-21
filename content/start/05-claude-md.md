@@ -27,19 +27,15 @@ When you start Claude in a folder that contains a `CLAUDE.md`, Claude opens it b
 CLAUDE.md is not a prompt. It's not a slash command. It's a file that sits in the folder. Claude reads it at session start. That's the entire mechanism.
 </Callout>
 
-It's also not magic. If your file says "always use British English" and you ask Claude to "write this one in American," Claude uses American. The file is the default, not a handcuff. You're not losing control by writing it — you're setting the floor.
+<CourseDiagram id="m05-d1" />
+
+It's also not magic. If your file says "always use British English" and you ask Claude to "write this one in American," Claude uses American. The file is the default, not a handcuff.
 
 ## The four things worth writing down
 
-A useful CLAUDE.md answers four questions. You don't need headers for each. You can write it as a short paragraph. But these four axes are where the value is.
+A useful CLAUDE.md answers four questions. You don't need headers for each — a short paragraph is fine. But these four axes are where the value is.
 
-**Who am I?** One sentence. Your role, what you do, who you do it for. The more specific, the better Claude's defaults get.
-
-**What is this folder for?** One or two sentences. The purpose of this specific folder and what kind of work lives in it.
-
-**What conventions do I care about?** Anything you keep re-explaining. Naming patterns. Tone. Words you don't use. Output shapes you prefer.
-
-**Who reads what comes out of here?** If most things produced in this folder go to a specific audience — clients, your spouse, a specific Instagram demographic, an inspector — name them.
+<CourseDiagram id="m05-d2" />
 
 Keep it short. One screen is ideal. A two-page CLAUDE.md is worse than a six-line one, because your future self has to maintain it.
 
@@ -177,13 +173,15 @@ If you later find yourself re-typing the same *universal* thing ("I'm in Austin,
 
 ## The thing people get wrong
 
-The mistake is writing CLAUDE.md like a prompt.
+The mistake is writing CLAUDE.md like a prompt. Claude already has a job description — what Claude doesn't have is *you*.
 
-"You are a helpful assistant specializing in real estate, with a warm but professional tone, who always considers the needs of first-time buyers…"
+<CourseDiagram id="m05-d3" />
 
-Delete that. Claude already has a job description. What Claude doesn't have is *you*. Write the thing only you can write — the specific shape of your work, your clients, your standards, your non-negotiables.
+Write the thing only you can write: the specific shape of your work, your clients, your standards, your non-negotiables.
 
-Read it out loud when you're done. If it sounds like a briefing document for a new assistant who just got hired on Monday, it's right. If it sounds like a prompt you'd paste into a chatbot, rewrite it.
+<CourseDiagram id="m05-d4" />
+
+Read it out loud when you're done. If it sounds like a briefing document for a new assistant who just got hired on Monday, it's right. If it sounds like a prompt, rewrite it.
 
 <TryThis time="10 min">
 

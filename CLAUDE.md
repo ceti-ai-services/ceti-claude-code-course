@@ -114,6 +114,33 @@ README.md
 .env.example
 ```
 
+## 5-diagrams-per-module rule (v4.1, 2026-04-21)
+
+> **Every module has at least 5 diagrams. Visuals are the majority. Prose is connective tissue.**
+
+Concretely:
+- **1 hero** diagram at `app/components/course/lesson/M<NN>Hero.vue` (composes `MissionBrief` + one pattern)
+- **4 mid-lesson** diagrams at `app/components/course/diagrams/m<NN>-d<1..4>.vue` (each thin wrapper around one pattern)
+- **No two diagrams in the same module use the same pattern** — force variety.
+
+### How diagrams get into a module
+
+1. Create `app/components/course/diagrams/<id>.vue` — thin wrapper, imports one pattern, binds EN+ES copy via `useCustomizer()`.
+2. Register in `app/components/course/diagrams/index.ts`.
+3. Embed `<CourseDiagram id="<id>" />` in the module's `.md` at the right paragraph break (replacing or augmenting prose).
+
+The `[slug].vue` tokenizer already knows `<CourseDiagram>` as a self-closing tag. No page-renderer changes when adding diagrams.
+
+### The prose shrinks to scaffolding
+
+When a diagram carries an idea, **delete the prose that was carrying it.** Keep: one-sentence setup before the diagram, one-sentence aftertaste naming what just happened. Cut: every "as you can see above" paragraph.
+
+Target shape for a 12-minute lesson:
+- 3–5 short prose paragraphs (setup, connective tissue, closing)
+- 1 hero diagram at the top
+- 4 mid-lesson diagrams distributed through the body
+- 1 `<TryThis>` block · 1 `<Recap>` block
+
 ## Design system (v4 — retro-boardwalk dual-mode, 2026-04-21)
 
 **Single source of truth:** `.claude/skills/retro-boardwalk-skill/` (BRAND_BOOK.md + PATTERNS.md).

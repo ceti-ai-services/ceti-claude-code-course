@@ -13,13 +13,9 @@ Hasta aquí solo le has pedido a Claude que lea. El siguiente paso — y el que 
 
 ## El ciclo de aprobación
 
-Cada acción que cambia un archivo en tu computadora pasa por el mismo patrón:
+Cada acción que cambia un archivo en tu computadora pasa por el mismo patrón.
 
-1. Le pides a Claude que haga algo.
-2. Claude decide que hace falta una edición y la propone.
-3. Claude te muestra el cambio propuesto y te pide aprobación.
-4. Apruebas o rechazas.
-5. Solo después de aprobar el archivo cambia de verdad.
+<CourseDiagram id="m04-d1" />
 
 Por defecto, no hay manera de saltarse el paso 3. Claude no puede reescribir un documento en silencio. No puede borrar un archivo sin decirte. No va a correr un comando de shell sin sacarlo a la superficie primero. Cuando quiere hacer algo, aparece un prompt en la terminal — usualmente con el nombre del archivo, un resumen del cambio, y opciones como "Sí," "No," o "Sí, y haz cosas similares automáticamente por el resto de esta tarea."
 
@@ -37,13 +33,9 @@ Para mover archivos, crear archivos, o comandos de shell, el prompt te muestra e
 
 ## Modos de permiso
 
-Hay tres modos con los que te vas a topar, que controlan qué tan seguido Claude pregunta:
+Hay tres modos con los que te vas a topar, que controlan qué tan seguido Claude pregunta.
 
-**Modo default** (a veces llamado *ask*): el comportamiento descrito arriba. Claude propone, tú apruebas, cada acción. Aquí es donde debes vivir hasta que la herramienta se sienta natural — probablemente tus primeras semanas.
-
-**Modo acceptEdits**: Claude deja de pedir aprobaciones para ediciones de archivo dentro de la sesión actual. Los comandos de shell siguen pidiendo aprobación. Es la marcha intermedia. Sirve cuando estás en una tarea larga y repetitiva de edición y confías en el patrón de Claude — reformatear veinte notas de reunión, por ejemplo, donde la primera edición ya te enseñó cómo queda el resultado. No arranques una sesión nueva en este modo.
-
-**Modo plan**: Claude no cambia absolutamente nada. Planea — describe en español claro qué haría, lista los archivos que tocaría, y se detiene. Tú lees el plan, decides si te gusta, y te cambias a un modo normal para ejecutar. Es el modo para carpetas sensibles o territorio desconocido. "Muéstrame qué harías, pero no lo hagas todavía."
+<CourseDiagram id="m04-d2" />
 
 Durante la primera semana, quédate en modo default. Puedes cambiar de modo desde dentro de Claude escribiendo un slash command (el prompt `>` los acepta), pero el modo que quieres al principio es el que pregunta cada vez. La fricción es el feature.
 
@@ -69,20 +61,13 @@ Esto no es una estrategia sofisticada de control de versiones. Es el equivalente
 
 ## Cuándo aprobar, cuándo rechazar
 
-Aprueba cuando:
+<CourseDiagram id="m04-d3" />
 
-- El diff o el comando calza con lo que pediste.
-- El archivo que se está cambiando es el que querías cambiar.
-- Puedes explicar, en una oración, qué está a punto de pasar.
-
-Rechaza cuando:
-
-- El cambio es más grande de lo que esperabas. Que Claude proponga editar seis archivos cuando le preguntaste sobre uno es razón para detenerte y preguntarle qué cree que está haciendo.
-- Algo está a punto de borrarse y no estás 100% seguro de quererlo.
-- Un comando de shell hace referencia a una ruta fuera de la carpeta donde estás trabajando.
-- No hiciste un backup del archivo, y el archivo importa.
+Aprueba cuando el diff o el comando calza con lo que pediste, el archivo que se está cambiando es el que querías cambiar, y puedes explicar en una oración qué está a punto de pasar. Rechaza cuando el cambio es más grande de lo esperado, algo está a punto de borrarse y no estás seguro, un comando de shell hace referencia a una ruta fuera de la carpeta, o el archivo importa y no hiciste backup.
 
 Rechazar no es fracaso. Es parte de la conversación. "No hagas eso — achiquemos el alcance. Solo cambia el primer párrafo" es un turno siguiente completamente válido, y Claude se va a ajustar.
+
+<CourseDiagram id="m04-d4" />
 
 <Recap>
 

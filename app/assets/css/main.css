@@ -99,24 +99,24 @@
 }
 .palette-boardwalk.dark {
   --background: 268 16% 11%;
-  --foreground: 40 55% 92%;
+  --foreground: 40 62% 96%;
   --card: 260 22% 17%;
-  --card-foreground: 40 55% 92%;
+  --card-foreground: 40 62% 96%;
   --muted: 268 15% 22%;
-  --muted-foreground: 268 18% 70%;
-  --border: 262 72% 86% / .22;
+  --muted-foreground: 268 28% 82%;
+  --border: 262 72% 86% / .30;
   --primary: 263 28% 22%;
-  --primary-foreground: 262 80% 85%;
+  --primary-foreground: 262 90% 92%;
   --secondary: 158 18% 15%;
-  --secondary-foreground: 152 58% 69%;
+  --secondary-foreground: 152 72% 82%;
   --accent: 12 30% 18%;
-  --accent-foreground: 10 74% 62%;
+  --accent-foreground: 10 88% 80%;
   --support: 212 30% 18%;
-  --support-foreground: 212 52% 65%;
-  --primary-edge: 262 80% 85%;
-  --secondary-edge: 152 58% 69%;
-  --accent-edge: 10 74% 62%;
-  --support-edge: 212 52% 65%;
+  --support-foreground: 212 70% 80%;
+  --primary-edge: 262 90% 92%;
+  --secondary-edge: 152 72% 82%;
+  --accent-edge: 10 88% 80%;
+  --support-edge: 212 70% 80%;
   --input: 0 0% 100% / .08;
 }
 
@@ -144,24 +144,24 @@
 }
 .palette-coastal.dark {
   --background: 192 14% 10%;
-  --foreground: 170 22% 92%;
+  --foreground: 170 30% 96%;
   --card: 204 28% 15%;
-  --card-foreground: 170 22% 92%;
+  --card-foreground: 170 30% 96%;
   --muted: 192 14% 20%;
-  --muted-foreground: 170 12% 64%;
-  --border: 165 60% 68% / .22;
+  --muted-foreground: 170 22% 78%;
+  --border: 165 60% 68% / .30;
   --primary: 168 28% 13%;
-  --primary-foreground: 165 60% 68%;
+  --primary-foreground: 165 72% 82%;
   --secondary: 8 25% 13%;
-  --secondary-foreground: 16 75% 76%;
+  --secondary-foreground: 16 85% 86%;
   --accent: 202 42% 15%;
-  --accent-foreground: 205 62% 60%;
+  --accent-foreground: 205 78% 78%;
   --support: 0 14% 15%;
-  --support-foreground: 0 50% 81%;
-  --primary-edge: 165 60% 68%;
-  --secondary-edge: 16 75% 76%;
-  --accent-edge: 205 62% 60%;
-  --support-edge: 0 50% 81%;
+  --support-foreground: 0 62% 88%;
+  --primary-edge: 165 72% 82%;
+  --secondary-edge: 16 85% 86%;
+  --accent-edge: 205 78% 78%;
+  --support-edge: 0 62% 88%;
 }
 
 /* ── 🌿 Greenhouse ── botanical, systems ─────────────────────────── */
@@ -188,24 +188,24 @@
 }
 .palette-greenhouse.dark {
   --background: 72 14% 7%;
-  --foreground: 40 40% 90%;
+  --foreground: 40 50% 94%;
   --card: 78 18% 12%;
-  --card-foreground: 40 40% 90%;
+  --card-foreground: 40 50% 94%;
   --muted: 72 12% 20%;
-  --muted-foreground: 42 14% 62%;
-  --border: 90 62% 66% / .22;
+  --muted-foreground: 42 28% 78%;
+  --border: 90 62% 66% / .30;
   --primary: 96 32% 12%;
-  --primary-foreground: 90 62% 66%;
+  --primary-foreground: 90 72% 80%;
   --secondary: 22 32% 12%;
-  --secondary-foreground: 22 78% 70%;
+  --secondary-foreground: 22 85% 82%;
   --accent: 144 32% 12%;
-  --accent-foreground: 145 42% 56%;
+  --accent-foreground: 145 58% 72%;
   --support: 36 20% 13%;
-  --support-foreground: 40 22% 72%;
-  --primary-edge: 90 62% 66%;
-  --secondary-edge: 22 78% 70%;
-  --accent-edge: 145 42% 56%;
-  --support-edge: 40 22% 72%;
+  --support-foreground: 40 36% 84%;
+  --primary-edge: 90 72% 80%;
+  --secondary-edge: 22 85% 82%;
+  --accent-edge: 145 58% 72%;
+  --support-edge: 40 36% 84%;
 }
 
 /* ── ⚡ Neo Sage ── muted-neon, high energy ──────────────────────── */
@@ -232,24 +232,24 @@
 }
 .palette-neosage.dark {
   --background: 260 16% 8%;
-  --foreground: 48 24% 95%;
+  --foreground: 48 30% 96%;
   --card: 260 18% 13%;
-  --card-foreground: 48 24% 95%;
+  --card-foreground: 48 30% 96%;
   --muted: 260 14% 22%;
-  --muted-foreground: 260 12% 68%;
-  --border: 262 86% 82% / .24;
+  --muted-foreground: 260 22% 82%;
+  --border: 262 86% 82% / .30;
   --primary: 258 38% 15%;
-  --primary-foreground: 262 86% 82%;
+  --primary-foreground: 262 92% 90%;
   --secondary: 72 65% 8%;
-  --secondary-foreground: 68 78% 62%;
+  --secondary-foreground: 68 88% 76%;
   --accent: 36 60% 12%;
-  --accent-foreground: 36 80% 57%;
+  --accent-foreground: 36 88% 72%;
   --support: 280 8% 13%;
-  --support-foreground: 260 12% 73%;
-  --primary-edge: 262 86% 82%;
-  --secondary-edge: 68 78% 62%;
-  --accent-edge: 36 80% 57%;
-  --support-edge: 260 12% 73%;
+  --support-foreground: 260 22% 84%;
+  --primary-edge: 262 92% 90%;
+  --secondary-edge: 68 88% 76%;
+  --accent-edge: 36 88% 72%;
+  --support-edge: 260 22% 84%;
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -329,24 +329,24 @@
    site from flashing unstyled if the PaletteController hydration is slow. */
 body:not([class*="palette-"]) {
   --background: 268 16% 11%;
-  --foreground: 40 55% 92%;
+  --foreground: 40 62% 96%;
   --card: 260 22% 17%;
-  --card-foreground: 40 55% 92%;
+  --card-foreground: 40 62% 96%;
   --muted: 268 15% 22%;
-  --muted-foreground: 268 18% 70%;
-  --border: 262 72% 86% / .22;
+  --muted-foreground: 268 28% 82%;
+  --border: 262 72% 86% / .30;
   --primary: 263 28% 22%;
-  --primary-foreground: 262 80% 85%;
+  --primary-foreground: 262 90% 92%;
   --secondary: 158 18% 15%;
-  --secondary-foreground: 152 58% 69%;
+  --secondary-foreground: 152 72% 82%;
   --accent: 12 30% 18%;
-  --accent-foreground: 10 74% 62%;
+  --accent-foreground: 10 88% 80%;
   --support: 212 30% 18%;
-  --support-foreground: 212 52% 65%;
-  --primary-edge: 262 80% 85%;
-  --secondary-edge: 152 58% 69%;
-  --accent-edge: 10 74% 62%;
-  --support-edge: 212 52% 65%;
+  --support-foreground: 212 70% 80%;
+  --primary-edge: 262 90% 92%;
+  --secondary-edge: 152 72% 82%;
+  --accent-edge: 10 88% 80%;
+  --support-edge: 212 70% 80%;
 }
 
 /* ─── Reduced-motion honor ─── */

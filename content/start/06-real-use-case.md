@@ -29,7 +29,7 @@ Every useful session follows three moves. Memorize the order — it's the whole 
 
 **Execute with approvals third.** Now Claude starts producing — writing files, moving documents, drafting the email — and you approve each step. If something goes wrong, you caught it at step two, not step three.
 
-Read → plan → execute. Three moves. Every task.
+<CourseDiagram id="m06-d1" />
 
 ## Your task, your version
 
@@ -167,17 +167,15 @@ The temptation, as Claude starts producing, is to stop reading the approval prom
 Every approval is a checkpoint. Especially the first time you run a task end-to-end, read what's about to happen before you say yes. The two seconds per approval you'd "save" by hitting accept-all is the same two seconds that would have caught the file being written to the wrong folder, the tone drifting into something you'd never send, or the summary confidently citing a document that isn't actually there. Read the diff. Read the command. Then approve.
 </Callout>
 
+<CourseDiagram id="m06-d2" />
+
 As the task gets familiar — the second, third, fourth time you do your weekly caption batch or follow-up draft — you'll scan faster. That's earned. Not default.
+
+<CourseDiagram id="m06-d3" />
 
 ## A few habits that multiply
 
-**Ask for structure.** "As a table." "As a bulleted list." "Two short paragraphs, no more." The default prose shape is rarely the most useful one. Specify.
-
-**Correct fast and direct.** "That's not what I asked for." "You missed the point of the second one." "Shorter." Claude responds well to plain correction. It doesn't need to be polite. It needs to be specific.
-
-**Ask what it's unsure about.** Before you ship, ask: "What did you skim versus read fully? Where did you have to guess?" Those edges of confidence are exactly where you want your human judgment to land.
-
-**Close the loop.** At the end: "Summarize what we did and what's left." You'll catch the one file it forgot, or the decision you meant to make and didn't.
+<CourseDiagram id="m06-d4" />
 
 <TryThis time="45 min">
 

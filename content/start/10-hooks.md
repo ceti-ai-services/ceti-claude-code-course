@@ -15,11 +15,9 @@ Most of Claude Code is cooperative — Claude proposes, you approve. Hooks are t
 
 A hook is a small shell command (or script) that runs at a specific lifecycle event during a Claude session. You register it in your `settings.json` — either `.claude/settings.json` in the project, or the global `~/.claude/settings.json`. The hook runs automatically, every time its event fires, without you invoking it.
 
-Three lifecycle events cover almost all practical use cases:
+<CourseDiagram id="m10-d1" />
 
-- **`PreToolUse`** — fires before Claude uses a tool. Your hook sees what Claude is about to do and can block it.
-- **`PostToolUse`** — fires after a tool ran successfully. Useful for logging, formatting, notifications.
-- **`Stop`** — fires when the session ends or Claude stops generating. Useful for summaries, cleanup, alerts.
+Three lifecycle events cover almost all practical use cases: `PreToolUse` fires before Claude uses a tool and can block it, `PostToolUse` fires after a successful call, and `Stop` fires when the session ends.
 
 <Callout variant="core-idea">
 A hook is a small script that runs at a moment you choose — before a tool call, after a session, on pre-commit.
@@ -47,11 +45,13 @@ In your `settings.json`, under a `hooks` object. Each event is a key; each value
 }
 ```
 
-The matcher says "only run this hook when Claude is about to use the Bash tool." The command inspects what Claude plans to run. If the command contains `rm -rf`, the hook exits non-zero with a message, and the harness blocks the call. Claude sees the block and adjusts.
+<CourseDiagram id="m10-d2" />
 
 <Callout variant="warning">
 A bad `PreToolUse` hook can block every tool call and make Claude useless. Test hooks in a scratch project before putting them in a real workspace. If you lock yourself out, edit `settings.json` directly to remove the hook.
 </Callout>
+
+<CourseDiagram id="m10-d4" />
 
 ## A safer example — `Stop` for a summary
 
@@ -74,11 +74,13 @@ Blocking hooks are powerful and easy to get wrong. A friendlier first hook is a 
 }
 ```
 
-No blocking. No decisions. Just a line that confirms the session closed and stamps the time. You'll know when it fires because the line shows up in your terminal.
+No blocking. No decisions. Just a line that confirms the session closed and stamps the time.
 
 ## When to reach for hooks
 
-Hooks are for things you want to happen *every time*, regardless of which prompt kicked them off. Logging. Safety rails. Auto-formatting after a write. A pre-commit check before Claude commits. If the rule is conditional on what you said in the prompt, a slash command or skill is the better tool. If the rule is "this should always happen in this workspace," it's a hook.
+Hooks are for things you want to happen *every time*, regardless of which prompt kicked them off. Logging. Safety rails. Auto-formatting after a write. A pre-commit check before Claude commits.
+
+<CourseDiagram id="m10-d3" />
 
 <TryThis time="8 min">
 

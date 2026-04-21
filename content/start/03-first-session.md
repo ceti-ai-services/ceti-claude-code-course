@@ -25,16 +25,13 @@ This is not a limitation. It's the feature.
 Wherever you launch Claude, that's the universe it operates in. Move the universe by moving your starting point.
 </Callout>
 
-You want to work with your client drafts? Open a terminal in your `Clients` folder. You want to clean up your DMs export? Open one in the folder where the export lives. You want to sort through receipts? Go to `Downloads` — or better, a subfolder.
+<CourseDiagram id="m03-d1" />
 
-Rule of thumb: the smaller and more specific the folder, the better your first session will be. A folder with 10 files related to one task beats a folder with 500 files from three years of your life.
+Rule of thumb: the smaller and more specific the folder, the better your first session will be.
 
 ## The move
 
-1. Open your file manager (Finder on Mac, Explorer on Windows, Files on Linux).
-2. Find one folder that holds **one batch of related work** — not your whole Documents tree, not your whole Desktop.
-3. Right-click that folder. On Mac: "New Terminal at Folder." On Windows/Linux: "Open in Terminal" or equivalent. If that option isn't there, open Terminal yourself and type `cd ` followed by dragging the folder onto the terminal window — that pastes the path.
-4. Type `claude` and press enter.
+<CourseDiagram id="m03-d2" />
 
 You're now inside Claude Code, scoped to that folder. Every file in there is readable. Nothing outside is.
 
@@ -91,15 +88,17 @@ Each answer stays in context. Claude remembers what you asked two questions ago.
 
 This is what makes Claude Code different from the chatbot version: the session holds. A vending machine resets between transactions. A colleague remembers the last five minutes.
 
+<CourseDiagram id="m03-d3" />
+
 <Callout variant="tip">
 If you feel like you should "start fresh" — don't. Keep the session. Ask the next thing. The more Claude learns about your folder, the sharper each answer gets.
 </Callout>
 
 ## When to end the session
 
-Type `/exit` or close the terminal when you're done. Everything Claude did to your files is already saved — it didn't hold anything in its head. Next time you run `claude` in that folder, you'll start a new session, and Claude will re-read whatever you point it at.
+Type `/exit` or close the terminal when you're done. Next time you run `claude` in that folder, Claude will re-read whatever you point it at. Sessions are cheap. Folders are the thing that matters.
 
-Sessions are cheap. Folders are the thing that matters.
+<CourseDiagram id="m03-d4" />
 
 <Recap>
 

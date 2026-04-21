@@ -13,9 +13,11 @@ So far, Claude can see files in your folder. That's a lot. It's not everything.
 
 Your Monday lives in Gmail, your week lives in Calendar, your clients live in a Notion database, and your numbers live in a Google Sheet. Claude Code reads the folder. It doesn't read those. Not until you connect them.
 
-**MCP — Model Context Protocol** — is the wire. One protocol, many tools. When you connect a tool through MCP, Claude gets three things from it: a list of *capabilities* (**Tools** it can call — actions, like "send this email"), a view of *current state* (**Resources** it can read — data, like "yesterday's threads"), and a set of *reusable templates* (**Prompts** the server exposes — ready-made recipes the tool's author wrote for common jobs). That's it. Three primitives — Tools, Resources, Prompts — one loop.
+**MCP — Model Context Protocol** — is the wire. One protocol, many tools. Every MCP server exposes three primitives — Tools, Resources, Prompts — and Claude runs the same loop across all of them.
 
-The loop is what matters. When Claude solves anything with an outside tool, it runs through four phases: **Perceive → Reason → Act → Observe.** PRAO. The loop restarts on every new turn. Understanding PRAO is how you understand *why* an agent chooses the wrong tool, *why* a prompt misfires, and *why* the quality of a tool description decides the ceiling on how useful that tool is.
+<CourseDiagram id="m11-d1" />
+
+The loop is what matters. When Claude solves anything with an outside tool, it runs through four phases: **Perceive → Reason → Act → Observe.** PRAO. The loop restarts on every new turn. Understanding PRAO is how you understand *why* an agent chooses the wrong tool and *why* the quality of a tool description decides the ceiling on how useful that tool is.
 
 <Callout variant="core-idea">
 MCP is the protocol. PRAO is the loop Claude runs inside that protocol. Every MCP call — Gmail, Calendar, Notion, the Sheet — travels the same loop.
@@ -23,7 +25,7 @@ MCP is the protocol. PRAO is the loop Claude runs inside that protocol. Every MC
 
 ## The loop, one phase at a time
 
-<PraoLoop />
+<CourseDiagram id="m11-d2" />
 
 ## What to install first
 
@@ -31,9 +33,13 @@ If this is your first connector, install one where the payoff is immediate and t
 
 **Gmail (read-only)** — Claude can read inbox and threads but can't send without your explicit approval. Good first connector because the value (inbox triage, reply drafting) shows up in the first session.
 
+<CourseDiagram id="m11-d3" />
+
 **Google Calendar (read-only)** — Claude sees your week, proposes time slots, drafts invite copy. Pair with Gmail and you've covered ~70% of your recurring text work.
 
 **Notion or Google Drive (read)** — if your source material lives there, your CLAUDE.md lands lighter because Claude can go find context instead of you pasting it.
+
+<CourseDiagram id="m11-d4" />
 
 <Callout variant="tip">
 Start read-only. Upgrade to write-enabled once the loop feels boring. The backup-first habit from Module 04 applies doubled when a connector can mutate state in an external tool.

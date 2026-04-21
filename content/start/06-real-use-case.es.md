@@ -29,7 +29,7 @@ Cada sesión útil sigue tres movimientos. Memoriza el orden — ese es el méto
 
 **Ejecutar con aprobaciones, tercero.** Ahora Claude empieza a producir — escribiendo archivos, moviendo documentos, redactando el correo — y tú apruebas cada paso. Si algo sale mal, lo atrapaste en el paso dos, no en el tres.
 
-Leer → planear → ejecutar. Tres movimientos. Cada tarea.
+<CourseDiagram id="m06-d1" />
 
 ## Tu tarea, tu versión
 
@@ -171,17 +171,15 @@ La tentación, conforme Claude empieza a producir, es dejar de leer los prompts 
 Cada aprobación es un checkpoint. Sobre todo la primera vez que corres una tarea de principio a fin, lee qué está a punto de pasar antes de decir que sí. Los dos segundos por aprobación que te "ahorrarías" presionando aceptar-todo son los mismos dos segundos que hubieran atrapado el archivo escribiéndose en la carpeta equivocada, el tono derivando a algo que nunca mandarías, o el resumen citando con toda confianza un documento que ni siquiera está. Lee el diff. Lee el comando. Luego aprueba.
 </Callout>
 
+<CourseDiagram id="m06-d2" />
+
 Conforme la tarea se vuelve familiar — la segunda, tercera, cuarta vez que haces tu lote semanal de captions o tu borrador de seguimiento — vas a revisar más rápido. Eso se gana. No es el default.
+
+<CourseDiagram id="m06-d3" />
 
 ## Unos cuantos hábitos que multiplican
 
-**Pide estructura.** "Como tabla." "Como lista de viñetas." "Dos párrafos cortos, no más." La forma prosa por default rara vez es la más útil. Especifica.
-
-**Corrige rápido y directo.** "Eso no es lo que pedí." "Te perdiste el punto del segundo." "Más corto." Claude responde bien a la corrección directa. No necesita ser educada. Necesita ser específica.
-
-**Pregunta qué no tiene claro.** Antes de entregar, pregunta: "¿Qué revisaste por encima versus qué leíste completo? ¿Dónde tuviste que adivinar?" Esos bordes de confianza son justo donde quieres que caiga tu juicio humano.
-
-**Cierra el ciclo.** Al final: "Resume qué hicimos y qué queda." Vas a atrapar el archivo que se le olvidó, o la decisión que querías tomar y no tomaste.
+<CourseDiagram id="m06-d4" />
 
 <TryThis time="45 min">
 

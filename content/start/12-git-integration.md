@@ -25,29 +25,25 @@ Claude can open a branch, make the change, stage it, and write a commit message 
 
 Most AI-generated commit messages are bad because they summarize the diff in flattering language. *"Improved error handling and enhanced logging."* Meaningless. Claude, prompted well, writes the opposite kind of message — one that names what changed and why.
 
-Good commit messages from Claude follow a shape: one-line summary in imperative mood, blank line, a paragraph that says what changed, why it changed, and what to watch for. No adjectives. No "improvements." If you read the message and still don't know what the commit does, send it back: *"rewrite — tell me what the behavior was before and what it is now."*
+<CourseDiagram id="m12-d1" />
 
-Read every commit message out loud before approving. If it sounds like marketing copy, it's wrong. If it sounds like a note you'd leave for the next engineer, it's right.
+If you read the message and still don't know what the commit does, send it back: *"rewrite — tell me what the behavior was before and what it is now."* Read every commit message out loud before approving. If it sounds like marketing copy, it's wrong. If it sounds like a note you'd leave for the next engineer, it's right.
 
 ## The draft PR pattern
 
-For anything non-trivial, push to a branch and open a draft pull request rather than committing straight to main. Draft PRs are low-stakes — reviewers see the diff, CI runs, and nothing is merged until you flip the draft flag off. Ask Claude: *"push this branch and open a draft PR against main, with a description that summarizes the change and lists what still needs review."*
+For anything non-trivial, push to a branch and open a draft pull request rather than committing straight to main. Ask Claude: *"push this branch and open a draft PR against main, with a description that summarizes the change and lists what still needs review."*
 
-This is the default on teams. For solo work it's still the safer default, because future-you reviewing a draft PR catches things that current-you approved too fast.
+<CourseDiagram id="m12-d2" />
 
 ## What to never let Claude do
 
-Three hard rules, worth saying plainly.
-
-**Never force-push.** Force-push rewrites history and can destroy other people's work. If Claude proposes `git push --force` or `--force-with-lease`, stop and think. Almost always there's a safer move — amending a local commit, reverting with a new commit, or asking a human.
-
-**Never skip hooks.** `--no-verify` bypasses pre-commit checks that exist for reasons. If a hook fails, the right move is to fix the underlying issue, not bypass the gate.
-
-**Never commit secrets.** If Claude proposes staging a `.env`, a credentials file, or anything with an API key, reject the stage. Add the file to `.gitignore` and try again.
+<CourseDiagram id="m12-d3" />
 
 <Callout variant="warning">
 Claude will occasionally try to be helpful in ways that are actively dangerous in a shared repo — force-push to fix a "messy history," `--no-verify` to get past a failing hook, `git add .` that sweeps in a secret. The approval prompt is your last line of defense. Read it.
 </Callout>
+
+<CourseDiagram id="m12-d4" />
 
 <TryThis time="8 min">
 

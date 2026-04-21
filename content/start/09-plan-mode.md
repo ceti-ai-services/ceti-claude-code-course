@@ -15,7 +15,9 @@ There's a gap between *"Claude, rename these twenty files"* and the first file a
 
 Plan mode is a state Claude runs in where it can read your files, search, and think, but cannot write, edit, run shell commands, or mutate anything. You ask for a change. Instead of making it, Claude produces a plan — a numbered list of what it would do, to which files, in what order. You read the plan. You approve, reject, or redirect.
 
-You enter plan mode with `shift-tab` (cycle through modes) or by telling Claude plainly: *"use plan mode for this."* You'll see the indicator change. From that point on, any file-changing operation is a dry run until you exit.
+<CourseDiagram id="m09-d1" />
+
+You enter plan mode with `shift-tab` (cycle through modes) or by telling Claude plainly: *"use plan mode for this."* From that point on, any file-changing operation is a dry run until you exit.
 
 <Callout variant="core-idea">
 Plan mode lets you see the plan before you see the edit — dry run, read only.
@@ -25,19 +27,17 @@ Plan mode lets you see the plan before you see the edit — dry run, read only.
 
 Any time the change touches more than one file. Any time the operation is hard to undo. Any time you're not sure Claude understood the scope. The cost of plan mode is twenty seconds of reading. The cost of skipping it is whatever the worst version of the edit looked like.
 
-Common moments where plan mode earns its keep: renaming a batch of files, restructuring a folder, refactoring anything, running a find-and-replace across documents, drafting a set of emails that will overwrite existing drafts.
-
-For single-file edits to a scratch document, plan mode is overkill. You can see the diff in the approval prompt anyway. Save plan mode for the operations where the blast radius is wider than one file.
+<CourseDiagram id="m09-d3" />
 
 ## Approving, rejecting, redirecting
 
-When Claude gives you the plan, you have three responses.
+When Claude gives you the plan, you have three responses — and the third one is the one most people forget.
 
-**Approve.** You read it, the shape is right, the files are right. Exit plan mode and let Claude run it. The approvals still come one step at a time during execution — plan mode doesn't replace per-step approval, it layers on top of it.
+<CourseDiagram id="m09-d2" />
 
-**Reject.** The plan is wrong and you want to start over. Say so. Claude drops the plan. You restate the task more clearly.
+Redirect is the move that matters. *"Steps one through four are fine. Step five is wrong — don't touch anything in the `archive/` folder."* Claude revises. You re-read. That's the full loop.
 
-**Redirect.** The plan is mostly right but one step is off. Tell Claude which step and why. *"Steps one through four are fine. Step five is wrong — don't touch anything in the `archive/` folder."* Claude revises. You re-read.
+<CourseDiagram id="m09-d4" />
 
 <TryThis time="8 min">
 

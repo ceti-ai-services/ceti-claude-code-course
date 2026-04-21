@@ -67,6 +67,12 @@
         <!-- PraoLoop: Perceive → Reason → Act → Observe interactive -->
         <PraoLoop v-else-if="block.kind === 'praoLoop'" />
 
+        <!-- CourseDiagram: any pattern-library-powered visual registered by id -->
+        <component
+          v-else-if="block.kind === 'diagram'"
+          :is="DIAGRAM_REGISTRY[block.id]"
+        />
+
         <!-- PersonaExample: renders only the active persona's slot -->
         <PersonaExample v-else-if="block.kind === 'personaExample'">
           <template #creator>
@@ -132,6 +138,7 @@ import Recap from "@/components/course/Recap.vue"
 import Quiz from "@/components/course/Quiz.vue"
 import PersonaExample from "@/components/course/PersonaExample.vue"
 import PraoLoop from "@/components/course/PraoLoop.vue"
+import { DIAGRAM_REGISTRY } from "@/components/course/diagrams"
 
 // Per-module interactive hero blocks. Each composes `MissionBrief` + a
 // module-specific interactive primitive (BeforeAfter / ProcessFlow /
@@ -189,6 +196,7 @@ type Block =
       slots: Partial<Record<Persona, string>>
     }
   | { kind: "praoLoop" }
+  | { kind: "diagram"; id: string }
 
 interface LessonFile {
   slug: string
@@ -269,10 +277,11 @@ const CUSTOM_TAGS = [
   "PersonaExample",
   "Quiz",
   "PraoLoop",
+  "CourseDiagram",
 ] as const
 
 // Tags that may appear self-closing (<Tag />) — no paired close required.
-const SELF_CLOSING_TAGS = new Set(["PraoLoop"])
+const SELF_CLOSING_TAGS = new Set(["PraoLoop", "CourseDiagram"])
 
 type CustomTag = (typeof CUSTOM_TAGS)[number]
 
@@ -290,7 +299,11 @@ function findNextCustomTag(
     selfClose: boolean
   } | null = null
   for (const tag of CUSTOM_TAGS) {
-    const re = new RegExp(`<${tag}(\\s[^>]*)?(/?)>`, "g")
+    // Match the opening tag (greedy on attrs). Detect self-close by checking
+    // whether the matched text ends with `/>` after attribute-group capture —
+    // using the prior `(/?)>` regex, `[^>]*` greedily swallowed the slash so
+    // selfClose was always false for tags like `<Tag id="x" />`.
+    const re = new RegExp(`<${tag}(\\s[^>]*)?>`, "g")
     re.lastIndex = from
     const m = re.exec(md)
     if (m) {
@@ -300,7 +313,7 @@ function findNextCustomTag(
           start: m.index,
           openEnd: m.index + m[0].length,
           rawOpen: m[0],
-          selfClose: m[2] === "/",
+          selfClose: /\/\s*>$/.test(m[0]),
         }
       }
     }
@@ -384,6 +397,10 @@ function tokenize(md: string): Block[] {
     if (found.selfClose && SELF_CLOSING_TAGS.has(found.tag)) {
       if (found.tag === "PraoLoop") {
         blocks.push({ kind: "praoLoop" })
+      } else if (found.tag === "CourseDiagram") {
+        const attrs = parseAttrs(found.rawOpen)
+        const id = attrs.id ?? ""
+        if (id) blocks.push({ kind: "diagram", id })
       }
       cursor = found.openEnd
       continue

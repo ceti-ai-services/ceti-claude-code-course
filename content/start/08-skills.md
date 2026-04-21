@@ -15,30 +15,13 @@ A slash command is a prompt you invoke. A skill is a body of knowledge that load
 
 A skill is a folder. It sits at `.claude/skills/<skill-name>/` and contains at minimum one file called `SKILL.md`. The folder can also hold reference documents, templates, example outputs — anything Claude might need once the skill is active.
 
-The SKILL.md file looks like this:
+<CourseDiagram id="m08-d1" />
 
-```markdown
----
-name: weekly-status-update
-description: Use when the user asks to draft their weekly status
-  update, status report, or Friday recap. Formats output with the
-  three sections they always use: Shipped, In Flight, Blocked.
----
-
-# Weekly Status Update
-
-When drafting a weekly status update for this user, always use
-three sections in this order:
-
-1. **Shipped** — what finished this week. Past tense. Short lines.
-2. **In Flight** — what's open. Name the owner if it's not them.
-3. **Blocked** — anything waiting on someone else. Name the person
-   and what you need from them.
-
-Keep the whole thing under 200 words. No adjectives. No "excited to."
-```
+<CourseDiagram id="m08-d2" />
 
 The `description` field in the frontmatter is load-bearing. Claude reads all skill descriptions at session start and uses them to decide when to pull a skill in. Vague description, skill never loads. Sharp description with the phrases the user actually says ("status update," "Friday recap"), skill loads at the right moment.
+
+<CourseDiagram id="m08-d3" />
 
 <Callout variant="core-idea">
 A skill is a folder of expertise Claude can load when the task matches.
@@ -46,17 +29,15 @@ A skill is a folder of expertise Claude can load when the task matches.
 
 ## How skills differ from slash commands
 
-Slash commands are explicit. You type `/morning`, Claude runs it, output appears. Skills are ambient. You say "draft my status update," Claude matches the phrase to the `weekly-status-update` skill's description, loads the skill, and produces output shaped by its contents — without you naming the skill.
-
 A slash command is a prompt. A skill is a small instruction manual. The slash command runs once and is gone. The skill stays loaded for the rest of the conversation and keeps shaping every related answer.
 
 Use a slash command when you want the same output every time. Use a skill when you want the *shape* consistent but the content variable.
 
 ## What goes in the folder
 
-Start with just `SKILL.md`. If the skill grows — reference material, example outputs, templates — add them as sibling files. Claude can read them once the skill is active.
+Start with just `SKILL.md`. If the skill grows — reference material, example outputs, templates — add them as sibling files. Claude can read them once the skill is active. A skill folder for drafting client emails might have `SKILL.md` plus `examples/` containing three real emails you've written, so Claude has tone to match.
 
-A skill folder for drafting client emails might have `SKILL.md` plus `examples/` containing three real emails you've written, so Claude has tone to match.
+<CourseDiagram id="m08-d4" />
 
 <TryThis time="10 min">
 

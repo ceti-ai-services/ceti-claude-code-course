@@ -13,13 +13,9 @@ So far you've only asked Claude to read. The next step — and the one most peop
 
 ## The approval loop
 
-Every action that changes a file on your computer goes through the same pattern:
+Every action that changes a file on your computer goes through the same pattern.
 
-1. You ask Claude to do something.
-2. Claude decides an edit is needed and proposes it.
-3. Claude shows you the proposed change and asks for approval.
-4. You approve or deny.
-5. Only after approval does the file actually change.
+<CourseDiagram id="m04-d1" />
 
 There's no way around step 3 by default. Claude can't silently rewrite a document. It can't delete a file without telling you. It won't run a shell command without surfacing it first. When it wants to do something, a prompt appears in the terminal — usually with the file name, a summary of the change, and options like "Yes," "No," or "Yes, and do similar things automatically for the rest of this task."
 
@@ -37,13 +33,9 @@ For file-moving, file-creating, or shell commands, the prompt shows the exact co
 
 ## Permission modes
 
-There are three modes you will encounter, controlling how often Claude asks:
+There are three modes you will encounter, controlling how often Claude asks.
 
-**Default mode** (sometimes called *ask*): the behavior described above. Claude proposes, you approve, every single action. This is where you should live until the tool feels natural — probably for your first few weeks.
-
-**acceptEdits mode**: Claude stops asking for file-edit approvals within the current session. Shell commands still require approval. This is the middle gear. It is useful when you are doing a long, repetitive editing task and you trust Claude on the pattern — reformatting twenty meeting notes, for instance, where the first edit taught you what the result looks like. Do not start a fresh session in this mode.
-
-**Plan mode**: Claude does not change anything at all. It plans — it describes what it would do in plain English, lists the files it would touch, and stops. You read the plan, decide whether you like it, and switch back to a normal mode to execute. This is the mode for sensitive folders or unfamiliar territory. "Show me what you would do, but don't do it yet."
+<CourseDiagram id="m04-d2" />
 
 For the first week, stay in default mode. You can switch modes from inside Claude by typing a slash command (the prompt `>` accepts them), but the mode you want at the start is the one that asks every time. The friction is the feature.
 
@@ -69,20 +61,13 @@ This is not a sophisticated version control strategy. It is the manual equivalen
 
 ## When to approve, when to deny
 
-Approve when:
+<CourseDiagram id="m04-d3" />
 
-- The diff or command matches what you asked for.
-- The file being changed is the file you intended to change.
-- You could explain, in one sentence, what is about to happen.
-
-Deny when:
-
-- The change is bigger than you expected. Claude proposing to edit six files when you asked about one is a reason to stop and ask what it thinks it is doing.
-- Something is about to be deleted and you are not 100% sure you want that.
-- A shell command references a path outside the folder you are working in.
-- You have not made a backup of the file, and the file matters.
+Approve when the diff or command matches what you asked for, the file being changed is the file you intended to change, and you could explain in one sentence what is about to happen. Deny when the change is bigger than expected, a deletion is happening you aren't sure about, a shell command references a path outside your working folder, or the file matters and you haven't made a backup.
 
 Denying is not failure. It is part of the conversation. "Don't do that — let's narrow the scope. Only change the first paragraph" is a completely valid next turn, and Claude will adjust.
+
+<CourseDiagram id="m04-d4" />
 
 <Recap>
 

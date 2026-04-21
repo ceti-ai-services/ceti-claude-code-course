@@ -25,16 +25,13 @@ Eso no es una limitación. Es el feature.
 Donde lances Claude, ese es el universo en el que opera. Mueves el universo moviendo tu punto de arranque.
 </Callout>
 
-¿Quieres trabajar con tus borradores de cliente? Abre una terminal en tu carpeta `Clients`. ¿Quieres limpiar un export de tus DMs? Abre una en la carpeta donde está el export. ¿Quieres ordenar recibos? Ve a `Downloads` — o mejor, a una subcarpeta.
+<CourseDiagram id="m03-d1" />
 
-Regla general: mientras más pequeña y específica la carpeta, mejor va a ser tu primera sesión. Una carpeta con 10 archivos de una tarea le gana a una con 500 archivos de tres años de tu vida.
+Regla general: mientras más pequeña y específica la carpeta, mejor va a ser tu primera sesión.
 
 ## El movimiento
 
-1. Abre tu explorador de archivos (Finder en Mac, Explorer en Windows, Files en Linux).
-2. Encuentra una carpeta que tenga **un lote de trabajo relacionado** — no todo tu árbol de Documents, no todo tu escritorio.
-3. Click derecho sobre esa carpeta. En Mac: "Nueva Terminal en Carpeta." En Windows/Linux: "Abrir en Terminal" o equivalente. Si esa opción no aparece, abre la Terminal tú mismo y escribe `cd ` seguido de arrastrar la carpeta a la ventana de terminal — eso pega la ruta.
-4. Escribe `claude` y presiona enter.
+<CourseDiagram id="m03-d2" />
 
 Ya estás dentro de Claude Code, con alcance en esa carpeta. Cada archivo adentro es legible. Nada de afuera lo es.
 
@@ -91,15 +88,17 @@ Cada respuesta se queda en contexto. Claude recuerda lo que preguntaste hace dos
 
 Esto es lo que hace a Claude Code distinto de la versión chatbot: la sesión se sostiene. Una máquina expendedora se resetea entre transacciones. Un colega recuerda los últimos cinco minutos.
 
+<CourseDiagram id="m03-d3" />
+
 <Callout variant="tip">
 Si sientes que deberías "empezar de cero" — no lo hagas. Mantén la sesión. Pregunta lo siguiente. Mientras más aprende Claude de tu carpeta, más afilada se pone cada respuesta.
 </Callout>
 
 ## Cuándo cerrar la sesión
 
-Escribe `/exit` o cierra la terminal cuando hayas terminado. Todo lo que Claude hizo con tus archivos ya está guardado — no se quedó con nada en la cabeza. La próxima vez que corras `claude` en esa carpeta, vas a arrancar una sesión nueva, y Claude va a volver a leer lo que le apuntes.
+Escribe `/exit` o cierra la terminal cuando hayas terminado. La próxima vez que corras `claude` en esa carpeta, Claude va a volver a leer lo que le apuntes. Las sesiones son baratas. Las carpetas son lo que importa.
 
-Las sesiones son baratas. Las carpetas son lo que importa.
+<CourseDiagram id="m03-d4" />
 
 <Recap>
 
