@@ -114,18 +114,130 @@ README.md
 .env.example
 ```
 
-## Design system
+## Design system (v4 — retro-boardwalk dual-mode, 2026-04-21)
 
-Minimal dark theme. **One** accent color: gold (`#d4a84b`). No indigo/cyan/gradient-soup. Backgrounds are near-black (`#0a0a0b`) with layered surfaces. Typography is Inter for text, JetBrains Mono for code/prices.
+**Single source of truth:** `.claude/skills/retro-boardwalk-skill/` (BRAND_BOOK.md + PATTERNS.md).
+**Visual-forge skill:** `.claude/skills/ceti-course-visuals/` (PLAN → GENERATE → EVAL loop).
 
-Tokens in `app/assets/css/main.css`:
-- `--bg` `#0a0a0b` (body)
-- `--surface` `#121214` (cards)
-- `--raised` `#1a1a1d` (inputs, code blocks)
-- `--gold` `#d4a84b` (accents — only color that isn't a shade of grey)
-- `--text` `#f5f5f4` · `--muted` `#a1a1a8` · `--dim` `#6b6b72`
+### The one rule that matters
 
-Every new component uses these tokens. Do not introduce new colors without updating this list.
+> **Light mode: the color is the fill. Dark mode: the color is the light at the edge.**
+
+Dark-mode nodes are deep hue-tinted shadows with luminous colored borders. If a dark-mode card reads as a bright pastel, it is wrong.
+
+### Four palettes × two modes via body class
+
+One HTML element owns the palette. Swap a body class → the whole system re-skins.
+
+```html
+<body class="palette-boardwalk dark">
+<!-- or palette-coastal | palette-greenhouse | palette-neosage -->
+<!-- and light | dark -->
+```
+
+| Palette | Personality | Pick for… |
+|---|---|---|
+| `boardwalk` | 90s nostalgia, softened | default — warm, human content |
+| `coastal` | warm/cool tension | tradeoffs, two-sided comparisons |
+| `greenhouse` | botanical earth tones | systems, infrastructure, growth |
+| `neosage` | muted-neon | high-energy, "electric" concepts |
+
+Palette CSS lives in `app/assets/css/main.css` as `:root`-scoped blocks. Components name roles, never hex.
+
+### Token roles (PRAO mapping is universal)
+
+| Role | Meaning | PRAO mapping |
+|---|---|---|
+| `primary` | "first" teaching color | **Perceive** |
+| `secondary` | "second" | **Reason** |
+| `accent` | active/CTA/output — one pop per view | **Act** |
+| `support` | neutral/observe | **Observe** |
+| `*-edge` | luminous border color (dark-mode only) | — |
+
+### Typography (fixed roles)
+
+| Face | Use | Weights |
+|---|---|---|
+| **Fraunces** (serif, italic) | Display headlines, card titles | 300 italic, 600 |
+| **DM Sans** (sans) | Body, UI | 400, 500, 600, 700 |
+| **Space Mono** (mono) | Code, file paths, artifacts | 400, 700 |
+
+Rules: display text uses Fraunces **300 italic** — the italic is the signature. Never mix weights in a sentence. Minimum body 11px.
+
+### Pattern library
+
+**Location:** `app/components/course/patterns/` — 18 reusable teaching shapes, functional (props-in, events-out), zero side effects.
+
+| Pattern | Use when… |
+|---|---|
+| `SequentialPulse` | 3–5 ordered phases that share role colors |
+| `OrbitalRing` | feedback loop / cycle (PRAO) |
+| `Storyboard` | one concept mapped onto N named phases with prose |
+| `PhaseTabs` | N phases × multiple facets |
+| `ComparisonGrid` | N parallel concepts (eras, tiers, approaches) |
+| `FailureTable` | wrong → trap → right (3–4 rows) |
+| `TracedExample` | ordered steps with artifacts |
+| `FillableBuilder` | the concept IS an artifact (CLAUDE.md, slash command) |
+| `DecisionFork` | judgment call, 2–3 paths |
+| `FitTree` | branching decision |
+| `FileTree` | project layout, anatomy |
+| `TerminalReplay` | real command flow with approve/deny |
+| `Timeline` | 4–6 linear steps |
+| `CheckableStack` | habits / checklists |
+| `SessionBoundary` | persistent vs ephemeral |
+| `TradeoffMatrix` | two approaches × N dimensions |
+| `ScatterFlow` | fit on a 2D axis |
+| `ThreeMovesTerminal` | read / plan / execute as three stamps |
+
+Decision tree for picking a pattern: see `.claude/skills/retro-boardwalk-skill/PATTERNS.md` § Pattern selection heuristic.
+
+### Non-negotiables (automatic fail in EVAL)
+
+1. **No raw hex in components.** Reference tokens only (`bg-primary`, `border-primary-edge`, `hsl(var(--accent))`).
+2. **No emoji inside diagram nodes.** Palette-selector UI can use them; diagrams cannot.
+3. **Contrast ≥ 4.5:1** on every colored background.
+4. **One saturated accent max** per card.
+5. **One focal animation max.** Secondaries can fade/dim, never compete.
+6. **Fraunces 300 italic** appears somewhere in every card (usually the title).
+7. **`prefers-reduced-motion`** disables auto-cycles; hover/focus still works.
+8. **All 4 palettes × light/dark** pass a visual check before ship.
+9. **Max 3 focal points** per visual. Max 4 role colors with intent.
+10. **Whitespace ≥ 30%** of the bounding box.
+
+### When to invoke the visual-forge skill
+
+Use `.claude/skills/ceti-course-visuals/` for any new concept that could be visual rather than prose: decision trees, processes, comparisons, mappings, sequences, anatomies, failure modes. The skill runs PLAN → GENERATE → EVAL for up to 5 rounds until the output clears the WOW rubric (`references/rubric.md`).
+
+**Don't invoke for:** pure typography moments, short transitional paragraphs, individual callouts.
+
+### How to extend a course pattern
+
+1. Pick the pattern from PATTERNS.md.
+2. Open `app/components/course/patterns/<PatternName>.vue`.
+3. **Copy-adapt, don't re-derive.** Keep the token names. Swap the copy. Swap the node count if needed (within the pattern's max).
+4. Verify the four constraints (max 4 role colors · max one focal animation · every colored background ≥ 4.5:1 · Fraunces italic somewhere).
+5. Test all 4 palettes × light/dark.
+
+### The 14-module Bronze structure
+
+| # | Title | Status | Time |
+|---|---|---|---|
+| 01 | What Claude Code is — and how it differs from the browser chatbot | live | 12 |
+| 02 | Install on Mac, Windows, or Linux | live | 14 |
+| 03 | Your first real session — scoped to a folder | live | 14 |
+| 04 | File permissions — read the diff, approve the change | live | 12 |
+| 05 | CLAUDE.md — write it once, stop explaining yourself | live | 13 |
+| 06 | One real task, end-to-end | live | 45 |
+| 07 | Slash commands — reusable prompts you build once | live | 12 |
+| 08 | Skills — packaged capabilities Claude loads on demand | live | 12 |
+| 09 | Plan mode — think before acting, dry-run your work | live | 10 |
+| 10 | Hooks — safety gates and pre/post-tool-use automation | live | 14 |
+| 11 | MCP basics — connect Gmail, Calendar, Notion, your files | live | 14 |
+| 12 | Git integration — commits, branches, PRs through Claude | live | 12 |
+| 13 | Subagents and parallel work | live | 12 |
+| 14 | Next steps — habits and the wider agentic toolkit | live | 10 |
+
+Unlock target: all 14 live by end of refactor pass 2026-04-21.
 
 ## Key rules
 
