@@ -1,42 +1,63 @@
 <!--
-  m13-d3 — Which tasks actually fit the subagent shape?
-  Pattern: ScatterFlow — independence (x) × context cost (y).
-  The dashed path connects only the "fit" tasks so the reader sees
-  the shape: high independence + high context cost = spawn.
+  m13-d3 — Parallel vs. sequential: what changes when you fan out.
+  Pattern: TradeoffMatrix (swapped from ScatterFlow 2026-04-21).
+
+  Prior version used ScatterFlow to plot "which tasks fit the shape,"
+  which overlapped the hero's ComparisonGrid of three patterns. This
+  version teaches concept (c) — parallel vs. sequential — a dimension
+  the module title promises but the other diagrams don't make concrete.
+
+  Left = parallel subagents (N run at once). Right = sequential chain
+  (each step waits). Rows name the practical dimensions so the reader
+  can feel the trade instead of reading about it.
 -->
 <script setup lang="ts">
-import ScatterFlow from "@/components/course/patterns/ScatterFlow.vue"
+import TradeoffMatrix from "@/components/course/patterns/TradeoffMatrix.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 
 const { lang } = useCustomizer()
 
 const en = {
-  title: "Which tasks fit the shape",
-  caption: "High independence + heavy reading = delegate. Low + light = stay in main.",
-  xLabel: "independent from each other →",
-  yLabel: "← heavy reading",
-  points: [
-    { x: 88, y: 90, label: "five-file summary", fit: true,  role: "secondary" as const, detail: "Each file stands alone — parallel subagents shine." },
-    { x: 82, y: 70, label: "wide search",      fit: true,  role: "secondary" as const, detail: "Burn the reading inside the subagent, return the hit." },
-    { x: 72, y: 82, label: "bounded research", fit: true,  role: "secondary" as const, detail: "Long task, compact answer — classic subagent fit." },
-    { x: 20, y: 30, label: "single edit",      fit: false, role: "support"   as const, detail: "Main session can do this directly — spawning is pure overhead." },
-    { x: 28, y: 22, label: "quick question",   fit: false, role: "support"   as const, detail: "If one answer will do, one answer will do." },
-    { x: 18, y: 78, label: "sequential deps",  fit: false, role: "accent"    as const, detail: "Step two needs step one's result — can't run in parallel." },
+  title: "Parallel, or sequential",
+  caption: "Same five files, two shapes of delegation. Pick by the work, not by the habit.",
+  leftHeader: {
+    label: "Parallel",
+    sublabel: "five subagents at once",
+    role: "secondary" as const,
+  },
+  rightHeader: {
+    label: "Sequential",
+    sublabel: "one after the next",
+    role: "support" as const,
+  },
+  rows: [
+    { key: "Wall time",   left: "as long as the slowest", right: "sum of all five" },
+    { key: "Main ctx",    left: "five summaries back",    right: "same, just slower" },
+    { key: "Best when",   left: "tasks don't depend",     right: "step two needs step one" },
+    { key: "Failure",     left: "one subagent may miss",  right: "first miss stops the chain" },
+    { key: "Overhead",    left: "N spawns, one sync",     right: "one spawn, many waits" },
   ],
 }
 
 const es = {
-  title: "Qué tareas encajan con la forma",
-  caption: "Mucha independencia + lectura pesada = delega. Poca + ligera = quédate.",
-  xLabel: "independientes entre sí →",
-  yLabel: "← lectura pesada",
-  points: [
-    { x: 88, y: 90, label: "resumen de 5 archivos", fit: true,  role: "secondary" as const, detail: "Cada archivo va solo — los subagentes en paralelo brillan." },
-    { x: 82, y: 70, label: "búsqueda amplia",       fit: true,  role: "secondary" as const, detail: "Quema la lectura dentro del subagente y devuelve el hallazgo." },
-    { x: 72, y: 82, label: "investigación acotada", fit: true,  role: "secondary" as const, detail: "Tarea larga, respuesta compacta — el encaje clásico." },
-    { x: 20, y: 30, label: "una edición",           fit: false, role: "support"   as const, detail: "La sesión principal lo hace directo — delegar es solo costo." },
-    { x: 28, y: 22, label: "pregunta rápida",       fit: false, role: "support"   as const, detail: "Si una respuesta basta, basta una respuesta." },
-    { x: 18, y: 78, label: "pasos dependientes",    fit: false, role: "accent"    as const, detail: "El paso dos necesita el uno — no corre en paralelo." },
+  title: "Paralelo o secuencial",
+  caption: "Mismos cinco archivos, dos formas de delegar. Elige por el trabajo, no por costumbre.",
+  leftHeader: {
+    label: "Paralelo",
+    sublabel: "cinco subagentes a la vez",
+    role: "secondary" as const,
+  },
+  rightHeader: {
+    label: "Secuencial",
+    sublabel: "uno tras otro",
+    role: "support" as const,
+  },
+  rows: [
+    { key: "Tiempo",      left: "lo que tarde el más lento", right: "la suma de los cinco" },
+    { key: "Ctx princ",   left: "cinco resúmenes de vuelta", right: "igual, pero más lento" },
+    { key: "Mejor si",    left: "no dependen entre sí",      right: "el dos necesita al uno" },
+    { key: "Si falla",    left: "uno puede perder algo",     right: "el primer fallo corta todo" },
+    { key: "Costo",       left: "N spawns, una síntesis",    right: "un spawn, muchas esperas" },
   ],
 }
 
@@ -44,11 +65,11 @@ const t = computed(() => (lang.value === "es" ? es : en))
 </script>
 
 <template>
-  <ScatterFlow
+  <TradeoffMatrix
     :title="t.title"
     :caption="t.caption"
-    :x-label="t.xLabel"
-    :y-label="t.yLabel"
-    :points="t.points"
+    :left-header="t.leftHeader"
+    :right-header="t.rightHeader"
+    :rows="t.rows"
   />
 </template>
