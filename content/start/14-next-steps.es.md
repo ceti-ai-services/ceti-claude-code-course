@@ -1,13 +1,13 @@
 ---
-title: Lo lograste. Ahora qué cambia.
-module: "07"
+title: Siguientes pasos — hábitos y el resto del kit agéntico
+module: "14"
 time: "10 min"
 tags: [next-steps, practice, silver, gold, bronze]
 skills_gained: [habit-forming, self-assessment, next-path]
 persona_aware: true
 ---
 
-# Lo lograste. Ahora qué cambia.
+# Siguientes pasos — hábitos y el resto del kit agéntico
 
 Hace una hora eras la persona que había visto un curso. Ahora usaste Claude en tu trabajo real, y hay un archivo terminado sentado en tu carpeta que no estaba esta mañana.
 

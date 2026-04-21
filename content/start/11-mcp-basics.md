@@ -13,7 +13,7 @@ So far, Claude can see files in your folder. That's a lot. It's not everything.
 
 Your Monday lives in Gmail, your week lives in Calendar, your clients live in a Notion database, and your numbers live in a Google Sheet. Claude Code reads the folder. It doesn't read those. Not until you connect them.
 
-**MCP — Model Context Protocol** — is the wire. One protocol, many tools. When you connect a tool through MCP, Claude gets three things from it: a list of *capabilities* (tools it can call), a view of *current state* (resources it can read), and a way to *run* a capability and get a structured result back. That's it. Three primitives, one loop.
+**MCP — Model Context Protocol** — is the wire. One protocol, many tools. When you connect a tool through MCP, Claude gets three things from it: a list of *capabilities* (**Tools** it can call — actions, like "send this email"), a view of *current state* (**Resources** it can read — data, like "yesterday's threads"), and a set of *reusable templates* (**Prompts** the server exposes — ready-made recipes the tool's author wrote for common jobs). That's it. Three primitives — Tools, Resources, Prompts — one loop.
 
 The loop is what matters. When Claude solves anything with an outside tool, it runs through four phases: **Perceive → Reason → Act → Observe.** PRAO. The loop restarts on every new turn. Understanding PRAO is how you understand *why* an agent chooses the wrong tool, *why* a prompt misfires, and *why* the quality of a tool description decides the ceiling on how useful that tool is.
 
@@ -54,7 +54,7 @@ If the first connector works, install one more this week. If it didn't — the c
 
 <Recap>
 
-MCP connects Claude to the tools where your actual work lives — Gmail, Calendar, Notion, your database. The protocol exposes three primitives (tools, resources, results), and every call travels the same four-phase PRAO loop: Perceive → Reason → Act → Observe. Start with one read-only connector. Let the loop feel boring before you graduate to write-enabled tools.
+MCP connects Claude to the tools where your actual work lives — Gmail, Calendar, Notion, your database. The protocol exposes three primitives (Tools, Resources, Prompts), and every call travels the same four-phase PRAO loop: Perceive → Reason → Act → Observe. Start with one read-only connector. Let the loop feel boring before you graduate to write-enabled tools.
 
 </Recap>
 

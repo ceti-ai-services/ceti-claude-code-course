@@ -1,13 +1,13 @@
 ---
-title: You did it. Now what changes.
-module: "07"
+title: Next steps — habits and the wider agentic toolkit
+module: "14"
 time: "10 min"
 tags: [next-steps, practice, silver, gold, bronze]
 skills_gained: [habit-forming, self-assessment, next-path]
 persona_aware: true
 ---
 
-# You did it. Now what changes.
+# Next steps — habits and the wider agentic toolkit
 
 An hour ago you were the person who had watched a course. Now you've used Claude on your actual work, and there's a finished file sitting in your folder that wasn't there this morning.
 
