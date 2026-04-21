@@ -24,6 +24,8 @@ Dos cosas tienen que ser ciertas antes de que Claude Code corra.
 
 Escoge la que ya tengas. Si no tienes ninguna, una suscripción Claude.ai Pro es el camino con menos resistencia.
 
+<CourseDiagram id="m02-d1" />
+
 ## El comando de instalación
 
 Sin importar el sistema operativo, el comando que realmente instala Claude Code es el mismo:
@@ -35,6 +37,10 @@ npm install -g @anthropic-ai/claude-code
 `npm` es el gestor de paquetes que viene con Node.js. `install -g` significa "instala de forma global, para que pueda correrlo desde cualquier lugar." `@anthropic-ai/claude-code` es el nombre del paquete. Después de que este comando termine, puedes escribir `claude` en cualquier ventana de terminal y se va a lanzar.
 
 El resto de esta lección es sobre llegar al punto donde ese comando funciona.
+
+<CourseDiagram id="m02-d3" />
+
+<CourseDiagram id="m02-d2" />
 
 ## Mac
 
@@ -129,6 +135,8 @@ Después de autenticarte, la terminal se asienta en algo que se ve más o menos 
 ```
 
 Ese único `>` con el cursor parpadeando es el prompt de Claude Code. Está esperando una pregunta.
+
+<CourseDiagram id="m02-d4" />
 
 <Recap>
 

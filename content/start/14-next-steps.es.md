@@ -19,6 +19,8 @@ Sigues teniendo los mismos clientes, la misma bandeja, el mismo calendario, el m
 
 No un día. Esta semana. El salto entre "instalé y lo usé una vez" y "es parte de mi ritmo semanal" son como tres sesiones. Si usas Claude tres veces en los próximos siete días, se te queda. Si no, la instalación envejece y se vuelve otra herramienta de la lista de las que más o menos sabes.
 
+<CourseDiagram id="m14-d1" />
+
 **Reusa tu CLAUDE.md apuntando Claude a otra carpeta.** Mañana por la mañana, encuentra otra carpeta donde viva tu trabajo — otro cliente, otro proyecto, otro lote. Escribe un CLAUDE.md nuevo ahí, modelado en el del Módulo 05. El segundo te va a tomar diez minutos en vez de treinta. El tercero cinco. Así es como aprendes qué de verdad pertenece en estos archivos y qué no.
 
 **Afina el CLAUDE.md que ya tienes conforme notas qué sigues re-explicando.** Cada vez que te encuentres escribiendo "recuerda que prefiero…" o "también, para aclarar, mis clientes…" — esa es una línea que pertenece en el archivo, no en el chat. Agrégala, guarda, la siguiente sesión queda más afilada. Tu CLAUDE.md mejora cada semana como dos líneas.
@@ -56,11 +58,17 @@ No un día. Esta semana. El salto entre "instalé y lo usé una vez" y "es parte
 
 Silver y Gold son reales. También son ganados, no vendidos. Si lo que hiciste en el Módulo 06 se sintió como el principio de algo en vez del final — si saliste de esa hora pensando *ok, ¿y si esto estuviera en un schedule, y si esto tocara mi correo, y si jalara de mi calendario* — hay caminos para eso.
 
+<CourseDiagram id="m14-d2" />
+
 **Silver — *Claude Code para tu trabajo*.** Cuatro semanas, cohorte asíncrona, $499, con cupo de veinte personas. Silver es la tier si quieres Claude cableado a las herramientas donde tu trabajo real vive — Gmail, Google Calendar, Notion, Airtable, las que usas de verdad. Sales de Silver con una de tus tareas semanales reales automatizada de principio a fin, no solo hecha más rápido sino *corriéndose sola en un schedule*. Si ya sabes qué tarea automatizarías, Silver es el camino que la construye.
 
 **Gold — *Claude Code en tu negocio*.** Cuatro horas 1:1, treinta días de soporte directo por Slack, $2,500. Gold es para cuando tú o tu equipo tienen un setup específico — tu stack, tus datos, tus restricciones — y quieres que yo o mi equipo se sienten y construyan la integración *para* ti en vez de enseñarte a construirla. Retainer opcional de $1,000 al mes después, si se vuelve trabajo continuo. La mayoría de los lectores de este curso no necesitan Gold. Unos pocos sí. Vas a saber cuál.
 
 No hay prisa en ninguna de las dos. Bronze es genuinamente suficiente para mucha gente. Si el próximo mes solo haces los tres hábitos de arriba — reusar CLAUDE.md, afinarlo, agarrarte antes del reflejo de copia-pega — y ese es el techo que te sirve, eso es un lugar completamente válido donde parar. Regresa cuando la tarea que quieras automatizar sea más grande de lo que el Bronze puede sostener.
+
+<CourseDiagram id="m14-d4" />
+
+<CourseDiagram id="m14-d3" />
 
 ## Una última cosa
 

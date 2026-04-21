@@ -15,6 +15,8 @@ Hiciste el trabajo dos veces. La IA respondió una. La segunda vuelta — la par
 
 Ese es el problema. No es la IA. Es la forma en que la estás usando.
 
+<CourseDiagram id="m01-d1" />
+
 <!-- persona:creator -->
 <Callout variant="core-idea">
 Ya conoces el movimiento: abres el chatbot, escribes "reescribe este caption para que quede más atractivo." Te llega la respuesta. La pegas. Arreglas tres cosas a mano. La publicas igual, aunque no suene del todo a ti.
@@ -47,6 +49,8 @@ Esa es la idea entera. Déjame decir qué significa, porque la mayoría de la ge
 
 Ahora mismo, tu trabajo está en carpetas. El brief de un cliente es un Google Doc en `~/Documents/Clients/`. Tu calendario está en una app. Tus recibos son una pila de screenshots en `~/Downloads`. Los borradores de tus correos están en Gmail. El backlog de captions es un archivo de Notas.
 
+<CourseDiagram id="m01-d3" />
+
 Cada vez que quieres *hacer* algo con ese trabajo — resumirlo, reorganizarlo, redactar a partir de él, limpiarlo — tienes que (a) copiar y pegar en un chatbot o (b) hacerlo tú mismo. Las dos son lentas.
 
 Claude Code elimina el paso (a). Abres una ventana de terminal, la apuntas a la carpeta, y ahora la IA puede leer los archivos directamente. No subidos. No resumidos. Los archivos reales. Y puede editarlos, con tu permiso, paso a paso.
@@ -68,6 +72,8 @@ Ese "después" es donde Claude Code se gana el sueldo.
 Hay un encuadre que hace que todo encaje. Se lo he enseñado a miles de personas, y es el que se queda.
 
 Claude Code no es una máquina expendedora. Es un colega.
+
+<CourseDiagram id="m01-d2" />
 
 Una máquina expendedora toma tu input, te da un output. Transacción cerrada. Te vas. Eso es ChatGPT en el navegador. Tú le pides, te contesta, el resto lo haces tú.
 
@@ -115,6 +121,8 @@ Una nota antes de seguir. La versión de este curso que estás leyendo es la pri
 Vienes usando la IA en una forma que la hace hacer la mitad fácil de tu trabajo y te deja a ti la mitad difícil. Claude Code es la misma IA en otra forma — una donde puede ver tus archivos y hacer el trabajo contigo. Colega, no máquina expendedora. Esa es la única idea que necesitas de este módulo. El resto es mecánica.
 
 </Recap>
+
+<CourseDiagram id="m01-d4" />
 
 <TryThis time="5 min">
 
