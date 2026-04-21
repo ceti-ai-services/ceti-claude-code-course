@@ -1,20 +1,9 @@
 <script setup lang="ts">
 import { computed, type HTMLAttributes } from "vue"
 import { cva, type VariantProps } from "class-variance-authority"
-import {
-  Sparkles,
-  Info,
-  AlertTriangle,
-  Lightbulb,
-  CheckCircle2,
-  BookOpen,
-  Flame,
-  ShieldAlert,
-  Star,
-  CircleHelp,
-} from "lucide-vue-next"
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { cn } from "@/lib/utils"
+import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
 
 // Callout variants — the semantic pin-points across the course.
 // Phase-accent variants (info/caution/important/reflect) use the extended
@@ -26,18 +15,25 @@ const calloutVariants = cva(
     variants: {
       variant: {
         // Legacy set — kept for backward compatibility with existing lesson MD
-        "core-idea":    "border-l-4 border-l-gold",
-        "tip":          "border-l-4 border-l-gold",
-        "warning":      "border-l-4 border-l-destructive",
-        "key-concept":  "border-l-4 border-l-gold",
-        "approval":     "border-l-4 border-l-gold",
-        "definition":   "border-l-4 border-l-border-strong",
-        "stakes":       "border-l-4 border-l-destructive",
+        "core-idea":    "border-l-4 border-l-[hsl(var(--primary-edge))]",
+        "tip":          "border-l-4 border-l-[hsl(var(--primary-edge))]",
+        "warning":      "border-l-4 border-l-[hsl(var(--accent-edge))]",
+        "key-concept":  "border-l-4 border-l-[hsl(var(--primary-edge))]",
+        "approval":     "border-l-4 border-l-[hsl(var(--secondary-edge))]",
+        "definition":   "border-l-4 border-l-[hsl(var(--support-edge))]",
+        "stakes":       "border-l-4 border-l-[hsl(var(--accent-edge))]",
         // New extended set — richer semantic palette per Manu 2026-04-20
-        "info":         "border-l-4 border-l-info",
-        "caution":      "border-l-4 border-l-caution",
-        "important":    "border-l-4 border-l-important",
-        "reflect":      "border-l-4 border-l-reflect",
+        "info":         "border-l-4 border-l-[hsl(var(--support-edge))]",
+        "caution":      "border-l-4 border-l-[hsl(var(--accent-edge))]",
+        "important":    "border-l-4 border-l-[hsl(var(--primary-edge))]",
+        "reflect":      "border-l-4 border-l-[hsl(var(--secondary-edge))]",
+        // New type-aligned variants
+        "decision":     "border-l-4 border-l-[hsl(var(--secondary-edge))]",
+        "structure":    "border-l-4 border-l-[hsl(var(--support-edge))]",
+        "brief":        "border-l-4 border-l-[hsl(var(--primary-edge))]",
+        "recap":        "border-l-4 border-l-[hsl(var(--secondary-edge))]",
+        "try":          "border-l-4 border-l-[hsl(var(--accent-edge))]",
+        "synthesis":    "border-l-4 border-l-[hsl(var(--primary-edge))]",
       },
     },
     defaultVariants: {
@@ -48,8 +44,13 @@ const calloutVariants = cva(
 
 type Variant = NonNullable<VariantProps<typeof calloutVariants>["variant"]>
 
+// The `type` prop drives the polyhedron shape.
+// When not provided, it is inferred from `variant`.
+type CalloutType = 'tip' | 'warning' | 'decision' | 'structure' | 'brief' | 'recap' | 'try' | 'synthesis'
+
 interface Props {
   variant?: Variant
+  type?: CalloutType
   title?: string
   class?: HTMLAttributes["class"]
 }
@@ -58,19 +59,50 @@ const props = withDefaults(defineProps<Props>(), {
   variant: "core-idea",
 })
 
-const iconMap = {
-  "core-idea":   Sparkles,
-  "tip":         Info,
-  "warning":     AlertTriangle,
-  "key-concept": Lightbulb,
-  "approval":    CheckCircle2,
-  "definition":  BookOpen,
-  "stakes":      Flame,
-  "info":        Info,
-  "caution":     ShieldAlert,
-  "important":   Star,
-  "reflect":     CircleHelp,
-} as const
+// Map variant → callout type (for shape derivation when type is absent)
+const variantToType: Record<Variant, CalloutType> = {
+  "core-idea":   "tip",
+  "tip":         "tip",
+  "warning":     "warning",
+  "key-concept": "tip",
+  "approval":    "decision",
+  "definition":  "structure",
+  "stakes":      "warning",
+  "info":        "tip",
+  "caution":     "warning",
+  "important":   "tip",
+  "reflect":     "synthesis",
+  "decision":    "decision",
+  "structure":   "structure",
+  "brief":       "brief",
+  "recap":       "recap",
+  "try":         "try",
+  "synthesis":   "synthesis",
+}
+
+// Map callout type → polyhedron shape
+const typeToShape: Record<CalloutType, string> = {
+  "tip":        "tetrahedron",        // Spark / minimum useful unit
+  "warning":    "tetrahelix",         // Off-axis spiral = "don't get drawn in"
+  "decision":   "octahedron",         // Duality, pivot, approve/deny
+  "structure":  "hexahedron",         // Foundation; gate/guard
+  "brief":      "icosahedron",        // Systems-view; what-is-connected-to-what
+  "recap":      "dodecahedron",       // The whole / completeness / cosmos
+  "try":        "cuboctahedron",      // Equilibrium-through-action
+  "synthesis":  "vector-equilibrium", // Packaged balance
+}
+
+// Map callout type → role color class (for glyph colorization)
+const typeToGlyphColor: Record<CalloutType, string> = {
+  "tip":        "callout-glyph--primary",
+  "warning":    "callout-glyph--accent",
+  "decision":   "callout-glyph--secondary",
+  "structure":  "callout-glyph--support",
+  "brief":      "callout-glyph--primary",
+  "recap":      "callout-glyph--secondary",
+  "try":        "callout-glyph--accent",
+  "synthesis":  "callout-glyph--primary",
+}
 
 const labelMap: Record<Variant, string> = {
   "core-idea":   "Core idea",
@@ -84,37 +116,74 @@ const labelMap: Record<Variant, string> = {
   "caution":     "Caution",
   "important":   "Important",
   "reflect":     "Reflect",
+  "decision":    "Decision",
+  "structure":   "Structure",
+  "brief":       "Mission brief",
+  "recap":       "Recap",
+  "try":         "Try this",
+  "synthesis":   "Synthesis",
 }
 
-const iconColorMap: Record<Variant, string> = {
-  "core-idea":   "text-gold",
-  "tip":         "text-gold",
-  "warning":     "text-destructive",
-  "key-concept": "text-gold",
-  "approval":    "text-gold",
-  "definition":  "text-muted-foreground",
-  "stakes":      "text-destructive",
-  "info":        "text-info",
-  "caution":     "text-caution",
-  "important":   "text-important",
-  "reflect":     "text-reflect",
-}
+const resolvedType = computed<CalloutType>(
+  () => props.type ?? variantToType[props.variant ?? "core-idea"]
+)
 
-const Icon = computed(() => iconMap[props.variant])
-const label = computed(() => labelMap[props.variant])
-const iconColor = computed(() => iconColorMap[props.variant])
+const shape = computed(() => typeToShape[resolvedType.value] as Parameters<typeof Polyhedron>[0] extends { shape: infer S } ? S : never)
+const glyphColorClass = computed(() => typeToGlyphColor[resolvedType.value])
+const label = computed(() => labelMap[props.variant ?? "core-idea"])
 </script>
 
 <template>
-  <Alert :class="cn(calloutVariants({ variant }), props.class)">
-    <component :is="Icon" :class="cn('w-4 h-4', iconColor)" />
+  <Alert :class="cn(calloutVariants({ variant }), 'callout-block', props.class)">
+    <!-- Polyhedron glyph — shape encodes intent -->
+    <Polyhedron
+      :shape="(shape as any)"
+      :size="28"
+      :class="['callout-glyph', glyphColorClass]"
+      :aria-hidden="true"
+    />
+
     <AlertTitle
-      class="font-display uppercase tracking-wider text-xs text-muted-foreground mb-1"
+      class="font-display italic font-light text-base text-foreground/80 mb-1"
     >
       {{ title ?? label }}
     </AlertTitle>
+
     <AlertDescription class="text-foreground/90 text-[15px] leading-relaxed">
       <slot />
     </AlertDescription>
   </Alert>
 </template>
+
+<style scoped>
+.callout-block {
+  position: relative;
+}
+
+/* Glyph colors via role tokens — no hex */
+.callout-glyph {
+  flex-shrink: 0;
+}
+
+.callout-glyph--primary {
+  color: hsl(var(--primary-edge));
+}
+
+.callout-glyph--secondary {
+  color: hsl(var(--secondary-edge));
+}
+
+.callout-glyph--accent {
+  color: hsl(var(--accent-edge));
+}
+
+.callout-glyph--support {
+  color: hsl(var(--support-edge));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout-block {
+    transition: none;
+  }
+}
+</style>

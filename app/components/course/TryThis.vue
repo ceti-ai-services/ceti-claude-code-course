@@ -1,46 +1,60 @@
 <script setup lang="ts">
-import { Target } from "lucide-vue-next"
+import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
 
-defineProps<{ time: string }>()
+defineProps<{ time?: string; title?: string }>()
 </script>
 
 <template>
-  <div class="assignment">
+  <div class="try-this">
     <!-- Gold top-sweep line -->
-    <div class="assignment__sweep" aria-hidden="true" />
+    <div class="try-this__sweep" aria-hidden="true" />
 
-    <div class="assignment__header">
-      <Target class="assignment__icon" aria-hidden="true" />
-      <span class="assignment__eyebrow">Field assignment</span>
-      <span class="assignment__timer">
-        <span class="assignment__timer-dot" aria-hidden="true" />
+    <div class="try-this__header">
+      <!-- Cuboctahedron: equilibrium-through-action (Fuller's "doing" state) -->
+      <Polyhedron
+        shape="cuboctahedron"
+        :size="36"
+        class="try-this__glyph"
+        aria-hidden="true"
+      />
+
+      <div class="try-this__header-text">
+        <span class="try-this__eyebrow">Try This</span>
+        <span v-if="title" class="try-this__title">{{ title }}</span>
+      </div>
+
+      <span v-if="time" class="try-this__timer">
+        <span class="try-this__timer-dot" aria-hidden="true" />
         {{ time }}
       </span>
     </div>
 
-    <div class="assignment__body">
+    <div class="try-this__body">
       <slot />
     </div>
   </div>
 </template>
 
 <style scoped>
-.assignment {
+.try-this {
   position: relative;
   margin: 28px 0;
   border-radius: 14px;
-  border: 1px solid rgba(212, 168, 75, 0.28);
-  background: linear-gradient(
-    160deg,
-    rgba(212, 168, 75, 0.06) 0%,
-    rgba(212, 168, 75, 0.02) 40%,
-    transparent 100%
-  );
+  border: 1px solid hsl(var(--accent-edge) / 0.28);
+  background: hsl(var(--muted));
   overflow: hidden;
 }
 
-/* Animated gold sweep on mount */
-.assignment__sweep {
+/* Dark mode: deeper background + glow border */
+:global(body.dark) .try-this {
+  background: hsl(var(--card));
+  border-color: hsl(var(--accent-edge) / 0.22);
+  box-shadow: inset 3px 0 0 0 hsl(var(--accent-edge)),
+              0 0 24px -8px hsl(var(--accent-edge) / 0.18);
+}
+
+/* Animated accent sweep on mount */
+.try-this__sweep {
   position: absolute;
   top: 0;
   left: 0;
@@ -49,8 +63,8 @@ defineProps<{ time: string }>()
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--color-gold) 40%,
-    var(--color-gold) 60%,
+    hsl(var(--accent-edge)) 40%,
+    hsl(var(--accent-edge)) 60%,
     transparent 100%
   );
   transform: scaleX(0);
@@ -62,45 +76,61 @@ defineProps<{ time: string }>()
   to { transform: scaleX(1); }
 }
 
-.assignment__header {
+.try-this__header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   padding: 12px 18px;
-  border-bottom: 1px dashed rgba(212, 168, 75, 0.22);
+  border-bottom: 1px dashed hsl(var(--accent-edge) / 0.22);
 }
 
-.assignment__icon {
-  width: 13px;
-  height: 13px;
-  color: var(--color-gold);
+.try-this__glyph {
+  color: hsl(var(--accent-edge));
   flex-shrink: 0;
 }
 
-.assignment__eyebrow {
+.try-this__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.try-this__eyebrow {
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-gold);
-  flex: 1;
+  color: hsl(var(--accent-edge));
 }
 
-.assignment__timer {
+.try-this__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.2;
+  color: hsl(var(--foreground));
+  letter-spacing: -0.01em;
+}
+
+.try-this__timer {
   display: flex;
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--color-muted);
+  color: hsl(var(--muted-foreground));
   letter-spacing: 0.04em;
+  flex-shrink: 0;
 }
 
-.assignment__timer-dot {
+.try-this__timer-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-gold);
+  background: hsl(var(--accent-edge));
   opacity: 0.7;
   animation: dot-pulse 2s ease-in-out infinite;
 }
@@ -110,60 +140,60 @@ defineProps<{ time: string }>()
   50% { opacity: 1; transform: scale(1.3); }
 }
 
-.assignment__body {
+.try-this__body {
   padding: 18px 20px 22px;
-  color: var(--color-text);
+  color: hsl(var(--foreground));
   font-size: 15px;
   line-height: 1.68;
 }
 
-.assignment__body :deep(p) { margin: 0 0 13px; }
-.assignment__body :deep(p:last-child) { margin-bottom: 0; }
+.try-this__body :deep(p) { margin: 0 0 13px; }
+.try-this__body :deep(p:last-child) { margin-bottom: 0; }
 
-.assignment__body :deep(ul),
-.assignment__body :deep(ol) {
+.try-this__body :deep(ul),
+.try-this__body :deep(ol) {
   margin: 8px 0 14px 0;
   padding: 0;
   list-style: none;
 }
-.assignment__body :deep(li) {
+.try-this__body :deep(li) {
   padding-left: 20px;
   position: relative;
   margin-bottom: 7px;
-  color: var(--color-text);
+  color: hsl(var(--foreground));
 }
-.assignment__body :deep(ul li::before) {
+.try-this__body :deep(ul li::before) {
   content: "→";
   position: absolute;
   left: 0;
-  color: var(--color-gold);
+  color: hsl(var(--accent-edge));
 }
-.assignment__body :deep(ol) { counter-reset: steps; }
-.assignment__body :deep(ol li) { counter-increment: steps; }
-.assignment__body :deep(ol li::before) {
+.try-this__body :deep(ol) { counter-reset: steps; }
+.try-this__body :deep(ol li) { counter-increment: steps; }
+.try-this__body :deep(ol li::before) {
   content: counter(steps, decimal-leading-zero);
   position: absolute;
   left: 0;
-  color: var(--color-gold);
+  color: hsl(var(--accent-edge));
   font-family: var(--font-mono);
   font-size: 12px;
 }
 
-.assignment__body :deep(code) {
-  background: var(--color-raised);
+.try-this__body :deep(code) {
+  background: hsl(var(--muted));
   padding: 2px 7px;
   border-radius: 4px;
   font-size: 0.89em;
-  color: var(--color-text);
+  color: hsl(var(--foreground));
 }
 
-.assignment__body :deep(strong) {
-  color: var(--color-text);
+.try-this__body :deep(strong) {
+  color: hsl(var(--foreground));
   font-weight: 700;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .assignment__sweep { animation: none; transform: scaleX(1); }
-  .assignment__timer-dot { animation: none; opacity: 0.7; }
+  .try-this__sweep { animation: none; transform: scaleX(1); }
+  .try-this__timer-dot { animation: none; opacity: 0.7; }
 }
 </style>

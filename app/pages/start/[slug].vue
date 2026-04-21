@@ -10,7 +10,7 @@
         :aria-label="`Module ${l.module}: ${l.title}`"
         :aria-current="i === lessonIndex ? 'page' : undefined"
       >
-        <Polyhedron :shape="glyphFor(l)" :size="18" />
+        <Polyhedron :shape="glyphFor(l)" :size="18" :meaning="glyphMeaningFor(l)" />
       </NuxtLink>
     </div>
 
@@ -26,6 +26,7 @@
           :size="48"
           :animate="true"
           :aria-label="`${lesson.title} — ${useModuleGlyph(lesson.slug).meaning}`"
+          :meaning="useModuleGlyph(lesson.slug).meaning"
         />
       </div>
       <h1>{{ lesson.title }}</h1>
@@ -59,6 +60,7 @@
         <Callout
           v-else-if="block.kind === 'callout'"
           :variant="block.variant"
+          :type="(block.calloutType as any)"
         >
           <div v-html="block.html" />
         </Callout>
@@ -183,7 +185,7 @@
           :aria-label="`Module ${l.module}: ${l.title}`"
           :aria-current="i === lessonIndex ? 'page' : undefined"
         >
-          <Polyhedron :shape="glyphFor(l)" :size="18" />
+          <Polyhedron :shape="glyphFor(l)" :size="18" :meaning="glyphMeaningFor(l)" />
         </NuxtLink>
       </div>
     </nav>
@@ -232,6 +234,11 @@ function glyphFor(l: { module: string; slug: string }) {
   return useModuleGlyph(l.module || l.slug).shape
 }
 
+// Resolves the short meaning sentence for a lesson's glyph — used for tooltip.
+function glyphMeaningFor(l: { module: string; slug: string }) {
+  return useModuleGlyph(l.module || l.slug).meaning
+}
+
 // Module hero map. Every Bronze module slug binds to its pattern-library-powered
 // hero component. New heroes compose MissionBrief + one pattern from
 // app/components/course/patterns/ per the docs/MODULE-VISUAL-PLAN.md.
@@ -257,7 +264,7 @@ type QuizOption = { label: string; correct: boolean; explain: string }
 type Block =
   | { kind: "html"; html: string }
   | { kind: "codeblock"; code: string; lang: string }
-  | { kind: "callout"; variant: string; html: string }
+  | { kind: "callout"; variant: string; calloutType?: string; html: string }
   | { kind: "try"; time: string; html: string }
   | { kind: "recap"; html: string }
   | { kind: "quiz"; prompt: string; options: QuizOption[] }
@@ -521,9 +528,11 @@ function tokenize(md: string): Block[] {
 
     if (found.tag === "Callout") {
       const variant = attrs.variant ?? "core-idea"
+      const calloutType = attrs.type ?? undefined
       blocks.push({
         kind: "callout",
         variant,
+        calloutType,
         html: mdToHtml(stripBlankLeadingTrailing(inner)),
       })
     } else if (found.tag === "TryThis") {

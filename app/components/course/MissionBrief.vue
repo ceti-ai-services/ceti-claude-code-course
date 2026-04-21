@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { Radio } from "lucide-vue-next"
+import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
 
 interface Objective {
   label: string
@@ -48,6 +49,13 @@ onMounted(() => {
         class="flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-gold uppercase mb-4"
         :class="visible ? 'mb-4' : ''"
       >
+        <!-- Icosahedron: systems-view; what-is-connected-to-what -->
+        <Polyhedron
+          shape="icosahedron"
+          :size="18"
+          class="brief-glyph"
+          aria-hidden="true"
+        />
         <Radio class="w-3 h-3 animate-pulse" />
         <span>Transmission · {{ props.codename }}</span>
         <span v-if="props.time" class="ml-auto text-muted-foreground tracking-normal normal-case font-normal">
@@ -165,6 +173,13 @@ onMounted(() => {
 .reveal-line--on {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Icosahedron glyph — systems-view anchor for the mission frame */
+.brief-glyph {
+  color: hsl(var(--primary-edge));
+  opacity: 0.75;
+  flex-shrink: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
