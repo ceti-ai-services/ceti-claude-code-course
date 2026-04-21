@@ -1,7 +1,8 @@
-<script setup lang="ts">
-import { ref } from "vue"
+<script lang="ts">
+// Module-scope declarations — referenced by withDefaults() which is hoisted
+// outside of setup(). Keep interfaces + default data here.
 
-interface Phase {
+export interface Phase {
   key: string
   name: string
   mcpHint: string
@@ -11,24 +12,14 @@ interface Phase {
   fail: string
 }
 
-interface TraceStep {
+export interface TraceStep {
   phase: "perceive" | "reason" | "act" | "observe"
   label: string
   action: string
   detail: string
 }
 
-interface Props {
-  eyebrow?: string
-  objective?: string
-  phases?: Phase[]
-  exampleTitle?: string
-  exampleTask?: string
-  trace?: TraceStep[]
-  class?: string
-}
-
-const defaultPhases: Phase[] = [
+export const defaultPhases: Phase[] = [
   {
     key: "perceive",
     name: "Perceive",
@@ -79,13 +70,27 @@ const defaultPhases: Phase[] = [
   },
 ]
 
-const defaultTrace: TraceStep[] = [
+export const defaultTrace: TraceStep[] = [
   { phase: "perceive", label: "Perceive", action: "Claude reads search_issues schema — learns about query, status, assignee, limit parameters", detail: "tools/list → search_issues schema loaded into session" },
   { phase: "perceive", label: "Perceive", action: "Reads current user resource to get authenticated username", detail: 'resources/read("config://user/current") → { username: "jsmith" }' },
   { phase: "reason", label: "Reason", action: "Matches task to tool: search_issues with assignee=\"jsmith\" and status=\"open\"", detail: "thinking: search_issues matches — need assignee + status filter, query can be empty string" },
   { phase: "act", label: "Act", action: "Executes: search_issues({ query: \"\", assignee: \"jsmith\", status: \"open\" })", detail: 'tools/call → { name: "search_issues", arguments: { query: "", assignee: "jsmith", status: "open" } }' },
   { phase: "observe", label: "Observe", action: "Receives 7 matching issues — presents list to user with IDs, titles, and statuses", detail: "→ [{ id: 142, title: \"Fix auth timeout\", status: \"open\" }, ... 6 more]" },
 ]
+</script>
+
+<script setup lang="ts">
+import { ref } from "vue"
+
+interface Props {
+  eyebrow?: string
+  objective?: string
+  phases?: Phase[]
+  exampleTitle?: string
+  exampleTask?: string
+  trace?: TraceStep[]
+  class?: string
+}
 
 const props = withDefaults(defineProps<Props>(), {
   eyebrow: "Integration",
