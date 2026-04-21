@@ -23,25 +23,41 @@
      dark-tinted backgrounds (--*-bg) and border colors (--*-edge) so tabs
      and panels can theme per-phase without competing with gold (primary).  */
 
-  /* Perceive / inform / read-only */
-  --color-info: #6aa8e8;
-  --color-info-bg: rgba(106, 168, 232, 0.08);
-  --color-info-edge: rgba(106, 168, 232, 0.32);
+  /* Perceive / inform / read-only — slightly brighter azure */
+  --color-info: #7fb5f0;
+  --color-info-bg: rgba(127, 181, 240, 0.10);
+  --color-info-edge: rgba(127, 181, 240, 0.38);
+  --color-info-deep: rgba(127, 181, 240, 0.55);
 
-  /* Reason / think / plan-mode */
-  --color-thought: #a78bfa;
-  --color-thought-bg: rgba(167, 139, 250, 0.08);
-  --color-thought-edge: rgba(167, 139, 250, 0.32);
+  /* Reason / think / plan-mode — slightly warmer violet */
+  --color-thought: #b39bfb;
+  --color-thought-bg: rgba(179, 155, 251, 0.10);
+  --color-thought-edge: rgba(179, 155, 251, 0.38);
+  --color-thought-deep: rgba(179, 155, 251, 0.55);
 
-  /* Act / execute / external tools (CETI brand camel) */
-  --color-act: #c49368;
-  --color-act-bg: rgba(196, 147, 104, 0.10);
-  --color-act-edge: rgba(196, 147, 104, 0.36);
+  /* Act / execute / external tools — warmer camel */
+  --color-act: #d6a077;
+  --color-act-bg: rgba(214, 160, 119, 0.12);
+  --color-act-edge: rgba(214, 160, 119, 0.42);
+  --color-act-deep: rgba(214, 160, 119, 0.60);
 
-  /* Observe / confirm / completed (CETI brand sage) */
-  --color-confirm: #8fb58e;
-  --color-confirm-bg: rgba(143, 181, 142, 0.10);
-  --color-confirm-edge: rgba(143, 181, 142, 0.36);
+  /* Observe / confirm / completed — brighter sage */
+  --color-confirm: #9fc99d;
+  --color-confirm-bg: rgba(159, 201, 157, 0.12);
+  --color-confirm-edge: rgba(159, 201, 157, 0.42);
+  --color-confirm-deep: rgba(159, 201, 157, 0.60);
+
+  /* Semantic callout tokens (separate from phase accents so callouts can
+     claim their own hue). All low-chroma dark-mode; light-mode twin at bottom. */
+  --color-caution: #e8a860;       /* amber — "caution" between warning and tip */
+  --color-caution-bg: rgba(232, 168, 96, 0.10);
+  --color-caution-edge: rgba(232, 168, 96, 0.40);
+  --color-important: #f0b04a;     /* deep amber — "important" leans toward gold */
+  --color-important-bg: rgba(240, 176, 74, 0.10);
+  --color-important-edge: rgba(240, 176, 74, 0.40);
+  --color-reflect: #c08fd6;       /* rose-violet — "reflect" is meta, deliberative */
+  --color-reflect-bg: rgba(192, 143, 214, 0.10);
+  --color-reflect-edge: rgba(192, 143, 214, 0.40);
 
   /* ─── shadcn-vue tokens mapped to CETI palette ─── */
   --color-background: var(--color-bg);
