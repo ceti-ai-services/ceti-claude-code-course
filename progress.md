@@ -1,61 +1,66 @@
-# Progress — Refactor Pass 2 (density + contrast)
+# Progress — after Pass 3a (navigation plumbing)
 
-**Snapshot:** 2026-04-21 late. 7 agents dispatched in parallel to add 4 mid-lesson diagrams per module (56 total). Infrastructure for the diagram registry is in place. Dark-mode contrast bumped across all 4 palettes.
+**Snapshot:** 2026-04-21 late. Manu reviewed pass-2 live. Said the design is "AWESOME" and the course is looking "MUCH better." Called out a specific list of issues. Pass 3 splits into two waves.
 
-## Current state
+## Wave A — Navigation plumbing (SHIPPED, commit c0e3207)
 
-### Task
-Expand every Bronze module from 1 diagram (hero only) to 5 diagrams (hero + 4 mid-lesson). Total target: 14 heroes + 56 mid-lesson = 70 diagrams. This is the density correction after pass-1 shipped with too much prose per module.
+1. ✅ **M01 back-button routes to `/start`** instead of `/` (marketing page).
+2. ✅ **`.btn-primary` contrast fixed** — was invisible in light mode (cream text on cream fill). Now uses `hsl(var(--primary-foreground))`.
+3. ✅ **"Review lesson" button** — smooth-scrolls to top, honors `prefers-reduced-motion`.
+4. ✅ **Bottom module-jumper strip** — duplicates the top progress dots at the bottom.
+5. ✅ **EN/ES toggle** — active state was unstyled (the `bg-gold` utility didn't exist in the palette system). Rebuilt with scoped palette tokens + mode-specific glow.
+6. ✅ **Current-module dot glow** — luminous ring + scale-up in dark mode, solid glow in light.
 
-### Active agents (parallel)
+Live on dev-learn.cetiai.co.
 
-| Agent | Modules | Status |
+## Wave B — Design polish (NEXT PASS)
+
+All items have concrete fix specifications logged in `.agent/HANDOFF.md §Wave B` and core decisions in `CLAUDE.md` (§copy-decision, §glow-decision).
+
+### Agent team for Wave B (plan, not yet dispatched)
+
+| Agent | Scope | Outputs |
 |---|---|---|
-| 1 | 01, 02 | in-flight |
-| 2 | 03, 04 | ✅ done |
-| 3 | 05, 06 | in-flight |
-| 4 | 07, 08 | ✅ done |
-| 5 | 09, 10 | ✅ done |
-| 6 | 11, 12 | in-flight |
-| 7 | 13, 14 | in-flight |
+| B1 — primitives | Build `<CopyButton>` component + update `DiagramShell` with dark glow + light shadow | shared copy UX + consistent card depth |
+| B2 — terminal surfaces | Convert all terminal chrome (TerminalReplay, ThreeMovesTerminal, any m<NN>-d<N>.vue using terminal aesthetic) to palette tokens | dark-mode terminals go dark, light-mode stay cream |
+| B3 — code blocks | Wrap all `<pre><code>` markdown output in a code-block component with CopyButton; audit `.prose` styles for pattern | every code fence has copy |
+| B4 — copy-integration | Audit FillableBuilder, TracedExample, any diagram that exposes verbatim text; add CopyButton to their artifact slots | nested copy works |
+| B5 — M10 JSON block | Wrap the hooks `settings.json` block in a proper code surface with chrome | fixes screenshot #5 |
+| B6 — M13 swap | Rework M13 diagrams — hero is ComparisonGrid (good); audit the 4 mid-lesson diagrams for clarity. ScatterFlow label-clip fix in the pattern. | clearer subagent teaching |
+| B7 — overflow audit | Grep every pattern for fixed widths + hardcoded `text-overflow` behavior; standardize with `overflow-wrap: break-word` | no truncated text |
+| B8 — MERCURIO | Review all 70 diagrams, flag weak ones, propose replacements | quality parity across modules |
 
-Each agent:
-1. Reads its 2 module `.md` files + `PATTERNS.md` + `M01Hero.vue` template
-2. Picks 4 distinct patterns per module (none = the module's hero pattern)
-3. Builds thin-wrapper `.vue` files at `app/components/course/diagrams/m<NN>-d<1..4>.vue`
-4. Inserts `<CourseDiagram id="m<NN>-d<1..4>" />` into the module's `.md` at the right paragraph breaks, deleting the prose the diagram now carries
+### Feedback items from Manu's review (log, verbatim context)
 
-### Modifications landed (by me, before agents)
+| # | Issue | Location | Spec |
+|---|---|---|---|
+| F1 | All copyable blocks need a copy button with single-click UX | Every code, prompt, FillableBuilder preview, TracedExample artifact, Terminal line | `<CopyButton :text="..." />`, clipboard API, transient checkmark |
+| F2 | Dark-mode terminal diagrams still use light-cream chrome | M03 TerminalReplay (screenshot #2) | Use `hsl(var(--card))`-shifted bg; terminal text uses `hsl(var(--foreground))` |
+| F3 | Glow on diagrams is inconsistent — the "awesome" one should be everywhere | Compare M10 hero (great) vs. others | `DiagramShell` adds dark-mode glow + light-mode shadow universally |
+| F4 | Text overflow — labels clipping | M13 ScatterFlow ("five-fi", "bounded researc"), possibly TracedExample | Max label 12 chars in ScatterFlow; `overflow-wrap: break-word` + `min-width: 0` on text containers |
+| F5 | M10 hooks JSON block renders as raw monospace with no chrome | screenshot #5 | Wrap in code-block component with chrome + CopyButton |
+| F6 | Current module number hard to see in dark mode | top progress-dots | ✅ FIXED in Wave A (glow ring) |
+| F7 | Next-module button invisible in light mode — class is there but glow-only visible | screenshot #7 | ✅ FIXED in Wave A (btn-primary fg token) |
+| F8 | M13 hero pattern (was ScatterFlow) is confusing | screenshot #8 | Swapped to ComparisonGrid in pass-2. **Remaining**: audit M13 mid-lesson diagrams for clarity |
 
-| File | Change |
-|---|---|
-| `app/assets/css/main.css` | Dark-mode `--*-foreground` lightness bumped to 76–92% across all 4 palettes |
-| `app/components/course/diagrams/index.ts` | New file — registry with static imports for all 56 `m<NN>-d<1..4>` components |
-| `app/pages/start/[slug].vue` | Tokenizer now recognizes `<CourseDiagram id="..." />` as self-closing tag; imports `DIAGRAM_REGISTRY` and dispatches via `<component :is="...">` |
-| `CLAUDE.md` | Added "5-diagrams-per-module rule" section with `<CourseDiagram>` contract, file paths, and prose-shrinkage guidance |
-| `.agent/HANDOFF.md` | Pass-2 scope + agent team table + success gates |
+### Design decisions locked in CLAUDE.md
 
-### Key decisions
+- **Copy-to-clipboard rule (§v4.2):** every copyable block gets `<CopyButton>`. Top-right placement, always visible on mobile, hover-visible on desktop, transient checkmark feedback.
+- **Glow & depth rule (§v4.2):** Dark mode cards glow with `0 0 32px -10px hsl(var(--primary-edge) / 0.18)`. Light mode cards use `0 1px 2px 0.06, 0 8px 24px -12px 0.10`.
+- **Terminal surface rule:** terminals follow the palette — never hex. Dark mode terminal bg is deeper than card bg; light mode is warm-cream.
 
-- **D-2026-04-21-density**: 5 diagrams per module is the floor. Visuals are majority; prose is connective tissue.
-- **D-2026-04-21-variety**: No two diagrams in the same module use the same pattern.
-- **D-2026-04-21-registry**: Central `diagrams/index.ts` registry. `[slug].vue` uses one generic tag; agents never edit the page renderer.
-- **D-2026-04-21-contrast**: `--*-foreground` tokens raised to 76–92% lightness. "Edge-light" rule preserved; light is just brighter.
+## Current status
 
-## What's next (when agents return)
+- **Build**: green (5.91 MB, 1.55 MB gzip)
+- **Routes**: 14 module pages + 5 site pages all 200
+- **Deploy**: commit `c0e3207` pushed, Vercel auto-deploying
+- **Diagrams**: 14 heroes + 56 mid-lesson = 70 rendering
+- **Next**: spawn Wave B agents B1–B8 in parallel
 
-1. Wait for all 7 notifications. Each returns ≤150-word report with pattern choices + prose deletions.
-2. Rebuild: `npx nuxt build`.
-3. Smoke test: 14 `/start/<slug>` routes should all 200 and render their 5 diagrams inline.
-4. Fix any TypeScript or build errors from agent outputs (hex leaks, missing prop shapes, broken markdown).
-5. Commit in one feat commit: `feat(density): 56 mid-lesson diagrams + 5-per-module rule`.
-6. Push → Vercel auto-deploy.
-7. Final MERCURIO pass if time allows.
-
-## Resume protocol (if context dies)
+## Resume protocol
 
 1. Read this file.
-2. Read `.agent/HANDOFF.md` § "Pass 2 architecture".
-3. `ls app/components/course/diagrams/*.vue | wc -l` — if < 56, check which m<NN>-d<N>.vue are missing and dispatch catch-up agents per the HANDOFF team table.
-4. `git log --oneline -6` to see where we are.
-5. `npx nuxt build` — if green, commit + push.
+2. Read `.agent/HANDOFF.md §Wave B`.
+3. `git log --oneline -6`.
+4. Spawn Wave B agents (specs in HANDOFF.md §Wave B table).
+5. Build + verify + commit + push.
