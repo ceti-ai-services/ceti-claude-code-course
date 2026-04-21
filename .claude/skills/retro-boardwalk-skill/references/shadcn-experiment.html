@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Retro Boardwalk — shadcn/ui experiment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="ext-resource-dependency" content="https://cdn.tailwindcss.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,300;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // Map shadcn's semantic tokens onto the Retro Boardwalk palettes.
+  // shadcn theming convention: HSL values in CSS vars, consumed via
+  // tailwind utilities like bg-primary / text-muted-foreground etc.
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          serif: ['Fraunces', 'Georgia', 'serif'],
+          mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
+        },
+        colors: {
+          background: 'hsl(var(--background) / <alpha-value>)',
+          foreground: 'hsl(var(--foreground) / <alpha-value>)',
+          card: 'hsl(var(--card) / <alpha-value>)',
+          'card-foreground': 'hsl(var(--card-foreground) / <alpha-value>)',
+          muted: 'hsl(var(--muted) / <alpha-value>)',
+          'muted-foreground': 'hsl(var(--muted-foreground) / <alpha-value>)',
+          primary: 'hsl(var(--primary) / <alpha-value>)',
+          'primary-foreground': 'hsl(var(--primary-foreground) / <alpha-value>)',
+          secondary: 'hsl(var(--secondary) / <alpha-value>)',
+          'secondary-foreground': 'hsl(var(--secondary-foreground) / <alpha-value>)',
+          accent: 'hsl(var(--accent) / <alpha-value>)',
+          'accent-foreground': 'hsl(var(--accent-foreground) / <alpha-value>)',
+          support: 'hsl(var(--support) / <alpha-value>)',
+          'support-foreground': 'hsl(var(--support-foreground) / <alpha-value>)',
+          border: 'hsl(var(--border) / <alpha-value>)',
+          ring: 'hsl(var(--ring) / <alpha-value>)',
+          // Dark-mode luminous edge colors (same role, but for borders)
+          'primary-edge': 'hsl(var(--primary-edge) / <alpha-value>)',
+          'secondary-edge': 'hsl(var(--secondary-edge) / <alpha-value>)',
+          'accent-edge': 'hsl(var(--accent-edge) / <alpha-value>)',
+          'support-edge': 'hsl(var(--support-edge) / <alpha-value>)',
+        },
+        borderRadius: {
+          lg: 'var(--radius)',
+          md: 'calc(var(--radius) - 2px)',
+          sm: 'calc(var(--radius) - 4px)',
+        },
+        keyframes: {
+          'slide-in': { '0%': { transform: 'translateY(6px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+          'fade-blink': { '0%,100%': { opacity: '.35' }, '50%': { opacity: '1' } },
+          'dash-travel': { to: { strokeDashoffset: '-20' } },
+          'pulse-lift': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-3px) scale(1.03)' } },
+        },
+        animation: {
+          'slide-in': 'slide-in .35s ease',
+          'fade-blink': 'fade-blink 1.4s ease-in-out infinite',
+          'dash-travel': 'dash-travel 1.2s linear infinite',
+          'pulse-lift': 'pulse-lift 1.4s ease-in-out infinite',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root {
+    --radius: 0.625rem;
+    --ring: 260 40% 55%;
+  }
+  /* ── Boardwalk ── */
+  .palette-boardwalk.light {
+    --background: 44 58% 89%; --foreground: 28 28% 13%;
+    --card: 42 46% 85%; --card-foreground: 28 28% 13%;
+    --muted: 42 20% 40%; --muted-foreground: 28 18% 34%;
+    --border: 260 35% 85%;
+    --primary: 265 45% 78%; --primary-foreground: 262 48% 30%;
+    --secondary: 150 35% 72%; --secondary-foreground: 158 56% 23%;
+    --accent: 10 62% 76%; --accent-foreground: 10 70% 26%;
+    --support: 212 40% 67%; --support-foreground: 212 56% 23%;
+    --primary-edge: 265 45% 78%; --secondary-edge: 150 35% 72%;
+    --accent-edge: 10 62% 76%; --support-edge: 212 40% 67%;
+  }
+  .palette-boardwalk.dark {
+    --background: 268 16% 11%; --foreground: 40 55% 92%;
+    --card: 260 22% 18%; --card-foreground: 40 55% 92%;
+    --muted: 268 15% 62%; --muted-foreground: 268 18% 70%;
+    --border: 262 72% 86% / .22;
+    --primary: 263 28% 22%; --primary-foreground: 262 80% 85%;
+    --secondary: 158 18% 15%; --secondary-foreground: 152 58% 69%;
+    --accent: 12 30% 18%; --accent-foreground: 10 74% 62%;
+    --support: 212 30% 18%; --support-foreground: 212 52% 65%;
+    --primary-edge: 262 80% 85%; --secondary-edge: 152 58% 69%;
+    --accent-edge: 10 74% 62%; --support-edge: 212 52% 65%;
+  }
+  /* ── Coastal ── */
+  .palette-coastal.light {
+    --background: 48 30% 89%; --foreground: 32 18% 11%;
+    --card: 46 24% 83%; --card-foreground: 32 18% 11%;
+    --muted: 36 15% 38%; --muted-foreground: 32 16% 28%;
+    --border: 170 40% 22% / .14;
+    --primary: 166 36% 72%; --primary-foreground: 166 55% 22%;
+    --secondary: 14 55% 82%; --secondary-foreground: 14 55% 26%;
+    --accent: 205 52% 78%; --accent-foreground: 205 70% 20%;
+    --support: 0 24% 72%; --support-foreground: 0 38% 24%;
+    --primary-edge: 166 36% 72%; --secondary-edge: 14 55% 82%;
+    --accent-edge: 205 52% 78%; --support-edge: 0 24% 72%;
+  }
+  .palette-coastal.dark {
+    --background: 192 14% 10%; --foreground: 170 22% 92%;
+    --card: 204 28% 15%; --card-foreground: 170 22% 92%;
+    --muted: 170 15% 54%; --muted-foreground: 170 12% 64%;
+    --border: 165 60% 68% / .18;
+    --primary: 168 28% 13%; --primary-foreground: 165 60% 68%;
+    --secondary: 8 25% 13%; --secondary-foreground: 16 75% 76%;
+    --accent: 202 42% 15%; --accent-foreground: 205 62% 60%;
+    --support: 0 14% 15%; --support-foreground: 0 50% 81%;
+    --primary-edge: 165 60% 68%; --secondary-edge: 16 75% 76%;
+    --accent-edge: 205 62% 60%; --support-edge: 0 50% 81%;
+  }
+  /* ── Greenhouse ── */
+  .palette-greenhouse.light {
+    --background: 44 30% 89%; --foreground: 40 40% 8%;
+    --card: 42 22% 83%; --card-foreground: 40 40% 8%;
+    --muted: 32 18% 35%; --muted-foreground: 32 20% 28%;
+    --border: 90 30% 20% / .15;
+    --primary: 80 26% 52%; --primary-foreground: 85 65% 12%;
+    --secondary: 14 42% 59%; --secondary-foreground: 14 58% 12%;
+    --accent: 148 20% 52%; --accent-foreground: 148 40% 12%;
+    --support: 30 12% 67%; --support-foreground: 30 20% 18%;
+    --primary-edge: 80 26% 52%; --secondary-edge: 14 42% 59%;
+    --accent-edge: 148 20% 52%; --support-edge: 30 12% 67%;
+  }
+  .palette-greenhouse.dark {
+    --background: 72 14% 7%; --foreground: 40 40% 88%;
+    --card: 78 18% 12%; --card-foreground: 40 40% 88%;
+    --muted: 42 18% 50%; --muted-foreground: 42 14% 60%;
+    --border: 90 62% 66% / .18;
+    --primary: 96 32% 12%; --primary-foreground: 90 62% 66%;
+    --secondary: 22 32% 12%; --secondary-foreground: 22 78% 70%;
+    --accent: 144 32% 12%; --accent-foreground: 145 42% 56%;
+    --support: 36 20% 13%; --support-foreground: 40 22% 72%;
+    --primary-edge: 90 62% 66%; --secondary-edge: 22 78% 70%;
+    --accent-edge: 145 42% 56%; --support-edge: 40 22% 72%;
+  }
+  /* ── Neo Sage ── */
+  .palette-neosage.light {
+    --background: 48 24% 93%; --foreground: 8 18% 11%;
+    --card: 48 22% 88%; --card-foreground: 8 18% 11%;
+    --muted: 32 10% 40%; --muted-foreground: 32 12% 30%;
+    --border: 262 44% 20% / .15;
+    --primary: 265 32% 65%; --primary-foreground: 262 60% 24%;
+    --secondary: 68 54% 54%; --secondary-foreground: 72 100% 11%;
+    --accent: 36 70% 66%; --accent-foreground: 36 100% 16%;
+    --support: 28 6% 63%; --support-foreground: 28 10% 18%;
+    --primary-edge: 265 32% 65%; --secondary-edge: 68 54% 54%;
+    --accent-edge: 36 70% 66%; --support-edge: 28 6% 63%;
+  }
+  .palette-neosage.dark {
+    --background: 260 16% 8%; --foreground: 48 24% 93%;
+    --card: 260 18% 13%; --card-foreground: 48 24% 93%;
+    --muted: 260 10% 56%; --muted-foreground: 260 10% 66%;
+    --border: 262 86% 82% / .20;
+    --primary: 258 38% 15%; --primary-foreground: 262 86% 82%;
+    --secondary: 72 65% 8%; --secondary-foreground: 68 78% 62%;
+    --accent: 36 60% 12%; --accent-foreground: 36 80% 57%;
+    --support: 280 8% 13%; --support-foreground: 260 12% 73%;
+    --primary-edge: 262 86% 82%; --secondary-edge: 68 78% 62%;
+    --accent-edge: 36 80% 57%; --support-edge: 260 12% 73%;
+  }
+
+  body { background: hsl(var(--background)); color: hsl(var(--foreground)); transition: background .3s ease, color .3s ease; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body class="font-sans">
+<div id="root"></div>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" fill="#0e0b14"/>
+    <g transform="translate(50 80)">
+      <rect width="22" height="22" rx="6" fill="none" stroke="#CAB8F8" stroke-width="2"/>
+      <rect x="26" width="22" height="22" rx="6" fill="none" stroke="#86DAC0" stroke-width="2"/>
+      <rect x="52" width="22" height="22" rx="6" fill="none" stroke="#E87258" stroke-width="2"/>
+      <rect x="78" width="22" height="22" rx="6" fill="none" stroke="#7AA0D0" stroke-width="2"/>
+    </g>
+  </svg>
+</template>
+
+<script type="text/babel" src="shadcn-primitives.jsx"></script>
+<script type="text/babel" src="shadcn-diagrams.jsx"></script>
+
+<script type="text/babel">
+const PALETTE_META = {
+  boardwalk:  { label: 'Boardwalk',  emoji: '🎡' },
+  coastal:    { label: 'Coastal',    emoji: '🌊' },
+  greenhouse: { label: 'Greenhouse', emoji: '🌿' },
+  neosage:    { label: 'Neo Sage',   emoji: '⚡' },
+};
+
+function Chrome({ mode, setMode, palette, setPalette }) {
+  return (
+    <div className="fixed top-3 right-3 z-50 flex items-center gap-1 p-1.5 rounded-full
+                    bg-card/80 backdrop-blur-md border border-border/50 shadow-lg">
+      {Object.entries(PALETTE_META).map(([id, p]) => (
+        <Button key={id} size="sm"
+                variant={palette === id ? 'primary' : 'ghost'}
+                onClick={() => setPalette(id)}>
+          <span className="mr-1">{p.emoji}</span>{p.label}
+        </Button>
+      ))}
+      <div className="w-px h-5 bg-border mx-1"/>
+      <Button size="sm" variant={mode === 'light' ? 'primary' : 'ghost'} onClick={() => setMode('light')}>Light</Button>
+      <Button size="sm" variant={mode === 'dark'  ? 'primary' : 'ghost'} onClick={() => setMode('dark')}>Dark</Button>
+    </div>
+  );
+}
+
+function App() {
+  const [mode, setMode] = React.useState(() => localStorage.getItem('sh-mode') || 'dark');
+  const [palette, setPalette] = React.useState(() => localStorage.getItem('sh-palette') || 'boardwalk');
+  React.useEffect(() => {
+    document.body.className = `font-sans palette-${palette} ${mode}`;
+    localStorage.setItem('sh-mode', mode);
+    localStorage.setItem('sh-palette', palette);
+  }, [mode, palette]);
+
+  return (
+    <>
+      <Chrome mode={mode} setMode={setMode} palette={palette} setPalette={setPalette} />
+
+      <div className="max-w-6xl mx-auto px-6 py-12 pb-24">
+        <header className="mb-10">
+          <div className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground mb-2">shadcn/ui · experiment</div>
+          <h1 className="font-serif font-light italic text-5xl tracking-tight mb-3 text-foreground">
+            The same patterns, built on a token contract.
+          </h1>
+          <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
+            Every diagram below uses only semantic tokens — <code className="font-mono text-xs">bg-primary</code>, <code className="font-mono text-xs">text-accent-foreground</code>, <code className="font-mono text-xs">border-ring</code>.
+            Swap the palette class on <code className="font-mono text-xs">&lt;body&gt;</code>, the whole system re-skins.
+            Toggle dark — color jumps from fill to luminous edge.
+          </p>
+        </header>
+
+        <Section title="Atoms" caption="The primitives every diagram is composed from.">
+          <Card className="p-6 col-span-2">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-4">Buttons</div>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="accent">Accent CTA</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="ghost">Ghost</Button>
+            </div>
+          </Card>
+          <Card className="p-6">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-4">Badges</div>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="primary">perceive</Badge>
+              <Badge variant="secondary">reason</Badge>
+              <Badge variant="accent">act</Badge>
+              <Badge variant="support">observe</Badge>
+            </div>
+          </Card>
+        </Section>
+
+        <Section title="PRAO loop" caption="The same four-node concept, three shapes.">
+          <Card className="p-6 col-span-3"><ShadSequentialPulse /></Card>
+          <Card className="p-6"><ShadOrbitalRing /></Card>
+          <Card className="p-6 col-span-2"><ShadStoryboard /></Card>
+        </Section>
+
+        <Section title="Concept diagrams" caption="Teach one specific idea — persistence, tradeoffs, fit.">
+          <Card className="p-6 col-span-2"><ShadSessionBoundary /></Card>
+          <Card className="p-6"><ShadFitTree /></Card>
+          <Card className="p-6 col-span-3"><ShadTradeoffMatrix /></Card>
+        </Section>
+
+        <Section title="Teaching patterns" caption="Reusable shapes — patterns.md as components.">
+          <Card className="p-6 col-span-2"><ShadComparison /></Card>
+          <Card className="p-6"><ShadFailureTable /></Card>
+          <Card className="p-6 col-span-2"><ShadTerminal /></Card>
+          <Card className="p-6"><ShadCheckList /></Card>
+        </Section>
+
+        <footer className="mt-12 pt-6 border-t border-border">
+          <div className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-2">What's new vs the RB version</div>
+          <ul className="text-sm text-foreground space-y-1.5 leading-relaxed">
+            <li>→ Every color flows through <code className="font-mono text-xs bg-muted/20 px-1.5 py-0.5 rounded">--token</code> CSS variables — not JS objects.</li>
+            <li>→ Swapping palette = swapping one class on <code className="font-mono text-xs bg-muted/20 px-1.5 py-0.5 rounded">&lt;body&gt;</code>. No re-renders, no context wiring.</li>
+            <li>→ Diagrams are pure Tailwind utility classes. No inline style objects.</li>
+            <li>→ Dark-mode "luminous edge" = dedicated <code className="font-mono text-xs bg-muted/20 px-1.5 py-0.5 rounded">--*-edge</code> tokens, used via <code className="font-mono text-xs bg-muted/20 px-1.5 py-0.5 rounded">border-primary-edge</code>.</li>
+          </ul>
+        </footer>
+      </div>
+    </>
+  );
+}
+
+function Section({ title, caption, children }) {
+  return (
+    <section className="mb-12">
+      <div className="mb-4">
+        <h2 className="font-serif text-2xl font-light text-foreground">{title}</h2>
+        {caption && <p className="text-xs text-muted-foreground italic mt-1">{caption}</p>}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-fr">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
