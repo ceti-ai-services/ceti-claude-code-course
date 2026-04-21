@@ -15,17 +15,18 @@
 
     <!-- Module manifest -->
     <section class="manifest" aria-label="Course modules">
-      <div class="manifest-label">Mission briefing · 7 modules</div>
+      <div class="manifest-label">Mission briefing · {{ modules.length }} modules · {{ liveCount }} live</div>
       <ol class="manifest-list">
         <li
           v-for="(m, i) in modules"
           :key="m.num"
-          class="manifest-item"
-          :style="`--item-delay: ${i * 60}ms`"
+          :class="['manifest-item', !m.live && 'manifest-item--planned']"
+          :style="`--item-delay: ${i * 45}ms`"
         >
           <span class="manifest-num">{{ m.num }}</span>
           <span class="manifest-title">{{ m.title }}</span>
-          <span class="manifest-time">{{ m.time }}</span>
+          <span v-if="m.live" class="manifest-time">{{ m.time }}</span>
+          <span v-else class="manifest-badge">Planned</span>
         </li>
       </ol>
     </section>
@@ -77,14 +78,27 @@ const code = ref('')
 const error = ref('')
 const loading = ref(false)
 
+const liveCount = computed(() => modules.filter(m => m.live).length)
+
+// 14-module Bronze shape — Foundations (1–6), Real work (6–7),
+// Toolkit (7–10), Integration (11–12), Going further (13–14).
+// Modules currently live are marked `live: true`. The rest appear on the
+// manifest with a `planned` marker so the full scope is visible on day one.
 const modules = [
-  { num: '01', title: 'What Claude Code is — and how it differs from the browser chatbot', time: '12 min' },
-  { num: '02', title: 'Install on Mac, Windows, or Linux', time: '14 min' },
-  { num: '03', title: 'Your first real session — scoped to a folder', time: '14 min' },
-  { num: '04', title: 'File permissions — read the diff, approve the change', time: '12 min' },
-  { num: '05', title: 'CLAUDE.md — write it once, stop explaining yourself', time: '13 min' },
-  { num: '06', title: 'One real task, end-to-end', time: '45 min' },
-  { num: '07', title: 'What you do next — three habits that compound', time: '10 min' },
+  { num: '01', title: 'What Claude Code is — and how it differs from the browser chatbot', time: '12 min', live: true },
+  { num: '02', title: 'Install on Mac, Windows, or Linux', time: '14 min', live: true },
+  { num: '03', title: 'Your first real session — scoped to a folder', time: '14 min', live: true },
+  { num: '04', title: 'File permissions — read the diff, approve the change', time: '12 min', live: true },
+  { num: '05', title: 'CLAUDE.md — write it once, stop explaining yourself', time: '13 min', live: true },
+  { num: '06', title: 'One real task, end-to-end', time: '45 min', live: true },
+  { num: '07', title: 'Slash commands — reusable prompts you build once', time: '12 min', live: false },
+  { num: '08', title: 'Skills — packaged capabilities Claude loads on demand', time: '12 min', live: false },
+  { num: '09', title: 'Plan mode — think before acting, dry-run your work', time: '10 min', live: false },
+  { num: '10', title: 'Hooks — safety gates and pre/post-tool-use automation', time: '14 min', live: false },
+  { num: '11', title: 'MCP basics — connect Gmail, Calendar, Notion, your files', time: '14 min', live: true },
+  { num: '12', title: 'Git integration — commits, branches, PRs through Claude', time: '12 min', live: false },
+  { num: '13', title: 'Subagents and parallel work', time: '12 min', live: false },
+  { num: '14', title: 'Next steps — habits and the wider agentic toolkit', time: '10 min', live: false },
 ]
 
 async function submit() {
@@ -232,6 +246,31 @@ async function submit() {
   font-size: 11px;
   color: var(--color-dim);
   white-space: nowrap;
+}
+
+.manifest-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+  padding: 2px 8px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.manifest-item--planned {
+  opacity: 0.58;
+}
+.manifest-item--planned:hover {
+  opacity: 0.85;
+}
+.manifest-item--planned .manifest-num {
+  color: var(--color-dim);
+}
+.manifest-item--planned .manifest-title {
+  color: var(--color-muted);
 }
 
 /* ---- Form ---- */

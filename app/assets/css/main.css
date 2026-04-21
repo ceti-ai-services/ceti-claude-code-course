@@ -17,6 +17,32 @@
   --color-gold-dim: rgba(212, 168, 75, 0.18);
   --color-danger: #e05b4b;
 
+  /* ─── Extended phase-accent palette (theme-aligned, low-chroma) ───────────
+     Per-concept accents for multi-phase interactions (PRAO loops, process
+     flows, branching choices). All muted — never cyberpunk. Paired with
+     dark-tinted backgrounds (--*-bg) and border colors (--*-edge) so tabs
+     and panels can theme per-phase without competing with gold (primary).  */
+
+  /* Perceive / inform / read-only */
+  --color-info: #6aa8e8;
+  --color-info-bg: rgba(106, 168, 232, 0.08);
+  --color-info-edge: rgba(106, 168, 232, 0.32);
+
+  /* Reason / think / plan-mode */
+  --color-thought: #a78bfa;
+  --color-thought-bg: rgba(167, 139, 250, 0.08);
+  --color-thought-edge: rgba(167, 139, 250, 0.32);
+
+  /* Act / execute / external tools (CETI brand camel) */
+  --color-act: #c49368;
+  --color-act-bg: rgba(196, 147, 104, 0.10);
+  --color-act-edge: rgba(196, 147, 104, 0.36);
+
+  /* Observe / confirm / completed (CETI brand sage) */
+  --color-confirm: #8fb58e;
+  --color-confirm-bg: rgba(143, 181, 142, 0.10);
+  --color-confirm-edge: rgba(143, 181, 142, 0.36);
+
   /* ─── shadcn-vue tokens mapped to CETI palette ─── */
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);

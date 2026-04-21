@@ -64,6 +64,9 @@
           :options="block.options"
         />
 
+        <!-- PraoLoop: Perceive → Reason → Act → Observe interactive -->
+        <PraoLoop v-else-if="block.kind === 'praoLoop'" />
+
         <!-- PersonaExample: renders only the active persona's slot -->
         <PersonaExample v-else-if="block.kind === 'personaExample'">
           <template #creator>
@@ -128,6 +131,7 @@ import TryThis from "@/components/course/TryThis.vue"
 import Recap from "@/components/course/Recap.vue"
 import Quiz from "@/components/course/Quiz.vue"
 import PersonaExample from "@/components/course/PersonaExample.vue"
+import PraoLoop from "@/components/course/PraoLoop.vue"
 
 // Per-module interactive hero blocks. Each composes `MissionBrief` + a
 // module-specific interactive primitive (BeforeAfter / ProcessFlow /
@@ -140,6 +144,7 @@ import M04Hero from "@/components/course/lesson/M04Hero.vue"
 import M05Hero from "@/components/course/lesson/M05Hero.vue"
 import M06Hero from "@/components/course/lesson/M06Hero.vue"
 import M07Hero from "@/components/course/lesson/M07Hero.vue"
+import M11Hero from "@/components/course/lesson/M11Hero.vue"
 
 import { useCustomizer } from "@/composables/useCustomizer"
 import type { Persona } from "@/types/customizer"
@@ -153,6 +158,7 @@ const heroMap: Record<string, unknown> = {
   "05-claude-md": M05Hero,
   "06-real-use-case": M06Hero,
   "07-next-steps": M07Hero,
+  "11-mcp-basics": M11Hero,
 }
 
 type QuizOption = { label: string; correct: boolean; explain: string }
@@ -167,6 +173,7 @@ type Block =
       kind: "personaExample"
       slots: Partial<Record<Persona, string>>
     }
+  | { kind: "praoLoop" }
 
 interface LessonFile {
   slug: string
@@ -246,23 +253,29 @@ const CUSTOM_TAGS = [
   "Recap",
   "PersonaExample",
   "Quiz",
+  "PraoLoop",
 ] as const
+
+// Tags that may appear self-closing (<Tag />) — no paired close required.
+const SELF_CLOSING_TAGS = new Set(["PraoLoop"])
 
 type CustomTag = (typeof CUSTOM_TAGS)[number]
 
 function findNextCustomTag(
   md: string,
   from: number,
-): { tag: CustomTag; start: number; openEnd: number; rawOpen: string } | null {
+): { tag: CustomTag; start: number; openEnd: number; rawOpen: string; selfClose: boolean } | null {
   // Find the first occurrence of any of our custom tags as an opening tag.
+  // Matches both paired (<Tag>) and self-closing (<Tag />) forms.
   let best: {
     tag: CustomTag
     start: number
     openEnd: number
     rawOpen: string
+    selfClose: boolean
   } | null = null
   for (const tag of CUSTOM_TAGS) {
-    const re = new RegExp(`<${tag}(\\s[^>]*)?>`, "g")
+    const re = new RegExp(`<${tag}(\\s[^>]*)?(/?)>`, "g")
     re.lastIndex = from
     const m = re.exec(md)
     if (m) {
@@ -272,6 +285,7 @@ function findNextCustomTag(
           start: m.index,
           openEnd: m.index + m[0].length,
           rawOpen: m[0],
+          selfClose: m[2] === "/",
         }
       }
     }
@@ -349,6 +363,15 @@ function tokenize(md: string): Block[] {
     if (found.start > cursor) {
       const chunk = md.slice(cursor, found.start)
       if (chunk.trim()) blocks.push({ kind: "html", html: mdToHtml(chunk) })
+    }
+
+    // Self-closing tag — emit block directly, advance cursor past opening tag.
+    if (found.selfClose && SELF_CLOSING_TAGS.has(found.tag)) {
+      if (found.tag === "PraoLoop") {
+        blocks.push({ kind: "praoLoop" })
+      }
+      cursor = found.openEnd
+      continue
     }
 
     const closeIdx = findMatchingClose(md, found.tag, found.openEnd)
