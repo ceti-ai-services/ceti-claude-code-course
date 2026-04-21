@@ -159,7 +159,7 @@ const showDiff = computed(() => state.value === "pending")
               <div class="flex gap-2">
                 <Button
                   size="sm"
-                  class="bg-gold text-[#15110a] hover:bg-gold-hover font-mono text-xs"
+                  class="bg-gold text-background hover:bg-gold-hover font-mono text-xs"
                   @click="approve"
                 >
                   <Check class="w-3.5 h-3.5 mr-1" />
@@ -315,12 +315,12 @@ const showDiff = computed(() => state.value === "pending")
   flex-shrink: 0;
 }
 .sim-diff__remove {
-  background: rgba(224, 91, 75, 0.12);
-  color: #f87171;
+  background: hsl(var(--accent-edge) / 0.12);
+  color: hsl(var(--accent-edge));
 }
 .sim-diff__add {
-  background: rgba(94, 183, 101, 0.12);
-  color: #86efac;
+  background: hsl(var(--secondary-edge) / 0.12);
+  color: hsl(var(--secondary-edge));
 }
 .sim-diff__context { color: var(--color-dim); }
 .sim-diff__meta {
@@ -350,9 +350,9 @@ const showDiff = computed(() => state.value === "pending")
   margin-top: 8px;
 }
 .sim-outcome--ok {
-  background: rgba(94, 183, 101, 0.1);
-  border: 1px solid rgba(94, 183, 101, 0.3);
-  color: #86efac;
+  background: hsl(var(--secondary-edge) / 0.10);
+  border: 1px solid hsl(var(--secondary-edge) / 0.30);
+  color: hsl(var(--secondary-edge));
 }
 .sim-outcome--deny {
   background: rgba(212, 168, 75, 0.08);
