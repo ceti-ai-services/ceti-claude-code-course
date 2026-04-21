@@ -1,6 +1,6 @@
 <template>
   <main class="lesson">
-    <div class="progress-dots">
+    <div class="progress-dots" aria-label="Module progress">
       <NuxtLink
         v-for="(l, i) in lessons"
         :key="l.slug"
@@ -8,6 +8,7 @@
         class="dot"
         :class="{ 'dot-done': i < lessonIndex, 'dot-current': i === lessonIndex }"
         :aria-label="`Module ${l.module}: ${l.title}`"
+        :aria-current="i === lessonIndex ? 'page' : undefined"
       >
         {{ l.module }}
       </NuxtLink>
@@ -105,26 +106,71 @@
       </p>
     </div>
 
-    <nav v-if="lesson" class="lesson-nav">
-      <NuxtLink
-        v-if="prev"
-        :to="lessonLink(prev.slug)"
-        class="btn btn-secondary"
-        >← Module {{ prev.module }}</NuxtLink
-      >
-      <NuxtLink v-else to="/start" class="btn btn-secondary"
-        >← Back to start</NuxtLink
-      >
+    <nav v-if="lesson" class="lesson-nav" aria-label="Lesson navigation">
+      <!-- Row 1: three primary actions -->
+      <div class="lesson-nav-row">
+        <NuxtLink
+          v-if="prev"
+          :to="lessonLink(prev.slug)"
+          class="lnav-btn lnav-btn--prev"
+        >
+          <span class="lnav-arrow" aria-hidden="true">←</span>
+          <span class="lnav-label">
+            <span class="lnav-mini">Previous</span>
+            <span class="lnav-title">Module {{ prev.module }}</span>
+          </span>
+        </NuxtLink>
+        <NuxtLink v-else to="/start" class="lnav-btn lnav-btn--prev">
+          <span class="lnav-arrow" aria-hidden="true">←</span>
+          <span class="lnav-label">
+            <span class="lnav-mini">Back to</span>
+            <span class="lnav-title">Module list</span>
+          </span>
+        </NuxtLink>
 
-      <NuxtLink
-        v-if="next"
-        :to="lessonLink(next.slug)"
-        class="btn btn-primary"
-        >Module {{ next.module }}: {{ next.title }} →</NuxtLink
-      >
-      <NuxtLink v-else to="/silver" class="btn btn-primary"
-        >You're done — see Silver →</NuxtLink
-      >
+        <button type="button" class="lnav-btn lnav-btn--review" @click="scrollToTop">
+          <span class="lnav-arrow" aria-hidden="true">↑</span>
+          <span class="lnav-label">
+            <span class="lnav-mini">Read again</span>
+            <span class="lnav-title">Review lesson</span>
+          </span>
+        </button>
+
+        <NuxtLink
+          v-if="next"
+          :to="lessonLink(next.slug)"
+          class="lnav-btn lnav-btn--next"
+        >
+          <span class="lnav-label">
+            <span class="lnav-mini">Next up</span>
+            <span class="lnav-title">{{ next.title }}</span>
+          </span>
+          <span class="lnav-arrow" aria-hidden="true">→</span>
+        </NuxtLink>
+        <NuxtLink v-else to="/silver" class="lnav-btn lnav-btn--next">
+          <span class="lnav-label">
+            <span class="lnav-mini">You're done</span>
+            <span class="lnav-title">See Silver cohort</span>
+          </span>
+          <span class="lnav-arrow" aria-hidden="true">→</span>
+        </NuxtLink>
+      </div>
+
+      <!-- Row 2: duplicate module jumper -->
+      <div class="lesson-nav-jump" aria-label="Jump to module">
+        <span class="lnav-jump-label">Jump to</span>
+        <NuxtLink
+          v-for="(l, i) in lessons"
+          :key="l.slug"
+          :to="lessonLink(l.slug)"
+          class="dot"
+          :class="{ 'dot-done': i < lessonIndex, 'dot-current': i === lessonIndex }"
+          :aria-label="`Module ${l.module}: ${l.title}`"
+          :aria-current="i === lessonIndex ? 'page' : undefined"
+        >
+          {{ l.module }}
+        </NuxtLink>
+      </div>
     </nav>
   </main>
 </template>
@@ -531,6 +577,12 @@ const next = computed(() =>
     : null,
 )
 
+function scrollToTop() {
+  if (typeof window === "undefined") return
+  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+  window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" })
+}
+
 function lessonLink(s: string): string {
   const p = persona.value
   const l = lang.value
@@ -601,30 +653,180 @@ useHead(() => ({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--raised);
-  border: 1px solid var(--border);
-  color: var(--dim);
-  font-family: "JetBrains Mono", monospace;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.15s ease;
+  transition: transform 0.2s var(--ease-out-spring),
+              background-color 0.2s var(--ease-out-spring),
+              border-color 0.2s var(--ease-out-spring),
+              color 0.2s var(--ease-out-spring),
+              box-shadow 0.2s var(--ease-out-spring);
 }
 .dot:hover {
-  border-color: var(--gold);
-  color: var(--text);
+  border-color: hsl(var(--primary-edge));
+  color: hsl(var(--foreground));
+  transform: translateY(-1px);
 }
 .dot-done {
-  color: var(--gold);
-  border-color: var(--gold-dim);
+  color: hsl(var(--primary-edge));
+  border-color: hsl(var(--primary-edge) / 0.45);
 }
 .dot-current {
-  background: var(--gold);
-  color: #15110a;
-  border-color: var(--gold);
+  background: hsl(var(--primary-edge));
+  color: hsl(var(--background));
+  border-color: hsl(var(--primary-edge));
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px hsl(var(--primary-edge) / 0.18),
+              0 2px 10px hsl(var(--primary-edge) / 0.35);
+  font-weight: 700;
+}
+/* Dark-mode: lift the glow so the current dot is unmissable against the tinted bg. */
+:global(body.dark) .dot-current {
+  box-shadow: 0 0 0 3px hsl(var(--primary-edge) / 0.25),
+              0 0 18px hsl(var(--primary-edge) / 0.55);
+}
+@media (prefers-reduced-motion: reduce) {
+  .dot, .dot:hover, .dot-current { transition: none; transform: none; }
+}
+
+/* ─── Lesson nav (bottom) ─── */
+.lesson-nav {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid hsl(var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.lesson-nav-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+.lnav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: transform 0.18s var(--ease-out-spring),
+              border-color 0.18s var(--ease-out-spring),
+              background-color 0.18s var(--ease-out-spring),
+              box-shadow 0.18s var(--ease-out-spring);
+  text-align: left;
+  min-height: 58px;
+}
+.lnav-btn:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary-edge));
+  box-shadow: 0 6px 18px -8px hsl(var(--primary-edge) / 0.35);
+}
+.lnav-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+.lnav-arrow {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: hsl(var(--primary-edge));
+  line-height: 1;
+  flex-shrink: 0;
+}
+.lnav-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.lnav-mini {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+.lnav-title {
+  font-size: 14px;
+  color: hsl(var(--foreground));
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lnav-btn--next {
+  background: hsl(var(--primary));
+  border-color: hsl(var(--primary-edge) / 0.4);
+}
+.lnav-btn--next .lnav-title,
+.lnav-btn--next .lnav-mini {
+  color: hsl(var(--primary-foreground));
+}
+.lnav-btn--next .lnav-arrow {
+  color: hsl(var(--primary-foreground));
+}
+.lnav-btn--next:hover {
+  background: hsl(var(--primary));
+  filter: brightness(1.08);
+  border-color: hsl(var(--primary-edge));
+  box-shadow: 0 8px 24px -8px hsl(var(--primary-edge) / 0.5);
+}
+.lnav-btn--review {
+  text-align: center;
+  padding: 12px 20px;
+  background: transparent;
+  border-style: dashed;
+  border-color: hsl(var(--border));
+}
+.lnav-btn--review .lnav-label {
+  align-items: center;
+}
+.lnav-btn--review:hover {
+  border-style: solid;
+  background: hsl(var(--muted));
+}
+
+.lesson-nav-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: hsl(var(--muted) / 0.35);
+  border: 1px solid hsl(var(--border));
+}
+.lnav-jump-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  margin-right: 8px;
+}
+
+/* Mobile: stack the three-button row */
+@media (max-width: 640px) {
+  .lesson-nav-row {
+    grid-template-columns: 1fr;
+  }
+  .lnav-btn--review { order: -1; }
 }
 
 .lesson-body :deep(h1) {

@@ -114,6 +114,30 @@ README.md
 .env.example
 ```
 
+## Copy-to-clipboard rule (v4.2, 2026-04-21)
+
+> **Every code block, every prompt, every copyable artifact gets a one-click copy button.**
+
+Applies everywhere a reader might want to paste-and-try:
+- Markdown code fences in lesson prose
+- `FillableBuilder` preview blocks
+- `TracedExample` expanded artifact panels
+- `TerminalReplay` / `ThreeMovesTerminal` command lines
+- JSON/YAML configuration blocks in any diagram
+- `<Callout>` bodies that contain code inline
+
+Implementation: one shared `<CopyButton :text="..." />` component. Clicking triggers `navigator.clipboard.writeText(text)` and shows a transient checkmark for ~1.2s. Position: top-right corner of the code surface. Visible on hover (and always on mobile).
+
+## Glow & depth rule (v4.2, 2026-04-21)
+
+> **Dark mode: diagrams glow with their edge color. Light mode: diagrams sit on a soft shadow.**
+
+Applied universally via `DiagramShell` (single source):
+- **Dark:** `box-shadow: 0 0 0 1px hsl(var(--border)), 0 0 32px -10px hsl(var(--primary-edge) / 0.18)`
+- **Light:** `box-shadow: 0 1px 2px hsl(var(--foreground) / 0.06), 0 8px 24px -12px hsl(var(--foreground) / 0.10)`
+
+Terminal chrome inside a diagram follows the same contract — terminal bg in dark mode is deeper than the card, in light mode is warm-cream (never light-cream-on-dark or vice versa).
+
 ## 5-diagrams-per-module rule (v4.1, 2026-04-21)
 
 > **Every module has at least 5 diagrams. Visuals are the majority. Prose is connective tissue.**

@@ -412,18 +412,18 @@ code, pre, .mono { font-family: var(--font-mono); font-size: 0.92em; }
 .nav-links a:hover, .nav-links a.router-link-exact-active { color: var(--color-text); }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; font: inherit; font-weight: 600; font-size: 15px; border-radius: var(--radius); border: 1px solid transparent; cursor: pointer; transition: all 0.2s var(--ease-out-spring); text-decoration: none; }
+/* Primary button — always reads with correct foreground against the primary fill.
+   Light mode: primary tokens are pastel fill + dark ink. Dark mode: primary is
+   a deep shadow + luminous edge text. `primary-foreground` is the correct
+   text token for both modes. */
 .btn-primary {
-  background: var(--color-gold);
-  color: hsl(var(--background));
-}
-body.dark .btn-primary {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  border: 1px solid hsl(var(--primary-edge) / 0.6);
+  border: 1px solid hsl(var(--primary-edge) / 0.55);
 }
-.btn-primary:hover { filter: brightness(1.06); }
-.btn-secondary { background: transparent; color: var(--color-text); border-color: var(--color-border); }
-.btn-secondary:hover { border-color: var(--color-gold); color: var(--color-gold); }
+.btn-primary:hover { filter: brightness(1.06); box-shadow: 0 6px 18px -8px hsl(var(--primary-edge) / 0.45); }
+.btn-secondary { background: transparent; color: hsl(var(--foreground)); border-color: hsl(var(--border)); }
+.btn-secondary:hover { border-color: hsl(var(--primary-edge)); color: hsl(var(--primary-edge)); }
 
 .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 28px; }
 .card-featured { border-color: var(--color-gold); box-shadow: 0 0 0 1px var(--color-gold-dim); position: relative; }
@@ -457,10 +457,9 @@ body.dark .btn-primary {
 .footer { margin-top: 80px; padding: 32px 0; border-top: 1px solid var(--color-border); text-align: center; }
 .footer p { color: var(--color-dim); font-size: 13px; }
 
-.lesson { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
+.lesson { max-width: 840px; margin: 0 auto; padding: 60px 24px 100px; }
 .lesson h1 { margin-bottom: 12px; font-size: clamp(32px, 5vw, 54px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
 .lesson-meta { color: var(--color-dim); font-size: 13px; margin-bottom: 40px; font-family: var(--font-mono); }
-.lesson-nav { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; gap: 16px; }
 
 .callout { background: var(--color-gold-dim); border-left: 3px solid var(--color-gold); padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0; }
 .callout p { color: var(--color-text); margin: 0; }
