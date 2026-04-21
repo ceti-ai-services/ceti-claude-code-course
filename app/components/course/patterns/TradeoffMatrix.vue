@@ -120,6 +120,9 @@ onBeforeUnmount(() => {
   color: hsl(var(--foreground));
   padding-right: 12px;
   margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .tm-key {
   font-family: var(--font-mono);
@@ -130,12 +133,18 @@ onBeforeUnmount(() => {
   text-align: center;
   text-transform: uppercase;
   margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .tm-right {
   font-size: 11.5px;
   color: hsl(var(--foreground));
   padding-left: 12px;
   margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Mobile: stack row as three lines (left / key / right) instead of 3-col grid. */

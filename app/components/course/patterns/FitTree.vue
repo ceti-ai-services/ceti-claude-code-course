@@ -141,6 +141,9 @@ onBeforeUnmount(() => {
   font-weight: 600;
   color: hsl(var(--foreground));
   text-align: center;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .ft-labels {
   display: grid;

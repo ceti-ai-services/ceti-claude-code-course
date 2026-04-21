@@ -86,6 +86,7 @@ function focus(i: number) { focused.value = i }
   font: inherit;
   color: inherit;
   cursor: pointer;
+  min-width: 0;
   transition: transform 0.24s var(--ease-out-spring),
               opacity 0.24s var(--ease-out-spring);
 }
@@ -105,12 +106,16 @@ function focus(i: number) { focused.value = i }
   font-weight: 700;
   color: hsl(var(--muted-foreground));
   text-transform: uppercase;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
-.cg-chip-wrap { display: inline-flex; }
+.cg-chip-wrap { display: inline-flex; max-width: 100%; }
 .cg-body {
   font-size: 12px;
   line-height: 1.55;
   color: hsl(var(--foreground));
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 @media (prefers-reduced-motion: reduce) {

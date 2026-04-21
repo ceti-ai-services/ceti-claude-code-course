@@ -115,6 +115,7 @@ function onKey(e: KeyboardEvent, i: number) {
   font-weight: 600;
   text-align: left;
   cursor: pointer;
+  min-width: 0;
   transition: all 0.22s var(--ease-out-spring);
 }
 .pt-tab:hover { color: hsl(var(--foreground)); }
@@ -129,7 +130,13 @@ function onKey(e: KeyboardEvent, i: number) {
   font-weight: 700;
   opacity: 0.7;
 }
-.pt-tab-title { font-size: 12.5px; line-height: 1.2; }
+.pt-tab-title {
+  font-size: 12.5px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+}
 
 .pt-tab--active.pt-role-primary   { background: hsl(var(--primary));   color: hsl(var(--primary-foreground));   }
 .pt-tab--active.pt-role-secondary { background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); }
@@ -202,6 +209,8 @@ function onKey(e: KeyboardEvent, i: number) {
   color: hsl(var(--foreground));
   margin: 0;
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 @keyframes pt-fade {

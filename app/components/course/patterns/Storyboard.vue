@@ -148,7 +148,12 @@ onBeforeUnmount(() => {
   justify-content: center;
   flex: 0 0 auto;
 }
-.sb-rail-title { line-height: 1.15; }
+.sb-rail-title {
+  line-height: 1.15;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
 /* Active rail states — color-as-fill in light, edge+text in dark. */
 .sb-rail-btn--active { transform: translateX(4px); }
@@ -164,6 +169,7 @@ onBeforeUnmount(() => {
 
 .sb-panel {
   flex: 1 1 auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -185,12 +191,16 @@ onBeforeUnmount(() => {
   font-size: 20px;
   color: hsl(var(--foreground));
   line-height: 1.1;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sb-panel-note {
   font-size: 13px;
   color: hsl(var(--foreground));
   line-height: 1.55;
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sb-dots {
   margin-top: auto;

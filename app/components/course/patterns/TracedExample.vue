@@ -116,6 +116,7 @@ function toggle(i: number) {
 }
 .te-body {
   flex: 1;
+  min-width: 0;
   display: flex;
   gap: 6px;
   align-items: baseline;
@@ -126,11 +127,15 @@ function toggle(i: number) {
   font-size: 11.5px;
   color: hsl(var(--muted-foreground));
   font-weight: 600;
+  flex-shrink: 0;
 }
 .te-action {
   font-size: 12.5px;
   color: hsl(var(--foreground));
   font-weight: 500;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .te-caret {
   font-family: var(--font-mono);

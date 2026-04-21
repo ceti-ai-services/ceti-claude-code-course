@@ -113,6 +113,8 @@ function toggle(i: number) { openIdx.value = i }
   font-style: italic;
   color: hsl(var(--muted-foreground));
   line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 @media (prefers-reduced-motion: reduce) {

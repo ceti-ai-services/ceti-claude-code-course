@@ -168,10 +168,13 @@ function toggleCheck(i: number, event: Event) {
 }
 .cs-title {
   flex: 1;
+  min-width: 0;
   font-size: 13px;
   font-weight: 600;
   color: hsl(var(--foreground));
   text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .cs-row--done .cs-title { color: hsl(var(--muted-foreground)); text-decoration: line-through; text-decoration-thickness: 1px; }
 

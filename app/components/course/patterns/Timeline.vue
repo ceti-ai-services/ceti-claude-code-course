@@ -147,11 +147,17 @@ onBeforeUnmount(() => {
 .tl-chip-label {
   font-size: 12px;
   font-weight: 700;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 .tl-chip-desc {
   font-size: 10.5px;
   font-weight: 400;
   opacity: 0.78;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 .tl-arrow {
   flex: 0 0 24px;

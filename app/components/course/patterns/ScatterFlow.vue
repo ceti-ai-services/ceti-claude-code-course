@@ -34,6 +34,15 @@ const props = withDefaults(
   },
 )
 
+const LABEL_MAX = 12
+
+/** Soft-cap any label longer than 12 chars with ellipsis — full text
+ * is preserved on the point for the SVG <title> tooltip + detail panel. */
+function displayLabel(label: string): string {
+  if (!label) return ""
+  return label.length > LABEL_MAX ? label.slice(0, LABEL_MAX - 1).trimEnd() + "\u2026" : label
+}
+
 const clampedPoints = computed(() => props.points.slice(0, 8))
 
 // Plot geometry — percentages over a 360x240 box.
@@ -146,7 +155,9 @@ function roleVar(role: Role, edge = false) {
             @blur="hovered = null"
             tabindex="0"
             :aria-label="p.label"
-          />
+          >
+            <title>{{ p.label }}</title>
+          </circle>
           <text
             :x="px(p) + (p.fit ? 12 : 10)"
             :y="py(p) + 3"
@@ -155,7 +166,7 @@ function roleVar(role: Role, edge = false) {
             :fill="p.fit ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))'"
             :opacity="p.fit ? 1 : 0.75"
             :font-weight="p.fit ? 600 : 500"
-          >{{ p.label }}</text>
+          ><title>{{ p.label }}</title>{{ displayLabel(p.label) }}</text>
         </g>
       </svg>
 
@@ -216,11 +227,16 @@ function roleVar(role: Role, edge = false) {
   font-size: 10.5px;
   font-weight: 700;
   color: hsl(var(--foreground));
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
 }
 .sf-tip-body {
   font-size: 11px;
   color: hsl(var(--muted-foreground));
   line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 @media (prefers-reduced-motion: reduce) {
   .sf-path--animated { animation: none; }

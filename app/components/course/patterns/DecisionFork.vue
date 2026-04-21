@@ -112,6 +112,9 @@ function reset() { picked.value = null }
   color: hsl(var(--foreground));
   line-height: 1.5;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .df-reset {
   all: unset;
