@@ -7,6 +7,7 @@
 -->
 <script setup lang="ts">
 import DiagramShell from "@/components/course/_primitives/DiagramShell.vue"
+import CopyButton from "@/components/course/_primitives/CopyButton.vue"
 
 type Field = {
   label: string
@@ -92,8 +93,9 @@ const rendered = computed(() => {
           <span v-if="f.hint" class="fb-hint">{{ f.hint }}</span>
         </label>
       </div>
-      <div class="fb-preview" :data-lang="previewLang">
+      <div class="fb-preview copy-host" :data-lang="previewLang">
         <pre class="fb-pre"><code>{{ rendered }}</code></pre>
+        <CopyButton :text="rendered" label="Copy preview" />
       </div>
     </div>
   </DiagramShell>
@@ -155,6 +157,7 @@ const rendered = computed(() => {
   font-style: italic;
 }
 .fb-preview {
+  position: relative;
   background: hsl(var(--foreground) / 0.06);
   border: 1px solid hsl(var(--border));
   border-radius: 8px;

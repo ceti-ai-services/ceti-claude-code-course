@@ -8,6 +8,7 @@
 -->
 <script setup lang="ts">
 import DiagramShell from "@/components/course/_primitives/DiagramShell.vue"
+import CopyButton from "@/components/course/_primitives/CopyButton.vue"
 
 type Role = "primary" | "secondary" | "accent" | "support"
 type TermLine = {
@@ -111,10 +112,16 @@ function onDeny() {
           v-show="visible(line)"
           :key="i"
           class="tr-line"
-          :class="line.role && `tr-line--${line.role}`"
+          :class="[line.role && `tr-line--${line.role}`, line.prompt && 'tr-line--prompt copy-host']"
         >
           <span v-if="line.prompt" class="tr-caret">›</span>
           <span class="tr-text">{{ line.text }}</span>
+          <CopyButton
+            v-if="line.prompt"
+            :text="line.text"
+            label="Copy command"
+            class="tr-copy"
+          />
         </div>
         <div v-if="showApproval()" class="tr-approval">
           <button type="button" class="tr-btn tr-btn--approve" @click="onApprove">
@@ -136,14 +143,15 @@ function onDeny() {
   max-width: 520px;
   border-radius: 10px;
   overflow: hidden;
-  background: hsl(var(--foreground));
-  color: hsl(var(--background));
-  box-shadow: 0 8px 22px hsl(var(--foreground) / 0.18);
+  /* Palette-token terminal surface: warm cream in light mode, deeper than
+     card bg in dark mode. Per §Terminal surface rule. */
+  background: hsl(var(--terminal-bg));
+  color: hsl(var(--terminal-fg));
+  box-shadow: 0 4px 18px hsl(var(--foreground) / 0.10);
   font-family: var(--font-mono);
+  border: 1px solid hsl(var(--border));
 }
 :global(body.dark) .tr-frame {
-  background: hsl(var(--background));
-  color: hsl(var(--foreground));
   box-shadow: 0 0 0 1px hsl(var(--border)), 0 8px 22px rgba(0, 0, 0, 0.45);
 }
 .tr-chrome {
@@ -151,11 +159,11 @@ function onDeny() {
   align-items: center;
   gap: 6px;
   padding: 7px 12px;
-  background: hsl(var(--foreground) / 0.15);
-  border-bottom: 1px solid hsl(var(--border) / 0.3);
+  background: hsl(var(--foreground) / 0.06);
+  border-bottom: 1px solid hsl(var(--border));
 }
 :global(body.dark) .tr-chrome {
-  background: hsl(var(--card));
+  background: hsl(var(--foreground) / 0.05);
 }
 .tr-dot {
   width: 9px;
@@ -170,9 +178,8 @@ function onDeny() {
   flex: 1;
   text-align: center;
   font-size: 10.5px;
-  color: hsl(var(--background) / 0.6);
+  color: hsl(var(--muted-foreground));
 }
-:global(body.dark) .tr-dir { color: hsl(var(--muted-foreground)); }
 .tr-body {
   padding: 12px 14px;
   font-size: 11px;
@@ -187,6 +194,21 @@ function onDeny() {
   display: flex;
   gap: 6px;
   align-items: baseline;
+  position: relative;
+  padding-right: 32px; /* reserve space for the copy button on prompt lines */
+}
+/* Scope the copy button tightly to prompt lines — smaller + higher
+   contrast than the default primitive so it sits comfortably in the
+   terminal row without fighting the text. CopyButton is a child scoped
+   component so we reach into it with :deep(). */
+.tr-line :deep(.tr-copy) {
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: transparent;
+  border-color: hsl(var(--border) / 0.6);
 }
 .tr-caret {
   color: hsl(var(--secondary-edge));
@@ -214,9 +236,8 @@ function onDeny() {
   font-weight: 700;
   padding: 3px 10px;
   border-radius: 4px;
-  color: hsl(var(--foreground));
+  color: hsl(var(--background));
 }
-:global(body.dark) .tr-btn { color: hsl(var(--background)); }
 .tr-btn--approve { background: hsl(var(--secondary-edge)); }
 .tr-btn--deny    { background: hsl(var(--accent-edge)); }
 .tr-btn:focus-visible {
@@ -225,10 +246,9 @@ function onDeny() {
 }
 .tr-btn:hover { filter: brightness(1.08); }
 .tr-cursor {
-  color: hsl(var(--background) / 0.55);
+  color: hsl(var(--terminal-fg) / 0.5);
   animation: fade-blink 1s infinite;
 }
-:global(body.dark) .tr-cursor { color: hsl(var(--foreground) / 0.5); }
 @media (prefers-reduced-motion: reduce) {
   .tr-line, .tr-approval { animation: none; }
   .tr-cursor { animation: none; opacity: 0.5; }

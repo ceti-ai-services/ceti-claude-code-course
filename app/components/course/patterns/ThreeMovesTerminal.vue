@@ -7,6 +7,7 @@
 -->
 <script setup lang="ts">
 import DiagramShell from "@/components/course/_primitives/DiagramShell.vue"
+import CopyButton from "@/components/course/_primitives/CopyButton.vue"
 
 type Role = "primary" | "secondary" | "accent" | "support"
 type TermMove = { stamp: string; role: Role; line: string; reply?: string }
@@ -81,9 +82,10 @@ function roleEdge(role: Role) {
           class="tm-block"
           :class="{ 'tm-block--revealed': step >= i }"
         >
-          <div class="tm-cmd">
+          <div class="tm-cmd copy-host">
             <span class="tm-prompt" :style="{ color: roleEdge(m.role) }">›</span>
             <span class="tm-text">{{ m.line }}</span>
+            <CopyButton :text="m.line" label="Copy command" class="tm-copy" />
           </div>
           <div v-if="m.reply" class="tm-reply">
             {{ m.reply }}
@@ -174,6 +176,17 @@ function roleEdge(role: Role) {
   display: flex;
   gap: 6px;
   line-height: 1.45;
+  position: relative;
+  padding-right: 30px;
+}
+.tm-cmd :deep(.tm-copy) {
+  top: -2px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: transparent;
+  border-color: hsl(var(--border) / 0.6);
 }
 .tm-prompt { font-weight: 700; }
 .tm-text { flex: 1; }

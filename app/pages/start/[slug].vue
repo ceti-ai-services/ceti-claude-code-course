@@ -40,6 +40,13 @@
           v-html="block.html"
         />
 
+        <!-- Fenced code block -->
+        <CodeBlock
+          v-else-if="block.kind === 'codeblock'"
+          :code="block.code"
+          :lang="block.lang"
+        />
+
         <!-- Callout -->
         <Callout
           v-else-if="block.kind === 'callout'"
@@ -184,6 +191,7 @@ import Recap from "@/components/course/Recap.vue"
 import Quiz from "@/components/course/Quiz.vue"
 import PersonaExample from "@/components/course/PersonaExample.vue"
 import PraoLoop from "@/components/course/PraoLoop.vue"
+import CodeBlock from "@/components/course/_primitives/CodeBlock.vue"
 import { DIAGRAM_REGISTRY } from "@/components/course/diagrams"
 
 // Per-module interactive hero blocks. Each composes `MissionBrief` + a
@@ -233,6 +241,7 @@ type QuizOption = { label: string; correct: boolean; explain: string }
 
 type Block =
   | { kind: "html"; html: string }
+  | { kind: "codeblock"; code: string; lang: string }
   | { kind: "callout"; variant: string; html: string }
   | { kind: "try"; time: string; html: string }
   | { kind: "recap"; html: string }
@@ -314,6 +323,37 @@ function stripBlankLeadingTrailing(s: string): string {
 
 function mdToHtml(md: string): string {
   return marked.parse(md, { async: false }) as string
+}
+
+/**
+ * Split a markdown chunk on fenced code blocks (``` …```). Each fence
+ * becomes a `codeblock` Block with the raw source text + optional language
+ * label; everything between / around fences is rendered via marked into
+ * `html` blocks.
+ *
+ * This is the site where every markdown code fence in a lesson graduates
+ * into a `<CodeBlock>` primitive with chrome + per-block CopyButton.
+ */
+function splitFences(md: string): Block[] {
+  const out: Block[] = []
+  // Match opening fence, capture lang on the same line, then greedily
+  // capture content up to the matching closing fence. The `^` / `\n` anchor
+  // avoids matching fences that live inside HTML strings.
+  const re = /(^|\n)```([a-zA-Z0-9_-]*)\r?\n([\s\S]*?)\r?\n```(?=\r?\n|$)/g
+  let lastIdx = 0
+  let m: RegExpExecArray | null
+  while ((m = re.exec(md))) {
+    // Emit any markdown that came before this fence.
+    const preStart = lastIdx
+    const preEnd = m.index + (m[1] ? m[1].length : 0)
+    const before = md.slice(preStart, preEnd)
+    if (before.trim()) out.push({ kind: "html", html: mdToHtml(before) })
+    out.push({ kind: "codeblock", code: m[3], lang: m[2] || "" })
+    lastIdx = re.lastIndex
+  }
+  const tail = md.slice(lastIdx)
+  if (tail.trim()) out.push({ kind: "html", html: mdToHtml(tail) })
+  return out
 }
 
 const CUSTOM_TAGS = [
@@ -430,13 +470,14 @@ function tokenize(md: string): Block[] {
     const found = findNextCustomTag(md, cursor)
     if (!found) {
       const rest = md.slice(cursor)
-      if (rest.trim()) blocks.push({ kind: "html", html: mdToHtml(rest) })
+      if (rest.trim()) blocks.push(...splitFences(rest))
       break
     }
-    // Flush regular markdown before this tag.
+    // Flush regular markdown before this tag — split into html + codeblock
+    // pieces so every fenced block picks up the CodeBlock chrome + copy.
     if (found.start > cursor) {
       const chunk = md.slice(cursor, found.start)
-      if (chunk.trim()) blocks.push({ kind: "html", html: mdToHtml(chunk) })
+      if (chunk.trim()) blocks.push(...splitFences(chunk))
     }
 
     // Self-closing tag — emit block directly, advance cursor past opening tag.

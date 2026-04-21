@@ -59,6 +59,11 @@
   --color-secondary-edge: hsl(var(--secondary-edge));
   --color-accent-edge: hsl(var(--accent-edge));
   --color-support-edge: hsl(var(--support-edge));
+
+  /* Terminal / code surface — per §Terminal surface rule (v4.2). Dark mode is
+     deeper than card bg; light mode is warm-cream. */
+  --color-terminal-bg: hsl(var(--terminal-bg));
+  --color-terminal-fg: hsl(var(--terminal-fg));
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -96,6 +101,9 @@
   --accent-edge: 10 62% 56%;
   --support-edge: 212 50% 48%;
   --input: 0 0% 0% / .06;
+  /* Terminal / code surface — warm cream in light mode, slightly deeper than card. */
+  --terminal-bg: 42 30% 83%;
+  --terminal-fg: 28 28% 13%;
 }
 .palette-boardwalk.dark {
   --background: 268 16% 11%;
@@ -118,6 +126,9 @@
   --accent-edge: 10 88% 80%;
   --support-edge: 212 70% 80%;
   --input: 0 0% 100% / .08;
+  /* Terminal / code surface — deeper than card, hue-tinted. */
+  --terminal-bg: 268 22% 7%;
+  --terminal-fg: 40 62% 96%;
 }
 
 /* ── 🌊 Coastal ── warm/cool tension ─────────────────────────────── */
@@ -141,6 +152,8 @@
   --secondary-edge: 14 65% 52%;
   --accent-edge: 205 60% 48%;
   --support-edge: 0 40% 50%;
+  --terminal-bg: 46 20% 82%;
+  --terminal-fg: 32 18% 11%;
 }
 .palette-coastal.dark {
   --background: 192 14% 10%;
@@ -162,6 +175,8 @@
   --secondary-edge: 16 85% 86%;
   --accent-edge: 205 78% 78%;
   --support-edge: 0 62% 88%;
+  --terminal-bg: 200 22% 6%;
+  --terminal-fg: 170 30% 96%;
 }
 
 /* ── 🌿 Greenhouse ── botanical, systems ─────────────────────────── */
@@ -185,6 +200,8 @@
   --secondary-edge: 14 56% 36%;
   --accent-edge: 148 38% 30%;
   --support-edge: 30 22% 38%;
+  --terminal-bg: 42 18% 82%;
+  --terminal-fg: 40 40% 8%;
 }
 .palette-greenhouse.dark {
   --background: 72 14% 7%;
@@ -206,6 +223,8 @@
   --secondary-edge: 22 85% 82%;
   --accent-edge: 145 58% 72%;
   --support-edge: 40 36% 84%;
+  --terminal-bg: 72 20% 4%;
+  --terminal-fg: 40 50% 94%;
 }
 
 /* ── ⚡ Neo Sage ── muted-neon, high energy ──────────────────────── */
@@ -229,6 +248,8 @@
   --secondary-edge: 68 72% 28%;
   --accent-edge: 36 80% 38%;
   --support-edge: 28 14% 30%;
+  --terminal-bg: 48 18% 86%;
+  --terminal-fg: 8 18% 11%;
 }
 .palette-neosage.dark {
   --background: 260 16% 8%;
@@ -250,6 +271,8 @@
   --secondary-edge: 68 88% 76%;
   --accent-edge: 36 88% 72%;
   --support-edge: 260 22% 84%;
+  --terminal-bg: 260 22% 5%;
+  --terminal-fg: 48 30% 96%;
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -347,6 +370,8 @@ body:not([class*="palette-"]) {
   --secondary-edge: 152 72% 82%;
   --accent-edge: 10 88% 80%;
   --support-edge: 212 70% 80%;
+  --terminal-bg: 268 22% 7%;
+  --terminal-fg: 40 62% 96%;
 }
 
 /* ─── Reduced-motion honor ─── */

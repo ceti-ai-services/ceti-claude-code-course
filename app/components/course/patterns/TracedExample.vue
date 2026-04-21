@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import DiagramShell from "@/components/course/_primitives/DiagramShell.vue"
 import Chip from "@/components/course/_primitives/Chip.vue"
+import CopyButton from "@/components/course/_primitives/CopyButton.vue"
 
 type Role = "primary" | "secondary" | "accent" | "support"
 type TracedStep = {
@@ -68,7 +69,10 @@ function toggle(i: number) {
           class="te-artifact"
           :data-lang="step.artifactLang || 'text'"
         >
-          <pre class="te-pre"><code>{{ step.artifact }}</code></pre>
+          <div class="te-pre-wrap copy-host">
+            <pre class="te-pre"><code>{{ step.artifact }}</code></pre>
+            <CopyButton :text="step.artifact" label="Copy artifact" />
+          </div>
         </div>
       </li>
     </ol>
@@ -148,9 +152,13 @@ function toggle(i: number) {
   padding: 0 12px 10px 74px;
   animation: slide-in 0.2s var(--ease-out-spring);
 }
+.te-pre-wrap {
+  position: relative;
+}
 .te-pre {
   margin: 0;
   padding: 8px 10px;
+  padding-right: 40px; /* room for the copy button */
   background: hsl(var(--muted) / 0.5);
   border-left: 2px solid hsl(var(--accent-edge) / 0.55);
   border-radius: 0 6px 6px 0;
