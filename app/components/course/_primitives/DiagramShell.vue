@@ -66,12 +66,23 @@ withDefaults(
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius-lg);
   margin: 0;
+  /* Light-mode default: soft drop shadow so every card has depth without
+     gradient soup. Per §D-2026-04-21-glow. Dark-mode override below. */
+  box-shadow:
+    0 1px 2px hsl(var(--foreground) / 0.06),
+    0 8px 24px -12px hsl(var(--foreground) / 0.10);
   transition: border-color 220ms var(--ease-out-spring),
-              background-color 220ms var(--ease-out-spring);
+              background-color 220ms var(--ease-out-spring),
+              box-shadow 220ms var(--ease-out-spring);
 }
 
+/* Dark-mode: luminous-edge glow using the palette's primary-edge token.
+   §D-2026-04-21-glow — applied universally so every diagram reads with
+   the same "edge of light" signature. */
 :global(body.dark) .ds {
-  box-shadow: 0 0 0 1px hsl(var(--border));
+  box-shadow:
+    0 0 0 1px hsl(var(--border)),
+    0 0 32px -10px hsl(var(--primary-edge) / 0.18);
 }
 
 .ds-header {
