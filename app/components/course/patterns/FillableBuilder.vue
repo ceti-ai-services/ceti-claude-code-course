@@ -181,4 +181,11 @@ const rendered = computed(() => {
 @media (max-width: 640px) {
   .fb-grid { grid-template-columns: 1fr; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .fb-input,
+  .fb-textarea,
+  .fb-select {
+    transition: none !important;
+  }
+}
 </style>

@@ -173,4 +173,9 @@ function glyph(kind: "folder" | "file") {
 @media (max-width: 640px) {
   .ftr-tooltip { display: none; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .ftr-row {
+    transition: none !important;
+  }
+}
 </style>
