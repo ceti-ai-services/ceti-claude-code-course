@@ -1,5 +1,5 @@
 <!--
-  CopyButton — shared primitive for copy-to-clipboard UX (v4.2, §D-2026-04-21-copy).
+  CopyButton — shared primitive for copy-to-clipboard UX (v4.3, §D-2026-04-21-copy-visible).
 
   Usage:
     <div class="relative copy-host">
@@ -7,15 +7,13 @@
       <CopyButton :text="snippet" />
     </div>
 
-  Hover-visibility convention:
-    - On mobile / narrow viewports (<640px) the button is ALWAYS visible.
-    - On desktop (>=640px) the button is opacity: 0 by default and fades
-      to opacity: 1 when the parent element matching `.copy-host` is hovered
-      OR when the button itself has keyboard focus (so keyboard users can
-      still see it).
-    - Consumers are expected to add the `copy-host` class (and
-      `position: relative`) to the container that wraps the copyable
-      surface. The button itself is absolutely positioned top-right.
+  Always-visible convention (updated 2026-04-21 user-feedback pass):
+    - Button is always visible at opacity 1 on BOTH mobile and desktop.
+    - Subtle by default (muted-foreground on card bg); brightens to
+      `--primary-edge` on hover / focus / copied state.
+    - Rationale: the prior hover-gated desktop variant was invisible to
+      users who didn't think to hover — discoverability beats minimalism
+      for a pedagogical surface where "paste this" is the whole point.
 
   Keyboard / a11y:
     - Native <button> element — focus ring via `hsl(var(--ring))`.
@@ -103,6 +101,7 @@ async function handleCopy() {
       <polyline points="20 6 9 17 4 12" />
     </svg>
 
+    <span class="copy-label" aria-hidden="true">{{ copied ? "Copied" : "Copy" }}</span>
     <span class="sr-only" aria-live="polite">
       {{ copied ? "Copied" : "" }}
     </span>
@@ -116,40 +115,52 @@ async function handleCopy() {
   right: 8px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 0;
+  gap: 5px;
+  padding: 4px 8px;
+  height: 26px;
   border-radius: 6px;
   border: 1px solid hsl(var(--border));
-  background: hsl(var(--muted) / 0.9);
+  background: hsl(var(--card));
   color: hsl(var(--muted-foreground));
   cursor: pointer;
-  opacity: 1; /* always visible on mobile */
-  transition: opacity 90ms ease, color 120ms ease, background-color 120ms ease, border-color 120ms ease;
+  opacity: 1; /* always visible — discoverability over hover */
+  transition:
+    color 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease;
   z-index: 2;
 }
 
+.copy-label {
+  font-family: "DM Sans", "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: inherit;
+}
+
 .copy-btn:hover {
-  color: hsl(var(--foreground));
+  color: hsl(var(--primary-edge));
   background: hsl(var(--muted));
-  border-color: hsl(var(--primary-edge) / 0.45);
+  border-color: hsl(var(--primary-edge) / 0.55);
 }
 
 .copy-btn:focus-visible {
   outline: none;
-  color: hsl(var(--foreground));
+  color: hsl(var(--primary-edge));
   box-shadow: 0 0 0 2px hsl(var(--ring));
-  opacity: 1;
 }
 
 .copy-btn[data-copied="true"] {
   color: hsl(var(--primary-edge));
   border-color: hsl(var(--primary-edge) / 0.6);
+  background: hsl(var(--primary-edge) / 0.08);
 }
 
 .copy-ico {
   display: block;
+  flex-shrink: 0;
 }
 
 .sr-only {
@@ -164,21 +175,9 @@ async function handleCopy() {
   border: 0;
 }
 
-/* Desktop: hover-visible. Consumer parent must have `.copy-host` class. */
-@media (min-width: 640px) {
-  .copy-btn {
-    opacity: 0;
-  }
-  :global(.copy-host:hover) .copy-btn,
-  :global(.copy-host:focus-within) .copy-btn,
-  .copy-btn:focus-visible {
-    opacity: 1;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .copy-btn {
-    transition: opacity 90ms ease;
+    transition: none;
   }
 }
 </style>
