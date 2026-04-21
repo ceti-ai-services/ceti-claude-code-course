@@ -91,14 +91,14 @@ const modules = [
   { num: '04', title: 'File permissions — read the diff, approve the change', time: '12 min', live: true },
   { num: '05', title: 'CLAUDE.md — write it once, stop explaining yourself', time: '13 min', live: true },
   { num: '06', title: 'One real task, end-to-end', time: '45 min', live: true },
-  { num: '07', title: 'Slash commands — reusable prompts you build once', time: '12 min', live: false },
-  { num: '08', title: 'Skills — packaged capabilities Claude loads on demand', time: '12 min', live: false },
-  { num: '09', title: 'Plan mode — think before acting, dry-run your work', time: '10 min', live: false },
-  { num: '10', title: 'Hooks — safety gates and pre/post-tool-use automation', time: '14 min', live: false },
+  { num: '07', title: 'Slash commands — reusable prompts you build once', time: '12 min', live: true },
+  { num: '08', title: 'Skills — packaged capabilities Claude loads on demand', time: '12 min', live: true },
+  { num: '09', title: 'Plan mode — think before acting, dry-run your work', time: '10 min', live: true },
+  { num: '10', title: 'Hooks — safety gates and pre/post-tool-use automation', time: '14 min', live: true },
   { num: '11', title: 'MCP basics — connect Gmail, Calendar, Notion, your files', time: '14 min', live: true },
-  { num: '12', title: 'Git integration — commits, branches, PRs through Claude', time: '12 min', live: false },
-  { num: '13', title: 'Subagents and parallel work', time: '12 min', live: false },
-  { num: '14', title: 'Next steps — habits and the wider agentic toolkit', time: '10 min', live: false },
+  { num: '12', title: 'Git integration — commits, branches, PRs through Claude', time: '12 min', live: true },
+  { num: '13', title: 'Subagents and parallel work', time: '12 min', live: true },
+  { num: '14', title: 'Next steps — habits and the wider agentic toolkit', time: '10 min', live: true },
 ]
 
 async function submit() {

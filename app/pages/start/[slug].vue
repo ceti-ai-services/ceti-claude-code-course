@@ -144,12 +144,21 @@ import M04Hero from "@/components/course/lesson/M04Hero.vue"
 import M05Hero from "@/components/course/lesson/M05Hero.vue"
 import M06Hero from "@/components/course/lesson/M06Hero.vue"
 import M07Hero from "@/components/course/lesson/M07Hero.vue"
+import M08Hero from "@/components/course/lesson/M08Hero.vue"
+import M09Hero from "@/components/course/lesson/M09Hero.vue"
+import M10Hero from "@/components/course/lesson/M10Hero.vue"
 import M11Hero from "@/components/course/lesson/M11Hero.vue"
+import M12Hero from "@/components/course/lesson/M12Hero.vue"
+import M13Hero from "@/components/course/lesson/M13Hero.vue"
+import M14Hero from "@/components/course/lesson/M14Hero.vue"
 
 import { useCustomizer } from "@/composables/useCustomizer"
 import type { Persona } from "@/types/customizer"
 import { PERSONAS } from "@/types/customizer"
 
+// Module hero map. Every Bronze module slug binds to its pattern-library-powered
+// hero component. New heroes compose MissionBrief + one pattern from
+// app/components/course/patterns/ per the docs/MODULE-VISUAL-PLAN.md.
 const heroMap: Record<string, unknown> = {
   "01-mental-model": M01Hero,
   "02-install": M02Hero,
@@ -157,8 +166,14 @@ const heroMap: Record<string, unknown> = {
   "04-file-permissions": M04Hero,
   "05-claude-md": M05Hero,
   "06-real-use-case": M06Hero,
-  "07-next-steps": M07Hero,
+  "07-slash-commands": M07Hero,
+  "08-skills": M08Hero,
+  "09-plan-mode": M09Hero,
+  "10-hooks": M10Hero,
   "11-mcp-basics": M11Hero,
+  "12-git-integration": M12Hero,
+  "13-subagents": M13Hero,
+  "14-next-steps": M14Hero,
 }
 
 type QuizOption = { label: string; correct: boolean; explain: string }

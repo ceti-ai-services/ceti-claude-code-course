@@ -20,14 +20,14 @@
           <div class="tier-medal">🥉</div>
           <h2>Bronze</h2>
           <p>Claude Code: Day One</p>
-          <div class="price">Free<span style="font-size:14px; color:var(--dim); margin-left:8px;">· invite only</span></div>
-          <div class="price-note">~90 min · self-serve · 7 modules</div>
+          <div class="price">Free<span style="font-size:14px; color:var(--color-dim); margin-left:8px;">· invite only</span></div>
+          <div class="price-note">~3 hours · self-serve · 14 modules</div>
           <ul>
             <li>Install on Mac, Windows, or Linux</li>
-            <li>Your first real session</li>
-            <li>CLAUDE.md template</li>
-            <li>5 starter slash commands</li>
-            <li>1-page cheat sheet + FAQ</li>
+            <li>First session, file permissions, CLAUDE.md</li>
+            <li>Slash commands, skills, plan mode, hooks</li>
+            <li>MCP, git, subagents</li>
+            <li>Starter kit + cheat sheet + FAQ</li>
           </ul>
           <NuxtLink to="/start" class="btn btn-secondary">Enter ticket code</NuxtLink>
         </article>

@@ -1,6 +1,16 @@
+<!--
+  M01Hero — "You already have AI. You're just using it wrong."
+
+  Composition: MissionBrief (transmission-style header) + ComparisonGrid
+  (vending-machine vs. colleague, two-column side-by-side with focus
+  affordance). The TradeoffMatrix for the detailed breakdown lives further
+  down the module as <M01TradeoffMatrix/>.
+
+  Plan ref: docs/MODULE-VISUAL-PLAN.md §01
+-->
 <script setup lang="ts">
 import MissionBrief from "@/components/course/MissionBrief.vue"
-import BeforeAfter from "@/components/course/BeforeAfter.vue"
+import ComparisonGrid from "@/components/course/patterns/ComparisonGrid.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 
 const { lang } = useCustomizer()
@@ -15,27 +25,22 @@ const en = {
     { label: "Name the shift" },
   ],
   time: "12 min",
-  shift: "The shift",
-  before: {
-    label: "Vending machine",
-    caption: "You prompt. It replies. You do the rest.",
-    bullets: [
-      "Lives on a website",
-      "Can't see your files",
-      "Forgets every turn",
-      "Half the work happens in your head after",
-    ],
-  },
-  after: {
-    label: "Colleague",
-    caption: "You work. It works. You approve.",
-    bullets: [
-      "Lives in your folder",
-      "Reads the real files",
-      "Keeps context across the session",
-      "Does the boring half; you do the part that needs you",
-    ],
-  },
+  compTitle: "The shift",
+  compCaption: "Click a column to focus. Same model, different shape of use.",
+  columns: [
+    {
+      eyebrow: "WHAT YOU HAVE NOW",
+      tagLabel: "vending machine",
+      tagRole: "support" as const,
+      body: "Lives on a website. Can't see your files. You prompt, it replies, you do the rest — half the work happens in your head after.",
+    },
+    {
+      eyebrow: "WHAT YOU COULD HAVE",
+      tagLabel: "colleague",
+      tagRole: "secondary" as const,
+      body: "Lives in your folder. Reads the real files. Keeps context across the session. Does the boring half; you do the part that needs you.",
+    },
+  ],
 }
 
 const es = {
@@ -48,27 +53,22 @@ const es = {
     { label: "Nombra el cambio" },
   ],
   time: "12 min",
-  shift: "El cambio",
-  before: {
-    label: "Máquina expendedora",
-    caption: "Tú escribes. Te responde. El resto lo haces tú.",
-    bullets: [
-      "Vive en una página",
-      "No puede ver tus archivos",
-      "Olvida cada turno",
-      "La mitad del trabajo ocurre en tu cabeza después",
-    ],
-  },
-  after: {
-    label: "Colega",
-    caption: "Tú trabajas. Trabaja contigo. Tú apruebas.",
-    bullets: [
-      "Vive en tu carpeta",
-      "Lee los archivos reales",
-      "Mantiene el contexto en la sesión",
-      "Hace la parte mecánica; tú haces la que te necesita",
-    ],
-  },
+  compTitle: "El cambio",
+  compCaption: "Clic en una columna para enfocarla. Mismo modelo, distinto uso.",
+  columns: [
+    {
+      eyebrow: "LO QUE TIENES AHORA",
+      tagLabel: "máquina expendedora",
+      tagRole: "support" as const,
+      body: "Vive en una página. No puede ver tus archivos. Tú escribes, responde, el resto lo haces tú — la mitad del trabajo ocurre en tu cabeza después.",
+    },
+    {
+      eyebrow: "LO QUE PODRÍAS TENER",
+      tagLabel: "colega",
+      tagRole: "secondary" as const,
+      body: "Vive en tu carpeta. Lee los archivos reales. Mantiene el contexto en la sesión. Hace la parte mecánica; tú haces la que te necesita.",
+    },
+  ],
 }
 
 const t = computed(() => (lang.value === "es" ? es : en))
@@ -82,9 +82,9 @@ const t = computed(() => (lang.value === "es" ? es : en))
     :objectives="t.chips"
     :time="t.time"
   />
-  <BeforeAfter
-    :title="t.shift"
-    :before="t.before"
-    :after="t.after"
+  <ComparisonGrid
+    :title="t.compTitle"
+    :caption="t.compCaption"
+    :columns="t.columns"
   />
 </template>

@@ -1,77 +1,94 @@
+<!--
+  M07Hero — "A slash command is a prompt you wrote yesterday, waiting in a menu."
+
+  Composition: MissionBrief + FillableBuilder. Reader fills the three fields
+  (name, description, body) and sees a live-rendered slash-command markdown
+  file on the right.
+
+  Plan ref: docs/MODULE-VISUAL-PLAN.md §07
+-->
 <script setup lang="ts">
 import { computed } from "vue"
 import MissionBrief from "@/components/course/MissionBrief.vue"
-import StackedReveal from "@/components/course/StackedReveal.vue"
+import FillableBuilder from "@/components/course/patterns/FillableBuilder.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 
 const { lang } = useCustomizer()
 
 const en = {
-  codename: "M07 · WEEK ONE",
-  title: "You did it. Now what changes.",
-  analogy: "Three moves this week. Then the tool is yours.",
+  codename: "M07 · SLASH COMMANDS",
+  title: "Slash commands — reusable prompts you build once.",
+  analogy: "A slash command is a prompt you wrote yesterday, waiting in a menu.",
   chips: [
-    { label: "Reuse" },
-    { label: "Refine" },
-    { label: "Catch the reflex" },
+    { label: "One file per command" },
+    { label: "Rule of three" },
+    { label: "Short verb names" },
   ],
-  time: "10 min",
-  eyebrow: "Weekly loop · 3 habits",
-  revealTitle: "Tick them as you go.",
-  items: [
+  time: "12 min",
+  builderTitle: "Write one now",
+  builderCaption: "Fill the fields. The file on the right is the file you'd save.",
+  fields: [
     {
-      label: "Reuse your CLAUDE.md in a second folder.",
-      summary: "A different client, a different project, a different batch.",
-      body:
-        "<p>Tomorrow morning, pick another folder where your work lives. Write a new CLAUDE.md there, modeled on the one from Module 05. The second one takes ten minutes. The third one takes five.</p>",
+      label: "Command name",
+      key: "name",
+      placeholder: "morning",
+      hint: "short verb · becomes /name",
     },
     {
-      label: "Refine the one you have as you notice what you keep re-explaining.",
-      summary: "Every re-explained thing is a line that belongs in the file.",
-      body:
-        "<p>Every time you type \"remember that I prefer…\" or \"also just to be clear, my clients…\" — that's a line that belongs in the file, not in the chat. Add it, save, next session is sharper.</p>",
+      label: "Description",
+      key: "description",
+      placeholder: "Summarize what changed in this folder since yesterday",
+      hint: "one line · shows in the /-menu",
     },
     {
-      label: "Catch yourself before the browser-chatbot reflex.",
-      summary: "The real test is noticing the reflex and redirecting.",
-      body:
-        "<p>Next week you'll almost open ChatGPT in a tab and paste a document. Stop for one second and ask: <em>could I just point Claude at the folder this lives in?</em> Nine times out of ten the answer is yes.</p>",
+      label: "Body (the prompt)",
+      key: "body",
+      kind: "textarea" as const,
+      placeholder:
+        "Look at the files in this folder. Tell me what changed in the last\n24 hours and flag anything that looks half-finished.",
+      hint: "what Claude runs when you type /name",
     },
   ],
+  previewTemplate:
+    "# .claude/commands/{{name}}.md\n---\ndescription: {{description}}\n---\n\n{{body}}",
 }
 
 const es = {
-  codename: "M07 · SEMANA 1",
-  title: "Lo lograste. Ahora qué cambia.",
-  analogy: "Tres movimientos esta semana. Luego la herramienta es tuya.",
+  codename: "M07 · COMANDOS SLASH",
+  title: "Comandos slash — prompts reutilizables que escribes una vez.",
+  analogy: "Un comando slash es un prompt que escribiste ayer, esperando en un menú.",
   chips: [
-    { label: "Reúsa" },
-    { label: "Afina" },
-    { label: "Atrapa el reflejo" },
+    { label: "Un archivo por comando" },
+    { label: "Regla del tres" },
+    { label: "Nombres de verbo corto" },
   ],
-  time: "10 min",
-  eyebrow: "Loop semanal · 3 hábitos",
-  revealTitle: "Márcalos conforme los haces.",
-  items: [
+  time: "12 min",
+  builderTitle: "Escribe uno ahora",
+  builderCaption: "Llena los campos. El archivo de la derecha es el archivo que guardarías.",
+  fields: [
     {
-      label: "Reúsa tu CLAUDE.md en una segunda carpeta.",
-      summary: "Otro cliente, otro proyecto, otro lote.",
-      body:
-        "<p>Mañana por la mañana, encuentra otra carpeta donde vive tu trabajo. Escribe un CLAUDE.md nuevo, modelado en el del Módulo 05. El segundo te toma diez minutos. El tercero cinco.</p>",
+      label: "Nombre del comando",
+      key: "name",
+      placeholder: "morning",
+      hint: "verbo corto · se convierte en /nombre",
     },
     {
-      label: "Afina el que tienes conforme notas qué sigues re-explicando.",
-      summary: "Cada cosa re-explicada es una línea que pertenece en el archivo.",
-      body:
-        "<p>Cada vez que escribas \"recuerda que prefiero…\" o \"también, para aclarar, mis clientes…\" — esa es una línea que pertenece en el archivo, no en el chat. Agrégala, guarda, la siguiente sesión queda más afilada.</p>",
+      label: "Descripción",
+      key: "description",
+      placeholder: "Resume qué cambió en esta carpeta desde ayer",
+      hint: "una línea · se ve en el menú /",
     },
     {
-      label: "Agárrate antes del reflejo del chatbot del navegador.",
-      summary: "La prueba real es notar el reflejo y redirigirlo.",
-      body:
-        "<p>La próxima semana casi abrirás ChatGPT en una pestaña y pegarás un documento. Detente un segundo y pregunta: <em>¿podría apuntar Claude a la carpeta donde vive esto?</em> Nueve de cada diez veces la respuesta es sí.</p>",
+      label: "Cuerpo (el prompt)",
+      key: "body",
+      kind: "textarea" as const,
+      placeholder:
+        "Mira los archivos en esta carpeta. Dime qué cambió en las últimas\n24 horas y marca lo que parezca a medias.",
+      hint: "lo que Claude corre cuando escribes /nombre",
     },
   ],
+  previewTemplate:
+    "# .claude/commands/{{name}}.md\n---\ndescription: {{description}}\n---\n\n{{body}}",
 }
 
 const t = computed(() => (lang.value === "es" ? es : en))
@@ -85,10 +102,11 @@ const t = computed(() => (lang.value === "es" ? es : en))
     :objectives="t.chips"
     :time="t.time"
   />
-  <StackedReveal
-    :eyebrow="t.eyebrow"
-    :title="t.revealTitle"
-    :items="t.items"
-    :checkable="true"
+  <FillableBuilder
+    :title="t.builderTitle"
+    :caption="t.builderCaption"
+    :fields="t.fields"
+    :preview-template="t.previewTemplate"
+    preview-lang="markdown"
   />
 </template>
