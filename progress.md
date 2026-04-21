@@ -1,66 +1,74 @@
-# Progress — after Pass 3a (navigation plumbing)
+# Progress — after Wave B (design polish + bilingual parity)
 
-**Snapshot:** 2026-04-21 late. Manu reviewed pass-2 live. Said the design is "AWESOME" and the course is looking "MUCH better." Called out a specific list of issues. Pass 3 splits into two waves.
+**Snapshot:** 2026-04-21 late. Pass-3 shipped in two waves. Wave A (navigation plumbing) landed as `c0e3207`. Wave B (design polish + bilingual parity) shipped as five commits orchestrated across five parallel subagents.
 
-## Wave A — Navigation plumbing (SHIPPED, commit c0e3207)
+## Wave A — Navigation plumbing (SHIPPED earlier)
 
-1. ✅ **M01 back-button routes to `/start`** instead of `/` (marketing page).
-2. ✅ **`.btn-primary` contrast fixed** — was invisible in light mode (cream text on cream fill). Now uses `hsl(var(--primary-foreground))`.
-3. ✅ **"Review lesson" button** — smooth-scrolls to top, honors `prefers-reduced-motion`.
-4. ✅ **Bottom module-jumper strip** — duplicates the top progress dots at the bottom.
-5. ✅ **EN/ES toggle** — active state was unstyled (the `bg-gold` utility didn't exist in the palette system). Rebuilt with scoped palette tokens + mode-specific glow.
-6. ✅ **Current-module dot glow** — luminous ring + scale-up in dark mode, solid glow in light.
+Commit `c0e3207`. See git log for details. All six items (F1–F6 / nav set) resolved.
 
-Live on dev-learn.cetiai.co.
+## Wave B — Design polish + bilingual parity (SHIPPED this pass)
 
-## Wave B — Design polish (NEXT PASS)
+Dispatched as parallel agents (B1 first, then C1/C2/B6+B7/B8/B2–B5 concurrent). All builds green. Size 5.94 MB / 1.55 MB gzip.
 
-All items have concrete fix specifications logged in `.agent/HANDOFF.md §Wave B` and core decisions in `CLAUDE.md` (§copy-decision, §glow-decision).
+### Commits in order
 
-### Agent team for Wave B (plan, not yet dispatched)
-
-| Agent | Scope | Outputs |
+| SHA | Scope | Author agent |
 |---|---|---|
-| B1 — primitives | Build `<CopyButton>` component + update `DiagramShell` with dark glow + light shadow | shared copy UX + consistent card depth |
-| B2 — terminal surfaces | Convert all terminal chrome (TerminalReplay, ThreeMovesTerminal, any m<NN>-d<N>.vue using terminal aesthetic) to palette tokens | dark-mode terminals go dark, light-mode stay cream |
-| B3 — code blocks | Wrap all `<pre><code>` markdown output in a code-block component with CopyButton; audit `.prose` styles for pattern | every code fence has copy |
-| B4 — copy-integration | Audit FillableBuilder, TracedExample, any diagram that exposes verbatim text; add CopyButton to their artifact slots | nested copy works |
-| B5 — M10 JSON block | Wrap the hooks `settings.json` block in a proper code surface with chrome | fixes screenshot #5 |
-| B6 — M13 swap | Rework M13 diagrams — hero is ComparisonGrid (good); audit the 4 mid-lesson diagrams for clarity. ScatterFlow label-clip fix in the pattern. | clearer subagent teaching |
-| B7 — overflow audit | Grep every pattern for fixed widths + hardcoded `text-overflow` behavior; standardize with `overflow-wrap: break-word` | no truncated text |
-| B8 — MERCURIO | Review all 70 diagrams, flag weak ones, propose replacements | quality parity across modules |
+| `816cef9` | B1 — CopyButton primitive + universal DiagramShell glow/shadow | B1 |
+| `4204a0d` | C2 Spanish for modules 07–13 + (bundled) B7 overflow fixes across 11 patterns | C2 + B7 (race) |
+| `22682ef` | B8 — diagram quality audit report at `.agent/B8-diagram-review.md` | B8 |
+| `f7ab7f1` | B6 — M13 d3 swap ScatterFlow → TradeoffMatrix | B6 |
+| `ebfc7ec` | B2+B3+B4+B5 — terminal palette tokens, CodeBlock primitive, Fillable/Traced copy, M10 JSON chrome | B2–B5 |
 
-### Feedback items from Manu's review (log, verbatim context)
+### What shipped — by feedback item
 
-| # | Issue | Location | Spec |
-|---|---|---|---|
-| F1 | All copyable blocks need a copy button with single-click UX | Every code, prompt, FillableBuilder preview, TracedExample artifact, Terminal line | `<CopyButton :text="..." />`, clipboard API, transient checkmark |
-| F2 | Dark-mode terminal diagrams still use light-cream chrome | M03 TerminalReplay (screenshot #2) | Use `hsl(var(--card))`-shifted bg; terminal text uses `hsl(var(--foreground))` |
-| F3 | Glow on diagrams is inconsistent — the "awesome" one should be everywhere | Compare M10 hero (great) vs. others | `DiagramShell` adds dark-mode glow + light-mode shadow universally |
-| F4 | Text overflow — labels clipping | M13 ScatterFlow ("five-fi", "bounded researc"), possibly TracedExample | Max label 12 chars in ScatterFlow; `overflow-wrap: break-word` + `min-width: 0` on text containers |
-| F5 | M10 hooks JSON block renders as raw monospace with no chrome | screenshot #5 | Wrap in code-block component with chrome + CopyButton |
-| F6 | Current module number hard to see in dark mode | top progress-dots | ✅ FIXED in Wave A (glow ring) |
-| F7 | Next-module button invisible in light mode — class is there but glow-only visible | screenshot #7 | ✅ FIXED in Wave A (btn-primary fg token) |
-| F8 | M13 hero pattern (was ScatterFlow) is confusing | screenshot #8 | Swapped to ComparisonGrid in pass-2. **Remaining**: audit M13 mid-lesson diagrams for clarity |
+| # | Issue | Resolution |
+|---|---|---|
+| F1 | Copy-to-clipboard on every code block | Shared `<CopyButton>`; integrated into `<CodeBlock>`, FillableBuilder preview, TracedExample artifacts, TerminalReplay/ThreeMovesTerminal per-line. Markdown fences now route through CodeBlock via `splitFences()` in `[slug].vue`. |
+| F2 | Dark-mode terminals still cream | Added `--terminal-bg` + `--terminal-fg` tokens to every palette × mode block in `main.css`. TerminalDemo + TerminalReplay + ThreeMovesTerminal all use tokens. Zero hex leaks (verified). |
+| F3 | Glow inconsistency | `DiagramShell` carries universal dark-mode `--primary-edge` glow + light-mode soft shadow. No per-component work. |
+| F4 | ScatterFlow label clip | Pattern now enforces 12-char soft-cap + ellipsis + `<title>` tooltip; plus `overflow-wrap: break-word` + `min-width: 0` applied across 11 patterns. |
+| F5 | M10 JSON raw monospace | Solved via B3 — the module's two `json` fences now render through CodeBlock. |
+| F6 | Current dot glow | ✅ Wave A |
+| F7 | Next-module button invisible in light mode | ✅ Wave A |
+| F8 | M13 hero confusing | Hero kept (ComparisonGrid, pass-2). Mid-lesson d3 swapped ScatterFlow → TradeoffMatrix. |
 
-### Design decisions locked in CLAUDE.md
+### Bilingual coverage (new in Wave B)
 
-- **Copy-to-clipboard rule (§v4.2):** every copyable block gets `<CopyButton>`. Top-right placement, always visible on mobile, hover-visible on desktop, transient checkmark feedback.
-- **Glow & depth rule (§v4.2):** Dark mode cards glow with `0 0 32px -10px hsl(var(--primary-edge) / 0.18)`. Light mode cards use `0 1px 2px 0.06, 0 8px 24px -12px 0.10`.
-- **Terminal surface rule:** terminals follow the palette — never hex. Dark mode terminal bg is deeper than card bg; light mode is warm-cream.
+- **Heroes:** 21/21 have `const es` — 100%.
+- **Lessons:** 14/14 `.es.md` — 100% (07–13 added this pass).
+
+### B8 diagram audit — key findings
+
+Report at `.agent/B8-diagram-review.md`. Verdicts: **KEEP 58 · TWEAK 10 · SWAP 2**.
+
+- **5 priority swaps** proposed but **not yet shipped**: `m13-d3` (done this pass), `M14Hero`, `M13Hero`, `M09Hero`, `m05-d2`.
+- **Pattern inventory imbalance**: FailureTable in 11/14 modules (d4 overuse). FitTree unused (dead inventory). TradeoffMatrix + Storyboard underused.
+- **Repo hygiene flag**: 7 orphan `M0XHero{A,B}.vue` variants on disk but not wired in `[slug].vue` — wire or delete.
+- **A11y flag**: FileTree and FillableBuilder don't explicitly honor `prefers-reduced-motion` (likely non-animated; confirm or add guard).
 
 ## Current status
 
-- **Build**: green (5.91 MB, 1.55 MB gzip)
-- **Routes**: 14 module pages + 5 site pages all 200
-- **Deploy**: commit `c0e3207` pushed, Vercel auto-deploying
-- **Diagrams**: 14 heroes + 56 mid-lesson = 70 rendering
-- **Next**: spawn Wave B agents B1–B8 in parallel
+- **Build:** green, 5.94 MB (1.55 MB gzip)
+- **Routes:** 14 module pages + 5 site pages, all 200
+- **Diagrams:** 14 heroes + 56 mid-lesson = 70 rendering; all in palette tokens
+- **Deploy:** 5 commits on main, not yet pushed
+- **Bilingual parity:** complete across heroes + lesson markdown
+
+## Next (Wave C — optional follow-up, not yet dispatched)
+
+Based on B8 audit:
+
+1. **Hero rework** — swap M14Hero, M13Hero, M09Hero per B8 priorities 2/3/4.
+2. **`m05-d2`** — CheckableStack → Storyboard.
+3. **Orphan cleanup** — decide M01HeroA/B, M02HeroA/B, M03HeroA/B, M04HeroA: wire or delete.
+4. **A11y audit** — confirm FileTree/FillableBuilder reduced-motion behavior.
+5. **Callout inline fences** — optionally route through CodeBlock (B2–B5 agent deferred this intentionally).
+6. **Push** — `npx vercel --prod --yes` from repo root (or git push — CI auto-deploys).
 
 ## Resume protocol
 
 1. Read this file.
-2. Read `.agent/HANDOFF.md §Wave B`.
-3. `git log --oneline -6`.
-4. Spawn Wave B agents (specs in HANDOFF.md §Wave B table).
-5. Build + verify + commit + push.
+2. Read `.agent/B8-diagram-review.md` for the full diagram-by-diagram list.
+3. `git log --oneline -8`.
+4. Pick a Wave C item (Hero rework most visible) or push and ship.
