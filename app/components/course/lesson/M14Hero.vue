@@ -1,15 +1,17 @@
 <!--
   M14Hero — "Next steps — habits and the wider agentic toolkit"
 
-  Composition: MissionBrief (transmission-style header) + CheckableStack
-  (four habits to commit to — scope first, read-only before write,
-  correct actively, ask for structure).
+  Composition: MissionBrief (transmission-style header) + Timeline.
+  The course finale as a five-step journey: Bronze finished → daily practice →
+  read-only opens → active correction → structured asks. Narrative weight over
+  a checkbox list.
 
   Plan ref: docs/MODULE-VISUAL-PLAN.md §14
+  Wave C swap: CheckableStack → Timeline (B8 audit priority 2).
 -->
 <script setup lang="ts">
 import MissionBrief from "@/components/course/MissionBrief.vue"
-import CheckableStack from "@/components/course/patterns/CheckableStack.vue"
+import Timeline from "@/components/course/patterns/Timeline.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 
 const { lang } = useCustomizer()
@@ -17,7 +19,7 @@ const { lang } = useCustomizer()
 const en = {
   codename: "M14 · NEXT STEPS",
   title: "Next steps — habits and the wider agentic toolkit.",
-  analogy: "Four habits. Tick them as you go.",
+  analogy: "You finished Bronze. Here is the path the habits take you down.",
   chips: [
     { label: "Scope first" },
     { label: "Read-only before write" },
@@ -25,27 +27,32 @@ const en = {
     { label: "Ask for structure" },
   ],
   time: "10 min",
-  stackTitle: "Four habits to commit to",
-  stackCaption: "Click a row for the why. Click the box to mark it yours.",
-  items: [
+  flowTitle: "Five steps past the finish line",
+  flowCaption: "Hover a step to pin it. The highlight cycles until you do.",
+  steps: [
     {
-      title: "Scope first",
-      body: "Always cd into the folder before you run claude. Scope is the first act of control — Claude reads only what the folder contains. No folder, no scope, no safety rails.",
+      label: "Bronze done",
+      description: "fourteen modules behind you · habits start now",
+      role: "support" as const,
+    },
+    {
+      label: "Scope first",
+      description: "cd into the folder before every claude · no folder, no rails",
       role: "primary" as const,
     },
     {
-      title: "Read-only before write",
-      body: "Start every new folder with a summarize or list request. Read the answer, judge the quality, then progress to edits. Trust is earned per-folder, not once.",
+      label: "Read-only before write",
+      description: "open new folders with a summarize · trust earned per-folder",
       role: "secondary" as const,
     },
     {
-      title: "Correct actively",
-      body: "When the plan drifts, redirect. Don't approve-and-hope. A five-word correction now saves a five-minute cleanup later. The best operators interrupt early and often.",
+      label: "Correct actively",
+      description: "redirect early · five-word fix beats a five-minute cleanup",
       role: "accent" as const,
     },
     {
-      title: "Ask for structure",
-      body: "Tell Claude the shape of the answer — bullets, table, file names, commit messages in imperative mood. Structure is half the prompt. The model fills shapes better than it invents them.",
+      label: "Ask for structure",
+      description: "name the shape · bullets, tables, file names, imperative commits",
       role: "support" as const,
     },
   ],
@@ -54,7 +61,7 @@ const en = {
 const es = {
   codename: "M14 · PRÓXIMOS PASOS",
   title: "Próximos pasos — hábitos y el kit agéntico más amplio.",
-  analogy: "Cuatro hábitos. Márcalos conforme los haces.",
+  analogy: "Terminaste Bronze. Aquí el camino que los hábitos te abren.",
   chips: [
     { label: "Primero el alcance" },
     { label: "Leer antes de escribir" },
@@ -62,27 +69,32 @@ const es = {
     { label: "Pide estructura" },
   ],
   time: "10 min",
-  stackTitle: "Cuatro hábitos para comprometerte",
-  stackCaption: "Haz clic en una fila para el porqué. Haz clic en la casilla para marcarlo tuyo.",
-  items: [
+  flowTitle: "Cinco pasos pasando la meta",
+  flowCaption: "Pasa el cursor sobre un paso para fijarlo. El resalte se cicla hasta que lo hagas.",
+  steps: [
     {
-      title: "Primero el alcance",
-      body: "Siempre haz cd a la carpeta antes de correr claude. El alcance es el primer acto de control — Claude solo lee lo que la carpeta contiene. Sin carpeta, sin alcance, sin baranda.",
+      label: "Bronze hecho",
+      description: "catorce módulos atrás · los hábitos empiezan ahora",
+      role: "support" as const,
+    },
+    {
+      label: "Primero el alcance",
+      description: "cd a la carpeta antes de cada claude · sin carpeta, sin baranda",
       role: "primary" as const,
     },
     {
-      title: "Leer antes de escribir",
-      body: "Empieza cada carpeta nueva con un pedido de resumen o lista. Lee la respuesta, juzga la calidad, y de ahí pasa a editar. La confianza se gana por carpeta, no una sola vez.",
+      label: "Leer antes de escribir",
+      description: "abre carpetas nuevas con un resumen · confianza por carpeta",
       role: "secondary" as const,
     },
     {
-      title: "Corrige activo",
-      body: "Cuando el plan se desvíe, redirige. No apruebes y reces. Una corrección de cinco palabras ahora te ahorra cinco minutos de limpieza después. Los mejores operadores interrumpen pronto y seguido.",
+      label: "Corrige activo",
+      description: "redirige pronto · cinco palabras ahora, no cinco minutos después",
       role: "accent" as const,
     },
     {
-      title: "Pide estructura",
-      body: "Dile a Claude la forma de la respuesta — viñetas, tabla, nombres de archivo, commits en imperativo. La estructura es la mitad del prompt. El modelo llena formas mejor de lo que las inventa.",
+      label: "Pide estructura",
+      description: "nombra la forma · viñetas, tablas, archivos, commits imperativos",
       role: "support" as const,
     },
   ],
@@ -99,9 +111,9 @@ const t = computed(() => (lang.value === "es" ? es : en))
     :objectives="t.chips"
     :time="t.time"
   />
-  <CheckableStack
-    :title="t.stackTitle"
-    :caption="t.stackCaption"
-    :items="t.items"
+  <Timeline
+    :title="t.flowTitle"
+    :caption="t.flowCaption"
+    :steps="t.steps"
   />
 </template>

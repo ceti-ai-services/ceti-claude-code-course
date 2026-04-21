@@ -1,15 +1,19 @@
 <!--
   M09Hero — "Plan mode lets you see the plan before you see the edit."
 
-  Composition: MissionBrief + ThreeMovesTerminal. Three stamps: READ → PLAN →
-  APPROVE, each mapped to a terminal line. Shows the dry-run shape of plan mode.
+  Composition: MissionBrief + SequentialPulse. Four phases of the plan-mode
+  pipeline — understand → propose → review → execute. The pulse travels the
+  track so the reader sees that nothing lands until the third phase clears.
 
   Plan ref: docs/MODULE-VISUAL-PLAN.md §09
+  Wave C swap: ThreeMovesTerminal → SequentialPulse (B8 audit priority 4).
+  ThreeMovesTerminal is M06's hero; plan mode's four-stamp pipeline is a
+  cleaner opener than reusing that shape.
 -->
 <script setup lang="ts">
 import { computed } from "vue"
 import MissionBrief from "@/components/course/MissionBrief.vue"
-import ThreeMovesTerminal from "@/components/course/patterns/ThreeMovesTerminal.vue"
+import SequentialPulse from "@/components/course/patterns/SequentialPulse.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 
 const { lang } = useCustomizer()
@@ -24,28 +28,13 @@ const en = {
     { label: "shift-tab to enter" },
   ],
   time: "10 min",
-  termTitle: "Three moves, one safe edit",
-  termCaption: "Each stamp is a moment. Each line is what Claude says at that moment.",
-  dir: "~/Documents/claude-plan-test",
-  moves: [
-    {
-      stamp: "READ",
-      role: "support" as const,
-      line: "rename all three files to use today's date as a prefix",
-      reply: "plan mode on · scanning folder · 3 files found",
-    },
-    {
-      stamp: "PLAN",
-      role: "secondary" as const,
-      line: "proposed: 1) notes.txt → 2026-04-21-notes.txt  2) ideas.txt → …",
-      reply: "dry run · nothing written yet",
-    },
-    {
-      stamp: "APPROVE",
-      role: "accent" as const,
-      line: "looks right — exit plan mode, run it",
-      reply: "executing · 3/3 renamed",
-    },
+  pulseTitle: "The four-stamp plan pipeline",
+  pulseCaption: "Nothing mutates until the third stamp clears. Click a step to pin it.",
+  steps: [
+    { title: "understand", subtitle: "scan the scope",       role: "support"   as const },
+    { title: "propose",    subtitle: "numbered dry run",     role: "primary"   as const },
+    { title: "review",     subtitle: "you approve or redirect", role: "secondary" as const },
+    { title: "execute",    subtitle: "per-step still on",    role: "accent"    as const },
   ],
 }
 
@@ -59,28 +48,13 @@ const es = {
     { label: "shift-tab para entrar" },
   ],
   time: "10 min",
-  termTitle: "Tres movimientos, una edición segura",
-  termCaption: "Cada sello es un momento. Cada línea es lo que Claude dice en ese momento.",
-  dir: "~/Documentos/prueba-plan",
-  moves: [
-    {
-      stamp: "LEE",
-      role: "support" as const,
-      line: "renombra los tres archivos con la fecha de hoy como prefijo",
-      reply: "modo plan activo · escaneando carpeta · 3 archivos",
-    },
-    {
-      stamp: "PLAN",
-      role: "secondary" as const,
-      line: "propuesto: 1) notas.txt → 2026-04-21-notas.txt  2) ideas.txt → …",
-      reply: "ensayo · nada escrito todavía",
-    },
-    {
-      stamp: "APROBAR",
-      role: "accent" as const,
-      line: "se ve bien — sal del modo plan y córrelo",
-      reply: "ejecutando · 3/3 renombrados",
-    },
+  pulseTitle: "Los cuatro sellos del modo plan",
+  pulseCaption: "Nada cambia hasta que pasa el tercer sello. Haz clic en un paso para fijarlo.",
+  steps: [
+    { title: "entiende",  subtitle: "revisa el alcance",     role: "support"   as const },
+    { title: "propone",   subtitle: "ensayo numerado",       role: "primary"   as const },
+    { title: "revisa",    subtitle: "apruebas o rediriges",  role: "secondary" as const },
+    { title: "ejecuta",   subtitle: "paso a paso sigue",     role: "accent"    as const },
   ],
 }
 
@@ -95,10 +69,9 @@ const t = computed(() => (lang.value === "es" ? es : en))
     :objectives="t.chips"
     :time="t.time"
   />
-  <ThreeMovesTerminal
-    :title="t.termTitle"
-    :caption="t.termCaption"
-    :dir="t.dir"
-    :moves="t.moves"
+  <SequentialPulse
+    :title="t.pulseTitle"
+    :caption="t.pulseCaption"
+    :steps="t.steps"
   />
 </template>
