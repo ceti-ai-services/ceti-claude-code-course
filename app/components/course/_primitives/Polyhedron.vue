@@ -30,6 +30,12 @@ const props = withDefaults(
     size?: number
     animate?: boolean
     ariaLabel?: string
+    /**
+     * Optional short sentence describing what this shape means in context.
+     * Rendered as the browser-native tooltip (`title` attr on the SVG).
+     * Intended source: `useModuleGlyph(slug).meaning`.
+     */
+    meaning?: string
   }>(),
   { size: 32, animate: false },
 )
@@ -49,6 +55,7 @@ const props = withDefaults(
     role="img"
     :class="['polyhedron', props.animate && 'polyhedron--animate']"
   >
+    <title v-if="props.meaning">{{ props.meaning }}</title>
     <!-- ── TETRAHEDRON ──────────────────────────────────────────────────────
          Dimetric projection: apex above, equilateral base below.
          3 visible faces rendered as: front-left, front-right, and top cap.
