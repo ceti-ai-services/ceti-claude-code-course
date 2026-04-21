@@ -10,7 +10,7 @@
         :aria-label="`Module ${l.module}: ${l.title}`"
         :aria-current="i === lessonIndex ? 'page' : undefined"
       >
-        {{ l.module }}
+        <Polyhedron :shape="glyphFor(l)" :size="18" />
       </NuxtLink>
     </div>
 
@@ -20,6 +20,14 @@
     <component v-if="heroComponent" :is="heroComponent" />
     <template v-else-if="lesson">
       <div class="eyebrow">Module {{ lesson.module }} · Bronze</div>
+      <div class="module-header-glyph">
+        <Polyhedron
+          :shape="useModuleGlyph(lesson.slug).shape"
+          :size="48"
+          :animate="true"
+          :aria-label="`${lesson.title} — ${useModuleGlyph(lesson.slug).meaning}`"
+        />
+      </div>
       <h1>{{ lesson.title }}</h1>
       <div class="lesson-meta">
         ~{{ lesson.time }} · {{ lessonIndex + 1 }} of {{ lessons.length }}
@@ -175,7 +183,7 @@
           :aria-label="`Module ${l.module}: ${l.title}`"
           :aria-current="i === lessonIndex ? 'page' : undefined"
         >
-          {{ l.module }}
+          <Polyhedron :shape="glyphFor(l)" :size="18" />
         </NuxtLink>
       </div>
     </nav>
@@ -192,7 +200,9 @@ import Quiz from "@/components/course/Quiz.vue"
 import PersonaExample from "@/components/course/PersonaExample.vue"
 import PraoLoop from "@/components/course/PraoLoop.vue"
 import CodeBlock from "@/components/course/_primitives/CodeBlock.vue"
+import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
 import { DIAGRAM_REGISTRY } from "@/components/course/diagrams"
+import { useModuleGlyph } from "@/composables/useModuleGlyph"
 
 // Per-module interactive hero blocks. Each composes `MissionBrief` + a
 // module-specific interactive primitive (BeforeAfter / ProcessFlow /
@@ -216,6 +226,11 @@ import M14Hero from "@/components/course/lesson/M14Hero.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 import type { Persona } from "@/types/customizer"
 import { PERSONAS } from "@/types/customizer"
+
+// Resolves Fuller polyhedron glyph for a given lesson. Memoised inline.
+function glyphFor(l: { module: string; slug: string }) {
+  return useModuleGlyph(l.module || l.slug).shape
+}
 
 // Module hero map. Every Bronze module slug binds to its pattern-library-powered
 // hero component. New heroes compose MissionBrief + one pattern from
@@ -735,6 +750,13 @@ useHead(() => ({
 }
 @media (prefers-reduced-motion: reduce) {
   .dot, .dot:hover, .dot-current { transition: none; transform: none; }
+}
+
+/* ─── Module header glyph ─── */
+.module-header-glyph {
+  margin: 16px 0 8px;
+  color: hsl(var(--primary-edge));
+  opacity: 0.85;
 }
 
 /* ─── Lesson nav (bottom) ─── */
