@@ -10,7 +10,7 @@
         :aria-label="`Module ${l.module}: ${l.title}`"
         :aria-current="i === lessonIndex ? 'page' : undefined"
       >
-        <Polyhedron :shape="glyphFor(l)" :size="18" :meaning="glyphMeaningFor(l)" />
+        {{ l.module.padStart(2, '0') }}
       </NuxtLink>
     </div>
 
@@ -19,19 +19,27 @@
          that composes MissionBrief + a module-specific interactive block. -->
     <component v-if="heroComponent" :is="heroComponent" />
     <template v-else-if="lesson">
-      <div class="eyebrow">Module {{ lesson.module }} · Bronze</div>
-      <div class="module-header-glyph">
-        <Polyhedron
-          :shape="useModuleGlyph(lesson.slug).shape"
-          :size="48"
-          :animate="true"
-          :aria-label="`${lesson.title} — ${useModuleGlyph(lesson.slug).meaning}`"
-          :meaning="useModuleGlyph(lesson.slug).meaning"
-        />
-      </div>
-      <h1>{{ lesson.title }}</h1>
-      <div class="lesson-meta">
-        ~{{ lesson.time }} · {{ lessonIndex + 1 }} of {{ lessons.length }}
+      <div class="fallback-hero">
+        <div class="fallback-hero-eyebrow">
+          <span class="fallback-glyph-wrap">
+            <Polyhedron
+              :shape="useModuleGlyph(lesson.slug).shape"
+              :size="28"
+              :animate="false"
+              :aria-label="`${lesson.title} — ${useModuleGlyph(lesson.slug).meaning}`"
+              :meaning="useModuleGlyph(lesson.slug).meaning"
+              class="fallback-glyph"
+            />
+            <svg class="fallback-antenna" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="2" />
+              <path d="M8 8 C5 11 5 13 8 16" />
+              <path d="M16 8 C19 11 19 13 16 16" />
+            </svg>
+          </span>
+          <span class="fallback-transmission">TRANSMISSION · M{{ lesson.module.padStart(2, '0') }} · {{ lesson.title.toUpperCase() }}</span>
+          <span class="fallback-time">{{ lesson.time }}</span>
+        </div>
+        <h1 class="fallback-title">{{ lesson.title }}</h1>
       </div>
     </template>
 
@@ -185,7 +193,7 @@
           :aria-label="`Module ${l.module}: ${l.title}`"
           :aria-current="i === lessonIndex ? 'page' : undefined"
         >
-          <Polyhedron :shape="glyphFor(l)" :size="18" :meaning="glyphMeaningFor(l)" />
+          {{ l.module.padStart(2, '0') }}
         </NuxtLink>
       </div>
     </nav>
@@ -205,6 +213,7 @@ import CodeBlock from "@/components/course/_primitives/CodeBlock.vue"
 import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
 import { DIAGRAM_REGISTRY } from "@/components/course/diagrams"
 import { useModuleGlyph } from "@/composables/useModuleGlyph"
+
 
 // Per-module interactive hero blocks. Each composes `MissionBrief` + a
 // module-specific interactive primitive (BeforeAfter / ProcessFlow /
@@ -228,16 +237,6 @@ import M14Hero from "@/components/course/lesson/M14Hero.vue"
 import { useCustomizer } from "@/composables/useCustomizer"
 import type { Persona } from "@/types/customizer"
 import { PERSONAS } from "@/types/customizer"
-
-// Resolves Fuller polyhedron glyph for a given lesson. Memoised inline.
-function glyphFor(l: { module: string; slug: string }) {
-  return useModuleGlyph(l.module || l.slug).shape
-}
-
-// Resolves the short meaning sentence for a lesson's glyph — used for tooltip.
-function glyphMeaningFor(l: { module: string; slug: string }) {
-  return useModuleGlyph(l.module || l.slug).meaning
-}
 
 // Module hero map. Every Bronze module slug binds to its pattern-library-powered
 // hero component. New heroes compose MissionBrief + one pattern from
@@ -761,11 +760,66 @@ useHead(() => ({
   .dot, .dot:hover, .dot-current { transition: none; transform: none; }
 }
 
-/* ─── Module header glyph ─── */
-.module-header-glyph {
-  margin: 16px 0 8px;
+/* ─── Fallback hero (modules without a registered MXXHero) ─── */
+.fallback-hero {
+  margin: 16px 0 32px;
+}
+
+.fallback-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.fallback-glyph-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.fallback-glyph {
   color: hsl(var(--primary-edge));
   opacity: 0.85;
+}
+
+.fallback-antenna {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.fallback-transmission {
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.18em;
+}
+
+.fallback-time {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: hsl(var(--muted-foreground));
+  opacity: 0.75;
+  text-transform: none;
+  flex-shrink: 0;
+}
+
+.fallback-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: hsl(var(--foreground));
 }
 
 /* ─── Lesson nav (bottom) ─── */

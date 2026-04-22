@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
+import { computed, onMounted, ref } from "vue"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { Radio } from "lucide-vue-next"
 import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
+import { moduleGlyph } from "@/composables/useModuleGlyph"
 
 interface Objective {
   label: string
 }
 
 interface Props {
-  codename: string // e.g. "M01 · MENTAL MODEL"
-  title: string // "You already have AI..."
-  analogy?: string // short operator-voice subtitle: "Think vending machine vs. colleague"
+  codename: string       // e.g. "M02 · INSTALL"
+  moduleNumber?: string  // e.g. "02" — overrides auto-detect from codename
+  title: string
+  analogy?: string
   objectives?: Objective[]
   time?: string
   class?: string
@@ -22,6 +23,16 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   objectives: () => [],
 })
+
+// Auto-detect the two-digit module number from either the explicit prop or
+// the codename string (e.g. "M02 · INSTALL" → "02").
+const moduleNum = computed<string>(() => {
+  if (props.moduleNumber) return props.moduleNumber.padStart(2, '0')
+  const match = props.codename.match(/M(\d{1,2})/)
+  return match ? match[1].padStart(2, '0') : '01'
+})
+
+const glyph = computed(() => moduleGlyph[moduleNum.value] ?? moduleGlyph['01'])
 
 const visible = ref(false)
 onMounted(() => {
@@ -49,15 +60,31 @@ onMounted(() => {
         class="flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-gold uppercase mb-4"
         :class="visible ? 'mb-4' : ''"
       >
-        <!-- Icosahedron: systems-view; what-is-connected-to-what -->
-        <Polyhedron
-          shape="icosahedron"
-          :size="18"
-          class="brief-glyph"
-          aria-hidden="true"
-        />
-        <Radio class="w-3 h-3 animate-pulse" />
-        <span>Transmission · {{ props.codename }}</span>
+        <!-- Per-module polyhedron glyph -->
+        <span class="mb-glyph">
+          <Polyhedron
+            :shape="glyph.shape"
+            :size="28"
+            :meaning="glyph.meaning"
+            class="brief-glyph"
+            aria-hidden="true"
+          />
+          <svg
+            class="mb-transmission"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="2" />
+            <path d="M8 8 C5 11 5 13 8 16" />
+            <path d="M16 8 C19 11 19 13 16 16" />
+          </svg>
+        </span>
+        <span class="mb-eyebrow">Transmission · {{ props.codename }}</span>
         <span v-if="props.time" class="ml-auto text-muted-foreground tracking-normal normal-case font-normal">
           {{ props.time }}
         </span>
@@ -175,11 +202,31 @@ onMounted(() => {
   transform: translateY(0);
 }
 
-/* Icosahedron glyph — systems-view anchor for the mission frame */
+/* Glyph + antenna wrapper */
+.mb-glyph {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+/* Per-module polyhedron — uses primary-edge for luminous stroke */
 .brief-glyph {
   color: hsl(var(--primary-edge));
-  opacity: 0.75;
+  opacity: 0.85;
   flex-shrink: 0;
+}
+
+/* Antenna SVG flair */
+.mb-transmission {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+/* Eyebrow text — Space Mono tracking already on the parent flex */
+.mb-eyebrow {
+  /* inherits font-mono, tracking-[0.2em], uppercase from parent */
 }
 
 @media (prefers-reduced-motion: reduce) {
