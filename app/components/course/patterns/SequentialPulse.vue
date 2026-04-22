@@ -99,23 +99,38 @@ onBeforeUnmount(() => {
 }
 .sp-chip {
   width: 100%;
+  min-width: 0;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+/* Override Chip's default nowrap so long step labels can wrap within the chip box. */
+.sp-chip :deep(.chip),
+.sp-chip.chip {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sp-chip-inner {
   display: flex;
   flex-direction: column;
   gap: 2px;
   line-height: 1.15;
+  min-width: 0;
 }
 .sp-chip-title {
   font-size: 12px;
   font-weight: 700;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sp-chip-sub {
   font-size: 10px;
   font-weight: 400;
   opacity: 0.78;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sp-connector {
   position: relative;
