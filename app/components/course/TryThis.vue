@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
+import { useCustomizer } from "@/composables/useCustomizer"
+import { useLabels } from "@/utils/i18nLabels"
 
 defineProps<{ time?: string; title?: string }>()
+
+const { lang } = useCustomizer()
+const L = useLabels(lang)
 </script>
 
 <template>
@@ -19,7 +24,7 @@ defineProps<{ time?: string; title?: string }>()
       />
 
       <div class="try-this__header-text">
-        <span class="try-this__eyebrow">Try This</span>
+        <span class="try-this__eyebrow">{{ L('TRY_THIS') }}</span>
         <span v-if="title" class="try-this__title">{{ title }}</span>
       </div>
 

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
+import { useCustomizer } from "@/composables/useCustomizer"
+import { useLabels } from "@/utils/i18nLabels"
 // No props — Recap is a fixed structural block
+
+const { lang } = useCustomizer()
+const L = useLabels(lang)
 </script>
 
 <template>
@@ -13,7 +18,7 @@ import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
         class="recap__glyph"
         aria-hidden="true"
       />
-      <span class="recap__label">Recap</span>
+      <span class="recap__label">{{ L('RECAP') }}</span>
       <div class="recap__line" aria-hidden="true" />
     </div>
 

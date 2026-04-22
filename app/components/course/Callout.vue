@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { cn } from "@/lib/utils"
 import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
+import { useCustomizer } from "@/composables/useCustomizer"
 
 // Callout variants — the semantic pin-points across the course.
 // Phase-accent variants (info/caution/important/reflect) use the extended
@@ -104,7 +105,10 @@ const typeToGlyphColor: Record<CalloutType, string> = {
   "synthesis":  "callout-glyph--primary",
 }
 
-const labelMap: Record<Variant, string> = {
+// Title rendered inside the callout (font-display italic, not uppercased).
+// Kept in title-case on both languages to match the existing visual style.
+// User-supplied `title` prop always wins — we only localize the default.
+const labelMapEn: Record<Variant, string> = {
   "core-idea":   "Core idea",
   "tip":         "Tip",
   "warning":     "Watch out",
@@ -124,13 +128,38 @@ const labelMap: Record<Variant, string> = {
   "synthesis":   "Synthesis",
 }
 
+const labelMapEs: Record<Variant, string> = {
+  "core-idea":   "Idea clave",
+  "tip":         "Consejo",
+  "warning":     "Atención",
+  "key-concept": "Concepto clave",
+  "approval":    "Patrón aprobado",
+  "definition":  "Definición",
+  "stakes":      "En juego",
+  "info":        "Información",
+  "caution":     "Precaución",
+  "important":   "Importante",
+  "reflect":     "Reflexión",
+  "decision":    "Decisión",
+  "structure":   "Estructura",
+  "brief":       "Misión",
+  "recap":       "Resumen",
+  "try":         "Prueba esto",
+  "synthesis":   "Síntesis",
+}
+
+const { lang } = useCustomizer()
+
 const resolvedType = computed<CalloutType>(
   () => props.type ?? variantToType[props.variant ?? "core-idea"]
 )
 
 const shape = computed(() => typeToShape[resolvedType.value] as Parameters<typeof Polyhedron>[0] extends { shape: infer S } ? S : never)
 const glyphColorClass = computed(() => typeToGlyphColor[resolvedType.value])
-const label = computed(() => labelMap[props.variant ?? "core-idea"])
+const label = computed(() => {
+  const map = lang.value === "es" ? labelMapEs : labelMapEn
+  return map[props.variant ?? "core-idea"]
+})
 </script>
 
 <template>

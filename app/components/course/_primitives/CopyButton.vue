@@ -26,18 +26,37 @@
     - class (optional):   additional class merge hook
 -->
 <script setup lang="ts">
-import { ref } from "vue"
+import { computed, ref } from "vue"
+import { useCustomizer } from "@/composables/useCustomizer"
+import { useLabels } from "@/utils/i18nLabels"
 
 const props = withDefaults(
   defineProps<{
     text: string
+    /**
+     * Optional consumer override for the aria-label. When omitted, falls
+     * back to the localized "Copy" / "Copiar" via useLabels(). Consumer-
+     * supplied strings (e.g. "Copy command") are respected verbatim — only
+     * the default label is translated.
+     */
     label?: string
     class?: string
   }>(),
-  {
-    label: "Copy",
-  },
+  {},
 )
+
+const { lang } = useCustomizer()
+const L = useLabels(lang)
+
+// Visible button text is ALWAYS the localized "Copy" / "Copied" — it's a
+// shared UI affordance, not a consumer-authored label. Consumer-supplied
+// `label` (e.g. "Copy command" from TerminalReplay) overrides the
+// aria-label only, preserving the existing a11y seam without leaking
+// English into Spanish UI.
+const visibleCopy = computed(() => L("COPY"))
+const visibleCopied = computed(() => L("COPIED"))
+const ariaCopy = computed(() => props.label ?? L("COPY"))
+const ariaCopied = computed(() => L("COPIED"))
 
 const copied = ref(false)
 let resetTimer: ReturnType<typeof setTimeout> | null = null
@@ -64,7 +83,7 @@ async function handleCopy() {
     type="button"
     class="copy-btn"
     :class="$props.class"
-    :aria-label="copied ? 'Copied' : label"
+    :aria-label="copied ? ariaCopied : ariaCopy"
     :data-copied="copied ? 'true' : 'false'"
     @click="handleCopy"
   >
@@ -101,9 +120,9 @@ async function handleCopy() {
       <polyline points="20 6 9 17 4 12" />
     </svg>
 
-    <span class="copy-label" aria-hidden="true">{{ copied ? "Copied" : "Copy" }}</span>
+    <span class="copy-label" aria-hidden="true">{{ copied ? visibleCopied : visibleCopy }}</span>
     <span class="sr-only" aria-live="polite">
-      {{ copied ? "Copied" : "" }}
+      {{ copied ? ariaCopied : "" }}
     </span>
   </button>
 </template>

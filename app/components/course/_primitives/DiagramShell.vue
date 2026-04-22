@@ -17,10 +17,20 @@
   Props are all optional except title.
 -->
 <script setup lang="ts">
-withDefaults(
+import { computed } from "vue"
+import { useCustomizer } from "@/composables/useCustomizer"
+import { useLabels } from "@/utils/i18nLabels"
+
+const props = withDefaults(
   defineProps<{
     title: string
     caption?: string
+    /**
+     * Optional consumer override. When omitted, the eyebrow falls back to
+     * the localized default ("LIVE DIAGRAM" / "DIAGRAMA") via useLabels().
+     * Consumer-supplied strings are respected verbatim — user-supplied
+     * content is not force-translated.
+     */
     eyebrow?: string
     /** Min-height of the body slot (so every card aligns). Default 180px. */
     minBodyHeight?: number | string
@@ -28,17 +38,21 @@ withDefaults(
     class?: string
   }>(),
   {
-    eyebrow: "LIVE DIAGRAM",
     caption: "",
     minBodyHeight: 200,
   },
 )
+
+const { lang } = useCustomizer()
+const L = useLabels(lang)
+
+const resolvedEyebrow = computed(() => props.eyebrow ?? L("LIVE_DIAGRAM"))
 </script>
 
 <template>
   <figure class="ds" :class="$props.class">
     <header class="ds-header">
-      <span class="ds-eyebrow">{{ eyebrow }}</span>
+      <span class="ds-eyebrow">{{ resolvedEyebrow }}</span>
       <h3 class="ds-title display-italic">{{ title }}</h3>
     </header>
 

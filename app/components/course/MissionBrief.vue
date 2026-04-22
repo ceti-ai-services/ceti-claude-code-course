@@ -5,6 +5,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import Polyhedron from "@/components/course/_primitives/Polyhedron.vue"
 import { moduleGlyph } from "@/composables/useModuleGlyph"
+import { useCustomizer } from "@/composables/useCustomizer"
+import { useLabels } from "@/utils/i18nLabels"
+
+const { lang } = useCustomizer()
+const L = useLabels(lang)
 
 interface Objective {
   label: string
@@ -84,7 +89,7 @@ onMounted(() => {
             <path d="M16 8 C19 11 19 13 16 16" />
           </svg>
         </span>
-        <span class="mb-eyebrow">Transmission · {{ props.codename }}</span>
+        <span class="mb-eyebrow">{{ L('TRANSMISSION') }} · {{ props.codename }}</span>
         <span v-if="props.time" class="ml-auto text-muted-foreground tracking-normal normal-case font-normal">
           {{ props.time }}
         </span>
