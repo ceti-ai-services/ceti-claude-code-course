@@ -62,7 +62,7 @@ onMounted(() => {
     <CardContent class="relative px-6 py-7 md:px-8 md:py-9">
       <!-- Codename + signal -->
       <div
-        class="flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-gold uppercase mb-4"
+        class="flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-gold uppercase mb-4 flex-wrap"
         :class="visible ? 'mb-4' : ''"
       >
         <!-- Per-module polyhedron glyph -->

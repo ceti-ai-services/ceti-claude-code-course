@@ -180,6 +180,8 @@ const rendered = computed(() => {
 }
 @media (max-width: 640px) {
   .fb-grid { grid-template-columns: 1fr; }
+  /* Prevent iOS Safari auto-zoom when focusing inputs < 16px */
+  .fb-input, .fb-textarea, .fb-select { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .fb-input,

@@ -429,12 +429,19 @@ code, pre, .mono { font-family: var(--font-mono); font-size: 0.92em; }
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
-.nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { font-weight: 800; letter-spacing: -0.01em; color: var(--color-text); font-size: 15px; text-decoration: none; }
+.nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.brand { font-weight: 800; letter-spacing: -0.01em; color: var(--color-text); font-size: 15px; text-decoration: none; flex-shrink: 0; }
 .brand span { color: var(--color-gold); }
-.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
 .nav-links a { color: var(--color-muted); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.15s ease; }
 .nav-links a:hover, .nav-links a.router-link-exact-active { color: var(--color-text); }
+
+/* ─── MOBILE NAV ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .nav-inner { padding: 10px 16px; gap: 8px; }
+  .nav-links { gap: 12px; flex: 1 1 100%; justify-content: flex-end; }
+  .nav-links a { font-size: 13px; padding: 4px 0; }
+}
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; font: inherit; font-weight: 600; font-size: 15px; border-radius: var(--radius); border: 1px solid transparent; cursor: pointer; transition: all 0.2s var(--ease-out-spring); text-decoration: none; }
 /* Primary button — always reads with correct foreground against the primary fill.
@@ -511,4 +518,33 @@ code, pre, .mono { font-family: var(--font-mono); font-size: 0.92em; }
 @keyframes orbit-travel {
   from { offset-distance: 0%; }
   to   { offset-distance: 100%; }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE TAP TARGETS
+   Global 640px block — bumps interactive primitives to ≥ 36px minimum
+   touch target. Component-scoped overrides live in their own files for
+   structural changes (CheckableStack, DecisionFork). This block handles
+   purely-metric adjustments that don't affect layout.
+   ──────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* CopyButton */
+  .copy-btn { min-height: 36px; padding: 8px 10px; }
+
+  /* PaletteToggle dots + mode button */
+  .pt-dot { width: 28px; height: 28px; }
+  .pt-mode { width: 40px; height: 40px; }
+  .pt-wrap { padding: 6px 10px; }
+
+  /* LanguageToggle buttons */
+  .lt-btn { padding: 8px 14px; font-size: 12px; min-width: 44px; min-height: 36px; }
+
+  /* TerminalReplay approve / deny */
+  .tr-btn { padding: 8px 14px; min-height: 36px; }
+
+  /* DecisionFork reset link → real button sizing */
+  .df-reset { min-height: 36px; padding: 8px 12px; display: inline-flex; align-items: center; }
+
+  /* Lesson progress dots */
+  .dot { width: 36px; height: 36px; }
 }

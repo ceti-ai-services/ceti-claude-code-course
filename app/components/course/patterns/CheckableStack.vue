@@ -199,6 +199,14 @@ function toggleCheck(i: number, event: Event) {
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* Mobile: expand the checkbox tap target without changing visible size */
+@media (max-width: 640px) {
+  .cs-check {
+    padding: 13px;
+    margin: -13px;
+    box-sizing: content-box;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .cs-row, .cs-check, .cs-body { transition: none; animation: none; }
 }

@@ -815,7 +815,7 @@ useHead(() => ({
 }
 
 .fallback-title {
-  font-size: 32px;
+  font-size: clamp(22px, 6vw, 32px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -953,6 +953,20 @@ useHead(() => ({
     grid-template-columns: 1fr;
   }
   .lnav-btn--review { order: -1; }
+
+  /* Hide the top progress strip; keep only the bottom jumper */
+  .progress-dots { display: none; }
+
+  /* Bottom jumper: horizontal-scroll snap rail (single row of dots) */
+  .lesson-nav-jump {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    justify-content: flex-start;
+  }
+  .lesson-nav-jump > * { scroll-snap-align: start; flex-shrink: 0; }
 }
 
 .lesson-body :deep(h1) {

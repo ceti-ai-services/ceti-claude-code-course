@@ -135,9 +135,12 @@ function glyph(kind: "folder" | "file") {
 }
 .ftr-name {
   flex-shrink: 0;
+  min-width: 0;
   padding: 1px 6px;
   border-radius: 3px;
   font-weight: 500;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .ftr-name--folder { font-weight: 700; }
 .ftr-tooltip {
