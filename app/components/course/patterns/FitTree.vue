@@ -184,4 +184,30 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 2px hsl(var(--ring));
 }
 .ft-chip { width: fit-content; }
+
+/* Mobile: collapse the branching tree to a vertical stack.
+   Hide the SVG fan-lines (decorative). Keep the label row as a compact
+   3-column header (labels are short — "FIT" / "MAYBE" / "SKIP"). Each
+   branch's chips become a vertically stacked column below — so the user
+   reads "labels above" → "matched chip columns below". */
+@media (max-width: 640px) {
+  .ft-wrap {
+    max-width: 100%;
+    gap: 8px;
+  }
+  .ft-lines { display: none; }
+  .ft-labels {
+    font-size: 9px;
+    gap: 4px;
+  }
+  .ft-branches {
+    gap: 8px;
+  }
+  .ft-branch {
+    align-items: center;
+    padding: 8px 6px;
+    gap: 6px;
+  }
+  .ft-chip { width: fit-content; }
+}
 </style>

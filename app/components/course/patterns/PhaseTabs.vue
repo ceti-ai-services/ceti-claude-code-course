@@ -220,4 +220,25 @@ function onKey(e: KeyboardEvent, i: number) {
 @media (prefers-reduced-motion: reduce) {
   .pt-panel { animation: none; }
 }
+
+/* Mobile: tablist becomes single-column stack; facet grid collapses to one column. */
+@media (max-width: 640px) {
+  .pt-tablist {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .pt-tab {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .pt-tab-num { flex: 0 0 auto; }
+  .pt-tab-title { font-size: 12px; }
+  .pt-facets {
+    grid-template-columns: 1fr;
+    gap: 6px 0;
+  }
+  .pt-panel-title { font-size: 17px; }
+}
 </style>

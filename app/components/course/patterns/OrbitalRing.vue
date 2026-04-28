@@ -175,4 +175,15 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .or-center-label { animation: none; }
 }
+
+/* Mobile: keep the radial layout but shrink the stage so it never clips
+   the 320–375px viewport. Inner SVG/labels scale via the BOX_W/BOX_H
+   inline width — we override with transform-origin scaling. */
+@media (max-width: 640px) {
+  .or-stage {
+    transform: scale(0.82);
+    transform-origin: center;
+    margin: -16px auto;
+  }
+}
 </style>

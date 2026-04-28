@@ -213,4 +213,25 @@ function roleEdge(role: Role) {
   .tm-block, .tm-stamp { transition: none; }
   .tm-cursor { animation: none; opacity: 1; }
 }
+
+/* Mobile: allow the stamps row to wrap, tighten chrome, and reduce text. */
+@media (max-width: 640px) {
+  .tm-frame { padding: 10px 12px 12px; }
+  .tm-stamps {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .tm-stamp {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+  .tm-path {
+    font-size: 9.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tm-cmd { font-size: 11px; }
+  .tm-reply { font-size: 10.5px; }
+}
 </style>

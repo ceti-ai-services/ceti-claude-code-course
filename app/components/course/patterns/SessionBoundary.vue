@@ -144,4 +144,30 @@ onMounted(() => {
 @media (prefers-reduced-motion: reduce) {
   .sb-evaporate { animation: none; opacity: 0.7; }
 }
+
+/* Mobile: outer row wraps; inner chip row wraps with the "evaporates" label
+   dropping below the chips instead of fighting for horizontal space. */
+@media (max-width: 640px) {
+  .sb-outer {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .sb-persist {
+    font-size: 11.5px;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .sb-tag { flex-shrink: 0; }
+  .sb-inner { padding: 18px 12px 14px; }
+  .sb-chips {
+    gap: 6px;
+  }
+  .sb-evaporate {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}
 </style>

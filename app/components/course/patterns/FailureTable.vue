@@ -120,4 +120,32 @@ function toggle(i: number) { openIdx.value = i }
 @media (prefers-reduced-motion: reduce) {
   .ft-row { transition: none; }
 }
+
+/* Mobile: hide the 3-column header (the cells now self-label via ::before)
+   and stack each row's WRONG → TRAP → RIGHT vertically. */
+@media (max-width: 640px) {
+  .ft-head { display: none; }
+  .ft-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px 8px;
+  }
+  .ft-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  .ft-cell::before {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+  }
+  .ft-row > .ft-cell:nth-child(1)::before { content: "WRONG"; }
+  .ft-row > .ft-cell:nth-child(2)::before { content: "TRAP"; }
+  .ft-row > .ft-cell:nth-child(3)::before { content: "RIGHT"; }
+}
 </style>

@@ -170,4 +170,36 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .tl-item, .tl-item--active { transition: none; transform: none; }
 }
+
+/* Mobile: vertical timeline with down-pointing arrows between steps. */
+@media (max-width: 640px) {
+  .tl-track {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+  .tl-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 12px;
+    padding: 6px 4px;
+  }
+  .tl-item--active {
+    transform: translateX(2px);
+  }
+  .tl-num { flex: 0 0 28px; }
+  .tl-chip { flex: 1; }
+  .tl-chip-inner { text-align: left; }
+  .tl-arrow {
+    flex: 0 0 18px;
+    padding-top: 0;
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .tl-item--active { transform: none; }
+}
 </style>

@@ -253,4 +253,23 @@ function onDeny() {
   .tr-line, .tr-approval { animation: none; }
   .tr-cursor { animation: none; opacity: 0.5; }
 }
+
+/* Mobile: tighten chrome and body, allow approval buttons to wrap. */
+@media (max-width: 640px) {
+  .tr-chrome { padding: 6px 10px; }
+  .tr-dir {
+    font-size: 9.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tr-body {
+    padding: 10px 12px;
+    font-size: 10.5px;
+  }
+  .tr-approval {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
 </style>

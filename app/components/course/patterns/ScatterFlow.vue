@@ -242,4 +242,27 @@ function roleVar(role: Role, edge = false) {
   .sf-path--animated { animation: none; }
   .sf-point { transition: none; }
 }
+
+/* Mobile: 2D scatter doesn't reflow well as a vertical list — labels overlap
+   at small viewports. The SVG already scales (max-width:100%, height:auto)
+   via .sf-svg, so we just give the wrapper horizontal-scroll headroom and
+   keep tooltips readable.
+   TODO mobile: convert scatter to grouped-list (by quadrant) for true vertical flow. */
+@media (max-width: 640px) {
+  .sf-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+  }
+  .sf-svg {
+    min-width: 320px;
+  }
+  .sf-tip {
+    left: 12px;
+    transform: none;
+    max-width: calc(100% - 24px);
+  }
+}
 </style>

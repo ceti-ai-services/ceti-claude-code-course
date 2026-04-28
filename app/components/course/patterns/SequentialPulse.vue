@@ -172,4 +172,44 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .sp-dot--live { animation: none; opacity: 0; }
 }
+
+/* Mobile: stack chips vertically with a vertical rail and down-pointing dot. */
+@media (max-width: 640px) {
+  .sp-track {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+  .sp-item {
+    width: 100%;
+  }
+  .sp-connector {
+    flex: 0 0 16px;
+    width: 100%;
+    height: 16px;
+    align-self: center;
+  }
+  .sp-rail {
+    width: 2px;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .sp-dot {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -4px);
+  }
+  .sp-dot--live {
+    animation: sp-travel-v 1s var(--ease-out-spring) forwards;
+  }
+  @keyframes sp-travel-v {
+    0%   { top: 0%;   opacity: 0; }
+    15%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .sp-dot--live { animation: none; opacity: 0; }
+}
 </style>

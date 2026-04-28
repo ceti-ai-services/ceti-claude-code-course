@@ -136,4 +136,15 @@ const resolvedEyebrow = computed(() => props.eyebrow ?? L("LIVE_DIAGRAM"))
   line-height: 1.5;
   margin-top: 4px;
 }
+
+/* Tighten frame on narrow viewports so inner pattern padding doesn't compound. */
+@media (max-width: 640px) {
+  .ds {
+    padding: 16px 14px 14px;
+    border-radius: var(--radius-md);
+  }
+  .ds-title {
+    font-size: 18px;
+  }
+}
 </style>

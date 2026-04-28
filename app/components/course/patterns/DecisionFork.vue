@@ -134,4 +134,35 @@ function reset() { picked.value = null }
 @media (prefers-reduced-motion: reduce) {
   .df-reveal { animation: none; }
 }
+
+/* Mobile: stack choices vertically (full-width tap targets), and let the
+   reveal panel wrap with its arrow becoming a top-pointing chevron. */
+@media (max-width: 640px) {
+  .df-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+  }
+  .df-choice {
+    min-width: 0;
+    width: 100%;
+  }
+  .df-reveal {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+  }
+  .df-arrow {
+    transform: rotate(90deg);
+    align-self: flex-start;
+  }
+  .df-consequence {
+    flex: 1 1 100%;
+    order: 2;
+  }
+  .df-reset {
+    order: 3;
+    margin-left: auto;
+  }
+}
 </style>

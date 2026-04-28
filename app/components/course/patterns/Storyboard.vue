@@ -228,4 +228,32 @@ onBeforeUnmount(() => {
   .sb-panel { animation: none; }
   .sb-rail-btn--active { transform: none; }
 }
+
+/* Mobile: stack the rail above the panel; rail becomes a horizontal
+   scrolling chip-row → step indicator. Panel takes the full width below. */
+@media (max-width: 640px) {
+  .sb-wrap {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sb-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 0;
+    width: 100%;
+    gap: 4px;
+  }
+  .sb-rail-btn {
+    width: auto;
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
+    padding: 6px 8px;
+    font-size: 11.5px;
+  }
+  .sb-rail-btn--active { transform: none; }
+  .sb-panel-title { font-size: 17px; }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .sb-rail-btn--active { transform: none; }
+}
 </style>
